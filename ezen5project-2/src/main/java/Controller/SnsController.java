@@ -69,7 +69,7 @@ public class SnsController extends HttpServlet {
 				"UTF-8",
 				new DefaultFileRenamePolicy()
 			);
-		
+		System.out.println(request.getServletContext().getRealPath("/sns/img"));
 		String sid = multi.getParameter("sid");
 		String spw = multi.getParameter("spw");
 		String simg = multi.getFilesystemName("simg");

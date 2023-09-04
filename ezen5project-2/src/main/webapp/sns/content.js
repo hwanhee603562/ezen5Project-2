@@ -18,7 +18,7 @@ function printSns(){
 				  html += 
 				  `
 				  	<div class="contentBox">
-					  	<img class="writeImg" src="/ezen5project-2/sns/img/">			<!-- 작성 사진 -->
+					  	<img class="writeImg" src="/ezen5project-2/sns/img/${r[i].simg}">			<!-- 작성 사진 -->
 					  	<div class="writer">${r[i].sid}</div>
 						<div class="writeDate">${r[i].sdate}</div>	<!-- 작성 시간 출력 -->
 						<div class="writeContent">${r[i].scontent}</div>	<!-- 작성 글 출력 -->
