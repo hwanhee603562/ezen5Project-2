@@ -93,13 +93,11 @@ public class SnsController extends HttpServlet {
 		// 수정사항 객체화
 		String simg = multi.getFilesystemName("simg");
 		String scontent = multi.getParameter("scontent");
-		// 본인확인 비밀번호 객체화
-		String spwd = multi.getParameter("spwd");
-		// 수정할 게시물 번호와 비밀번호가 db 필드값과 같을경우 수정 진행
 		
 		SnsDto dto = new SnsDto(sno, simg , scontent);
 		if (dto.getSimg() == null) {
-	//		dto.setSimg(SnsDao.getInstance().getPrintContent(sno).getSimg;
+			//기존 게시물 정보 가져오기 ? 어떻게 ?
+			dto.setSimg(SnsDao.getInstance().oldimg(sno).getSimg());
 		}
 		
 		boolean result = SnsDao.getInstance().onupdate(dto);
