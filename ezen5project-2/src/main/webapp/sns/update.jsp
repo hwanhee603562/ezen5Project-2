@@ -10,12 +10,11 @@
 <body>
 
 	<form class="writeForm">
-		아이디 : <input type="text" name="sid" class="inputSid">
 		비밀번호 : <input type="text" name="spw" class="inputSpw">
 		첨부파일 : <input name="simg" type="file" class="writeFileUp"> 
 		내용작성 : <textarea name="scontent" class="writeContent"></textarea>
 	</form>
-	<button onclick="writeSns()"> 수정 </button>
+	<button onclick="onupdate()"> 수정 </button>
 	<a href="/ezen5project-2/sns/content.jsp"> <button> 이전 </button> </a>
 	<!-- 글 출력 페이지로 이동 -->
 	
