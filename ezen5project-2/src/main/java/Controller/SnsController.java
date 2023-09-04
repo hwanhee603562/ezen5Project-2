@@ -36,7 +36,7 @@ public class SnsController extends HttpServlet {
 
 	// 글 삭제 - 승우
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 }
