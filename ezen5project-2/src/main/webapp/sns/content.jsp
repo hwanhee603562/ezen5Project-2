@@ -24,7 +24,6 @@
 				<button class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
 				<button onclick="snsDelete()"class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
 			</div>
-
 		</div>	
 	</div><!-- content 전체구역 end -->
 
