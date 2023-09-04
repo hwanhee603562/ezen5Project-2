@@ -1,6 +1,6 @@
 package model.dao;
 
-public class SnsDao {
+public class SnsDao extends Dao{
 	
 	// 싱글톤
 	private static SnsDao snsDao = new SnsDao();

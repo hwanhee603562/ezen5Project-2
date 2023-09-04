@@ -26,7 +26,7 @@ public class SnsController extends HttpServlet {
 
 	// 글 등록 - 환희
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 	// 글 수정 - 병철
