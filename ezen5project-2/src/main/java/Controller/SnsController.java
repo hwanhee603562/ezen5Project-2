@@ -44,7 +44,12 @@ public class SnsController extends HttpServlet {
 			System.out.println(result.get(i).getSdate());
 			try {
 				Date format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(result.get(i).getSdate());
+				Date date = new Date();
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM--dd HH:mm");
+				String format = formatter.format(date);
+				Date format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(format);
 				System.out.println(format1);
+				System.out.println(format2);
 			} catch (Exception e) {System.out.println(e);}
 		}
 		
@@ -115,8 +120,7 @@ public class SnsController extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int sno = Integer.parseInt(request.getParameter("sno"));
-		String spwd = request.getParameter("spwd"); 
-		boolean result = SnsDao.getInstance().snsDelete(sno, spwd);
+		boolean result = SnsDao.getInstance().snsDelete(sno);
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
