@@ -8,7 +8,7 @@
 
 
 <title>Insert title here</title>
-	<link href="/sns/header.css" rel="stylesheet">
+	<link href="/ezen5project-2/sns/header.css" rel="stylesheet">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 	<!-- 최신 JQUERY 불러오기 : AJAX메소드 사용하기 위해 : JS가 외부로부터 통신하기 위해 -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
-	<script src="/sns/header.js" type="text/javascript"></script>
+	<script src="/ezen5project-2/sns/header.js" type="text/javascript"></script>
 	
 </body>
 </html>

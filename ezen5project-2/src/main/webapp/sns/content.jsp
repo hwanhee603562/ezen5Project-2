@@ -6,7 +6,7 @@
 	
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="/sns/content.css" rel="stylesheet">
+	<link href="/ezen5project-2/sns/content.css" rel="stylesheet">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
 			<div class="writeContent">  </div>	<!-- 작성 글 출력 -->
 			<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
 				<button class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
-				<button class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
+				<button onclick="snsDelete()"class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
 			</div>
 		</div>	
 	</div><!-- content 전체구역 end -->
@@ -28,6 +28,6 @@
 	<!-- 최신 JQUERY 불러오기 : AJAX메소드 사용하기 위해 : JS가 외부로부터 통신하기 위해 -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
-	<script src="/sns/content.js" type="text/javascript"></script>
+	<script src="/ezen5project-2/sns/content.js" type="text/javascript"></script>
 </body>
 </html>
