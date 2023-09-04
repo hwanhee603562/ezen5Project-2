@@ -120,8 +120,7 @@ public class SnsController extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int sno = Integer.parseInt(request.getParameter("sno"));
-		String spwd = request.getParameter("spwd"); 
-		boolean result = SnsDao.getInstance().snsDelete(sno, spwd);
+		boolean result = SnsDao.getInstance().snsDelete(sno);
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
