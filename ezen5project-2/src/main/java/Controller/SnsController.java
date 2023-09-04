@@ -23,6 +23,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import model.dao.SnsDao;
 import model.dto.SnsDto;
 
+import model.dao.SnsDao;
+
 
 @WebServlet("/SnsController")
 public class SnsController extends HttpServlet {
@@ -111,7 +113,15 @@ public class SnsController extends HttpServlet {
 
 	// 글 삭제 - 승우
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int sno = Integer.parseInt(request.getParameter("sno"));
+		String spwd = request.getParameter("spwd"); 
+		boolean result = SnsDao.getInstance().snsDelete(sno, spwd);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
+				
+	
 	}
 
 }

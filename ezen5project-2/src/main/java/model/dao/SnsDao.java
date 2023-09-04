@@ -91,5 +91,16 @@ public class SnsDao extends Dao{
 	// 글 삭제 - 승우
 	/*---------------------------------*/
 
-	
+	public boolean snsDelete( int sno , String spwd) {
+		try {
+			String sql="delete from sns where sno = ? and spwd = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, sno); ps.setString(2, spwd);
+			int row = ps.executeUpdate();
+			if( row == 1) return true;
+		
+		} catch (Exception e) {System.out.println(e);}	
+		return false;
+	}
+
 }
