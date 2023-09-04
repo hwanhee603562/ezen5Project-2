@@ -12,7 +12,7 @@
 </head>
 <body>
 
-	<div>
+	<div class="headerWrap">
 		<h2> sns </h2>
 		<a href="/ezen5project-2/sns/write.jsp"><button type="button"> 등록 </button></a>
 	</div>

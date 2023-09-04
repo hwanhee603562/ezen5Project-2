@@ -17,13 +17,15 @@ function printSns(){
       		for(let i =0; i < r.length; i++){
 				  html += 
 				  `
-				  	<img class="writeImg" src="/ezen5project-2/sns/img/">			<!-- 작성 사진 -->
-				  	<div class="writer">${r[i].sid}</div>
-					<div class="writeDate">${r[i].sdate}</div>	<!-- 작성 시간 출력 -->
-					<div class="writeContent">${r[i].scontent}</div>	<!-- 작성 글 출력 -->
-					<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
-						<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
-						<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
+				  	<div class="contentBox">
+					  	<img class="writeImg" src="/ezen5project-2/sns/img/">			<!-- 작성 사진 -->
+					  	<div class="writer">${r[i].sid}</div>
+						<div class="writeDate">${r[i].sdate}</div>	<!-- 작성 시간 출력 -->
+						<div class="writeContent">${r[i].scontent}</div>	<!-- 작성 글 출력 -->
+						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
+							<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
+							<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
+						</div>
 					</div>
 				  `
 			  }
