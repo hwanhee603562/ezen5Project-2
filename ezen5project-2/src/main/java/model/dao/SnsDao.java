@@ -20,16 +20,18 @@ public class SnsDao extends Dao{
 	// 글 출력 - 의선
 	/*---------------------------------*/
 	public ArrayList<SnsDto> printContent() {
-		ArrayList<SnsDto> sDto = new ArrayList<>();
+		ArrayList<SnsDto> list = new ArrayList<>();
 		
 		try {
 			String sql="select*from sns";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				
+				SnsDto sDto = new SnsDto(rs.getInt(1), rs.getString(2), 
+						rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				list.add(sDto);
 			}
-			
+			return list;
 			
 		} catch (Exception e) {System.out.println(e);}
 		
