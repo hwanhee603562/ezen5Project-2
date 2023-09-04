@@ -5,8 +5,8 @@ function writeSns(){
 	let form = document.querySelectorAll('.writeForm')[0];
 	let formData = new FormData( form );
 	
-	let id = document.querySelector('.writeContent').value;
-	let pw = document.querySelector('.writeContent').value;
+	let id = document.querySelector('.inputSid').value;
+	let pw = document.querySelector('.inputSpw').value;
 	let content = document.querySelector('.writeContent').value;
 	
 	// 유효성검사
@@ -26,11 +26,11 @@ function writeSns(){
 		return;
 	}
 		// 비밀번호가 6자리를 초과하는 경우
-	if(pw>6){
+	if(pw.length > 6){
 		alert('비밀번호를 6자리 이하로 입력해주세요');
 		return;
 	}
-	if(id>12){
+	if(id.length > 12){
 		alert('아이디를 12자리 이하로 입력해주세요');
 		return;
 	}

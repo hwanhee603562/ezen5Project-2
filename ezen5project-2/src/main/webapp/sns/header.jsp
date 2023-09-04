@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" >
+		
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" >
 
  
-<title>Insert title here</title>
+	<title>Insert title here</title>
 	<link href="/ezen5project-2/sns/header.css" rel="stylesheet">
 </head>
 <body>
