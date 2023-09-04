@@ -1,5 +1,5 @@
 
-
+console.log('통신성공')
 // 실행시 한번 자동출력
 printSns();
 
