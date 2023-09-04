@@ -12,7 +12,7 @@
 </head>
 <body>
 
-	<div>
+	<div class="headerWrap">
 		<h2> sns </h2>
 		<button type="button"> 등록 </button>
 	</div>
