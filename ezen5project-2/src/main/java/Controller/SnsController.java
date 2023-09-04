@@ -17,14 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.dto.SnsDto;
 
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
-import model.dao.SnsDao;
-import model.dto.SnsDto;
-
-import model.dao.SnsDao;
-
 
 @WebServlet("/SnsController")
 public class SnsController extends HttpServlet {
