@@ -79,6 +79,14 @@ public class SnsDto {
 		return "SnsDto [sno=" + sno + ", simg=" + simg + ", sid=" + sid + ", scontent=" + scontent + ", spwd=" + spwd
 				+ ", sdate=" + sdate + "]";
 	}
+	
+	// 게시글 수정 생성자 - 병철
+	public SnsDto(int sno, String simg, String scontent) {
+		super();
+		this.sno = sno;
+		this.simg = simg;
+		this.scontent = scontent;
+	}
 	    
 	    
 }
