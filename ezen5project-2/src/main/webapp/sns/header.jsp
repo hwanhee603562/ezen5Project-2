@@ -12,7 +12,10 @@
 </head>
 <body>
 
-
+	<div>
+		<h2> sns </h2>
+		<button type="button"> 등록 </button>
+	</div>
 
 	
 	<!-- 최신 JQUERY 불러오기 : AJAX메소드 사용하기 위해 : JS가 외부로부터 통신하기 위해 -->
