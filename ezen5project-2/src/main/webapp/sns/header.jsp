@@ -6,7 +6,7 @@
 	
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" >
 
-
+ 
 <title>Insert title here</title>
 	<link href="/ezen5project-2/sns/header.css" rel="stylesheet">
 </head>
@@ -14,7 +14,7 @@
 
 	<div>
 		<h2> sns </h2>
-		<button type="button"> 등록 </button>
+		<a href="/ezen5project-2/sns/write.jsp"><button type="button"> 등록 </button></a>
 	</div>
 
 	
