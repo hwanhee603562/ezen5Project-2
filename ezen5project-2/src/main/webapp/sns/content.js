@@ -46,7 +46,7 @@ function printSns(){
 								<div class="outputReply"> 답글출력구역 </div>
 								<div>
 									<span class="outputTime"> 시간출력구역 </span>
-									<button onclick="deleteReply()" class="deleteBtn"> x </button>
+									<span onclick="deleteReply()" class="rdeleteBtn"> x </span>
 								</div>
 							</div>
 						</div>
