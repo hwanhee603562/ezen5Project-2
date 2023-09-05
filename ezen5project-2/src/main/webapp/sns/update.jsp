@@ -8,14 +8,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+		<div class="name">
+		<h2>글 수정 페이지</h2>
+		</div>
 	<form class="writeForm">
-		비밀번호 : <input type="text" name="spw" class="inputSpw">
-		첨부파일 : <input name="simg" type="file" class="writeFileUp"> 
-		내용작성 : <textarea name="scontent" class="writeContent"></textarea>
+		<textarea name="scontent" class="writeContent" placeholder="수정할 내용"></textarea> <br/>
+		<div class="re">
+		<input name="simg" type="file" class="writeFileUp">
+		<input type="text" name="spw" class="inputSpw" placeholder="비밀번호"> 
+		</div>
 	</form>
-	<button onclick="onupdate()"> 수정 </button>
-	<a href="/ezen5project-2/sns/content.jsp"> <button> 이전 </button> </a>
+	 <div class="bttom">
+	<button class="btn" onclick="onupdate()"> 수정 </button>
+	<a href="/ezen5project-2/sns/content.jsp"> <button> 목록 </button> </a>
+	</div>
 	<!-- 글 출력 페이지로 이동 -->
 	
 	<script src="/ezen5project-2/sns/write.js" type="text/javascript"></script>

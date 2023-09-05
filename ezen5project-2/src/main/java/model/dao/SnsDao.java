@@ -21,9 +21,9 @@ public class SnsDao extends Dao{
 	/*---------------------------------*/
 	public ArrayList<SnsDto> printContent() {
 		ArrayList<SnsDto> list = new ArrayList<>();
-		
+		 
 		try {
-			String sql="select*from sns";
+			String sql="select*from sns order by sno desc";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()) {

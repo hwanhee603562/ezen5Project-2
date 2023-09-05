@@ -1,17 +1,63 @@
 @charset "UTF-8";
 
-*{padding: 0px; margin: 0px;}
+*{padding: 0px; margin: 0px;
+font-family: 'KCC-Ganpan';
+box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'KCC-Ganpan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCC-Ganpan.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .wrap{
 	width: 350px;
 	margin: 0 auto;
 }
 
+
+
 .contentBox{
 	padding: 10px;
     border: 1px solid #e8e8e8;
     border-radius: 20px;
     margin-bottom: 30px;
+    width: 100%;
+}
+
+.imgBox{
+	width: 330px;
+	margin: 0 auto;
+}
+.writeImg{ 
+	width: 330px;
+	object-fit: cover;
+	margin: 0 auto;
+}
+.writer{
+	font-weight: bold;
+}
+.writeDate{
+	font-size: 11px;
+}
+.bottomBtn button{
+	width: 50px;
+	height: 24px;
+	background-color: white;
+	border-radius: 49%;
+	border-color: yellow;
+}
+.writeContent{
+	word-break:break-all;	
+}
+
+.writeImg{
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+    border-radius: 20px;
 }
 
 
