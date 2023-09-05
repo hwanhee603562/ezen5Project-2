@@ -2,6 +2,7 @@
 
 *{padding: 0px; margin: 0px;
 font-family: 'KCC-Ganpan';
+box-sizing: border-box;
 }
 
 @font-face {
