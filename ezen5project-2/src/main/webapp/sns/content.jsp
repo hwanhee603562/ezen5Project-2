@@ -16,7 +16,7 @@
 
 	<div class="wrap"><!-- content 전체구역 / 모든 각각의 게시물 출력 구역 -->	
 		<div class="outputField"><!-- 게시물 1개 출력되는 구역 -->
-
+ 
 		</div>	
 	</div><!-- content 전체구역 end -->
 

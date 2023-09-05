@@ -87,6 +87,12 @@ public class SnsDto {
 		this.simg = simg;
 		this.scontent = scontent;
 	}
+
+	// 기존 이미지 호출 생성자 -병철
+	public SnsDto(String simg) {
+		super();
+		this.simg = simg;
+	}
 	    
 	    
 }
