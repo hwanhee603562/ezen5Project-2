@@ -25,6 +25,7 @@ font-family: 'KCC-Ganpan';
     margin-bottom: 30px;
     width: 100%;
 }
+
 .imgBox{
 	width: 330px;
 	margin: 0 auto;
@@ -50,6 +51,17 @@ font-family: 'KCC-Ganpan';
 .writeContent{
 	word-break:break-all;	
 }
+
+.writeImg{
+	width: 100%;
+	height: 300px;
+	object-fit: cover;
+    border-radius: 20px;
+}
+
+
+
+
 
 
 
