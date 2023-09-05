@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 	
-	<link href="/sns/write.css" rel="stylesheet">
+	<link href="/ezen5project-2/sns/write.css" rel="stylesheet">
 
 <body>
 

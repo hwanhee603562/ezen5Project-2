@@ -87,6 +87,24 @@ public class SnsDao extends Dao{
 		}return false;
 	}
 	
+	// 기존 게시물 img 호출 함수
+	public SnsDto oldimg(int sno) {
+		
+		try {
+			String sql = "select simg from sns where sno = ?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, sno);
+			rs=ps.executeQuery();
+			if (rs.next()) {
+				SnsDto dto = new SnsDto(rs.getString("simg"));
+				return dto;
+			}
+		} catch (Exception e) {System.out.println("기존이미지 가져오기 sql 오류 : " + e);}
+		return null;
+	}
+	
+	
 	
 	// 글 삭제 - 승우
 	/*---------------------------------*/
