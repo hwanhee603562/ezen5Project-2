@@ -38,9 +38,9 @@ function printSns(){
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
 							<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
 							<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
-							<button onclick="reply()"> 답글 </button>
+							<button onclick="reply(${r[i].sno})"> 답글 </button>
 							<div class="replyList">
-								<div class="outputReply"> 답글출력구역 </div>
+								<div class="outputReply" value=""> 답글출력구역 </div>
 								<div>
 									<span class="outputTime"> 시간출력구역 </span>
 									<button onclick="deleteReply()" class="deleteBtn"> x </button>
@@ -95,6 +95,37 @@ function snsDelete(sno, spwd){
 			error : e => { console.log(e) } 
 		});
 	}else{alert('삭제 실패]비밀번호가 일치하지않습니다.')}
+	
+}
+
+function replyprint(){
+	
+	
+	    $.ajax({
+      url :  "/ezen5project-2/ReplyController",
+      method : "get" , 
+      data : {sno : sno} ,
+      success : r => {
+		  
+		let output = document.querySelector('.outputReply')
+		for(let i = 0; i<r.length; i++){}
+		html = `${d}`
+		  
+	  } ,
+      error :  e => {e}
+      });
+	
+	
+	
+	
+	
+	html = ``;
+	
+	
+	
+	output.innerHTML=html;
+	
+	
 	
 }
 
