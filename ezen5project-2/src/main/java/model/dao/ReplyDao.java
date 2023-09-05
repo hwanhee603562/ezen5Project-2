@@ -8,7 +8,7 @@ public class ReplyDao extends Dao{
 	private ReplyDao() {};
 	
 	
-	
+	// 답글등록
 	public boolean Replyword( String rcontent , String rpwd) {
 		try {
 			String sql ="insert into reply( rcontent , rpwd ) values( ? , ?)";

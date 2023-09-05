@@ -97,6 +97,8 @@ function snsDelete(sno, spwd){
 	}else{alert('삭제 실패]비밀번호가 일치하지않습니다.')}
 	
 }
+
+// 답글등록 함수
 function reply(){
 	console.log('답글 응답')
 	let rcontent = prompt('답글 입력해주세요');
