@@ -9,7 +9,7 @@
 
 	<link href="/ezen5project-2/sns/content.css" rel="stylesheet">
  
-</head>
+</head> 
 <body>
 
 	<%@include file = "./header.jsp" %>
