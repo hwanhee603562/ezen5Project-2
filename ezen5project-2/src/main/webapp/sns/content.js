@@ -17,7 +17,11 @@ function printSns(){
       		for(let i =0; i < r.length; i++){
 				  
 				  if( Number(r[i].sdate) < 60){
-					  r[i].sdate = '조금전';
+					  if(Number(r[i].sdate) < 1){
+						  r[i].sdate = '조금전'
+					  }else{
+						  r[i].sdate = r[i].sdate + '분전';
+					  }
 				  }else if(Number(r[i].sdate) > 60){
 					  if(Number(r[i].sdate)/60 >= 24){
 						  r[i].sdate = Math.floor((Number(r[i].sdate)/60)/24) + '일전'
