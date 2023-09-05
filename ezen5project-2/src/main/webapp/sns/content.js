@@ -4,7 +4,7 @@
 printSns();
 
 function printSns(){
-	
+	 
 	$.ajax( { 
        url : "http://localhost/ezen5project-2/SnsController",
        data : "",         // 보내는 데이터
