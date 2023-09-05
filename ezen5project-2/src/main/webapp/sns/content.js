@@ -4,9 +4,9 @@
 printSns();
 
 function printSns(){
-	
+	 
 	$.ajax( { 
-       url : "http://localhost/ezen5project-2/SnsController",
+       url : "/ezen5project-2/SnsController",
        data : "",         // 보내는 데이터
        method : "get",
        success : r =>{console.log('통신성공')
@@ -15,11 +15,27 @@ function printSns(){
 			let html = ``;
       		
       		for(let i =0; i < r.length; i++){
+				  
+				  if( Number(r[i].sdate) < 60){
+					  r[i].sdate = '조금전';
+				  }else if(Number(r[i].sdate) > 60){
+					  if(Number(r[i].sdate)/60 >= 24){
+						  r[i].sdate = Math.floor((Number(r[i].sdate)/60)/24) + '일전'
+					  }else{
+						  r[i].sdate = Math.floor(Number(r[i].sdate)/60) + '시간전'
+					  }
+				  }
+				  
 				  html += 
 				  `
 				  	<div class="contentBox">
+
 					  	<img class="writeImg" width="320px;" src="/ezen5project-2/sns/img/${r[i].simg}">			<!-- 작성 사진 -->
 					  	<div class="writer">${r[i].sid}</div>
+
+					  	<div class="imgBox"> <img class="writeImg" src="/ezen5project-2/sns/img/${r[i].simg}">	</div>		<!-- 작성 사진 -->
+					  	<div class="writer">ID  ${r[i].sid}</div>
+
 						<div class="writeDate">${r[i].sdate}</div>	<!-- 작성 시간 출력 -->
 						<div class="writeContent">${r[i].scontent}</div>	<!-- 작성 글 출력 -->
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
@@ -42,6 +58,8 @@ function updateSns(sno, spwd){
 	
 	if(spwdCheck == spwd){
 		location.href = `/ezen5project-2/sns/update.jsp?sno=${sno}`
+	}else{
+		alert('비밀번호가 틀렸습니다.')
 	}
 	
 	

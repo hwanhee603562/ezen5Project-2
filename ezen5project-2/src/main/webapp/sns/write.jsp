@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head> 
 	
 	<link href="/ezen5project-2/sns/write.css" rel="stylesheet">
 
