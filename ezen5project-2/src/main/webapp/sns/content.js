@@ -34,7 +34,7 @@ function printSns(){
 				  `
 				  	<div class="contentBox">
 					  	<div class="imgBox"> <img class="writeImg" src="/ezen5project-2/sns/img/${r[i].simg}">	</div>		<!-- 작성 사진 -->
-					  	<div class="writer">ID  ${r[i].sid}</div>
+					  	<div class="writer">${r[i].sid}</div>
 						<div class="writeDate">${r[i].sdate}</div>	<!-- 작성 시간 출력 -->
 						<div class="writeContent">${r[i].scontent}</div>	<!-- 작성 글 출력 -->
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->

@@ -37,9 +37,14 @@ font-family: 'KCC-Ganpan';
 }
 .writer{
 	font-weight: bold;
+	margin: 10px 0px;
+	padding-left: 10px;
 }
 .writeDate{
 	font-size: 11px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	color: #5F5F5F;
 }
 .bottomBtn button{
 	width: 50px;
@@ -47,9 +52,12 @@ font-family: 'KCC-Ganpan';
 	background-color: white;
 	border-radius: 49%;
 	border-color: yellow;
+	cursor: pointer;
 }
 .writeContent{
 	word-break:break-all;	
+	margin-bottom: 10px;
+	padding-left: 10px;
 }
 
 .writeImg{
