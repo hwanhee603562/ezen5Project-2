@@ -4,9 +4,9 @@
 printSns();
 
 function printSns(){
-	
+	 
 	$.ajax( { 
-       url : "http://localhost/ezen5project-2/SnsController",
+       url : "/ezen5project-2/SnsController",
        data : "",         // 보내는 데이터
        method : "get",
        success : r =>{console.log('통신성공')
@@ -33,8 +33,8 @@ function printSns(){
 				  html += 
 				  `
 				  	<div class="contentBox">
-					  	<img class="writeImg" src="/ezen5project-2/sns/img/${r[i].simg}">			<!-- 작성 사진 -->
-					  	<div class="writer">${r[i].sid}</div>
+					  	<div class="imgBox"> <img class="writeImg" src="/ezen5project-2/sns/img/${r[i].simg}">	</div>		<!-- 작성 사진 -->
+					  	<div class="writer">ID  ${r[i].sid}</div>
 						<div class="writeDate">${r[i].sdate}</div>	<!-- 작성 시간 출력 -->
 						<div class="writeContent">${r[i].scontent}</div>	<!-- 작성 글 출력 -->
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
