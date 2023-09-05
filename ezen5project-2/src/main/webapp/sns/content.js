@@ -97,4 +97,34 @@ function snsDelete(sno, spwd){
 	}else{alert('삭제 실패]비밀번호가 일치하지않습니다.')}
 	
 }
+function reply(){
+	console.log('답글 응답')
+	let rcontent = prompt('답글 입력해주세요');
+	let rpwd = prompt('비밀번호를 입력해주세요')
+	
+	if(rcontent.length == 0 || rcontent == null ){
+		alert('답글을 입력해주세요')
+		return
+	}
+	if(rpwd.length == 0 || rpwd == null ){
+		alert('비밀번호를 입력해주세요')
+		return
+	}
+		
+	
+	$.ajax({
+		url : "/ezen5project-2/ReplyController" ,
+		method : "post" ,
+		data : { rcontent : rcontent , rpwd : rpwd } , 
+		success : r => { console.log(r)
+			if(r){
+				alert('등록 성공')
+			}else{
+				alert('등록 실패')
+			}
+		 },
+		error : e => { console.log(e) } 
+	})
+	
+}
 

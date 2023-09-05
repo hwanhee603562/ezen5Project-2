@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.ReplyDao;
+import model.dto.ReplyDto;
+
 @WebServlet("/ReplyController")
 public class ReplyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +27,15 @@ public class ReplyController extends HttpServlet {
 
 	// 승우	- 답글 등록
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String rcontent = request.getParameter("rcontent");
+		String rpwd = request.getParameter("rpwd");
 		
+		ReplyDto replyDto = new ReplyDto(rpwd, rcontent);
+		
+		boolean result = ReplyDao.getInstance().Replyword(rcontent, rpwd);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
