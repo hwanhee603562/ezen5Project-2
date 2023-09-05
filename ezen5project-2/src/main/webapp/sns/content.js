@@ -30,9 +30,6 @@ function printSns(){
 				  `
 				  	<div class="contentBox">
 
-					  	<img class="writeImg" width="320px;" src="/ezen5project-2/sns/img/${r[i].simg}">			<!-- 작성 사진 -->
-					  	<div class="writer">${r[i].sid}</div>
-
 					  	<div class="imgBox"> <img class="writeImg" src="/ezen5project-2/sns/img/${r[i].simg}">	</div>		<!-- 작성 사진 -->
 					  	<div class="writer">ID  ${r[i].sid}</div>
 
