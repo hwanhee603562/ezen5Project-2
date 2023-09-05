@@ -33,7 +33,7 @@ public class SnsController extends HttpServlet {
 
     public SnsController() {
         
-    }
+    } 
 
     
     // 글 출력 - 의선
@@ -54,7 +54,7 @@ public class SnsController extends HttpServlet {
 		        System.out.println(diffSec + "초 차이");
 		        System.out.println(diffMin + "분 차이");
 		        System.out.println(diffHor + "시 차이");
-		        System.out.println(diffDays + "일 차이");
+		        System.out.println(diffDays + "일차이");
 		        String datecheck = "" + diffMin;
 		        
 				result.get(i).setSdate(datecheck);

@@ -63,6 +63,32 @@ public class SnsDao extends Dao{
 		return false;
 	}
 	
+	// 검색기능
+	public ArrayList<SnsDto> searchContent(String searchWord) {
+		
+		try {
+			ArrayList<SnsDto> list = new ArrayList<>();
+			
+			String sql = "select * from sns where scontent like '%"+searchWord+"%';";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while( rs.next() ) {
+				SnsDto snsDto = new SnsDto(rs.getInt(1), rs.getString(2), 
+					rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				list.add(snsDto);
+			}
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
 	// 글 수정 - 병철
 	/*---------------------------------*/
 	
