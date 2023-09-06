@@ -51,6 +51,19 @@ function printSns(){
 							`
 							// 답글 출력구역
 							r.replyList.forEach( c => {
+								if( Number(c.rdate) < 60){
+									 if(Number(c.rdate) < 1){
+										  c.rdate = '조금전'
+									 }else{
+										  c.rdate = c.rdate + '분전';
+									 }
+								}else if(Number(c.rdate) > 60){
+									 if(Number(c.rdate)/60 >= 24){
+										  c.rdate = Math.floor((Number(c.rdate)/60)/24) + '일전'
+									 }else{
+										  c.rdate = Math.floor(Number(c.rdate)/60) + '시간전'
+									 }
+								} 
 								
 								if(c.sno == b.sno){
 									html += 
@@ -58,7 +71,7 @@ function printSns(){
 									<div class="replyPrintBox">
 										<div class="outputReply"> ${c.rcontent} </div>
 										<div>
-											<span class="outputTime"> 시간출력구역 </span>
+											<span class="outputTime"> ${c.rdate} </span>
 											<span onclick="deleteReply(${c.rno})" class="rdeleteBtn"> x </span>
 										</div>
 									</div>

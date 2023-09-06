@@ -1,7 +1,9 @@
 package Controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +31,6 @@ public class ReplyController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int sno = Integer.parseInt(request.getParameter("sno"));
-		
 		ArrayList<ReplyDto> result = ReplyDao.getInstance().printReply();
 		
 		// 리턴값을 JSON 형식으로 변환
