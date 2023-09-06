@@ -32,7 +32,7 @@ function printSns(){
 						  b.sdate = Math.floor(Number(b.sdate)/60) + '시간전'
 					  }
 				  } 
-				  
+				   
 				  html += 
 				  `
 				  	<div class="contentBox">
