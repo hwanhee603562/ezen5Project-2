@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.dao.ReplyDao;
 import model.dao.SnsDao;
+import model.dto.ReplyDto;
 import model.dto.SnsDto;
+import model.dto.ReponseDto;
 
 
 @WebServlet("/SearchController")
@@ -55,9 +58,11 @@ public class SearchController extends HttpServlet {
 			} catch (Exception e) {System.out.println(e);}
 		}
 		
+		ArrayList<ReplyDto> result2 = ReplyDao.getInstance().printReply();
+		ReponseDto reponseDto = new ReponseDto(list, result2);
 		
 		ObjectMapper objectMapper = new ObjectMapper();
-		String jsonArray = objectMapper.writeValueAsString( list );
+		String jsonArray = objectMapper.writeValueAsString( reponseDto );
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(jsonArray);
