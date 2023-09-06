@@ -1,14 +1,15 @@
 package model.dto;
 
+import java.util.ArrayList;
+
 public class ReplyDto {
 	// 댓글 테이블 DTO
 	
-	int rno;			// 댓글 번호 [PK]
-    String rpwd;		// 댓글 패스워드
-    String rcontent;	// 댓글
-    String rdate;		// 작성일자
-    int sno;			// 댓글을 작성한 게시물 번호 [FK]
-    
+	private int rno;			// 댓글 번호 [PK]
+    private String rpwd;		// 댓글 패스워드
+    private String rcontent;	// 댓글
+    private String rdate;		// 작성일자
+    private int sno;			// 댓글을 작성한 게시물 번호 [FK]
     
     
     // 생성자
@@ -22,9 +23,8 @@ public class ReplyDto {
 		this.rdate = rdate;
 		this.sno = sno;
 	}
+	
 
-	
-	
 	// getter  setter
 	public int getRno() {
 		return rno;
@@ -65,6 +65,7 @@ public class ReplyDto {
 	public void setSno(int sno) {
 		this.sno = sno;
 	}
+
 
 	@Override
 	public String toString() {

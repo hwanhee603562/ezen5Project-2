@@ -87,10 +87,14 @@ box-sizing: border-box;
 /* 답글구역 */
 .replyList{
 	margin: 5px 0px;
-	display: flex;
-	justify-content: space-between;
 	font-size: 13px;
 	border-top: 1px solid #eeeeee;
+}
+
+.replyPrintBox{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
 /* 답글 출력구역 */

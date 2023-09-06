@@ -14,19 +14,19 @@ function printSns(){
        		let snsContent = document.querySelector('.outputField');
 			let html = ``;
       		
-      		for(let i =0; i < r.length; i++){
+      		r.snsList.forEach(b => {
 				  
-				  if( Number(r[i].sdate) < 60){
-					  if(Number(r[i].sdate) < 1){
-						  r[i].sdate = '조금전'
+				  if( Number(b.sdate) < 60){
+					  if(Number(b.sdate) < 1){
+						  b.sdate = '조금전'
 					  }else{
-						  r[i].sdate = r[i].sdate + '분전';
+						  b.sdate = b.sdate + '분전';
 					  }
-				  }else if(Number(r[i].sdate) > 60){
-					  if(Number(r[i].sdate)/60 >= 24){
-						  r[i].sdate = Math.floor((Number(r[i].sdate)/60)/24) + '일전'
+				  }else if(Number(b.sdate) > 60){
+					  if(Number(b.sdate)/60 >= 24){
+						  b.sdate = Math.floor((Number(b.sdate)/60)/24) + '일전'
 					  }else{
-						  r[i].sdate = Math.floor(Number(r[i].sdate)/60) + '시간전'
+						  b.sdate = Math.floor(Number(b.sdate)/60) + '시간전'
 					  }
 				  }
 				  
@@ -34,20 +34,36 @@ function printSns(){
 				  `
 				  	<div class="contentBox">
 
-					  	<div class="imgBox"> <img class="writeImg" src="/ezen5project-2/sns/img/${r[i].simg}">	</div>		<!-- 작성 사진 -->
-					  	<div class="writer">${r[i].sid}</div>
-						<div class="writeDate">${r[i].sdate}</div>	<!-- 작성 시간 출력 -->
-						<div class="writeContent">${r[i].scontent}</div>	<!-- 작성 글 출력 -->
+					  	<div class="imgBox"> <img class="writeImg" src="/ezen5project-2/sns/img/${b.simg}">	</div>		<!-- 작성 사진 -->
+					  	<div class="writer">${b.sid}</div>
+						<div class="writeDate">${b.sdate}</div>	<!-- 작성 시간 출력 -->
+						<div class="writeContent">${b.scontent}</div>	<!-- 작성 글 출력 -->
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
-							<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
-							<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
+							<button onclick="updateSns(${b.sno}, '${b.spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
+							<button onclick="snsDelete(${b.sno}, '${b.spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
 							<button onclick="reply()"> 답글 </button>
 							<div class="replyList">
-								<div class="outputReply"> 답글출력구역 </div>
-								<div>
-									<span class="outputTime"> 시간출력구역 </span>
-									<span onclick="deleteReply()" class="rdeleteBtn"> x </span>
-								</div>
+							`
+							// 답글 출력구역
+							r.replyList.forEach( c => {
+								console.log(c)
+								
+								if(c.sno == b.sno){
+									html += 
+									`
+									<div class="replyPrintBox">
+										<div class="outputReply"> ${c.rcontent} </div>
+										<div>
+											<span class="outputTime"> 시간출력구역 </span>
+											<span onclick="deleteReply(${c.rno})" class="rdeleteBtn"> x </span>
+										</div>
+									</div>
+									`
+								}
+							})
+	
+				 html +=				
+							`	
 							</div>
 						</div>
 						
@@ -55,7 +71,7 @@ function printSns(){
 						
 					</div>
 				  `
-			  }
+			  })
 			  snsContent.innerHTML = html;
        		
 		},
@@ -64,6 +80,7 @@ function printSns(){
 	
 }
 
+// 게시글 수정
 function updateSns(sno, spwd){
 	let spwdCheck = prompt('비밀번호를 입력해주세요.');
 	
@@ -77,7 +94,7 @@ function updateSns(sno, spwd){
 }
 
 
-
+// 게시글 삭제
 function snsDelete(sno, spwd){
  
 	let spwdCheck = prompt('비밀번호를 입력해주세요. ')
@@ -100,4 +117,23 @@ function snsDelete(sno, spwd){
 	}else{alert('삭제 실패]비밀번호가 일치하지않습니다.')}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
