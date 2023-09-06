@@ -1,5 +1,4 @@
 
-console.log('통신성공')
 // 실행시 한번 자동출력
 printSns();
 
@@ -9,15 +8,14 @@ function printSns(){
        url : "/ezen5project-2/SnsController",
        data : "",         // 보내는 데이터
        method : "get",
-       success : r =>{console.log('통신성공')
-       		
+       success : r =>{
+
        		let snsContent = document.querySelector('.outputField');
 			let html = ``;
       		
       		// content 구역 출력 전 총 피드 수 출력
-			document.querySelector('.feedCount').innerHTML = `총 피드 수 : ${r.length}`;
+			document.querySelector('.feedCount').innerHTML = `총 피드 수 : ${r.snsList.length}`;
       		
-      		for(let i =0; i < r.length; i++){
 
       		r.snsList.forEach(b => {
 				  
@@ -45,15 +43,14 @@ function printSns(){
 						<div class="writeContent">${b.scontent}</div>	<!-- 작성 글 출력 -->
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
 
-							<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
-							<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
-							<button onclick="reply(${r[i].sno})"> 답글 </button>
+							<button onclick="updateSns(${b.sno}, '${b.spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
+							<button onclick="snsDelete(${b.sno}, '${b.spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
+							<button onclick="reply(${b.sno})"> 답글 </button>
 
 							<div class="replyList">
 							`
 							// 답글 출력구역
 							r.replyList.forEach( c => {
-								console.log(c)
 								
 								if(c.sno == b.sno){
 									html += 
@@ -80,9 +77,8 @@ function printSns(){
 				  `
 			  })
 			  snsContent.innerHTML = html;
-       		}	// 반복문 r.length end
 		},	// success end
-       	error : e=>{console.log(e)}
+       	error : e=>{ console.log('통신실패') }
      }); // ajax end
 	
 }	// function end
@@ -113,13 +109,12 @@ function snsDelete(sno, spwd){
 			method : "delete" ,
 			data : {sno : sno} ,
 			success : r => { 
-				console.log(r)
 				if(r) {
 					alert('삭제 성공')
 					printSns();
 				}else{alert('삭제 실패')}
 			},
-			error : e => { console.log(e) } 
+			error : e => {} 
 		});
 	}else{alert('삭제 실패]비밀번호가 일치하지않습니다.')}
 }
@@ -129,8 +124,6 @@ function snsDelete(sno, spwd){
 function searchContent(){
 	let searchWord = document.querySelector('.searchInput').value;
 	
-
-		
 	$.ajax({
 		url: "/ezen5project-2/SearchController",
 		method: "get",
@@ -141,10 +134,8 @@ function searchContent(){
 			let html = ``;
 			
 			// content 구역 출력 전 총 피드 수 출력
-			document.querySelector('.feedCount').innerHTML = `총 피드 수 : ${r.length}`;
-
+			document.querySelector('.feedCount').innerHTML = `총 피드 수 : ${r.snsList.length}`;
       		
-      		for(let i =0; i < r.length; i++){
 
       		r.snsList.forEach(b => {
 				  
@@ -172,15 +163,14 @@ function searchContent(){
 						<div class="writeContent">${b.scontent}</div>	<!-- 작성 글 출력 -->
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
 
-							<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
-							<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
-							<button onclick="reply(${r[i].sno})"> 답글 </button>
+							<button onclick="updateSns(${b.sno}, '${b.spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
+							<button onclick="snsDelete(${b.sno}, '${b.spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
+							<button onclick="reply(${b.sno})"> 답글 </button>
 
 							<div class="replyList">
 							`
 							// 답글 출력구역
 							r.replyList.forEach( c => {
-								console.log(c)
 								
 								if(c.sno == b.sno){
 									html += 
@@ -207,8 +197,7 @@ function searchContent(){
 				  `
 			  })
 			  snsContent.innerHTML = html;
-       		}
-		},
+		},	// success end
 		error: e => {
 			console.log('통신실패');
 		}
@@ -217,21 +206,31 @@ function searchContent(){
 
 
 
-
 // 답글등록 함수
 function reply( sno ){
 	console.log('답글 응답')
 	console.log(sno)
-	let rcontent = prompt('답글 입력해주세요');
-	let rpwd = prompt('비밀번호를 입력해주세요')
 	
+	// 답글 입력 후 유효성 검사
+	let rcontent = prompt('답글 입력해주세요');
 	if(rcontent.length == 0 || rcontent == null ){
 		alert('답글을 입력해주세요')
 		return
 	}
+	if(rcontent.length > 30){
+		alert('답글은 최대 30글자 까지만 입력 가능합니다')
+		return;
+	}
+	
+	// 답글 비밀번호 입력 후 유효성 검사
+	let rpwd = prompt('비밀번호를 입력해주세요')
 	if(rpwd.length == 0 || rpwd == null ){
 		alert('비밀번호를 입력해주세요')
 		return
+	}
+	if(rpwd.length < 8){
+		alert('비밀번호를 8자리 이상으로 설정하십시오')
+		return;
 	}
 		
 	
@@ -239,35 +238,18 @@ function reply( sno ){
 		url : "/ezen5project-2/ReplyController" ,
 		method : "post" ,
 		data : { rcontent : rcontent , rpwd : rpwd , sno : sno} , 
-		success : r => { console.log(r)
+		success : r => { 
 			if(r){
 				alert('등록 성공')
 			}else{
 				alert('등록 실패')
 			}
+			printSns();
 		 },
-		error : e => { console.log(e) } 
+		error : e => {} 
 	})
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -283,13 +265,12 @@ function deleteReply( rno ){
 		success : r =>{
 			if(r){
 				alert('삭제가 완료되었습니다')
+				printSns();
 			} else {
 				alert('비밀번호가 일치하지 않습니다')
 			}
 		},
-		error : e =>{
-			
-		}
+		error : e =>{}
 	})
 	
 	

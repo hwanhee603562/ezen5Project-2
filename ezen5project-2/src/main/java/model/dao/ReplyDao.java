@@ -13,6 +13,7 @@ public class ReplyDao extends Dao{
 		return replyDao;
 	}
 	
+	// 답글 출력
 	public ArrayList<ReplyDto> printReply(){
 		ArrayList<ReplyDto> list = new ArrayList<>();
 		

@@ -2,13 +2,15 @@ package model.dto;
 
 import java.util.ArrayList;
 
-public class reponseDto {
+public class ReponseDto {
 	
 	ArrayList<SnsDto> snsList;
 	ArrayList<ReplyDto> replyList;
 	
-	public reponseDto(ArrayList<SnsDto> snsList, ArrayList<ReplyDto> replyList) {
-		super();
+	// 생성자
+	public ReponseDto() {}
+	
+	public ReponseDto(ArrayList<SnsDto> snsList, ArrayList<ReplyDto> replyList) {
 		this.snsList = snsList;
 		this.replyList = replyList;
 	}
