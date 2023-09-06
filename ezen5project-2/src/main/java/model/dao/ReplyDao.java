@@ -6,7 +6,7 @@ public class ReplyDao extends Dao{
 	private static ReplyDao replyDao = new ReplyDao();
 	public static ReplyDao getInstance() {return replyDao;}
 	private ReplyDao() {};
-	
+
 	
 	// 답글등록
 	public boolean Replyword( String rcontent , String rpwd , int sno) {
