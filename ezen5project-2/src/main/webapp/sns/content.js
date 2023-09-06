@@ -174,6 +174,7 @@ function searchContent(){
 // 답글등록 함수
 function reply( sno ){
 	console.log('답글 응답')
+	console.log(sno)
 	let rcontent = prompt('답글 입력해주세요');
 	let rpwd = prompt('비밀번호를 입력해주세요')
 	
@@ -190,7 +191,7 @@ function reply( sno ){
 	$.ajax({
 		url : "/ezen5project-2/ReplyController" ,
 		method : "post" ,
-		data : { rcontent : rcontent , rpwd : rpwd } , 
+		data : { rcontent : rcontent , rpwd : rpwd , sno : sno} , 
 		success : r => { console.log(r)
 			if(r){
 				alert('등록 성공')
