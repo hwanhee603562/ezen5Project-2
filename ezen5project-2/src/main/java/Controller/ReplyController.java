@@ -32,7 +32,7 @@ public class ReplyController extends HttpServlet {
 		int sno = Integer.parseInt(request.getParameter("sno"));
 		ReplyDto replyDto = new ReplyDto(rpwd, rcontent);
 		
-		boolean result = ReplyDao.getInstance().Replyword(rcontent, rpwd,sno);
+		boolean result = ReplyDao.getInstance().replyword(rcontent, rpwd,sno);
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);

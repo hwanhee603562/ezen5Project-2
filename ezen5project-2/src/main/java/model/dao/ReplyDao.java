@@ -9,7 +9,7 @@ public class ReplyDao extends Dao{
 	
 	
 	// 답글등록
-	public boolean Replyword( String rcontent , String rpwd , int sno) {
+	public boolean replyword( String rcontent , String rpwd , int sno) {
 		try {
 			String sql ="insert into reply( rcontent , rpwd , sno) values( ? , ? , ?)";
 			ps= conn.prepareStatement(sql);
