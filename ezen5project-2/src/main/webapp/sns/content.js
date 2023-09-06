@@ -208,8 +208,7 @@ function searchContent(){
 
 // 답글등록 함수
 function reply( sno ){
-	console.log('답글 응답')
-	console.log(sno)
+
 	
 	// 답글 입력 후 유효성 검사
 	let rcontent = prompt('답글 입력해주세요');
