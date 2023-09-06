@@ -1,5 +1,5 @@
 
-
+console.log('통신성공')
 // 실행시 한번 자동출력
 printSns();
 
@@ -102,6 +102,7 @@ function snsDelete(sno, spwd){
 function searchContent(){
 	let searchWord = document.querySelector('.searchInput').value;
 	
+
 		
 	$.ajax({
 		url: "/ezen5project-2/SearchController",
@@ -158,6 +159,41 @@ function searchContent(){
 			console.log('통신실패');
 		}
 	})
+}
+
+
+
+
+// 답글등록 함수
+function reply(){
+	console.log('답글 응답')
+	let rcontent = prompt('답글 입력해주세요');
+	let rpwd = prompt('비밀번호를 입력해주세요')
+	
+	if(rcontent.length == 0 || rcontent == null ){
+		alert('답글을 입력해주세요')
+		return
+	}
+	if(rpwd.length == 0 || rpwd == null ){
+		alert('비밀번호를 입력해주세요')
+		return
+	}
+		
+	
+	$.ajax({
+		url : "/ezen5project-2/ReplyController" ,
+		method : "post" ,
+		data : { rcontent : rcontent , rpwd : rpwd } , 
+		success : r => { console.log(r)
+			if(r){
+				alert('등록 성공')
+			}else{
+				alert('등록 실패')
+			}
+		 },
+		error : e => { console.log(e) } 
+	})
+	
 }
 
 
