@@ -14,6 +14,9 @@ function printSns(){
        		let snsContent = document.querySelector('.outputField');
 			let html = ``;
       		
+      		// content 구역 출력 전 총 피드 수 출력
+			document.querySelector('.feedCount').innerHTML = `총 피드 수 : ${r.length}`;
+      		
       		for(let i =0; i < r.length; i++){
 				  
 				  if( Number(r[i].sdate) < 60){
@@ -38,7 +41,7 @@ function printSns(){
 						<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
 							<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
 							<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
-							<button onclick="reply()"> 답글 </button>
+							<button onclick="reply(${r[i].sno})"> 답글 </button>
 							<div class="replyList">
 								<div class="outputReply"> 답글출력구역 </div>
 								<div>
@@ -112,6 +115,10 @@ function searchContent(){
        		
        		let snsContent = document.querySelector('.outputField');
 			let html = ``;
+			
+			// content 구역 출력 전 총 피드 수 출력
+			document.querySelector('.feedCount').innerHTML = `총 피드 수 : ${r.length}`;
+
       		
       		for(let i =0; i < r.length; i++){
 				  
@@ -137,7 +144,7 @@ function searchContent(){
 							<div class="bottomBtn">				<!-- 하단 버튼 구역 -->
 								<button onclick="updateSns(${r[i].sno}, '${r[i].spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
 								<button onclick="snsDelete(${r[i].sno}, '${r[i].spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
-								<button onclick="reply()"> 답글 </button>
+								<button onclick="reply(${r[i].sno})"> 답글 </button>
 								<div class="replyList">
 									<div class="outputReply"> 답글출력구역 </div>
 									<div>
