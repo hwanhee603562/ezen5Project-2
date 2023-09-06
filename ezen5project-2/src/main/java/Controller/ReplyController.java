@@ -32,19 +32,51 @@ public class ReplyController extends HttpServlet {
 		int sno = Integer.parseInt(request.getParameter("sno"));
 		ReplyDto replyDto = new ReplyDto(rpwd, rcontent);
 		
-		boolean result = ReplyDao.getInstance().Replyword(rcontent, rpwd,sno);
+		boolean result = ReplyDao.getInstance().replyWord(rcontent, rpwd,sno);
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 	// 병철	- 답글 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		int rno = Integer.parseInt(request.getParameter("rno"));
+		String rpwd = request.getParameter("rpwd");
+		
+		// 답글 비밀번호 일치여부 확인
+		boolean checkPw = ReplyDao.getInstance().checkReplyPw( rno, rpwd );
+		if( !checkPw ) {
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(checkPw);
+			return;
+		}
+		boolean result = ReplyDao.getInstance().deletReply( rno );
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

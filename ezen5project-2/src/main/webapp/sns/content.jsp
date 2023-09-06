@@ -20,7 +20,7 @@
 		<div class="outputField"><!-- 게시물 1개 출력되는 구역 -->
  
 		</div>
-		
+		<button onclick="deleteReply(5)">testdeletebutton</button>
 	</div><!-- content 전체구역 end -->
 
 

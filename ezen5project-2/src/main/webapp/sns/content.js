@@ -206,7 +206,28 @@ function reply( sno ){
 
 
 
-
+function deleteReply( rno ){
+	
+	let rpwd = prompt('답글 비밀번호를 입력하십시오');
+	
+	$.ajax({
+		url : "/ezen5project-2/ReplyController",
+		method : "delete",
+		data : { rno : rno, rpwd : rpwd },
+		success : r =>{
+			if(r){
+				alert('삭제가 완료되었습니다')
+			} else {
+				alert('비밀번호가 일치하지 않습니다')
+			}
+		},
+		error : e =>{
+			
+		}
+	})
+	
+	
+}
 
 
 
