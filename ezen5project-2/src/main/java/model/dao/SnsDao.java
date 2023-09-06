@@ -69,7 +69,7 @@ public class SnsDao extends Dao{
 		try {
 			ArrayList<SnsDto> list = new ArrayList<>();
 			
-			String sql = "select * from sns where scontent like '%"+searchWord+"%';";
+			String sql = "select * from sns where scontent like '%"+searchWord+"%' order by sdate desc ";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while( rs.next() ) {
