@@ -8,7 +8,7 @@ create table sns(
 	simg longtext not null,
 	sid varchar(12) not null,
     scontent text not null,
-    spwd varchar(6) not null,
+    spwd varchar(50) not null,
     sdate datetime default now(),
     primary key(sno)
 );
