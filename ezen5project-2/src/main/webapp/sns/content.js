@@ -27,7 +27,7 @@ function printSns(){
 					  }else{
 						  r[i].sdate = Math.floor(Number(r[i].sdate)/60) + '시간전'
 					  }
-				  }
+				  } 
 				  
 				  html += 
 				  `
@@ -172,7 +172,7 @@ function searchContent(){
 
 
 // 답글등록 함수
-function reply(){
+function reply( sno ){
 	console.log('답글 응답')
 	let rcontent = prompt('답글 입력해주세요');
 	let rpwd = prompt('비밀번호를 입력해주세요')
