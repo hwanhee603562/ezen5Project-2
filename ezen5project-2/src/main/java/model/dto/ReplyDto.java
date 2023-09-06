@@ -25,6 +25,13 @@ public class ReplyDto {
 	}
 	
 
+
+	public ReplyDto(String rpwd, String rcontent) {
+		super();
+		this.rpwd = rpwd;
+		this.rcontent = rcontent;
+	}
+
 	// getter  setter
 	public int getRno() {
 		return rno;

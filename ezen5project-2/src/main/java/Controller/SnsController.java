@@ -19,15 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dto.ReplyDto;
 import model.dto.SnsDto;
-import model.dto.reponseDto;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
-import model.dao.SnsDao;
-import model.dto.SnsDto;
-
-import model.dao.SnsDao;
+import model.dto.ReponseDto;
 
 
 @WebServlet("/SnsController")
@@ -37,7 +29,7 @@ public class SnsController extends HttpServlet {
 
     public SnsController() {
         
-    }
+    } 
 
     
     // 글 출력 - 의선
@@ -55,10 +47,6 @@ public class SnsController extends HttpServlet {
 		        long diffHor = (format2.getTime() - format1.getTime()) / 3600000; //시 차이
 		        long diffDays = diffSec / (24*60*60); //일자수 차이
 		        
-		        System.out.println(diffSec + "초 차이");
-		        System.out.println(diffMin + "분 차이");
-		        System.out.println(diffHor + "시 차이");
-		        System.out.println(diffDays + "일 차이");
 		        String datecheck = "" + diffMin;
 		        
 				result.get(i).setSdate(datecheck);
@@ -67,13 +55,12 @@ public class SnsController extends HttpServlet {
 		}
 		
 		ArrayList<ReplyDto> result2 = ReplyDao.getInstance().printReply();
-		reponseDto rDto = new reponseDto(result, result2);
-		
+		ReponseDto rDto = new ReponseDto(result, result2);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonArray = objectMapper.writeValueAsString(rDto);
-		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(jsonArray);
+
 	}
 
 	// 글 등록 - 환희

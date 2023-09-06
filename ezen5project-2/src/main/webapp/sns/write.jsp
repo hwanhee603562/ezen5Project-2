@@ -19,6 +19,7 @@
 	</form>
 	<button onclick="writeSns()"> 등록 </button>
 	<a href="/ezen5project-2/sns/content.jsp"> <button> 취소 </button> </a>
+	
 	<!-- 글 출력 페이지로 이동 -->
 	
 	<script src="/ezen5project-2/sns/write.js" type="text/javascript"></script>
