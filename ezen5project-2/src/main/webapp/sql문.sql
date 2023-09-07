@@ -26,3 +26,14 @@ create table reply(
     primary key(rno),
     foreign key(sno) references sns(sno) on delete cascade
 );
+
+# ucheck 	- 0 : 결정x	1 : 좋아요	2 : 싫어요
+drop table if exists usercheck;
+create table usercheck(
+	uno int auto_increment,				-- pk
+	uip varchar(30) unique not null,	-- 유저 ip
+	ucheck int default 0,				-- 유저 반응
+    sno int,
+    primary key(uno),
+    foreign key (sno) references sns (sno)
+);
