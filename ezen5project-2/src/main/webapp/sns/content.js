@@ -49,7 +49,12 @@ function printSns(){
 							<button onclick="snsDelete(${b.sno}, '${b.spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
 							<button onclick="reply(${b.sno})"> 답글 </button>
 							<button onclick="downloadbtn()" type="button">다운로드</button>
-
+							
+							<div class="userCheck">
+								<button onclick="userGood(${b.sno})" type="button"> 좋아용 </button>
+								<button onclick="userBad(${b.sno})" type="button"> 싫어용 </button>
+							</div>
+							
 							<div class="replyList">
 							` 
 							// 답글 출력구역
@@ -67,7 +72,7 @@ function printSns(){
 										  c.rdate = Math.floor(Number(c.rdate)/60) + '시간전'
 									 }
 								} 
-								
+								 
 								if(c.sno == b.sno){
 									html += 
 									`
@@ -183,7 +188,12 @@ function searchContent(){
 							<button onclick="snsDelete(${b.sno}, '${b.spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
 							<button onclick="reply(${b.sno})"> 답글 </button>
 							<button onclick="downloadbtn(${b.simg})" type="button">다운로드</button>
-
+							
+							<div class="userCheck">
+								<button onclick="userGood(${b.sno})" type="button"> 좋아용 </button>
+								<button onclick="userBad(${b.sno})" type="button"> 싫어용 </button>
+							</div>
+							
 							<div class="replyList">
 							`
 							// 답글 출력구역
@@ -303,8 +313,17 @@ function downloadbtn(simg){
 	});
 }
 
+// 게시물 조회시 유저의 무반응/좋아요/싫어요 상태 확인 
+	// 		0 : 좋아요	1 : 싫어요
+	// 해당 유저의 IP를 DB 데이터와 비교하여 데이터 저장이 없으면 [무반응] 기본 이미지로 변경
+	// 해당 유저가 좋아요 혹은 싫어요를 취소할 경우 DB에 해당 데이터 삭제
 
 
+// 좋아요
+
+
+
+// 싫어요
 
 
 
