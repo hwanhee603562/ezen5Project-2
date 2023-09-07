@@ -1,9 +1,11 @@
 package Controller;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dto.ReplyDto;
 import model.dto.SnsDto;
+import service.FileService;
 import model.dto.ReponseDto;
 
 
@@ -93,6 +96,7 @@ public class SnsController extends HttpServlet {
 		String spw = multi.getParameter("spw");
 		String simg = multi.getFilesystemName("simg");
 		String scontent = multi.getParameter("scontent");
+		System.out.println(scontent);
 		
 		boolean result = SnsDao.getInstance().writeContent( sid, spw, simg, scontent );
 		
@@ -137,7 +141,14 @@ public class SnsController extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int sno = Integer.parseInt(request.getParameter("sno"));
+			// 레코드 삭제전 파일이름 가져오기
+		String filename = SnsDao.getInstance().oldimg(sno).getSimg();
 		boolean result = SnsDao.getInstance().snsDelete(sno);
+		
+		if(result) {
+			filename = request.getServletContext().getRealPath("/sns/img") + "/" + filename;
+			FileService.fileDelete(filename);
+		}
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
