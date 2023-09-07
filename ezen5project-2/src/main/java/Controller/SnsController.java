@@ -93,6 +93,8 @@ public class SnsController extends HttpServlet {
 		String spw = multi.getParameter("spw");
 		String simg = multi.getFilesystemName("simg");
 		String scontent = multi.getParameter("scontent");
+		scontent=scontent.replace("\r\n","<br>");
+		System.out.println(scontent);
 		
 		boolean result = SnsDao.getInstance().writeContent( sid, spw, simg, scontent );
 		

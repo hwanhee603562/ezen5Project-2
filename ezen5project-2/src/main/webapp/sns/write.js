@@ -1,4 +1,5 @@
-
+	console.log(" 글쓰기 js ")
+	
 
 
 function writeSns(){
@@ -8,10 +9,11 @@ function writeSns(){
 	let id = document.querySelector('.inputSid').value;
 	let pw = document.querySelector('.inputSpw').value;
 	let content = document.querySelector('.writeContent').value;
+
 	
 	// 유효성검사
 		// 아이디가 공백인 경우
-	if(id.length == 0 || id == null){
+	if(id.length == 0 || id == null){ 
 		alert('아이디를 입력해주세요');
 		return;
 	}
