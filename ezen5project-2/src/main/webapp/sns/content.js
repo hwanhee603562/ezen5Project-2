@@ -51,7 +51,7 @@ function printSns(){
 							<button onclick="downloadbtn()" type="button">다운로드</button>
 
 							<div class="replyList">
-							`
+							` 
 							// 답글 출력구역
 							r.replyList.forEach( c => {
 								if( Number(c.rdate) < 60){
