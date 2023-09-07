@@ -1,5 +1,7 @@
 package model.dto;
 
+import java.util.ArrayList;
+
 public class SnsDto {
 	private int sno;
 	private String simg;

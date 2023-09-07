@@ -17,7 +17,14 @@ box-sizing: border-box;
 	margin: 0 auto;
 }
 
-
+/* 검색창 */
+.searchInput{
+	width: 100%;
+	height: 30px;
+	margin: 10px 0;
+	border-radius: 5px;
+	padding-left: 10px;
+}
 
 .contentBox{
 	padding: 10px;
@@ -38,19 +45,36 @@ box-sizing: border-box;
 }
 .writer{
 	font-weight: bold;
+	margin: 10px 0px;
+	padding-left: 8px;
 }
 .writeDate{
 	font-size: 11px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	color: #5F5F5F;
 }
+
+/* 콘텐츠 버튼 */
 .bottomBtn button{
 	width: 50px;
 	height: 24px;
 	background-color: white;
 	border-radius: 49%;
 	border-color: yellow;
+	cursor: pointer;
 }
+
+/* 수정, 삭제, 답글 버튼 호버효과 */
+.bottomBtn button:hover{
+	background-color: yellow;
+	color: #654D9C;
+}
+
 .writeContent{
 	word-break:break-all;	
+	margin-bottom: 10px;
+	padding-left: 8px;
 }
 
 .writeImg{
@@ -59,6 +83,33 @@ box-sizing: border-box;
 	object-fit: cover;
     border-radius: 20px;
 }
+
+/* 답글구역 */
+.replyList{
+	margin: 5px 0px;
+	font-size: 13px;
+	border-top: 1px solid #eeeeee;
+}
+
+.replyPrintBox{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* 답글 출력구역 */
+.outputReply{
+	padding-left: 8px; 
+}
+
+/* 답글 삭제버튼 */
+.rdeleteBtn{
+	border: none;
+	background-color: white;
+	width: 20px;
+	cursor: pointer;
+}
+
 
 
 
