@@ -119,6 +119,7 @@ public class SnsController extends HttpServlet {
 		// 수정사항 객체화
 		String simg = multi.getFilesystemName("simg");
 		String scontent = multi.getParameter("scontent");
+		scontent=scontent.replace("\r\n","<br>");
 		
 		SnsDto dto = new SnsDto(sno, simg , scontent);
 		if (dto.getSimg() == null) {
