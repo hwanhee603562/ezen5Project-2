@@ -48,6 +48,7 @@ function printSns(){
 							<button onclick="updateSns(${b.sno}, '${b.spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
 							<button onclick="snsDelete(${b.sno}, '${b.spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
 							<button onclick="reply(${b.sno})"> 답글 </button>
+							<button onclick="downloadbtn()" type="button">다운로드</button>
 
 							<div class="replyList">
 							`
@@ -181,6 +182,7 @@ function searchContent(){
 							<button onclick="updateSns(${b.sno}, '${b.spwd}')" class="updateBtn"> 수정 </button>	<!-- 수정 버튼 -->
 							<button onclick="snsDelete(${b.sno}, '${b.spwd}')" class="deleteBtn"> 삭제 </button>	<!-- 삭제 버튼 -->
 							<button onclick="reply(${b.sno})"> 답글 </button>
+							<button onclick="downloadbtn(${b.simg})" type="button">다운로드</button>
 
 							<div class="replyList">
 							`
@@ -288,6 +290,17 @@ function deleteReply( rno ){
 	})
 	
 	
+}
+// 이미지 다운로드
+function downloadbtn(simg){
+	console.log('다운로드 버튼')
+	$.ajax({
+		url : "/ezen5project-2/ImgDownloadController" ,
+		method : "get",
+		data : {} ,
+		success : r => { console.log(r) } ,
+		error : e => { console.log(e) } 
+	});
 }
 
 
