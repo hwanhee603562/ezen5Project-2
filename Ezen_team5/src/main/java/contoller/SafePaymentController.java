@@ -15,7 +15,7 @@ public class SafePaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
-     * Default constructor. 
+     * Default constructor.  
      */
     public SafePaymentController() {
         // TODO Auto-generated constructor stub
