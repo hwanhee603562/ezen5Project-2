@@ -12,7 +12,7 @@ public class Board {
 	private String bdate;		// 작성일
 	private String bfile;		// 첨부파일
 	private int mno;			// 작성자
-    
+     
 	private boolean ishost;		// 작성자 확인변수
 
     
