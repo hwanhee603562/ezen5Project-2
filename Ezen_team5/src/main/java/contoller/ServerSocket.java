@@ -1,4 +1,4 @@
-package contoller.chat;
+package contoller;
 
 public class ServerSocket {
 
