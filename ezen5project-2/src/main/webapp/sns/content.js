@@ -25,7 +25,9 @@ function printSns(){
 					  }else{
 						  b.sdate = b.sdate + '분전';
 					  }
-				  }else if(Number(b.sdate) > 60){
+				  }else if(Number(b.sdate) > 525600){
+					  b.sdate = Math.floor(Number(b.sdate)/525600) + '년전'
+				  } else if(Number(b.sdate) > 60){
 					  if(Number(b.sdate)/60 >= 24){
 						  b.sdate = Math.floor((Number(b.sdate)/60)/24) + '일전'
 					  }else{
@@ -49,7 +51,7 @@ function printSns(){
 							<button onclick="downloadbtn('${b.simg}')" type="button">다운로드</button>
 
 							<div class="replyList">
-							`
+							` 
 							// 답글 출력구역
 							r.replyList.forEach( c => {
 								if( Number(c.rdate) < 60){

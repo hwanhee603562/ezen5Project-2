@@ -19,7 +19,7 @@
 		<div class="feedCount">총 피드 수 : </div>
 		<input class="searchInput" onkeyup="searchContent()" placeholder="검색">
 
-
+ 
 		<div class="outputField"><!-- 게시물 1개 출력되는 구역 -->
  
 		</div>

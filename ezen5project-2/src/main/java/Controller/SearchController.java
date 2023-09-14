@@ -37,7 +37,7 @@ public class SearchController extends HttpServlet {
 		list = SnsDao.getInstance().searchContent( searchWord );
 		
 		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getSdate());
+
 			try {
 				Date format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(list.get(i).getSdate());
 				Date format2 = new Date();
@@ -46,11 +46,7 @@ public class SearchController extends HttpServlet {
 		        long diffMin = (format2.getTime() - format1.getTime()) / 60000; //분 차이
 		        long diffHor = (format2.getTime() - format1.getTime()) / 3600000; //시 차이
 		        long diffDays = diffSec / (24*60*60); //일자수 차이
-		        
-		        System.out.println(diffSec + "초 차이");
-		        System.out.println(diffMin + "분 차이");
-		        System.out.println(diffHor + "시 차이");
-		        System.out.println(diffDays + "일 차이");
+
 		        String datecheck = "" + diffMin;
 		        
 		        list.get(i).setSdate(datecheck);
