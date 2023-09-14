@@ -8,6 +8,6 @@
 <!-- 게시판 수정 jsp -->
 </head>
 <body>
-
+	<%@include file ="../hadder.jsp" %>
 </body>
 </html>

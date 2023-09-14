@@ -8,6 +8,7 @@
 <!-- 게시판 작성 jsp -->
 </head>
 <body>
-
+	<%@include file ="../hadder.jsp" %>
+	
 </body>
 </html>

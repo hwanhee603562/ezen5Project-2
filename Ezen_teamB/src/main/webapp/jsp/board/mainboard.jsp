@@ -8,6 +8,16 @@
 <!-- 전체 게시판 jsp -->
 </head>
 <body>
-
+	<%@include file ="../hadder.jsp" %>
+	<h3> 게시판 </h3>
+	
+	<select>
+		<option></option>
+		<option></option>
+		<option></option>
+	</select>
+	
+	<button type="button">글쓰기</button>
+	
 </body>
 </html>
