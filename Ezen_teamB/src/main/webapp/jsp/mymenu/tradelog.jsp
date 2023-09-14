@@ -5,12 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 페이지 시작 시 메인페이지 -->
+<!-- 마이메뉴 중 거래내역 jsp -->
 </head>
 <body>
-
-	<h3>index</h3>
-	
 
 </body>
 </html>

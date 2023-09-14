@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+/* 공통 css */
+*{
+	padding: 0px; margin: 0px;
+	box-sizing: border-box;
+	font-family: 'Nanum Gothic';
+}
+/* a태그, li태그 */
+a{color: black; text-decoration: none;}
+li{list-style-type: none;}
+ul{padding: 0px; margin: 0px;}
+
+a:hover{
+	color: #A287D6;
+}
+
+/* 외부폰트 */
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.nanumgothic * {
+ 	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.webcontainer{
+	width: 1200px;
+}
+
+#header{
+	width: 1200px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin: 0 auto;
+	background-color: #ffffff;
+}
+
+.mainlogo{
+	width: 5%;
+}
+
+.mainlogo img{
+	width: 100%;
+}
+
+.mainmenu{
+	width: 60%;
+	display: flex;
+	font-size: 20px;
+}
+
+.mainmenu li{
+	margin-right: 20px;
+}
+
+.submenu{
+	display: flex;
+	font-size: 13px;
+}
+
+.submenu li{
+	margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
