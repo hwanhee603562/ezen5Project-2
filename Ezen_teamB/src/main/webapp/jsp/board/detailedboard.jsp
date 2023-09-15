@@ -9,11 +9,13 @@
 </head>
 <body>
 	<%@include file ="../header.jsp" %>
+	<div class="webcontainer"> <!-- 페이지 전체 구역 -->
+		<div></div>
 	
 	
 	
 	
-	
+	</div>
 	
 	
 	<script  src="/Ezen_teamB/js/board/detailedboard.js" type="text/javascript"></script>
