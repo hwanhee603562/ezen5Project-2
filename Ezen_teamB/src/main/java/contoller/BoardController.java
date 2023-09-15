@@ -15,19 +15,23 @@ public class BoardController extends HttpServlet {
     public BoardController() {
         super();
     }
-
+    
+	// 1. 게시판 등록
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+	}
+    
+	// 2. 게시판 조회
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	}
-	
+	// 3. 게시판 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
-	
+	// 4. 게시판 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}

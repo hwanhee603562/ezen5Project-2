@@ -8,6 +8,14 @@
 <!-- 개별게시판 jsp -->
 </head>
 <body>
-	<%@include file ="../hadder.jsp" %>
+	<%@include file ="../header.jsp" %>
+	
+	
+	
+	
+	
+	
+	
+	<script  src="/Ezen_teamB/js/board/detailedboard.js" type="text/javascript"></script>
 </body>
 </html>

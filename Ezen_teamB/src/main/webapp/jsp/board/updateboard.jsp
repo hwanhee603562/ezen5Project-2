@@ -8,6 +8,22 @@
 <!-- 게시판 수정 jsp -->
 </head>
 <body>
-	<%@include file ="../hadder.jsp" %>
+	<%@include file ="../header.jsp" %>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<script  src="/Ezen_teamB/js/board/updateboard.js" type="text/javascript"></script>
 </body>
 </html>
