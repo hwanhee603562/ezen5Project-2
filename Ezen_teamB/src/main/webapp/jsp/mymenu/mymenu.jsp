@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 마이메뉴 본문 jsp -->
+	<link href="../../css/mymenu.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file = "../header.jsp" %>
