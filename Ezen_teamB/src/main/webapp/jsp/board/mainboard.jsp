@@ -12,9 +12,8 @@
 	<h3> 게시판 </h3>
 	
 	<select>
-		<option></option>
-		<option></option>
-		<option></option>
+		<option>자유게시판</option>
+		<option>건의사항</option>
 	</select>
 	
 	<button type="button">글쓰기</button>
