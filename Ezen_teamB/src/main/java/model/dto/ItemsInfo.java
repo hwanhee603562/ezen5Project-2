@@ -5,7 +5,7 @@ import java.util.Map;
 
 // 물품 판매정보 and 물품 카테고리 and 제품별 여러 개의 이미지
 public class ItemsInfo {
-	
+	 
 	private int uno;				// 대분류번호 pk
 	private String uname;			// 대분류 카테고리명
 	private int dno;				// 소분류번호 pk
