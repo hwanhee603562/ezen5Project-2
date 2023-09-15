@@ -10,7 +10,7 @@
 	<link href="/Ezen_teamB/css/item/detaileditems.css" rel="stylesheet">
 </head>
 <body>
-
+	<%@ include file = "../header.jsp" %>
 
 
 

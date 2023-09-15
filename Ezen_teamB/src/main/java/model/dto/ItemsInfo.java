@@ -13,6 +13,8 @@ public class ItemsInfo {
 	private int ino;				// 판매물품번호 pk
 	private int iprice;				// 판매가격
 	private int mno;				// 판매자
+	private String ititle;			// 판매제목
+    private String icontent;		// 판매내용
 	private int itrade;				// 거래방식( 1 배송, 2 대면거래, 3 중개거래 )
 	private String itradeplace;		// 거래장소
 	private String idate;			// 판매물품 등록일시
@@ -28,9 +30,10 @@ public class ItemsInfo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ItemsInfo(int uno, String uname, int dno, String dname, int ino, int iprice, int mno, int itrade,
-			String itradeplace, String idate, int eno, int iestate, int isafepayment, int keepstate,
-			Map<Integer, String> imgList) {
+
+	public ItemsInfo(int uno, String uname, int dno, String dname, int ino, int iprice, int mno, String ititle,
+			String icontent, int itrade, String itradeplace, String idate, int eno, int iestate, int isafepayment,
+			int keepstate, Map<Integer, String> imgList) {
 		super();
 		this.uno = uno;
 		this.uname = uname;
@@ -39,6 +42,8 @@ public class ItemsInfo {
 		this.ino = ino;
 		this.iprice = iprice;
 		this.mno = mno;
+		this.ititle = ititle;
+		this.icontent = icontent;
 		this.itrade = itrade;
 		this.itradeplace = itradeplace;
 		this.idate = idate;
@@ -49,8 +54,8 @@ public class ItemsInfo {
 		this.imgList = imgList;
 	}
 
-	
-	
+
+
 	// getter setter
 	public int getUno() {
 		return uno;
@@ -172,18 +177,36 @@ public class ItemsInfo {
 		this.imgList = imgList;
 	}
 
-	
-	
-	
+	public String getItitle() {
+		return ititle;
+	}
+
+
+	public void setItitle(String ititle) {
+		this.ititle = ititle;
+	}
+
+
+	public String getIcontent() {
+		return icontent;
+	}
+
+
+	public void setIcontent(String icontent) {
+		this.icontent = icontent;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ItemsInfo [uno=" + uno + ", uname=" + uname + ", dno=" + dno + ", dname=" + dname + ", ino=" + ino
-				+ ", iprice=" + iprice + ", mno=" + mno + ", itrade=" + itrade + ", itradeplace=" + itradeplace
-				+ ", idate=" + idate + ", eno=" + eno + ", iestate=" + iestate + ", isafepayment=" + isafepayment
-				+ ", keepstate=" + keepstate + ", imgList=" + imgList + "]";
+				+ ", iprice=" + iprice + ", mno=" + mno + ", ititle=" + ititle + ", icontent=" + icontent + ", itrade="
+				+ itrade + ", itradeplace=" + itradeplace + ", idate=" + idate + ", eno=" + eno + ", iestate=" + iestate
+				+ ", isafepayment=" + isafepayment + ", keepstate=" + keepstate + ", imgList=" + imgList + "]";
 	}
-
-    
+	
+	
+	
 
 	
 
