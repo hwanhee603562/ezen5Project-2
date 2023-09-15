@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+.infoBox{
+	height: 800px;
+	margin-top: 20px;
+}
+
+/* 마이메뉴 내정보구역 */
+.infoTop{
+	padding: 10px;
+	border: 1px solid #e8e8e8;
+	height: 40%;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.infoContent{
+	height: 100%;
+	position: relative;
+}
+
+/* 아이디 */
+.contentHeader{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+/* 내 정보 내용 */
+.contentMain{
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 40px;
+}
+
+/* 내 정보 내용 개별 구역 */
+.contentMain div{
+	margin-right: 20px;
+}
+
+/* 상세정보 내용 */
+.name, .address, .email{
+	margin-bottom: 10px;
+}
+
+
+/* 마이메뉴 서브메뉴 구역*/
+.infoBottom{
+	border: 1px solid #e8e8e8;
+	height: 60%;
+}
+
+/* 내정보 수정 버튼 */
+.updateBtn{
+	position: absolute;
+	bottom: 10px;
+	font-size: 12px;
+}
+.nav-tabs{
+	width: 100%;
+	border-radius: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
