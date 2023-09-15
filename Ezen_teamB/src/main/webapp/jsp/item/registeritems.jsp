@@ -48,9 +48,17 @@
 						</table>
 					</div>
 				</div>
-				
-
 				판매가격 : <input name="pprice" type="number"><br>
+				<div>
+					거래방식 : 
+					<input type="checkbox" name="item" value="배송">배송
+					<input type="checkbox" name="item" value="대면거래">대면거래
+					<input type="checkbox" name="item" value="중개거래">중개거래
+				</div>
+				<!-- 거래방식 : 배송일 경우 출력x -->
+				<!-- 거래방식 : 대면거래일 경우 대면거래 장소 주소 api로 입력 후 해당 주소위치 맵에 출력 -->
+				<!-- 거래방식 : 중개거래일 경우 지도상 중개거래소 선택 -->
+				
 				제품장소 : 	<div id="map" style="width:300px;height:350px;"></div>
 							<p><em>지도를 클릭해주세요!</em></p> 
 							<div id="clickLatlng"></div>
