@@ -2,6 +2,8 @@ package model.dao;
 
 import java.util.List;
 
+import model.dto.ItemsInfo;
+
 public class MyMenuDao extends Dao{
 	
 	private static MyMenuDao myMenuDao = new MyMenuDao();
@@ -15,7 +17,15 @@ public class MyMenuDao extends Dao{
 	
 	
 	// 판매중인 물품 출력
-	
+	public List<ItemsInfo> saleList(int mno){
+		
+		try {
+			
+			
+		} catch (Exception e) {System.out.println(e);}
+		
+		return null;
+	}
 	
 	
 	// 나의 거래내역
