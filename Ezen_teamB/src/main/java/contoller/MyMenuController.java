@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.dao.MyMenuDao;
+import model.dto.ItemsInfo;
+
 
 @WebServlet("/MyMenuController")
 public class MyMenuController extends HttpServlet {
@@ -29,8 +34,13 @@ public class MyMenuController extends HttpServlet {
 			
 			int mno = Integer.parseInt(request.getParameter("mno"));
 			
+			List<ItemsInfo> result = MyMenuDao.getInstance().saleList(mno);
 			
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(result);
 			
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(json);
 		}
 		
 	}
