@@ -34,7 +34,7 @@ function idcheck(){
 }//idcheck end
 
 
-function signupP(){
+function signup(){
 	
 	let signupform = document.querySelectorAll('.signupform')[0];
 	
@@ -42,7 +42,19 @@ function signupP(){
 	
 	$.ajax({
 		
-		
+		url : "/Ezen_teamB/MemberController",
+		method : "post",
+		data : signupData,
+	    contentType : false,
+	    processData : false,		
+		sucess : resulte => { 
+			if(resulte){
+				alert('회원가입에 성공 하였습니다')
+				
+			}
+			
+			
+		}
 		
 		
 		
