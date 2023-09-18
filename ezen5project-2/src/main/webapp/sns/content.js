@@ -51,6 +51,7 @@ function printSns(){
 <<<<<<< HEAD
 							<button onclick="downloadbtn('${b.simg}')" type="button">다운로드</button>
 
+<<<<<<< HEAD
 =======
 							<button onclick="downloadbtn()" type="button">다운로드</button>
 							
@@ -60,8 +61,22 @@ function printSns(){
 							</div>
 							
 >>>>>>> branch 'master' of https://github.com/hwanhee603562/ezen5Project-2
+=======
+
+>>>>>>> branch '최병철' of https://github.com/hwanhee603562/ezen5Project-2
 							<div class="replyList">
+<<<<<<< HEAD
 							` 
+=======
+
+								<div class="outputReply" value=""> 답글출력구역 </div>
+								<div>
+									<span class="outputTime"> 시간출력구역 </span>
+									<button onclick="deleteReply()" class="deleteBtn"> x </button>
+								</div>
+
+							`
+>>>>>>> branch '최병철' of https://github.com/hwanhee603562/ezen5Project-2
 							// 답글 출력구역
 							r.replyList.forEach( c => {
 								if( Number(c.rdate) < 60){
@@ -94,6 +109,7 @@ function printSns(){
 	
 				 html +=				
 							`	
+
 							</div>
 						</div>
 						
@@ -289,6 +305,38 @@ function reply( sno ){
 
 
 
+function replyprint(){
+	
+	
+	    $.ajax({
+      url :  "/ezen5project-2/ReplyController",
+      method : "get" , 
+      data : {sno : sno} ,
+      success : r => {
+		  
+		let output = document.querySelector('.outputReply')
+		for(let i = 0; i<r.length; i++){}
+		html = `${d}`
+		  
+	  } ,
+      error :  e => {e}
+      });
+	
+	
+	
+	
+	
+	html = ``;
+	
+	
+	
+	output.innerHTML=html;
+	
+	
+	
+}
+
+
 
 function deleteReply( rno ){
 	
@@ -336,10 +384,6 @@ function downloadbtn(simg){
 
 
 // 싫어요
-
-
-
-
 
 
 

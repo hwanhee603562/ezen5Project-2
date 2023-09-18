@@ -96,6 +96,10 @@ public class SnsController extends HttpServlet {
 		String spw = multi.getParameter("spw");
 		String simg = multi.getFilesystemName("simg");
 		String scontent = multi.getParameter("scontent");
+<<<<<<< HEAD
+=======
+		scontent=scontent.replace("\r\n","<br>");
+>>>>>>> branch '최병철' of https://github.com/hwanhee603562/ezen5Project-2
 		System.out.println(scontent);
 		
 		boolean result = SnsDao.getInstance().writeContent( sid, spw, simg, scontent );
@@ -121,6 +125,7 @@ public class SnsController extends HttpServlet {
 		// 수정사항 객체화
 		String simg = multi.getFilesystemName("simg");
 		String scontent = multi.getParameter("scontent");
+		scontent=scontent.replace("\r\n","<br>");
 		
 		SnsDto dto = new SnsDto(sno, simg , scontent);
 		if (dto.getSimg() == null) {

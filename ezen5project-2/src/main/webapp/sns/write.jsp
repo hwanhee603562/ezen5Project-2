@@ -15,7 +15,7 @@
 		아이디 : <input type="text" name="sid" class="inputSid">
 		비밀번호 : <input type="text" name="spw" class="inputSpw">
 		첨부파일 : <input name="simg" type="file" class="writeFileUp"> 
-		내용작성 : <textarea name="scontent" class="writeContent"></textarea>
+		내용작성 : <textarea id="textareaId" name="scontent" class="writeContent"></textarea>
 	</form>
 	<button onclick="writeSns()"> 등록 </button>
 	<a href="/ezen5project-2/sns/content.jsp"> <button> 취소 </button> </a>
