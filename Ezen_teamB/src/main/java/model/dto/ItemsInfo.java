@@ -5,11 +5,8 @@ import java.util.Map;
 
 // 물품 판매정보 and 물품 카테고리 and 제품별 여러 개의 이미지
 public class ItemsInfo {
-	
-	private int uno;				// 대분류번호 pk
-	private String uname;			// 대분류 카테고리명
-	private int dno;				// 소분류번호 pk
-	private String dname;			// 소분류 카테고리명
+	 
+
 	private int ino;				// 판매물품번호 pk
 	private int iprice;				// 판매가격
 	private int mno;				// 판매자
@@ -22,6 +19,10 @@ public class ItemsInfo {
 	private int iestate;			// 거래상태( 0 판매중 1 판매완료 )
 	private int isafepayment;		// 안전결제사용여부( 0 미사용 1 사용 )
 	private int keepstate;			// 중개거래소 물품 보관 여부
+	private int uno;				// 대분류번호 pk
+	private String uname;			// 대분류 카테고리명
+	private int dno;				// 소분류번호 pk
+	private String dname;			// 소분류 카테고리명
     // 제품별 여러개 이미지 
 	Map<Integer, String> imgList = new HashMap<>();
     
@@ -30,15 +31,10 @@ public class ItemsInfo {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public ItemsInfo(int uno, String uname, int dno, String dname, int ino, int iprice, int mno, String ititle,
-			String icontent, int itrade, String itradeplace, String idate, int eno, int iestate, int isafepayment,
-			int keepstate, Map<Integer, String> imgList) {
+	public ItemsInfo(int ino, int iprice, int mno, String ititle, String icontent, int itrade, String itradeplace,
+			String idate, int eno, int iestate, int isafepayment, int keepstate, int uno, String uname, int dno,
+			String dname, Map<Integer, String> imgList) {
 		super();
-		this.uno = uno;
-		this.uname = uname;
-		this.dno = dno;
-		this.dname = dname;
 		this.ino = ino;
 		this.iprice = iprice;
 		this.mno = mno;
@@ -51,44 +47,15 @@ public class ItemsInfo {
 		this.iestate = iestate;
 		this.isafepayment = isafepayment;
 		this.keepstate = keepstate;
+		this.uno = uno;
+		this.uname = uname;
+		this.dno = dno;
+		this.dname = dname;
 		this.imgList = imgList;
 	}
 
-
-
+	
 	// getter setter
-	public int getUno() {
-		return uno;
-	}
-
-	public void setUno(int uno) {
-		this.uno = uno;
-	}
-
-	public String getUname() {
-		return uname;
-	}
-
-	public void setUname(String uname) {
-		this.uname = uname;
-	}
-
-	public int getDno() {
-		return dno;
-	}
-
-	public void setDno(int dno) {
-		this.dno = dno;
-	}
-
-	public String getDname() {
-		return dname;
-	}
-
-	public void setDname(String dname) {
-		this.dname = dname;
-	}
-
 	public int getIno() {
 		return ino;
 	}
@@ -111,6 +78,22 @@ public class ItemsInfo {
 
 	public void setMno(int mno) {
 		this.mno = mno;
+	}
+
+	public String getItitle() {
+		return ititle;
+	}
+
+	public void setItitle(String ititle) {
+		this.ititle = ititle;
+	}
+
+	public String getIcontent() {
+		return icontent;
+	}
+
+	public void setIcontent(String icontent) {
+		this.icontent = icontent;
 	}
 
 	public int getItrade() {
@@ -169,6 +152,38 @@ public class ItemsInfo {
 		this.keepstate = keepstate;
 	}
 
+	public int getUno() {
+		return uno;
+	}
+
+	public void setUno(int uno) {
+		this.uno = uno;
+	}
+
+	public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public int getDno() {
+		return dno;
+	}
+
+	public void setDno(int dno) {
+		this.dno = dno;
+	}
+
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
 	public Map<Integer, String> getImgList() {
 		return imgList;
 	}
@@ -177,33 +192,19 @@ public class ItemsInfo {
 		this.imgList = imgList;
 	}
 
-	public String getItitle() {
-		return ititle;
-	}
-
-
-	public void setItitle(String ititle) {
-		this.ititle = ititle;
-	}
-
-
-	public String getIcontent() {
-		return icontent;
-	}
-
-
-	public void setIcontent(String icontent) {
-		this.icontent = icontent;
-	}
-
-
+	
+	
 	@Override
 	public String toString() {
-		return "ItemsInfo [uno=" + uno + ", uname=" + uname + ", dno=" + dno + ", dname=" + dname + ", ino=" + ino
-				+ ", iprice=" + iprice + ", mno=" + mno + ", ititle=" + ititle + ", icontent=" + icontent + ", itrade="
-				+ itrade + ", itradeplace=" + itradeplace + ", idate=" + idate + ", eno=" + eno + ", iestate=" + iestate
-				+ ", isafepayment=" + isafepayment + ", keepstate=" + keepstate + ", imgList=" + imgList + "]";
+		return "ItemsInfo [ino=" + ino + ", iprice=" + iprice + ", mno=" + mno + ", ititle=" + ititle + ", icontent="
+				+ icontent + ", itrade=" + itrade + ", itradeplace=" + itradeplace + ", idate=" + idate + ", eno=" + eno
+				+ ", iestate=" + iestate + ", isafepayment=" + isafepayment + ", keepstate=" + keepstate + ", uno="
+				+ uno + ", uname=" + uname + ", dno=" + dno + ", dname=" + dname + ", imgList=" + imgList + "]";
 	}
+
+
+	
+	
 	
 	
 	
