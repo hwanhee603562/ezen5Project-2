@@ -10,7 +10,11 @@ function writeBtn() {
 		data : formData ,
 		contentType : false,
 		processData : false,
-		success : r => { console.log(r) },
+		success : r => { console.log(r) 
+		if(r){
+			alert('글등록성공')
+		}else{ alert('글등록실패') }
+		},
 		error : e => { console.log(e )}
 
 	})

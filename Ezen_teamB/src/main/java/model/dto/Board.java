@@ -35,6 +35,16 @@ public class Board {
 		this.mno = mno;
 		this.ishost = ishost;
 	}
+	
+
+	public Board(int cno, String btitle, String bcontent, String bfile, int mno) {
+		super();
+		this.cno = cno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.mno = mno;
+	}
 
 
 	public int getCno() {
