@@ -37,9 +37,23 @@ document.querySelector('.smenu4').addEventListener("click",(e)=>{
 	document.getElementById('smenu4').classList.add('active');
 })
 
+// 마이메뉴 페이지 출력시 함수 실행
+saleList();
 // 판매중인상품 리스트 출력 함수
 function saleList(){console.log('판매중인상품 리스트')
-	
+
+	let mno = 2;
+
+	$.ajax( { 
+	       url : "/Ezen_teamB/MyMenuController",
+	       data : {type: '1' , mno: mno},         // 보내는 데이터
+	       method : "get",
+	       success : r =>{console.log('통신성공')
+	       		
+	       		
+			},
+	       	error : e=>{console.log(e)}
+	     });
 	
 }
 

@@ -32,7 +32,7 @@
 				<div class="infoCard">
 					<ul class="nav nav-tabs nav-fill">
 					  <li class="nav-item smenu1" onclick="saleList()">
-					    <a id="smenu1" class="nav-link active" aria-current="page" href="#">판매중인상품</a>
+					    <a onclick="saleList()" id="smenu1" class="nav-link active" aria-current="page" href="#">판매중인상품</a>
 					  </li>
 					  <li class="nav-item smenu2">
 					    <a id="smenu2" class="nav-link" href="#">거래내역</a>
