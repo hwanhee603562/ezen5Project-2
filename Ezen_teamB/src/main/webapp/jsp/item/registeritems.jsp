@@ -24,7 +24,12 @@
 				<div class="inputDeskBox prtImg">
 					<div class="deskInfo">제품이미지</div>
 					<div class="rightInputBox">
-						<input type="file" name="file" placeholder="이미지 등록"><br>
+						<label class="input-file-button" for="uploadFile">
+							
+							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+							
+						</label>
+						<input type="file" id="uploadFile" name="file"><br>	
 					</div>
 				</div>
 				
@@ -46,9 +51,21 @@
 				
 				<div class="inputDeskBox prtCategory">
 					<div class="deskInfo">카테고리</div>
-					<div class="rightInputBox">
-						<div> 대분류 출력 </div>
-						<div> 대분류에 따른 소분류 출력 </div>
+					<div class="rightInputBox categoryField">
+						<div class="umaincategoryBox"> 대분류 출력 
+							<ul>
+								<li> <button type="button" onclick=""> 여성의류 </button> </li>
+								<li> <button type="button" onclick=""> 남성의류 </button> </li>
+								<li> <button type="button" onclick=""> 신발 </button> </li>
+							</ul>
+						</div>
+						<div class="dsubcategoryBox"> 대분류에 따른 소분류 출력 
+							<ul>
+								<li> <button type="button" onclick=""> 아우터 </button> </li>
+								<li> <button type="button" onclick=""> 상의 </button> </li>
+								<li> <button type="button" onclick=""> 바지 </button> </li>
+							</ul>
+						</div>
 					</div>
 				</div>
 				
@@ -88,7 +105,9 @@
 			</div>	<!-- 물품정보 입력 박스 end -->
 			
 		</form>	<!-- form 식별구역 end -->
-		<button onclick="registerItems()" type="button"> 등록 </button><button type="button"> 취소 </button>
+		<div class="bottomBtn">
+			<button onclick="registerItems()" type="button"> 등록 </button><button type="button"> 취소 </button>
+		</div>
 	</div>
 
 	<script src="/Ezen_teamB/js/item/registeritems.js" type="text/javascript"></script>
