@@ -45,8 +45,22 @@
 					  </li>
 					</ul>
 				</div>
+				<div class="productCount">
+					<h4>상품 <span>3</span></h4>
+				</div>
 				<div class="cardInfo">
-				
+					<table class="table">
+					  <tbody>
+					    <tr>
+					      <th scope="row">1</th>
+					      <td>이미지</td>
+					      <td>제목</td>
+					      <td>거래방식</td>
+					      <td>대분류/소분류</td>
+					      <td>등록일시</td>
+					    </tr>
+					  </tbody>
+					</table>
 				</div>
 			</div>
 		</div>

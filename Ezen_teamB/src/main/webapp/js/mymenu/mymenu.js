@@ -48,7 +48,7 @@ function saleList(){console.log('판매중인상품 리스트')
 	       url : "/Ezen_teamB/MyMenuController",
 	       data : {type: '1' , mno: mno},         // 보내는 데이터
 	       method : "get",
-	       success : r =>{console.log(r)
+	       success : r =>{console.log(r);
 	       		
 	       		
 			},
