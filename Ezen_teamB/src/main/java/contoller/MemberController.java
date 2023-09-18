@@ -14,7 +14,7 @@ public class MemberController extends HttpServlet {
     public MemberController() {
         super();
     }
-
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
