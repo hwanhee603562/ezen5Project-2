@@ -21,13 +21,13 @@ public class BoardDao extends Dao{
 	// 개별 게시물 등록
 	public boolean bwrite( Board boardDto ) {
 		try {
-			String sql ="insert into board( btitle , bcontent , bfile , mno , cno ) "+" values( ? , ? , ? , ? , ? )";
+			String sql ="insert into board( btitle , bcontent , bfile , cno ) "+" values( ? , ? , ? , ? )";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, boardDto.getBtitle());
 			ps.setString(2, boardDto.getBcontent());
 			ps.setString(3, boardDto.getBfile());
-			ps.setInt(4, boardDto.getMno());
-			ps.setInt(5, boardDto.getCno());
+			ps.setInt(4, boardDto.getCno());
+			
 			int count = ps.executeUpdate(); if( count == 1 ) return true;
 		} catch (Exception e) {System.out.println(e);}
 		return false;

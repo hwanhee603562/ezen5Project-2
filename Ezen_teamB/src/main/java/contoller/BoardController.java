@@ -12,6 +12,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.dao.BoardDao;
 import model.dto.Board;
+import model.dto.MemberList;
 
 
 @WebServlet("/BoardController")
@@ -37,9 +38,9 @@ public class BoardController extends HttpServlet {
     	String bcontent = multi.getParameter("bcontent");
     	String bfile = multi.getFilesystemName("bfile");
     	
-    	int cno = Integer.parseInt(multi.getParameter("cno"));
+    	int cno = Integer.parseInt(multi.getParameter("cno")); 
     	
-    	Board boardDto = new Board(cno, btitle, bcontent, bfile, cno);
+    	Board boardDto = new Board(cno, btitle, bcontent, bfile);
     	
     	boolean result = BoardDao.getInstance().bwrite(boardDto);
     	
@@ -49,13 +50,13 @@ public class BoardController extends HttpServlet {
     
 	// 2. 게시판 조회
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 
 	// 3. 게시판 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 	// 4. 게시판 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -37,13 +37,13 @@ public class Board {
 	}
 	
 
-	public Board(int cno, String btitle, String bcontent, String bfile, int mno) {
+	public Board(int cno, String btitle, String bcontent, String bfile) {
 		super();
 		this.cno = cno;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		this.mno = mno;
+		
 	}
 
 

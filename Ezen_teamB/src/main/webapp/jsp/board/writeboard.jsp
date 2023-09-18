@@ -18,16 +18,17 @@
 		</div>
 		<div>
 		<form class="writeForm">
-			<select>
-				<option value=1>공지사항</option>
-				<option value=2>건의사항</option>
-			</select>
-			제목 : <input name="btitle" type="text">
-			내용 : <textarea name="bcontent"></textarea>
-			첨부파일 : <input type="file" name="bfile" class="">
-		</form>
-			<button onclick="writeBtn()" type="button">글등록</button>
 			
+			제목 : <input type="text" name="btitle" class="btitle">
+			내용 : <textarea name="bcontent" class="bcontent"></textarea>
+			첨부파일 : <input type="file" name="bfile" class="bfile">
+			<select name="cno" class="cno">
+				<option value="1">공지사항</option>
+				<option value="2">건의사항</option>
+			</select>
+		
+			<button onclick="writeBtn()" type="button">글등록</button>
+		</form>	
 		</div>
 	</div>
 	<script  src="/Ezen_teamB/js/board/writeboard.js" type="text/javascript"></script>
