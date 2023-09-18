@@ -21,9 +21,9 @@
 		</div>
 		<!-- 본메뉴 -->
 		<ul class="mainmenu">
-			<li><a href="#">중고거래</a></li>
+			<li><a class="registerText" href="#">중고거래</a></li>
 			<li><a href="#">물품등록</a></li>
-			<li><a href="#">게시판</a></li>
+			<li><a href="/Ezen_teamB/jsp/board/mainboard.jsp">게시판</a></li>
 		</ul>
 		
 		<!-- 서브메뉴 -->

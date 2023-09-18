@@ -18,52 +18,69 @@
 		
 			<div class="inputInfoBox">	<!-- 물품정보 입력 박스 -->
 				
-				제목 : <input name="pname" type="text"><br>
-				제품설명 : <textarea name="pcontent" rows="" cols=""></textarea><br>
 				
-				카테고리 분류 선택 <button type="button"> 카테고리 </button>
-				<div name="selectedCategory" class="selectedCategory"> 선택된 카테고리 출력구역 </div>
-				<div class="categoryPopup"> <!-- 카테고리 버튼을 클릭했을 때 출력되는 팝업창 -->
-					<!-- 구글링 필요 : Javascript 특정 영역 제외 클릭 -->
-					<h2> 카테고리 버튼을 클릭했을 때 출력되는 팝업창 </h2>
-					<div class="leftCategory">	<!-- 좌측 대분류 구역 -->
-						<table>
-							<tr>
-								<th> 대분류 </th>
-							</tr>
-							<tr>
-								<td> 가전제품 </td>
-								<td> 의류 </td>
-							</tr>
-						</table>
-					</div> 
-					<div class="rightCategory">	<!-- 우측 대분류에 따른 소분류 구역 -->
-						<table>
-							<tr>
-								<th> 소분류 </th>
-							</tr>
-							<tr>
-								<td> 냉장고 </td>
-								<td> TV </td>
-							</tr>
-						</table>
+				<h2> 상품등록 기본정보 </h2>
+				
+				<div class="inputDeskBox prtImg">
+					<div class="deskInfo">제품이미지</div>
+					<div class="rightInputBox">
+						<input type="file" name="file" placeholder="이미지 등록"><br>
 					</div>
 				</div>
-				판매가격 : <input name="pprice" type="number"><br>
-				<div>
-					거래방식 : 
-					<input type="checkbox" name="item" value="배송">배송
-					<input type="checkbox" name="item" value="대면거래">대면거래
-					<input type="checkbox" name="item" value="중개거래">중개거래
+				
+				<div class="inputDeskBox prtTitle">
+					<div class="deskInfo">제목</div>
+					<div class="rightInputBox">
+						<input name="ptitle" class="ptilte" type="text"><br>
+					</div>
 				</div>
+				
+				
+				<div class="inputDeskBox prtContent">
+					<div class="deskInfo">제품설명</div>
+					<div class="rightInputBox">
+						<textarea name="pcontent" rows="" cols=""></textarea><br>
+					</div>
+				</div>
+					
+				
+				<div class="inputDeskBox prtCategory">
+					<div class="deskInfo">카테고리</div>
+					<div class="rightInputBox">
+						<div> 대분류 출력 </div>
+						<div> 대분류에 따른 소분류 출력 </div>
+					</div>
+				</div>
+				
+				
+				<div class="inputDeskBox prtTrade">
+					<div class="deskInfo">거래방식</div>
+					<div class="rightInputBox itradeBox">
+						<div class="itrade"> 배송 </div>
+						<div class="itrade"> 대면거래 </div>
+						<div class="itrade"> 중개거래 </div>
+					</div>
+				</div>
+				
+				
+				<div class="inputDeskBox prtPrice">
+					<div class="deskInfo">판매가격</div>
+					<div class="rightInputBox">
+						<input name="pprice" class="pprice" type="number"><br>
+					</div>
+				</div>
+				
+
 				
 				
 				<!-- 거래방식 : 배송일 경우 출력x -->
 				<!-- 거래방식 : 대면거래일 경우 대면거래 장소 주소 api로 입력 후 해당 주소위치 맵에 출력 -->
 				<!-- 거래방식 : 중개거래일 경우 지도상 중개거래소 선택 -->
-				거래장소 : 	<div id="map" style="width:300px;height:350px;"></div>
+				거래장소 : 	<div id="map" style="width:100%;height:350px;"></div>
 							<p><em>지도를 클릭해주세요!</em></p> 
 							<div id="clickLatlng"></div>
+							
+							
 				<div class="safePayment">
 					추후 기능 추가시 안전결제 진행
 				</div>
