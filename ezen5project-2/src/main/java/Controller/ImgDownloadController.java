@@ -1,5 +1,8 @@
 package Controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -22,15 +25,25 @@ public class ImgDownloadController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
 		
 		String filename = request.getParameter("simg");
-		String uploadpath = request.getServletContext().getRealPath("");
+		String uploadpath = request.getServletContext().getRealPath("/sns/img");
 		String filepath = uploadpath+"/"+filename;
-		
+
 		response.setHeader(
 				"Content-Disposition" ,
 				"attachment;filename="+URLEncoder.encode(filepath , "UTF-8"));
+
+		File file = new File(filepath);
+		FileInputStream fin = new FileInputStream(file);
+		byte[] bytes = new byte[ (int)file.length()];
+		fin.read(bytes);
+
+		BufferedOutputStream oin = new BufferedOutputStream(response.getOutputStream());
 		
+		oin.write(bytes);
 	}
 
 
