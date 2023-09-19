@@ -21,8 +21,8 @@
 		</div> <!-- 상단 메뉴 end -->
 		
 		
-		<div class="boardTable"> <!-- 게시물이 출력 -->
-			<table>
+		<div> <!-- 게시물이 출력 -->
+			<table class="boardTable">
 				<tr>
 					<th> 번호 </th>
 					<th> 카테고리 </th>
@@ -72,6 +72,15 @@
 		
 		
 		<div class="boardBottom"> <!--하단 메뉴 -->
+			<!-- 페이징 처리 구역 -->
+			<div class="">
+			
+			
+			
+			
+			</div>
+			<!-- 페이징 처리 구역 end-->
+			<!-- 검색구역 -->
 			<select class="key">
 				<option>제목</option>
 				<option>내용</option>
@@ -79,6 +88,7 @@
 			</select>
 			<input class="keyword" type="text" placeholder="검색할내용"> <!-- 검색내용 -->
 			<button onclick="boardSearch()" type="button">검색</button>
+			<!-- 검색구역 END -->
 		</div> <!--하단 메뉴 end -->
 		
 		

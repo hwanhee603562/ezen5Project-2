@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.ArrayList;
+
 import model.dto.Board;
 
 // 게시판 클래스
@@ -13,7 +15,29 @@ public class BoardDao extends Dao{
 	
 	
 	// 전체 게시물 출력
-	
+	public ArrayList<Board> getList( int cno , int listsize , int starrow , String key , String keyword){
+		ArrayList<Board> list = new ArrayList<>();
+		try {
+			String sql = "";
+			// 카테고리 선택
+			if(cno != 0 ) {}
+			// 검색
+			if(!key.isEmpty() && !keyword.isEmpty() ) {
+				// 카테고리내 검색이면
+				if( cno != 0 ) sql+="";
+				else sql += "";
+			}
+			
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, starrow);
+			ps.setInt(2,listsize);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				Board boardDto = new Board();
+			}
+		} catch (Exception e) {System.out.println(e);}
+		return list;
+	}
 	
 	// 개별 게시물 출력
 	
@@ -21,7 +45,7 @@ public class BoardDao extends Dao{
 	// 개별 게시물 등록
 	public boolean bwrite( Board boardDto ) {
 		try {
-			String sql ="insert into board( btitle , bcontent , bfile , cno ) "+" values( ? , ? , ? , ? )";
+			String sql ="insert into board( btitle , bcontent , bfile , cno )"+"values( ? , ? , ? , ? )";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, boardDto.getBtitle());
 			ps.setString(2, boardDto.getBcontent());

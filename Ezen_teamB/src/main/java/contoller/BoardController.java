@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -50,7 +51,25 @@ public class BoardController extends HttpServlet {
     
 	// 2. 게시판 조회
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1.
+		String type = request.getParameter("type");
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json="";
+		// 전체 조회
+		if(type.equals("1")) {
+			
+			String key = request.getParameter("key");
+			String keywrod = request.getParameter("keyword");
+			
+			int cno = Integer.parseInt(request.getParameter("cno")); // 카테고리
+			int listsize = Integer.parseInt(request.getParameter("listsize")); // 출력할 게시물 최대 게시물수 
+			int page = Integer.parseInt(request.getParameter("page")); // 페이지
+			
+			int startrow = (page-1)*listsize; // 페이지번호*최대게시물수
+			
+			//int totalsize = BoardDao.getInstance().getTotalSize()
 		
+		}
 	}
 
 

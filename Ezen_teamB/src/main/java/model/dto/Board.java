@@ -36,7 +36,7 @@ public class Board {
 		this.ishost = ishost;
 	}
 	
-
+	// 글쓰기 생성자
 	public Board(int cno, String btitle, String bcontent, String bfile) {
 		super();
 		this.cno = cno;
