@@ -1,6 +1,6 @@
 console.log('회원가입 스크립트 실행')
 
-
+/*
 function idcheck(){
 	console.log('아이디 체크 함수')
 	
@@ -32,13 +32,14 @@ function idcheck(){
 		idcheck.innerHTML = `영문(대,소문자) + 숫자 조합의 5~20 글자만 입력 가능 합니다.`
 	} // else end 
 }//idcheck end
-
+*/
 
 function signup(){
 	
 	let signupform = document.querySelectorAll('.signupform')[0];
 	
 	let signupData = new FormData(signupform);
+	console.log(signupData)
 	
 	$.ajax({
 		
@@ -47,20 +48,18 @@ function signup(){
 		data : signupData,
 	    contentType : false,
 	    processData : false,		
-		sucess : resulte => { 
-			if(resulte){
+		success : result => { 
+			console.log(result)
+			if(result==true){
 				alert('회원가입에 성공 하였습니다')
-				
-			}
-			
-			
-		}
+				location.href="/Ezen_teamB/jsp/member/login.jsp"}
+			else{alert('회원가입 실패')}			
+		},
+		error : error =>{console.log(error)}
 		
-		
-		
-	})
+	})// ajax
 	
-}
+}// signup end
 
 
 
