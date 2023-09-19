@@ -39,7 +39,7 @@
 						<input name="ptitle" class="ptilte" type="text"><br>
 					</div>
 				</div>
-				
+				 
 				
 				<div class="inputDeskBox prtContent">
 					<div class="deskInfo">제품설명</div>
