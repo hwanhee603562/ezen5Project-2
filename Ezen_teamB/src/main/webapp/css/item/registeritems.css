@@ -101,8 +101,11 @@ body {
 }
 .prtCategory{
 	height: 350px;
-	border-bottom: 1px solid #e8e8e8;
 	padding-top: 30px;
+}
+.prtSelectCategory{
+	height: 70px;
+	border-bottom: 1px solid #e8e8e8;	
 }
 .prtTrade{
 	height: 170px;
@@ -139,24 +142,23 @@ body {
 /* ------ 이미지 첨부구역 end ------ */
 
 
-/* ----- 카테고리 구역 ------ */
+
+
+
+/* ======== 카테고리 구역 ======== */
 .categoryField{
 	height: 300px;
-	border: 1px solid red;
+	width: 630px;
+	border: 1px solid #CCCCCC;
 	display: flex;
+	margin-right: 20px;
 }
 /* 대분류 카테고리 */
 .umaincategoryBox{
 	width: 315px;
 	text-align: center;
+	overflow-y: scroll;
 }
-
-
-/* js에서 처리 hover처리 */
-.umaincategoryBox:hover{
-	background-color: #e8e8e8;
-}
-
 
 .umaincategoryBox button{	
 	background-color: transparent;
@@ -169,6 +171,7 @@ body {
 .dsubcategoryBox{
 	width: 315px;
 	text-align: center;
+	overflow-y: scroll;
 }
 .dsubcategoryBox button{
 	background-color: transparent;
@@ -177,10 +180,59 @@ body {
 	height: 25px;
 }
 
+/* 대분류 리스트 내 버튼 너비 지정 */
+.mainUl li button{
+	width: 90%;
+	height: 30px;
+	border: none;
+	font-size: 21px;
+	text-align: left;
+	margin: 10px 0px 10px 21px;
+}
+.mainUl li:hover{
+	background-color: #e8e8e8;
+}
 
+/* 소분류 리스트 내 버튼 너비 지정 */
+.subUl li button{
+	width: 90%;
+	height: 30px;
+	border: none;
+	font-size: 21px;
+	text-align: left;
+	margin: 10px 0px 10px 21px;
+}
+.subUl li:hover{
+	background-color: #e8e8e8;
+}
 
+.defaultCategory div{
+	width: 290px;
+	height: 40px;
+	margin-top: 130px; 
+	text-align: center;
+	color: grey;
+}
 
+.selectCategory{
+	margin-left: 130px;
+	position:relative;
+	color: red;
+}
+/* 등록시 form전송을 위해 input을 가림 */
+.selectCategory div{
+	width: 610px;
+	height: 100px;
+	position:absolute;
+	z-index: 10;
+}
+.selectCategory input{
+	width: 400px !important;
+	border: none !important;
+	z-index: 1;
+}
 
+/* ======== 제목 내용 구역 ======== */
 /* 페이지 타이틀 스타일 */
 .title{
     font-size: 24px;
@@ -191,6 +243,8 @@ body {
 .rightInputBox textarea{
 	width: 640px;
 }
+
+
 
 
 .bottomBtn{
@@ -213,32 +267,3 @@ body {
 
 
 
-/*
-<div class="categoryPopup"> <!-- 카테고리 버튼을 클릭했을 때 출력되는 팝업창 -->
-					<!-- 구글링 필요 : Javascript 특정 영역 제외 클릭 -->
-					<h2> 카테고리 버튼을 클릭했을 때 출력되는 팝업창 </h2>
-					<div class="leftCategory">	<!-- 좌측 대분류 구역 -->
-						<table>
-							<tr>
-								<th> 대분류 </th>
-							</tr>
-							<tr>
-								<td> 가전제품 </td>
-								<td> 의류 </td>
-							</tr>
-						</table>
-					</div> 
-					<div class="rightCategory">	<!-- 우측 대분류에 따른 소분류 구역 -->
-						<table>
-							<tr>
-								<th> 소분류 </th>
-							</tr>
-							<tr>
-								<td> 냉장고 </td>
-								<td> TV </td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				
-				*/

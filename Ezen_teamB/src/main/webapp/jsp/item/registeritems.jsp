@@ -52,20 +52,24 @@
 				<div class="inputDeskBox prtCategory">
 					<div class="deskInfo">카테고리</div>
 					<div class="rightInputBox categoryField">
-						<div class="umaincategoryBox"> 대분류 출력 
+						<div class="umaincategoryBox">
 							<ul class="mainUl">
 								<!-- 대분류 카테고리 출력 구역 -->
 							</ul>
 						</div>
-						<div class="dsubcategoryBox"> 대분류에 따른 소분류 출력 
+						<div class="dsubcategoryBox">
 							<ul	class="subUl">
-								<li> <button type="button" onclick=""> 아우터 </button> </li>
-								<li> <button type="button" onclick=""> 상의 </button> </li>
-								<li> <button type="button" onclick=""> 바지 </button> </li>
+								<li class="defaultCategory"> <div>소분류 선택</div> </li>
 							</ul>
 						</div>
+						
 					</div>
 				</div>
+				<div class="selectCategory prtSelectCategory"> 
+					<div></div>
+					선택한 카테고리 : <input type="text" readonly>  
+				</div>
+				
 				
 				
 				<div class="inputDeskBox prtTrade">

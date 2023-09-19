@@ -1,6 +1,5 @@
 
 
-
 getMainCategory()
 // 1. 카테고리 대분류/소분류 출력
 function getMainCategory(){
@@ -20,14 +19,10 @@ function getMainCategory(){
 
 			mainUl.innerHTML = mainhtml;
 			
-			
 		},
 		error: e => {
 			console.log('에러 발생')
 		}
-		
-
-		
 	})
 	
 }
@@ -44,7 +39,7 @@ function getSubCategory( uno ){
 			let subhtml = ``;
 			
 			// 해당 대분류에 소분류 카테고리가 없으면 등록되어있지 않음을 출력
-			if( s.length == 0 ) subhtml += `<li> <button onclick="" type="button"> 현재 소분류 카테고리가<br> 등록되어있지 않습니다 </button> </li>`;
+			if( s.length == 0 ) subhtml += `<li> <button onclick="test(${dname})" type="button"> 현재 소분류 카테고리가<br> 등록되어있지 않습니다 </button> </li>`;
 			s.forEach( category => {
 				// getSubCategory(${ category.dno })
 				subhtml += `<li> <button onclick="" type="button"> ${ category.dname } </button> </li>`;
@@ -57,11 +52,7 @@ function getSubCategory( uno ){
 		error: e => {
 			console.log('에러 발생')
 		}
-		
-
-		
 	})
-	
 }
 
 
