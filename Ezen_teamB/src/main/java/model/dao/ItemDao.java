@@ -1,5 +1,10 @@
 package model.dao;
 
+import java.util.ArrayList;
+
+import model.dto.CategoryDto;
+import model.dto.ItemsInfo;
+
 // 판매물품 클래스
 public class ItemDao extends Dao {
 
@@ -10,11 +15,61 @@ public class ItemDao extends Dao {
 	private ItemDao() {}
 	
 	
-	// 판매물품등록
+	// 1 판매물품등록
 	
 	
 	
-	// 판매물품조회
+	// 2 판매물품조회
+		// 2-1 카테고리 조회 ( 대분류 )
+	public ArrayList<CategoryDto> getMainCategory(){
+		
+		try {
+			ArrayList<CategoryDto> categoryList = new ArrayList<>();
+			String sql = "select * from umaincategory";
+
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				CategoryDto categoryDto = new CategoryDto( 
+					rs.getInt(1), rs.getString(2), 0, null 
+				);
+				categoryList.add(categoryDto);
+			}
+			return categoryList;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+		// 2-1 카테고리 조회 ( 소분류 )
+	public ArrayList<CategoryDto> getSubCategory( int uno ){
+		
+		try {
+			ArrayList<CategoryDto> categoryList = new ArrayList<>();
+			String sql = "select d.uno, u.uname, d.dno, d.dname "
+						+ "from umaincategory u join dsubcategory d "
+						+ "on d.uno = u.uno where u.uno = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, uno);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				CategoryDto categoryDto = new CategoryDto( 
+					rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4)
+				);
+				categoryList.add(categoryDto);
+			}
+			return categoryList;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
 	
 	
 	

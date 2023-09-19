@@ -1,5 +1,244 @@
-.categoryPopup{
-	width: 500px;
-	height: 700px;
-	border: 1px solid red;
+/* registeritems.css */
+
+/* ========= 전체 구성 ========= */
+
+
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
 }
+
+/* 물품 정보 입력란 스타일 */
+.registerItemsWrap {
+    width: 800px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 0 auto;
+    
+}
+
+/* 입력 폼 스타일 */
+.registerForm {
+    margin-bottom: 20px;
+}
+
+
+/* 입력 폼 요소 스타일 */
+.inputInfoBox input[type="text"],
+.inputInfoBox input[type="number"],
+
+.ptilte, .pprice{
+	width: 640px;
+	height: 40px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+} 
+
+.inputInfoBox textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* ========= 전체 구성 end ========= */
+
+.inputDeskBox{
+	display: flex;
+	width: 780px;
+	
+}
+.deskInfo{
+	width: 150px;
+	font-size: 18px;
+    font-weight: 400;
+    color: rgb(25, 25, 25);
+}
+.rightInputBox{
+	width: 100%;
+}
+.itradeBox{
+	display: flex;
+}
+.itrade{
+	width: 90px;
+	height: 45px;
+	border: 4px solid black;
+	background-color: #EFEFEF;
+	border-radius: 12px;
+	text-align: center;
+	padding: 5px;
+	margin-right: 20px;
+	cursor: pointer;
+
+}
+.itrade:active{
+	background-color: #6AAFE6;	
+}
+.itrade:hover{
+	background-color: #0D6EFD;
+}
+/* -------- 각 입력 박스 구역 ---------- */
+.prtImg{
+	height: 220px;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 30px;
+}
+.prtTitle{
+	height: 115px;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 30px;
+}
+.prtContent{
+	height: 200px;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 30px;
+}
+.prtCategory{
+	height: 350px;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 30px;
+}
+.prtTrade{
+	height: 170px;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 30px;
+}
+.prtPrice{
+	height: 130px;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 30px;
+}
+
+/* ----------- 각 입력 박스구역 end ---------- */
+
+
+/* 이미지 첨부 입력버튼 */
+.input-file-button{
+	border-radius: 4px;
+	color: white;
+	cursor: pointer;
+	width: 150px;
+	height: 150px;
+}
+
+.labelImg{
+	width: 100%;
+	height: 100%;
+	border: 1px solid #e8e8e8;
+}
+
+#uploadFile{
+	display: none;
+}
+/* ------ 이미지 첨부구역 end ------ */
+
+
+/* ----- 카테고리 구역 ------ */
+.categoryField{
+	height: 300px;
+	border: 1px solid red;
+	display: flex;
+}
+/* 대분류 카테고리 */
+.umaincategoryBox{
+	width: 315px;
+	text-align: center;
+}
+
+
+/* js에서 처리 hover처리 */
+.umaincategoryBox:hover{
+	background-color: #e8e8e8;
+}
+
+
+.umaincategoryBox button{	
+	background-color: transparent;
+	border: 1px solid black;
+	width: 315px;
+	height: 25px;
+}
+
+/* 소분류 카테고리 */
+.dsubcategoryBox{
+	width: 315px;
+	text-align: center;
+}
+.dsubcategoryBox button{
+	background-color: transparent;
+	border: 1px solid black;
+	width: 315px;
+	height: 25px;
+}
+
+
+
+
+
+/* 페이지 타이틀 스타일 */
+.title{
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.rightInputBox textarea{
+	width: 640px;
+}
+
+
+.bottomBtn{
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+
+
+/* 안전결제 메시지 스타일 */
+.safePayment {
+    margin-top: 20px;
+    font-style: italic;
+    color: #777;
+}
+
+
+
+/*
+<div class="categoryPopup"> <!-- 카테고리 버튼을 클릭했을 때 출력되는 팝업창 -->
+					<!-- 구글링 필요 : Javascript 특정 영역 제외 클릭 -->
+					<h2> 카테고리 버튼을 클릭했을 때 출력되는 팝업창 </h2>
+					<div class="leftCategory">	<!-- 좌측 대분류 구역 -->
+						<table>
+							<tr>
+								<th> 대분류 </th>
+							</tr>
+							<tr>
+								<td> 가전제품 </td>
+								<td> 의류 </td>
+							</tr>
+						</table>
+					</div> 
+					<div class="rightCategory">	<!-- 우측 대분류에 따른 소분류 구역 -->
+						<table>
+							<tr>
+								<th> 소분류 </th>
+							</tr>
+							<tr>
+								<td> 냉장고 </td>
+								<td> TV </td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				
+				*/

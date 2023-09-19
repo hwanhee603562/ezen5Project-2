@@ -1,54 +1,62 @@
 package contoller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class MyMenuController
- */
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.dao.MyMenuDao;
+import model.dto.ItemsInfo;
+
+
 @WebServlet("/MyMenuController")
 public class MyMenuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
+
     public MyMenuController() {
-        // TODO Auto-generated constructor stub
+
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    // 마이메뉴 출력함수
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		String type = request.getParameter("type");
+		
+		// 판매중인 물품 출력
+		if(type.equals("1")) {
+			
+			int mno = Integer.parseInt(request.getParameter("mno"));
+			int estate = Integer.parseInt(request.getParameter("estate"));
+			
+			List<ItemsInfo> result = MyMenuDao.getInstance().saleList(mno, estate);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(result);
+			
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(json);
+		}
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 	}
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 	}
 
 }
