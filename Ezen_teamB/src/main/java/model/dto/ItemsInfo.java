@@ -53,6 +53,7 @@ public class ItemsInfo {
 		this.dname = dname;
 		this.imgList = imgList;
 	}
+	
 
 	
 	// getter setter
