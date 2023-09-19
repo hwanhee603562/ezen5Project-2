@@ -46,8 +46,29 @@
 
 /* 마이메뉴 서브메뉴 구역*/
 .infoBottom{
-	border: 1px solid #e8e8e8;
 	height: 60%;
+}
+
+/* 해당메뉴 정보 출력 구역 */
+.printContent{
+	border-bottom: 1px solid #e8e8e8;
+	border-left: 1px solid #e8e8e8;
+	border-right: 1px solid #e8e8e8;
+	height: 500px;
+}
+
+/* 상품정보 텍스트 */
+.productCount{
+	padding: 20px;
+}
+
+.cardInfo{
+	padding: 10px;
+}
+
+/* 상품 하나구역 */
+.table{
+	padding: 10px;
 }
 
 /* 내정보 수정 버튼 */
@@ -56,12 +77,25 @@
 	bottom: 10px;
 	font-size: 12px;
 }
+
 .nav-tabs{
 	width: 100%;
 	border-radius: 0;
 }
 
+/* 판매완료 텍스트 */
+.saleComplete{
+	color: black;
+	background-color: #e8e8e8;
+	text-align: center;
+	font-size: 12px;
+	margin-top: 3px;
+}
 
+/* 상품 숫자 텍스트 */
+.countText{
+	color: red;
+}
 
 
 

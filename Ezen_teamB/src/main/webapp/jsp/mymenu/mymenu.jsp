@@ -35,7 +35,7 @@
 					    <a onclick="saleList()" id="smenu1" class="nav-link active" aria-current="page" href="#">판매중인상품</a>
 					  </li>
 					  <li class="nav-item smenu2">
-					    <a id="smenu2" class="nav-link" href="#">거래내역</a>
+					    <a onclick="transHistory()" id="smenu2" class="nav-link" href="#">거래내역</a>
 					  </li>
 					  <li class="nav-item smenu3">
 					    <a id="smenu3" class="nav-link" href="#">찜목록</a>
@@ -45,10 +45,19 @@
 					  </li>
 					</ul>
 				</div>
-				<div class="cardInfo">
-				
+				<div class="printContent">
+					<div class="productCount">
+						
+					</div>
+					<div class="cardInfo">
+						<table class="table pd3">
+						  <tbody class="tableBody">
+						   		<!-- 판매중인 물품 출력 구역 -->
+						  </tbody>
+						</table>
+					</div>
 				</div>
-			</div>
+			</div> <!-- infoBottom end -->
 		</div>
 	</div>	<!-- 마이메뉴 전체구역 end -->
 	
