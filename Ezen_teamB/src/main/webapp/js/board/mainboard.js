@@ -1,6 +1,9 @@
 function onWriteBtn(){
 	console.log('글쓰기버튼')
-	alert('회원전용입니다.')
+	if(""){
+		
+	}else{alert('회원전용입니다.')}
+	
 	location.href="/Ezen_teamB/jsp/board/writeboard.jsp"
 }
 
