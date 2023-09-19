@@ -66,8 +66,8 @@
 					</div>
 				</div>
 				<div class="selectCategory prtSelectCategory"> 
-					<div></div>
-					선택한 카테고리 : <input type="text" readonly>  
+					<div>선택한 카테고리 : <p class="checkMain"></p> <p class="checkSub"></p> </div>
+					<input name="dno" class="dno" type="text" readonly>  
 				</div>
 				
 				
@@ -75,11 +75,22 @@
 				<div class="inputDeskBox prtTrade">
 					<div class="deskInfo">거래방식</div>
 					<div class="rightInputBox itradeBox">
-						<div class="itrade"> 배송 </div>
-						<div class="itrade"> 대면거래 </div>
-						<div class="itrade"> 중개거래 </div>
+						<div onclick="delivery()" class="delivery itrade"> 배송 </div>
+						<div onclick="faceToFace()" class="faceToFace itrade"> 대면거래 </div>
+						<div onclick="brokerage()" class="brokerage itrade"> 중개거래 </div>
 					</div>
 				</div>
+				
+				<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->
+				<!-- 거래방식 - 중개거래일 시 지도출력하여 중개거래소 선택 -->
+				<div class="outputMapField"><!-- 지도 출력되는 구역 -->
+					
+				</div>
+				
+				
+				
+				
+				
 				
 				
 				<div class="inputDeskBox prtPrice">
@@ -88,6 +99,7 @@
 						<input name="pprice" class="pprice" type="number"><br>
 					</div>
 				</div>
+				
 					
 
 				
@@ -95,9 +107,6 @@
 				<!-- 거래방식 : 배송일 경우 출력x -->
 				<!-- 거래방식 : 대면거래일 경우 대면거래 장소 주소 api로 입력 후 해당 주소위치 맵에 출력 -->
 				<!-- 거래방식 : 중개거래일 경우 지도상 중개거래소 선택 -->
-				거래장소 : 	<div id="map" style="width:100%;height:350px;"></div>
-							<p><em>지도를 클릭해주세요!</em></p> 
-							<div id="clickLatlng"></div>
 							
 							
 				<div class="safePayment">
@@ -111,7 +120,10 @@
 			<button onclick="registerItems()" type="button"> 등록 </button><button type="button"> 취소 </button>
 		</div>
 	</div>
-
+	
+	<!-- 카카오지도 api -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51f4ebd6d93bf1f15d0f4ba2809fea5&libraries=services""></script>
+	
 	<script src="/Ezen_teamB/js/item/registeritems.js" type="text/javascript"></script>
 </body>
 </html>

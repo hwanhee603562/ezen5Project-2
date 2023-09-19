@@ -105,15 +105,15 @@ body {
 }
 .prtSelectCategory{
 	height: 70px;
-	border-bottom: 1px solid #e8e8e8;	
 }
 .prtTrade{
 	height: 170px;
-	border-bottom: 1px solid #e8e8e8;
+	border-top: 1px solid #e8e8e8;	
 	padding-top: 30px;
 }
 .prtPrice{
 	height: 130px;
+	border-top: 1px solid #e8e8e8;	
 	border-bottom: 1px solid #e8e8e8;
 	padding-top: 30px;
 }
@@ -185,7 +185,7 @@ body {
 	width: 90%;
 	height: 30px;
 	border: none;
-	font-size: 21px;
+	font-size: 17px;
 	text-align: left;
 	margin: 10px 0px 10px 21px;
 }
@@ -198,7 +198,7 @@ body {
 	width: 90%;
 	height: 30px;
 	border: none;
-	font-size: 21px;
+	font-size: 17px;
 	text-align: left;
 	margin: 10px 0px 10px 21px;
 }
@@ -219,6 +219,11 @@ body {
 	position:relative;
 	color: red;
 }
+.checkMain, .checkSub{
+	display: inline-block;
+	font-weight: bold;
+}
+
 /* 등록시 form전송을 위해 input을 가림 */
 .selectCategory div{
 	width: 610px;
@@ -230,7 +235,11 @@ body {
 	width: 400px !important;
 	border: none !important;
 	z-index: 1;
+	color: transparent;
 }
+/* ======== 카테고리 구역 end ========*/
+
+
 
 /* ======== 제목 내용 구역 ======== */
 /* 페이지 타이틀 스타일 */
