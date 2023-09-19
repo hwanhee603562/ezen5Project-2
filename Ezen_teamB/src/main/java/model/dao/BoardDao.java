@@ -33,7 +33,12 @@ public class BoardDao extends Dao{
 			ps.setInt(2,listsize);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				Board boardDto = new Board();
+				Board boardDto = new Board(rs.getInt("cno"), 
+						rs.getString("cname"), rs.getInt("bno"), 
+						rs.getString("btitle"), rs.getString("bcontent"), 
+						rs.getString("bdate"), rs.getString("bfile"), 
+						rs.getInt("mno"), rs.getString("mid"));
+				list.add(boardDto);
 			}
 		} catch (Exception e) {System.out.println(e);}
 		return list;
