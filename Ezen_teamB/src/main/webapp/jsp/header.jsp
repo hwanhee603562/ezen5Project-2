@@ -22,7 +22,7 @@
 		<!-- 본메뉴 -->
 		<ul class="mainmenu">
 			<li><a class="registerText" href="#">중고거래</a></li>
-			<li><a href="#">물품등록</a></li>
+			<li><a href="/Ezen_teamB/jsp/item/registeritems.jsp">물품등록</a></li>
 			<li><a href="#">게시판</a></li>
 		</ul>
 		

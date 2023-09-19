@@ -30,11 +30,13 @@ public class MyMenuController extends HttpServlet {
 		
 		String type = request.getParameter("type");
 		
+		// 판매중인 물품 출력
 		if(type.equals("1")) {
 			
 			int mno = Integer.parseInt(request.getParameter("mno"));
+			int estate = Integer.parseInt(request.getParameter("estate"));
 			
-			List<ItemsInfo> result = MyMenuDao.getInstance().saleList(mno);
+			List<ItemsInfo> result = MyMenuDao.getInstance().saleList(mno, estate);
 			
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(result);

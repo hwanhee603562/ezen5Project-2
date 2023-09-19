@@ -37,12 +37,17 @@ public class MyMenuDao extends Dao{
 		}
 	
 	// 판매중인 물품 출력
-	public List<ItemsInfo> saleList(int mno){
+	public List<ItemsInfo> saleList(int mno, int estate){
 		
 		List<ItemsInfo> list = new ArrayList<>();
 		
 		try {
-			String sql = "select i.*, uc.uno, uc.uname, dc.dname from itemsinfo i natural join umaincategory uc natural join dsubcategory dc where i.mno = ? and i.iestate = 0";
+			String sql = "select i.*, uc.uno, uc.uname, dc.dname from itemsinfo i natural join umaincategory uc natural join dsubcategory dc where i.mno = ? and ";
+			if(estate == 1) {
+				sql += "i.iestate = 0";
+			}else if(estate == 2) {
+				sql += "i.iestate = 1";
+			}
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, mno);
 			rs = ps.executeQuery();
