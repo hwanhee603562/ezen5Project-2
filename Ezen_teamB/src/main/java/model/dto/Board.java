@@ -11,7 +11,8 @@ public class Board {
 	private String bcontent;	// 작성내용
 	private String bdate;		// 작성일
 	private String bfile;		// 첨부파일
-	private int mno;			// 작성자
+	private int mno;			// 작성자번호
+	private String mid;			// 작성자 아이디
      
 	private boolean ishost;		// 작성자 확인변수
 
@@ -36,7 +37,7 @@ public class Board {
 		this.ishost = ishost;
 	}
 	
-
+	// 글쓰기 생성자
 	public Board(int cno, String btitle, String bcontent, String bfile) {
 		super();
 		this.cno = cno;
@@ -44,6 +45,24 @@ public class Board {
 		this.bcontent = bcontent;
 		this.bfile = bfile;
 		
+	}
+	
+	
+	
+	
+	// 게시물 조회 생성자
+	public Board(int cno, String cname, int bno, String btitle, String bcontent, String bdate, String bfile, int mno,
+			String mid) {
+		super();
+		this.cno = cno;
+		this.cname = cname;
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bdate = bdate;
+		this.bfile = bfile;
+		this.mno = mno;
+		this.mid = mid;
 	}
 
 
@@ -135,13 +154,26 @@ public class Board {
 	public void setIshost(boolean ishost) {
 		this.ishost = ishost;
 	}
+	
+
+	public String getMid() {
+		return mid;
+	}
+
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
 
 
 	@Override
 	public String toString() {
 		return "Board [cno=" + cno + ", cname=" + cname + ", bno=" + bno + ", btitle=" + btitle + ", bcontent="
-				+ bcontent + ", bdate=" + bdate + ", bfile=" + bfile + ", mno=" + mno + ", ishost=" + ishost + "]";
+				+ bcontent + ", bdate=" + bdate + ", bfile=" + bfile + ", mno=" + mno + ", mid=" + mid + ", ishost="
+				+ ishost + "]";
 	}
 
+
+	
 	
 }
