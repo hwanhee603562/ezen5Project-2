@@ -45,7 +45,9 @@ public class MemberController extends HttpServlet {
     	System.out.println("폰번호" +signPhone);
     	String signEamil = multi.getParameter("signEmail");
     	System.out.println("이메일" +signEamil);
-    	String signAddress = multi.getParameter("signAddress");
+    	String signAddress = multi.getParameter("addr2");
+    	String signAddress2 = multi.getParameter("addr3");
+    	signAddress= signAddress+""+signAddress2;
     	System.out.println("주소" +signAddress);
     	String signId = multi.getParameter("signId");
     	System.out.println("아이디" +signId);

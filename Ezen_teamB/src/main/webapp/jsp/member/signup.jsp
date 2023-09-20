@@ -6,50 +6,76 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- css -->
-<link href="/Ezen_teamB/css/signup/signup.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<link href="/Ezen_teamB/css/signup/signup.css" rel="stylesheet">
+
 
 </head>
 <body>
-		
+	<%@include file = "../header.jsp" %>	
 		<div class="container"><!-- container -->
 			<form class="signupform">
-			<h3>가지가지 커뮤니티 회원가입 페이지</h3>
+			<h3 class="signInfo">회원가입 페이지</h3>
 				
 			<div> <!-- 회원가입 구역 -->
 			
 			
-				<div>이름</div>
-				<input id="signName" name="signName" type="text"><br/>
+				<div><span class="signfont">이름</span></div>
+				<input class="form-floating mb-3" id="signName" name="signName" type="text" placeholder="이름" ><br/>
 				
-				<div>주민번호</div>
-				<input id="signResidentNumF" name="signResidentNumF" type="number" max="6" > - 
-				<input id="signResidentNumS" name="signResidentNumS" class="signResidentNumP" type="number"><br/>
+				<div><span class="signfont">주민번호</span></div>
+				<input class="form-floating mb-3" id="signResidentNumF" name="signResidentNumF" type="number" max="6" placeholder="생년월일"  > - 
+				<input class="form-floating mb-3" id="signResidentNumS" name="signResidentNumS" class="signResidentNumP" type="number" placeholder="뒤 7자리" ><br/>
 				
-				<div>전화번호</div>
-				<input id="signPhone" name="signPhone"  type="number">
+				<div><span class="signfont">전화번호</span></div>
+				<div ><span style="color:gray;">'-' 제외 숫자만 입력 해주세요.</span></div>
+				<input class="form-floating mb-3" id="signPhone" name="signPhone"  type="number" placeholder="전화번호" >
 
-				<div>이메일</div>
-				<input id="signEmail" name="signEmail"  type="text">
+				<div><span class="signfont">이메일</span></div>
+				<input class="form-floating mb-3" id="signEmail" name="signEmail"  type="text" placeholder="이메일" >
 								
-				<div>주소</div>
-				<input id="signAddress" name="signAddress"  type="text">		
-				<button type="button">검색</button>	
+					<div><span class="signfont">주소</span></div>
+						<!-- 우편번호 찾기 -->
+				<div class="addressDisplay">	
+					<div class="form-group">
+						<input class="form-control" style="width: 70%; display: inline;"
+							placeholder="우편번호" name="addr1" id="addr1" type="text"
+							readonly="readonly">
+					</div>
+					<div>
+						<button type="button" class="btn btn-default" onclick="execPostCode();" style="border:1px solid #DBDBDB; font-weight: bold;">
+							우편번호 찾기
+						</button>
+					</div>
+				</div>
+				<!-- 도로명 주소 -->
+				<div class="form-group">
+					<input class="form-control" style="top: 5px; margin : 3px 0px;" placeholder="도로명 주소"
+						name="addr2" id="addr2" type="text" readonly="readonly" />
+				</div>
+				
+				<div class="form-group">
+					<input class="form-control detail" placeholder="상세주소" name="addr3" id="addr3"
+						type="text" />
+				</div><br/>	
 					
-				<div>아이디</div> <!-- onkeyup="idcheck()" -->
-				<input id="signId" name="signId"  type="text"><br/>
+				
+				
+				<div><span class="signfont">아이디</span></div> <!-- onkeyup="idcheck()" -->
+				<input class="form-floating mb-3" id="signId" name="signId"  type="text" placeholder="아이디"><br/>
 				<div class="idCheck"><span style="color:red;"></span></div><br/>		<!-- 중복검사, 영문+숫자 조합 최소 5글자 이상 -->
 							
-				<div>비밀번호</div>
+				<div><span class="signfont">비밀번호</span></div>
 				<div ><span style="color:gray;">영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</span></div>
-				<input id="signPwd1" name="signPwd"  type="password">
+				<input class="form-floating mb-1" id="signPwd1" name="signPwd"  type="password" placeholder="비밀번호">
 				<div class="signPwdCheck1"><span style="color:red;">비밀번호 유효성 검사 출력</span></div><br/>
 								
-				<div>비밀번호 확인</div>
-				<input id="signPwd2" name="signPwdCheck"  type="password">
+				<div><span class="signfont">비밀번호 확인</span></div>
+				<input class="form-floating mb-1" id="signPwd2" name="signPwdCheck"  type="password" placeholder="비밀번호 확인">
 				<div class="signPwdCheck2"><span style="color:red;">비밀번호확인 유효성 검사 출력</span></div><br/>
 
 				<div>
-					<button type="button" onclick="signup()">회원가입</button>
+					<button class="signbtn btn btn-outline-dark" type="button" onclick="signup()">회원가입</button>
 				</div>
 
 				
@@ -62,8 +88,20 @@
 			</div><!-- 회원가입 구역 end -->
 			</form><!-- signupform -->
 		</div> <!-- container end -->
-		
 
+
+
+
+
+
+
+
+
+	<!-- 부트 스트랩 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+	<!-- 주소검색 api -->	
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 
 	<!-- jquery 호출 -->
