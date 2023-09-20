@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.MyMenuDao;
 import model.dto.ItemsInfo;
+import model.dto.Mymenu;
 
 
 @WebServlet("/MyMenuController")
@@ -43,6 +44,23 @@ public class MyMenuController extends HttpServlet {
 			
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().print(json);
+		}
+		// 회원 정보 출력
+		else if(type.equals("2")) {
+			int mno = Integer.parseInt(request.getParameter("mno"));
+			int tradeCount = MyMenuDao.getInstance().tradeCount(mno);
+			
+			System.out.println(mno + " " + tradeCount);
+			
+			Mymenu result = MyMenuDao.getInstance().printMemberInfo(mno);
+			result.setTradelog(tradeCount);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(result);
+			
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(json);
+			
 		}
 		
 	}
