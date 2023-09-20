@@ -14,19 +14,48 @@ public class BoardDao extends Dao{
 	private BoardDao() {}
 	
 	
+	// 게시물 수 출력
+	public int getTotalSize( int cno , String key , String keyword ) {
+		
+		try {
+			String sql = "select count(*) from board b natural join memberlist m";
+			
+			if( cno != 0 ) { sql +=" where b.cno = " +cno;}
+			
+			if( !key.isEmpty() && !keyword.isEmpty()) {
+				if( cno != 0 ) sql += " and ";
+				else sql += "where";
+				
+				sql +=" "+key+" like '%"+keyword+"%' "; 
+			}
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if( rs.next() )return rs.getInt(1);
+		} catch (Exception e) { System.out.println(e); }
+		
+		return 0;
+	}
+	
+	
+	
 	// 전체 게시물 출력
 	public ArrayList<Board> getList( int cno , int listsize , int starrow , String key , String keyword){
 		ArrayList<Board> list = new ArrayList<>();
 		try {
-			String sql = "";
+			String sql = "select b.* , m.mid , c.cname from board b natural join category c natural join memberlist m ";
 			// 카테고리 선택
-			if(cno != 0 ) {}
+			if(cno != 0 ) { sql += " where b.cno = " +cno;}
 			// 검색
 			if(!key.isEmpty() && !keyword.isEmpty() ) {
 				// 카테고리내 검색이면
-				if( cno != 0 ) sql+="";
-				else sql += "";
+				if( cno != 0 ) sql+=" and ";
+				else sql += " where ";
+				
+				sql +=" "+key+" like '%"+ keyword+"%' ";
 			}
+			
+			sql += " order by b.bdate desc limit ? , ?";
 			
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, starrow);

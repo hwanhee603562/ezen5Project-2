@@ -1,6 +1,8 @@
 package contoller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import model.dao.BoardDao;
 import model.dto.Board;
 import model.dto.MemberList;
+import model.dto.PageDto;
 
 
 @WebServlet("/BoardController")
@@ -59,7 +62,7 @@ public class BoardController extends HttpServlet {
 		if(type.equals("1")) {
 			
 			String key = request.getParameter("key");
-			String keywrod = request.getParameter("keyword");
+			String keyword = request.getParameter("keyword");
 			
 			int cno = Integer.parseInt(request.getParameter("cno")); // 카테고리
 			int listsize = Integer.parseInt(request.getParameter("listsize")); // 출력할 게시물 최대 게시물수 
@@ -67,9 +70,19 @@ public class BoardController extends HttpServlet {
 			
 			int startrow = (page-1)*listsize; // 페이지번호*최대게시물수
 			
-			//int totalsize = BoardDao.getInstance().getTotalSize()
-		
+			int totalsize = BoardDao.getInstance().getTotalSize(cno,key,keyword);
+			int totalpage = totalsize%listsize == 0 ? totalsize/listsize : totalsize/listsize+1;
+			int btnsize = 5;
+			int starbtn =((page-1)/btnsize)*btnsize+1;
+			int endbtn = starbtn+(btnsize-1);
+			if( endbtn >= totalpage ) endbtn = totalpage;
+			ArrayList<Board> result = BoardDao.getInstance().getList(cno, listsize, endbtn, key, keyword);
+			PageDto pageDto = new PageDto(page, listsize, btnsize, totalsize, totalpage, starbtn, endbtn, result);
+			
+			json = objectMapper.writeValueAsString(pageDto);
 		}
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(json);
 	}
 
 
