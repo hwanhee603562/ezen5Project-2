@@ -55,7 +55,8 @@ function infoPrint(){console.log('회원정보 출력 함수')
 				
 				html +=
 				`
-					<div class="contentHeader">${r.mid}</div>
+					<h3 class="infoTitletxt"> 마이페이지 </h3>
+					<div class="contentHeader">아이디 ${r.mid}</div>
 					<div class="contentMain">
 						<div>칭호 : 처음온손님</div>
 						<div>거래활동 ${r.tradelog}</div>

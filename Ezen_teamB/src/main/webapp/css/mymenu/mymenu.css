@@ -14,6 +14,23 @@
 	margin-bottom: 20px;
 }
 
+/* 마이메뉴 텍스트 */
+.infoTitletxt{
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.infoTitletxt:aftef{
+	content: '';
+    width: 100%;
+    height: 6px;
+    background-color: #f2c000;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 .infoContent{
 	height: 100%;
 	position: relative;
