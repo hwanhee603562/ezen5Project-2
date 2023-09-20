@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.time.LocalDateTime;
+
 import model.dto.MemberList;
 
 // 회원기능 클래스
@@ -44,7 +46,7 @@ public class MemberDao extends Dao{
 	
 	
 	// 로그인
-	
+
 	
 	
 	

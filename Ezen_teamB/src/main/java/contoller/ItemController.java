@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.ItemDao;
 import model.dto.CategoryDto;
+import model.dto.MemberList;
 
 
 @WebServlet("/ItemController")
@@ -52,8 +53,18 @@ public class ItemController extends HttpServlet {
 		
 	}
 
+	// 제품 입력하기
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		/* 로그인 기능 구현 전 임시적으로 로그인 세션저장 */
+		MemberList loginDto = new MemberList( 12, "azz258" );
+		request.getSession().setAttribute("loginDto", loginDto);
+		
+		
+		int mno = ((MemberList)request.getSession().getAttribute("loginDto")).getMno();
+		
+		
+		
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,3 +76,17 @@ public class ItemController extends HttpServlet {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

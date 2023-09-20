@@ -174,10 +174,35 @@ function faceToFace(){
 
 
 
+/* ============================= 거래방식 end */
+
+let fileList = []	// 파일을 저장할 배열 선언
 
 
-
-
+function fileUpload( mimg ){
+	console.log(mimg.files[0].name);
+	console.log(mimg.files[0]);
+	
+	
+	let fileReader = new FileReader();
+	
+	fileReader.readAsDataURL( mimg.files[0] );	
+	
+	
+	// 이미지를 출력할 구역 생성
+	document.querySelector('.outputImg').innerHTML +=	`
+			<img class="ddd" alt="" src=""/>
+		` 
+	fileList.push( mimg.files[0].name );
+	
+	console.log(fileList)
+	
+	fileReader.onload = e => {
+		console.log(e.target.result)
+		document.querySelector('.ddd').src = e.target.result;	
+	}
+	
+}
 
 
 

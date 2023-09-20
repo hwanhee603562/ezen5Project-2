@@ -29,9 +29,23 @@
 							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
 							
 						</label>
-						<input type="file" id="uploadFile" name="file"><br>	
+						<input onchange="fileUpload(this)" type="file" id="uploadFile" name="file"><br>	
 					</div>
 				</div>
+				
+				<div class="outputImg prtSelectImg"> <!-- 선택된 이미지 출력 구역 -->
+					<img class="aImg" alt="" src=""/>
+					<img class="bImg" alt="" src=""/>
+					<img class="cImg" alt="" src=""/>
+					<img class="dImg" alt="" src=""/>
+					<img class="eImg" alt="" src=""/>
+					<img class="fImg" alt="" src=""/>
+					<img class="gImg" alt="" src=""/>
+					<img class="hImg" alt="" src=""/>
+					<img class="iImg" alt="" src=""/>
+					<img class="jImg" alt="" src=""/>
+				</div>
+				
 				
 				<div class="inputDeskBox prtTitle">
 					<div class="deskInfo">제목</div>

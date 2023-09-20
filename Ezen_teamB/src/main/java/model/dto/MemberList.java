@@ -51,6 +51,14 @@ public class MemberList {
 		this.mpwd = mpwd;
 	}
 
+	// 로그인 기능 완성 전 임시적으로 사용되는 생성자
+	public MemberList(int mno, String mid) {
+		super();
+		this.mno = mno;
+		this.mid = mid;
+	}
+	
+	
 	// get, set
 	public int getMno() {
 		return mno;
