@@ -83,15 +83,12 @@
 				
 				<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->
 				<!-- 거래방식 - 중개거래일 시 지도출력하여 중개거래소 선택 -->
-				<div class="outputMapField"><!-- 지도 출력되는 구역 -->
-					
+				<div id="outputMapField" style="display: none;"><!-- 지도 출력되는 구역 -->
+					<input type="text" id="sample5_address" placeholder="주소">
+					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+					<div id="map" style="width:100%;height:350px;"></div>
+					<div id="clickLatlng"></div>
 				</div>
-				
-				
-				
-				
-				
-				
 				
 				<div class="inputDeskBox prtPrice">
 					<div class="deskInfo">판매가격</div>
@@ -100,10 +97,7 @@
 					</div>
 				</div>
 				
-					
 
-				
-				
 				<!-- 거래방식 : 배송일 경우 출력x -->
 				<!-- 거래방식 : 대면거래일 경우 대면거래 장소 주소 api로 입력 후 해당 주소위치 맵에 출력 -->
 				<!-- 거래방식 : 중개거래일 경우 지도상 중개거래소 선택 -->
@@ -117,12 +111,15 @@
 			
 		</form>	<!-- form 식별구역 end -->
 		<div class="bottomBtn">
-			<button onclick="registerItems()" type="button"> 등록 </button><button type="button"> 취소 </button>
+			<button onclick="registerItems()" type="button" style="background-color: #A287D6;"> 등록 </button><button type="button" style="background-color: white;"> 취소 </button>
 		</div>
 	</div>
 	
 	<!-- 카카오지도 api -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51f4ebd6d93bf1f15d0f4ba2809fea5&libraries=services""></script>
+	
+	<!-- 카카오 우편번호 서비스 api -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<script src="/Ezen_teamB/js/item/registeritems.js" type="text/javascript"></script>
 </body>
