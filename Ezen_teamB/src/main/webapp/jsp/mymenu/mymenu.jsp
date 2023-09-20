@@ -15,17 +15,7 @@
 		<div class="infoBox">
 			<div class="infoTop">
 				<div class="infoContent">
-					<div class="contentHeader">아이디</div>
-					<div class="contentMain">
-						<div>칭호 : 처음온손님</div>
-						<div>거래활동 0</div>
-						<div>판매물품 0</div>
-						<div>포인트 30000</div>
-					</div>
-					<div class="name">이름</div>
-					<div class="address">주소</div>
-					<div class="email">이메일주소</div>
-					<button class="btn btn-outline-dark btn-sm updateBtn">정보수정</button>					
+					<!-- 회원 정보 출력 구역 -->					
 				</div>
 			</div>
 			<div class="infoBottom">
@@ -50,11 +40,7 @@
 						
 					</div>
 					<div class="cardInfo">
-						<table class="table pd3">
-						  <tbody class="tableBody">
-						   		<!-- 판매중인 물품 출력 구역 -->
-						  </tbody>
-						</table>
+							<!-- 서브메뉴 콘텐츠 출력구역 -->
 					</div>
 				</div>
 			</div> <!-- infoBottom end -->

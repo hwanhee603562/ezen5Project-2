@@ -37,6 +37,49 @@ document.querySelector('.smenu4').addEventListener("click",(e)=>{
 	document.getElementById('smenu4').classList.add('active');
 })
 
+// 회원정보 출력 함수
+infoPrint();
+function infoPrint(){console.log('회원정보 출력 함수')
+	
+	let mno = 2;
+	
+	$.ajax({ 
+	       url : "/Ezen_teamB/MyMenuController",
+	       async: false,
+	       data : {type: '2' , mno: mno},         // 보내는 데이터
+	       method : "get",
+	       success : r =>{console.log(r);
+	       
+				let infoContent = document.querySelector('.infoContent');
+				let html = ``;
+				
+				html +=
+				`
+					<div class="contentHeader">${r.mid}</div>
+					<div class="contentMain">
+						<div>칭호 : 처음온손님</div>
+						<div>거래활동 ${r.tradelog}</div>
+						<div>판매물품 ${r.saleProduct}</div>
+						<div>포인트 ${r.mpoint}</div>
+					</div>
+					<div class="name">${r.mname}</div>
+					<div class="address">${r.madress}</div>
+					<div class="email">${r.memail}</div>
+					<button class="btn btn-outline-dark btn-sm updateBtn">정보수정</button>
+				`
+				
+				
+				
+				
+				infoContent.innerHTML = html;
+				
+	       },
+	       error : e =>{console.log('통신실패')}
+	 });
+	
+	
+}
+
 // 마이메뉴 페이지 출력시 함수 실행
 saleList();
 // 판매중인상품 리스트 출력 함수
@@ -46,10 +89,11 @@ function saleList(){console.log('판매중인상품 리스트')
 
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
+	       async: false,
 	       data : {type: '1' , mno: mno, estate : 1},         // 보내는 데이터
 	       method : "get",
 	       success : jsonArray =>{console.log(jsonArray);
-	       		let tableBody = document.querySelector('.tableBody');
+	       		let cardInfo = document.querySelector('.cardInfo');
 	       		let html = ``;
 	       		
 	       		// 판매중인 상품 숫자 출력
@@ -58,7 +102,11 @@ function saleList(){console.log('판매중인상품 리스트')
 	       		html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;   		
 	       		productCount.innerHTML = html
 	       		
-	       		html = ``;
+	       		html = 
+	       		`
+	       			<table class="table table-hover align-middle text-center">
+						  <tbody class="tableBody">
+	       		`;
 	       		
 	       		if(jsonArray.length < 1){
 					   tableBody.innerHTML = `판매중인 상품이 없습니다.`;
@@ -67,7 +115,6 @@ function saleList(){console.log('판매중인상품 리스트')
 	       		
 	       		// 회원번호에 따른 판매중인 상품 출력
 	       		jsonArray.forEach((p,i)=>{
-					   console.log(Object.values(p.imgList)[0]);
 					   if(p.itrade == 1){
 						   p.itrade = '배송'
 					   }else if(p.itrade == 2){
@@ -75,20 +122,28 @@ function saleList(){console.log('판매중인상품 리스트')
 					   }else if(p.itrade == 3){
 						   p.itrade = '중개소거래'
 					   }
+					   
+					   p.idate = (p.idate).substr(0,10);
 					   html += 
 					   `
-					   		<tr class="tableContent">
-						      <th scope="row">${i+1}</th>
-						      <td><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
-						      <td>${p.ititle}</td>
-						      <td>${p.itrade}</td>
-						      <td>${p.uname}/${p.dname}</td>
-						      <td>${p.idate}</td>
-						    </tr>
+							   		<tr class="tableContent">
+								      <th scope="row">${i+1}</th>
+								      <td width="10%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
+								      <td width="30%">${p.ititle}</td>
+								      <td width="10%">${p.itrade}</td>
+								      <td width="20%">${p.uname}/${p.dname}</td>
+								      <td>${p.idate}</td>
+								    </tr>
 					   `
 					   
 				   })
-	       		tableBody.innerHTML = html;
+				   
+				   html += 
+				   `
+				   			</tbody>
+						</table>
+				   `
+	       		cardInfo.innerHTML = html;
 	       		
 			},
 	       	error : e=>{console.log(e)}
@@ -104,12 +159,18 @@ function transHistory(){console.log('거래내역 리스트')
 	
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
+	       async: false,
 	       data : {type: '1' , mno: mno, estate : 2},         // 보내는 데이터
 	       method : "get",
 	       success : jsonArray =>{console.log(jsonArray);
 	       	
-	       		let tableBody = document.querySelector('.tableBody');
-	       		let html = ``;
+	       		let cardInfo = document.querySelector('.cardInfo');
+	       		let html = 
+				`
+	       			<table class="table table-hover align-middle text-center">
+						  <tbody class="tableBody">
+	       		`;
+				
 	       		
 	       		// 회원번호에 따른 거래내역 출력
 	       		jsonArray.forEach((p,i)=>{
@@ -121,11 +182,12 @@ function transHistory(){console.log('거래내역 리스트')
 					   }else if(p.itrade == 3){
 						   p.itrade = '중개소거래'
 					   }
+					   p.idate = (p.idate).substr(0,10);
 					   html += 
 					   `
 					   		<tr class="tableContent">
 						      <th scope="row">${i+1}</th>
-						      <td><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
+						      <td width="5%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
 						      <td>${p.ititle}</td>
 						      <td>${p.itrade}</td>
 						      <td>${p.uname}/${p.dname}</td>
@@ -135,7 +197,14 @@ function transHistory(){console.log('거래내역 리스트')
 					   `
 					   
 				   })
-	       		tableBody.innerHTML = html;
+				 
+				 html += 
+				   `
+				   			</tbody>
+						</table>
+				   `   
+				 
+	       		cardInfo.innerHTML = html;
 	       		
 	       		let saleProduct = jsonArray.length
 	       		let productCount = document.querySelector('.productCount');
