@@ -116,6 +116,7 @@ body {
 	border-top: 1px solid #e8e8e8;	
 	border-bottom: 1px solid #e8e8e8;
 	padding-top: 30px;
+	margin-top: 80px;
 }
 
 /* ----------- 각 입력 박스구역 end ---------- */
@@ -135,6 +136,13 @@ body {
 	height: 100%;
 	border: 1px solid #e8e8e8;
 }
+/* 이미지 출력구역 */
+.outputImg img{
+	width: 150px;
+	height: 150px;
+	margin: 5px 0px 5px 19px;
+}
+
 
 #uploadFile{
 	display: none;
@@ -269,6 +277,22 @@ body {
 	font-size: 20px;
 	font-weight: bold;
 }
+
+/* ======== 제목 내용 구역 end ======== */
+
+
+/* ======== 지도 출력 구역 ======== */
+
+.selectedAddress{
+	margin-top: 30px;
+	color: red;
+	
+}
+
+
+
+
+
 
 
 

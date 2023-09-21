@@ -13,7 +13,7 @@ public class ItemsInfo {
 	private String ititle;			// 판매제목
     private String icontent;		// 판매내용
 	private int itrade;				// 거래방식( 1 배송, 2 대면거래, 3 중개거래 )
-	private String itradeplace;		// 거래장소
+	private String itradeplace;		// 대면거래일 시 거래 주소
 	private String idate;			// 판매물품 등록일시
 	private int eno;				// 중개소 번호( 중개소거래를 이용할 시 )
 	private int iestate;			// 거래상태( 0 판매중 1 판매완료 )

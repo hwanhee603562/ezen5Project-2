@@ -30,20 +30,11 @@
 							
 						</label>
 						<input onchange="fileUpload(this)" type="file" id="uploadFile" name="file"><br>	
+						<span> ※ 이미지는 최대 10개까지 저장가능합니다 </span>
 					</div>
 				</div>
 				
 				<div class="outputImg prtSelectImg"> <!-- 선택된 이미지 출력 구역 -->
-					<img class="aImg" alt="" src=""/>
-					<img class="bImg" alt="" src=""/>
-					<img class="cImg" alt="" src=""/>
-					<img class="dImg" alt="" src=""/>
-					<img class="eImg" alt="" src=""/>
-					<img class="fImg" alt="" src=""/>
-					<img class="gImg" alt="" src=""/>
-					<img class="hImg" alt="" src=""/>
-					<img class="iImg" alt="" src=""/>
-					<img class="jImg" alt="" src=""/>
 				</div>
 				
 				
@@ -101,7 +92,10 @@
 					<input type="text" id="sample5_address" placeholder="주소">
 					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 					<div id="map" style="width:100%;height:350px;"></div>
-					<div id="clickLatlng"></div>
+					<div id="clickLatlng"> ※ 행정안전부에서 업데이트되지 않은 도로명주소는 지번주소로 대체됩니다 </div>
+					<div class="selectedAddress">
+						선택한 위치 : <span>  </span>
+					</div>
 				</div>
 				
 				<div class="inputDeskBox prtPrice">
