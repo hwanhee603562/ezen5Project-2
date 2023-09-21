@@ -42,6 +42,7 @@
 	font-weight: bold;
 	margin-bottom: 20px;
 	margin-top: 30px;
+	margin-left: 10px;
 }
 
 .contentHeader::before{
@@ -57,11 +58,17 @@
 	font-size: 12px;
 }
 
+/* 내 정보 내용 박스 */
+.infoDetail{
+	margin-left: 10px;
+}
+
 /* 내 정보 내용 */
 .contentMain{
 	display: flex;
 	justify-content: flex-start;
 	margin-bottom: 40px;
+	margin-left: 10px;
 	font-size: 17px;
 }
 
@@ -170,6 +177,9 @@
 /* 내정보 수정 버튼 */
 .updateBtn{
 	font-size: 10px !important;
+	position: absolute;
+    top: 85px;
+    right: 10px;
 }
 
 .nav-tabs{
