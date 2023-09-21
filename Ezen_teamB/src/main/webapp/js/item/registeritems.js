@@ -89,7 +89,7 @@ function delivery(){
 	faceToFaceCSS.backgroundColor = "#EFEFEF";
 	brokerageCSS.backgroundColor = "#EFEFEF";
 	 
-	 document.querySelector('.outputMapField').innerHTML = ``;
+	 document.getElementById("outputMapField").style.display = "none";
 	 itrade = 1;
 }
 
@@ -286,11 +286,6 @@ function brokerage(){
 
 
 
-
-
-
-
-
 /* ============================= 거래방식 end */
 
 
@@ -302,6 +297,15 @@ let fileList = []	// 파일을 저장할 배열 선언
 
 // 1 이미지 파일 업로드
 function fileUpload( mimg ){
+	
+	fileList.push( mimg );
+	
+
+	
+	// 1. form dom객체 호출
+	let registerForm = document.querySelectorAll('.registerForm')[0];
+	let formData = new FormData( registerForm );
+	
 
 	if( fileList.length >= 10 ){
 		alert('이미지는 최대 10개 까지 저장가능합니다')
@@ -312,6 +316,8 @@ function fileUpload( mimg ){
 	let fileReader = new FileReader();
 	// 파일의 정보 읽기
 	fileReader.readAsDataURL( mimg.files[0] );	
+	
+	
 	
 	// 이미지를 출력할 구역 생성
 	document.querySelector('.outputImg').innerHTML +=	`
@@ -324,11 +330,8 @@ function fileUpload( mimg ){
 	// 읽어온 파일을 불러옴
 	fileReader.onload = e => {
 		document.querySelector(`.img${fileList.length}`).src = e.target.result;	
-		fileList.push( e.target.result );
 	}
 	
-	console.log('fileList 확인')
-	console.log(fileList)
 }
 
 // 2 선택된 이미지 파일 삭제
@@ -340,15 +343,30 @@ function fileDelete( fileNum ){
 	// 파일 이미지 출력구역을 공백으로 초기화
 	document.querySelector('.outputImg').innerHTML = ``;
 	
+	console.log('확인시작')
+	console.log(fileList[0].files[0])
+	console.log(fileList[1].files[0])
+	console.log(fileList[2].files[0])
+	
 	// 배열 fileList 에 저장된 객체를 순차적으로 다시 출력
 	fileList.forEach( ( fileData, i ) => {
+		
+		
+		// 파일을 읽는 객체 생성
+		let fileReader = new FileReader();
+		
+		// 파일의 정보 읽기
+		fileReader.readAsDataURL( fileData.files[0] );	
 		
 		document.querySelector('.outputImg').innerHTML +=	`
 			<img class="img${i}" alt="" src=""/>
 			<button onclick="fileDelete(${i})" type="button">x</button>
 		`
+			// 읽어온 파일을 불러옴
+		fileReader.onload = e => {
+			document.querySelector(`.img${i}`).src = e.target.result;	
+		}
 		
-		document.querySelector(`.img${i}`).src = fileData;	
 	})
 	
 }
@@ -363,6 +381,36 @@ function registerItems(){
 	let registerForm = document.querySelectorAll('.registerForm')[0];
 	let formData = new FormData( registerForm );
 	
-	console.log(formData)
+	for(let i of fileList ){
+		formData.append( "file", i )
+	}
 	
+	
+	console.log('내부 객체 확인')
+	
+	
+	
+
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
