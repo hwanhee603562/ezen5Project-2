@@ -63,9 +63,11 @@ function infoPrint(){console.log('회원정보 출력 함수')
 						<div class="saleTop">판매물품 <span>${r.saleProduct}</span></div>
 						<div class="pointTop">포인트 <span>${r.mpoint}</span></div>
 					</div>
-					<div class="name">이름 ${r.mname}</div>
-					<div class="address"> 주소 ${r.madress}</div>
-					<div class="email"> 이메일 ${r.memail}</div>
+					<div class="infoDetail">
+						<div class="name">이름 ${r.mname}</div>
+						<div class="address"> 주소 ${r.madress}</div>
+						<div class="email"> 이메일 ${r.memail}</div>
+					</div>
 					<button class="btn btn-outline-dark btn-sm updateBtn">정보수정</button>
 				`
 				
