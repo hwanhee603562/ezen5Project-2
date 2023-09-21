@@ -68,7 +68,7 @@ function infoPrint(){console.log('회원정보 출력 함수')
 						<div class="address"> 주소 ${r.madress}</div>
 						<div class="email"> 이메일 ${r.memail}</div>
 					</div>
-					<button class="btn btn-outline-dark btn-sm updateBtn">정보수정</button>
+					<button onclick="updateInfo()" class="btn btn-outline-dark btn-sm updateBtn">정보수정</button>
 				`
 				
 				
@@ -282,6 +282,13 @@ function PrintWishList(){console.log('찜목록 리스트')
 		},
 		error : e=>{console.log('통신실패')}
 	})
+	
+}	// f end
+
+
+// 회원정보 수정 함수
+function updateInfo(){ console.log('회원정보 변경 함수')
+	
 	
 }
 
