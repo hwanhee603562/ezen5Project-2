@@ -30,6 +30,7 @@
 		<ul class="submenu">
 			<li><a href="/Ezen_teamB/jsp/member/login.jsp">로그인</a></li>
 			<li><a href="/Ezen_teamB/jsp/member/signup.jsp">회원가입</a></li>
+			<li><a href="/Ezen_teamB/jsp/mymenu/mymenu.jsp">마이페이지</a></li>
 		</ul>
 	</div>
 	

@@ -45,9 +45,9 @@ function infoPrint(){console.log('회원정보 출력 함수')
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB/MyMenuController",
-	       async: false,
 	       data : {type: '2' , mno: mno},         // 보내는 데이터
 	       method : "get",
+	       async: false,
 	       success : r =>{console.log(r);
 	       
 				let infoContent = document.querySelector('.infoContent');
@@ -55,16 +55,19 @@ function infoPrint(){console.log('회원정보 출력 함수')
 				
 				html +=
 				`
-					<div class="contentHeader">${r.mid}</div>
+					<h3 class="infoTitletxt"> 마이페이지 </h3>
+					<div class="contentHeader">${r.mid} <span>회원님</span></div>
 					<div class="contentMain">
-						<div>칭호 : 처음온손님</div>
-						<div>거래활동 ${r.tradelog}</div>
-						<div>판매물품 ${r.saleProduct}</div>
-						<div>포인트 ${r.mpoint}</div>
+						<div class="titleTop">처음온손님</div>
+						<div class="tradeTop">거래활동 <span>${r.tradelog}</span></div>
+						<div class="saleTop">판매물품 <span>${r.saleProduct}</span></div>
+						<div class="pointTop">포인트 <span>${r.mpoint}</span></div>
 					</div>
-					<div class="name">${r.mname}</div>
-					<div class="address">${r.madress}</div>
-					<div class="email">${r.memail}</div>
+					<div class="infoDetail">
+						<div class="name">이름 ${r.mname}</div>
+						<div class="address"> 주소 ${r.madress}</div>
+						<div class="email"> 이메일 ${r.memail}</div>
+					</div>
 					<button class="btn btn-outline-dark btn-sm updateBtn">정보수정</button>
 				`
 				
@@ -89,9 +92,9 @@ function saleList(){console.log('판매중인상품 리스트')
 
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
-	       async: false,
 	       data : {type: '1' , mno: mno, estate : 1},         // 보내는 데이터
 	       method : "get",
+	       async: false,
 	       success : jsonArray =>{console.log(jsonArray);
 	       		let cardInfo = document.querySelector('.cardInfo');
 	       		let html = ``;
@@ -159,9 +162,9 @@ function transHistory(){console.log('거래내역 리스트')
 	
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
-	       async: false,
 	       data : {type: '1' , mno: mno, estate : 2},         // 보내는 데이터
 	       method : "get",
+	       async: false,
 	       success : jsonArray =>{console.log(jsonArray);
 	       	
 	       		let cardInfo = document.querySelector('.cardInfo');
@@ -214,6 +217,71 @@ function transHistory(){console.log('거래내역 리스트')
 	       error : e => {}
 	
 	});
+	
+}
+
+// 찜목록 출력함수
+function PrintWishList(){console.log('찜목록 리스트')
+	
+	let mno = 2;
+	
+	$.ajax({
+		url : "/Ezen_teamB/MyMenuController",
+		async : false,
+		data : {type : '3', mno : mno},
+		method : "get", 
+		success : jsonArray =>{console.log(jsonArray);
+		
+		let cardInfo = document.querySelector('.cardInfo');
+	       		let html = 
+				`
+	       			<table class="table table-hover align-middle text-center">
+						  <tbody class="tableBody">
+	       		`;
+				
+	       		
+	       		// 회원번호에 따른 거래내역 출력
+	       		jsonArray.forEach((p,i)=>{
+					   console.log(Object.values(p.imgList)[0]);
+					   if(p.itrade == 1){
+						   p.itrade = '배송'
+					   }else if(p.itrade == 2){
+						   p.itrade = '직거래'
+					   }else if(p.itrade == 3){
+						   p.itrade = '중개소거래'
+					   }
+					   p.idate = (p.idate).substr(0,10);
+					   html += 
+					   `
+					   		<tr class="tableContent">
+						      <th scope="row">${i+1}</th>
+						      <td width="5%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
+						      <td>${p.ititle}</td>
+						      <td>${p.itrade}</td>
+						      <td>${p.uname}/${p.dname}</td>
+						      <td><div class="saleContinue">판매중<div></td>
+						      <td><button class="btn btn-danger" type="button">x</button></td>
+						    </tr>
+					   `
+					   
+				   })
+				 
+				 html += 
+				   `
+				   			</tbody>
+						</table>
+				   `   
+				 
+	       		cardInfo.innerHTML = html;
+	       		
+	       		let saleProduct = jsonArray.length
+	       		let productCount = document.querySelector('.productCount');
+	       		html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;   		
+	       		productCount.innerHTML = html
+		
+		},
+		error : e=>{console.log('통신실패')}
+	})
 	
 }
 

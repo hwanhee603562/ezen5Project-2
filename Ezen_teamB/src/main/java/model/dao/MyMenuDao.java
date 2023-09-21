@@ -84,7 +84,7 @@ public class MyMenuDao extends Dao{
 		return null;
 	}
 	
-	// 판매중인 물품 출력
+	// 판매중인 물품 출력 / 거래내역 출력
 	public List<ItemsInfo> saleList(int mno, int estate){
 		
 		List<ItemsInfo> list = new ArrayList<>();
@@ -116,8 +116,30 @@ public class MyMenuDao extends Dao{
 		return null;
 	}
 	
-	
-	// 나의 거래내역
+	// 찜 목록 출력 함수
+	public List<ItemsInfo> printWishList(int mno){
+		
+		List<ItemsInfo> list = new ArrayList<>();
+		
+		try {
+			String sql = "select i.ino, w.mno, i.ititle,i.itrade,i.idate, uc.uname, dc.dname "
+					+ "from itemsinfo i, umaincategory uc, dsubcategory dc, watchitem w "
+					+ "where i.ino = w.ino and i.dno = dc.dno and uc.uno = dc.uno and i.iestate = 0 and w.mno = " + mno;
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ItemsInfo idto = new ItemsInfo(
+						rs.getInt(1), rs.getInt(2), rs.getString(3),
+						rs.getInt(4), rs.getString(5),
+						rs.getString(6), rs.getString(7), getProductImg(rs.getInt("ino")));
+				list.add(idto);
+			}
+			return list;
+			
+		} catch (Exception e) {System.out.println("찜 목록 오류 :" + e);}
+		
+		return null;
+	}
 	
 	
 	// 개인정보변경
@@ -126,7 +148,6 @@ public class MyMenuDao extends Dao{
 	// 회원탈퇴
 	
 	
-	// 찜 기능
 	
 	
 	

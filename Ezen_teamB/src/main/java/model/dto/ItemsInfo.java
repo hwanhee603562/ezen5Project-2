@@ -54,8 +54,20 @@ public class ItemsInfo {
 		this.imgList = imgList;
 	}
 	
+	// 물품 정보 출력 생성자
+	public ItemsInfo(int ino, int mno, String ititle, int itrade, String idate, String uname, String dname,
+			Map<Integer, String> imgList) {
+		super();
+		this.ino = ino;
+		this.mno = mno;
+		this.ititle = ititle;
+		this.itrade = itrade;
+		this.idate = idate;
+		this.uname = uname;
+		this.dname = dname;
+		this.imgList = imgList;
+	}
 
-	
 	// getter setter
 	public int getIno() {
 		return ino;
