@@ -30,6 +30,8 @@ public class MyMenuController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String type = request.getParameter("type");
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
 		
 		// 판매중인 물품 출력
 		if(type.equals("1")) {
@@ -38,12 +40,8 @@ public class MyMenuController extends HttpServlet {
 			int estate = Integer.parseInt(request.getParameter("estate"));
 			
 			List<ItemsInfo> result = MyMenuDao.getInstance().saleList(mno, estate);
+			json = mapper.writeValueAsString(result);
 			
-			ObjectMapper mapper = new ObjectMapper();
-			String json = mapper.writeValueAsString(result);
-			
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().print(json);
 		}
 		// 회원 정보 출력
 		else if(type.equals("2")) {
@@ -54,14 +52,21 @@ public class MyMenuController extends HttpServlet {
 			
 			Mymenu result = MyMenuDao.getInstance().printMemberInfo(mno);
 			result.setTradelog(tradeCount);
-			
-			ObjectMapper mapper = new ObjectMapper();
-			String json = mapper.writeValueAsString(result);
-			
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().print(json);
+			json = mapper.writeValueAsString(result);
 			
 		}
+		
+		// 찜목록 출력
+		else if(type.equals("3")) {
+			int mno = Integer.parseInt(request.getParameter("mno"));
+			
+			List<ItemsInfo> result = MyMenuDao.getInstance().printWishList(mno);
+			json = mapper.writeValueAsString(result);
+			
+		}
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(json);
 		
 	}
 

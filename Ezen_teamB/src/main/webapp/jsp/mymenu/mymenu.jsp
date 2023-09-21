@@ -21,14 +21,14 @@
 			<div class="infoBottom">
 				<div class="infoCard">
 					<ul class="nav nav-tabs nav-fill">
-					  <li class="nav-item smenu1" onclick="saleList()">
+					  <li class="nav-item smenu1">
 					    <a onclick="saleList()" id="smenu1" class="nav-link active" aria-current="page" href="#">판매중인상품</a>
 					  </li>
 					  <li class="nav-item smenu2">
 					    <a onclick="transHistory()" id="smenu2" class="nav-link" href="#">거래내역</a>
 					  </li>
 					  <li class="nav-item smenu3">
-					    <a id="smenu3" class="nav-link" href="#">찜목록</a>
+					    <a onclick="PrintWishList()" id="smenu3" class="nav-link" href="#">찜목록</a>
 					  </li>
 					  <li class="nav-item smenu4">
 					    <a id="smenu4" class="nav-link" href="#">채팅목록</a>

@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 .infoBox{
-	height: 800px;
 	margin-top: 20px;
 }
 
@@ -9,26 +8,27 @@
 .infoTop{
 	padding: 10px;
 	border: 1px solid #e8e8e8;
-	height: 40%;
 	width: 100%;
 	margin-bottom: 20px;
 }
 
 /* 마이메뉴 텍스트 */
 .infoTitletxt{
+	font-size: 30px;
 	font-weight: bold;
 	margin-bottom: 20px;
+	position: relative;
 }
 
-.infoTitletxt:aftef{
+.infoTitletxt::after{
 	content: '';
     width: 100%;
     height: 6px;
-    background-color: #f2c000;
+    background-color:#9767EB;
     display: inline-block;
     position: absolute;
     left: 0;
-    top: 0;
+    bottom: -20px;
 }
 
 .infoContent{
@@ -38,9 +38,23 @@
 
 /* 아이디 */
 .contentHeader{
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: bold;
 	margin-bottom: 20px;
+	margin-top: 30px;
+}
+
+.contentHeader::before{
+	content: '';
+    width: 5px;
+    height: 15px;
+    background-color: #F58D6C;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.contentHeader span{
+	font-size: 12px;
 }
 
 /* 내 정보 내용 */
@@ -48,7 +62,57 @@
 	display: flex;
 	justify-content: flex-start;
 	margin-bottom: 40px;
+	font-size: 17px;
 }
+
+.contentMain span{
+	color: #F58D6C;
+}
+
+
+/* 정보 로고들 */
+
+.titleTop::before{
+	content: "";
+	display: inline-block;
+  	background-image: url( "/Ezen_teamB/jsp/mymenu/img/logo1.png" );
+  	background-size: 14px 14px;
+  	width: 14px;
+  	height: 14px;
+  	margin-right: 5px;
+}
+
+.tradeTop::before{
+	content: "";
+	display: inline-block;
+  	background-image: url( "/Ezen_teamB/jsp/mymenu/img/logo2.png" );
+  	background-size: 14px 14px;
+  	width: 14px;
+  	height: 14px;
+  	margin-right: 5px;
+}
+
+.saleTop::before{
+	content: "";
+	display: inline-block;
+  	background-image: url( "/Ezen_teamB/jsp/mymenu/img/logo3.png" );
+  	background-size: 14px 14px;
+  	width: 14px;
+  	height: 14px;
+  	margin-right: 5px;
+}
+
+.pointTop::before{
+	content: "";
+	display: inline-block;
+  	background-image: url( "/Ezen_teamB/jsp/mymenu/img/logo4.png" );
+  	background-size: 14px 14px;
+  	width: 14px;
+  	height: 14px;
+  	margin-right: 5px;
+}
+
+/* ---------------------------------------------------------------- */
 
 /* 내 정보 내용 개별 구역 */
 .contentMain div{
@@ -63,8 +127,19 @@
 
 /* 마이메뉴 서브메뉴 구역*/
 .infoBottom{
-	height: 60%;
 }
+
+/* 비활성화된 서브메뉴 */
+.nav-link{
+	color: #9e9e9e !important;
+}
+
+/* 활성화된 서브메뉴 */
+.nav-link.active{
+	color: black !important;
+	font-weight: bold;
+}
+
 
 /* 해당메뉴 정보 출력 구역 */
 .printContent{
@@ -88,11 +163,13 @@
 	padding: 10px;
 }
 
+.email{
+	margin-bottom: 20px;
+}
+
 /* 내정보 수정 버튼 */
 .updateBtn{
-	position: absolute;
-	bottom: 10px;
-	font-size: 12px;
+	font-size: 10px !important;
 }
 
 .nav-tabs{
