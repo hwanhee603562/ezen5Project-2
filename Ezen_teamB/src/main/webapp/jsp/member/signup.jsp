@@ -11,7 +11,7 @@
 
 
 </head>
-<body>
+<body >
 	<%@include file = "../header.jsp" %>	
 		<div class="container"><!-- container -->
 			<form class="signupform">
@@ -21,20 +21,21 @@
 			
 			
 				<div><span class="signfont">이름</span></div>
-				<input class="form-floating mb-3" id="signName" name="signName" type="text" placeholder="이름" ><br/>
+				<input class="form-floating mb-3 px-3" id="signName" name="signName" maxlength="30" oninput="maxlength(this)" type="text" placeholder="이름" ><br/>
 				
 				<div><span class="signfont">주민번호</span></div>
-				<input class="form-floating mb-3" id="signResidentNumF" name="signResidentNumF" type="number" max="6" placeholder="생년월일"  > - 
-				<input class="form-floating mb-3" id="signResidentNumS" name="signResidentNumS" class="signResidentNumP" type="number" placeholder="뒤 7자리" ><br/>
+				<input class="form-floating mb-3 px-3" id="signResidentNumF" name="signResidentNumF" type="number" maxlength="6" oninput="maxlength(this)" placeholder="생년월일"  > - 
+				<input class="form-floating mb-3 px-3" id="signResidentNumS" name="signResidentNumS" class="signResidentNumP" maxlength="7" oninput="maxlength(this)" type="number" placeholder="뒤 7자리" ><br/>
 				
 				<div><span class="signfont">전화번호</span></div>
-				<div ><span style="color:gray;">'-' 제외 숫자만 입력 해주세요.</span></div>
-				<input class="form-floating mb-3" id="signPhone" name="signPhone"  type="number" placeholder="전화번호" >
+				<div ><span style="color:gray; font-size:12px;">'-' 제외 숫자만 입력 해주세요.</span></div>
+				<input class="form-floating mb-3 px-3" id="signPhone" name="signPhone" maxlength="11" oninput="maxlength(this)"  type="number" placeholder="전화번호" >
 
 				<div><span class="signfont">이메일</span></div>
-				<input class="form-floating mb-3" id="signEmail" name="signEmail"  type="text" placeholder="이메일" >
+				<input class="form-floating mb-1 px-3" onkeyup="emailCheck()" id="signEmail" name="signEmail" maxlength="30" oninput="maxlength(this)"  type="text" placeholder="이메일" >
+				<div class="idCheck px-2"></div><br/>		<!-- 이메일 양식 맞춰서 -->
 								
-					<div><span class="signfont">주소</span></div>
+				<div><span class="signfont">주소</span></div>
 						<!-- 우편번호 찾기 -->
 				<div class="addressDisplay">	
 					<div class="form-group">
@@ -62,17 +63,18 @@
 				
 				
 				<div><span class="signfont">아이디</span></div> <!-- onkeyup="idcheck()" -->
-				<input class="form-floating mb-3" id="signId" name="signId"  type="text" placeholder="아이디"><br/>
-				<div class="idCheck"><span style="color:red;"></span></div><br/>		<!-- 중복검사, 영문+숫자 조합 최소 5글자 이상 -->
-							
+				<input class="form-floating mb-1 px-3" onkeyup="idcheck()" id="signId" name="signId" maxlength="20" oninput="maxlength(this)"  type="text" placeholder="아이디"><br/>
+				<div class="idCheck px-2"></div><br/>		<!-- 중복검사, 영문+숫자 조합 최소 5글자 이상 -->
+
+				 <input type="text" style="display:none;"/>			
 				<div><span class="signfont">비밀번호</span></div>
-				<div ><span style="color:gray;">영문, 숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</span></div>
-				<input class="form-floating mb-1" id="signPwd1" name="signPwd"  type="password" placeholder="비밀번호">
-				<div class="signPwdCheck1"><span style="color:red;">비밀번호 유효성 검사 출력</span></div><br/>
+				<div ><span style="color:gray; font-size:12px;">영문 + 숫자 조합 8자 이상 입력해주세요</span></div>
+				<input class="form-floating mb-1 px-3" onkeyup="signPwdTest()"  id="signPwd" name="signPwd" maxlength="20" oninput="maxlength(this)"  type="password" placeholder="비밀번호">
+				<div class="signPwdCheck1 px-2"></div><br/>
 								
 				<div><span class="signfont">비밀번호 확인</span></div>
-				<input class="form-floating mb-1" id="signPwd2" name="signPwdCheck"  type="password" placeholder="비밀번호 확인">
-				<div class="signPwdCheck2"><span style="color:red;">비밀번호확인 유효성 검사 출력</span></div><br/>
+				<input class="form-floating mb-1 px-3"  onkeyup="signPwdTest()" id="signPwdCheck" name="signPwdCheck" maxlength="20" oninput="maxlength(this)"  type="password" placeholder="비밀번호 확인">
+				<div class="signPwdCheck2 px-2"></div><br/>
 
 				<div>
 					<button class="signbtn btn btn-outline-dark" type="button" onclick="signup()">회원가입</button>

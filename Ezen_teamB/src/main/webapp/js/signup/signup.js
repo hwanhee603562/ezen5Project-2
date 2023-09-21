@@ -1,7 +1,13 @@
 console.log('회원가입 스크립트 실행')
 
+// 인풋 박스 최대 글자수 이상 입력 불가
+function maxlength(object){
+    if (object.value.length > object.maxLength){
+      object.value = object.value.slice(0, object.maxLength);
+  }    
+}
 
-/*
+// 아이디 유효성 검사
 function idcheck(){
 	console.log('아이디 체크 함수')
 	
@@ -12,8 +18,8 @@ function idcheck(){
 	// 아이디 유효성 검사 출력 구역 
 	let idcheck = document.querySelector('.idCheck');	
 	
-	// 아이디 유효성 검사 / 영문 소,대,숫자 필수 // 최소5~20글자 까지
-	let idregular = /^[a-zA-Z\d]{5,20}$/
+	// 아이디 유효성 검사 / 영문 소,숫자 필수 // 최소5~20글자 까지
+	let idregular = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,20}$/
 	console.log(idregular.test(signId));
 	
 	if(idregular.test(signId)){		
@@ -24,16 +30,75 @@ function idcheck(){
 			method : "get",
 			data : {dape : "signId" , data : signId},
 			success : result => {
-				if(result){idcheck.innerHTML = `사용중인 아이디 입니다`}
-				else{idcheck.innerHTML = `사용 가능한 아이이디 입니다.`}
+				if(result){idcheck.innerHTML = `<span style="color:red; font-size:12px;">사용중인 아이디 입니다</span>`}
+				else{idcheck.innerHTML = `<span style="color:blue; font-size:12px;">사용 가능한 아이이디 입니다</span>`}
 			},
 			error : error=>{ console.log(error)}
 		})
 	}else{
-		idcheck.innerHTML = `영문(대,소문자) + 숫자 조합의 5~20 글자만 입력 가능 합니다.`
+		idcheck.innerHTML = `<span style="color:gray; font-size:12px;">영문(대,소문자) + 숫자 조합의 5~20 글자만 입력 가능 합니다</span>`
 	} // else end 
 }//idcheck end
-*/
+
+
+// 비밀번호 유효성 검사
+
+function signPwdTest(){
+	let signPwd = document.getElementById('signPwd').value;
+	let signPwdCheck = document.getElementById('signPwdCheck').value;
+	
+	
+	console.log(signPwd)
+	console.log(signPwdCheck)
+	
+	let pwregular = /^(?=.*[a-z])(?=.*\d)[a-z\d]{8,20}$/
+	console.log(pwregular.test(signPwdCheck))
+	console.log(pwregular.test(signPwdCheck))
+	
+	
+	if(pwregular.test(signPwd)){
+		document.querySelector('.signPwdCheck1').innerHTML=`<span style="color:blue; font-size:12px;">사용 가능한 비밀번호</span>`;
+	}else if(signPwd == ""){
+		document.querySelector('.signPwdCheck1').innerHTML=``;
+		document.querySelector('.signPwdCheck2').innerHTML=``;				
+	}
+	
+	
+	if(signPwdCheck == ""){
+		document.querySelector('.signPwdCheck2').innerHTML=``;
+		
+	}else if(signPwd != signPwdCheck){
+		document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:red; font-size:12px;">비밀번호 불일치</span>`;}
+		
+	else if(signPwd == signPwdCheck && signPwdCheck != "")
+	{document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:blue; font-size:12px;">비밀번호 일치</span>`;}
+
+}
+
+// 이메일 유효성 검사
+
+function emailCheck(){
+	// 이메일 정보 호출
+	let signEmail = document.getElementById('signEmail').value;
+	//출력 구역
+	let idCheck = document.querySelector('.idCheck')
+	let html=``
+	let emailregular = /^[a-zA-Z\d_-]+@[a-zA-Z\d_-]+\.[a-zA-Z]+$/
+	
+	if(signEmail==""){
+		idCheck.innerHTML=``;
+	}else if(emailregular.test(signEmail)){
+		idCheck.innerHTML=`<span style="color:blue; font-size:12px;">이메일 사용가능</span>`
+	}else{
+		idCheck.innerHTML=`<span style="color:red; font-size:12px;">이메일 사용불가</span>`
+	}
+	
+	
+	
+}
+
+
+
 
 //팝업 위치를 지정(화면의 가운데 정렬)
 var width = 500; //팝업의 너비
