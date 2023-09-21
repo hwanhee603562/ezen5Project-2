@@ -50,28 +50,29 @@ function signPwdTest(){
 	
 	console.log(signPwd)
 	console.log(signPwdCheck)
-	
+	//비밀번호 정규식 표현
 	let pwregular = /^(?=.*[a-z])(?=.*\d)[a-z\d]{8,20}$/
 	console.log(pwregular.test(signPwdCheck))
 	console.log(pwregular.test(signPwdCheck))
 	
 	
-	if(pwregular.test(signPwd)){
+	if(pwregular.test(signPwd)){//정규식 표현이 정상 이라면
 		document.querySelector('.signPwdCheck1').innerHTML=`<span style="color:blue; font-size:12px;">사용 가능한 비밀번호</span>`;
-	}else if(signPwd == ""){
+	}else if(signPwd == ""){//비밀번호가 공란이라면 알림 메세지 지우기
 		document.querySelector('.signPwdCheck1').innerHTML=``;
 		document.querySelector('.signPwdCheck2').innerHTML=``;				
 	}
 	
 	
-	if(signPwdCheck == ""){
+	if(signPwdCheck == ""){//비밀번호 확인이 공란이라면 알림 메세지 지우기
 		document.querySelector('.signPwdCheck2').innerHTML=``;
 		
-	}else if(signPwd != signPwdCheck){
-		document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:red; font-size:12px;">비밀번호 불일치</span>`;}
-		
-	else if(signPwd == signPwdCheck && signPwdCheck != "")
-	{document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:blue; font-size:12px;">비밀번호 일치</span>`;}
+	}else if(signPwd != signPwdCheck){//비밀번호와 비밀번호 확인이 불일치시
+		document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:red; font-size:12px;">비밀번호 불일치</span>`;
+	}
+	else if(signPwd == signPwdCheck && signPwdCheck != ""){// 비밀번호, 비밀번호 확인 일치, 공란 아니면
+		document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:blue; font-size:12px;">비밀번호 일치</span>`;
+	}
 
 }
 
@@ -82,14 +83,14 @@ function emailCheck(){
 	let signEmail = document.getElementById('signEmail').value;
 	//출력 구역
 	let idCheck = document.querySelector('.idCheck')
-	let html=``
+
 	let emailregular = /^[a-zA-Z\d_-]+@[a-zA-Z\d_-]+\.[a-zA-Z]+$/
 	
-	if(signEmail==""){
+	if(signEmail==""){//이메일 공란이면 알림창 비우기
 		idCheck.innerHTML=``;
-	}else if(emailregular.test(signEmail)){
+	}else if(emailregular.test(signEmail)){//정규표현식 정상일때
 		idCheck.innerHTML=`<span style="color:blue; font-size:12px;">이메일 사용가능</span>`
-	}else{
+	}else{//정규표현식 비정상일때
 		idCheck.innerHTML=`<span style="color:red; font-size:12px;">이메일 사용불가</span>`
 	}
 	
@@ -157,9 +158,9 @@ function execPostCode() {
 
 
 function signup(){
-	
+	// 회원 가입 폼 호출
 	let signupform = document.querySelectorAll('.signupform')[0];
-	
+	// 폼 데이터화
 	let signupData = new FormData(signupform);
 	console.log(signupData)
 	
