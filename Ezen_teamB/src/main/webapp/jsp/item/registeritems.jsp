@@ -85,7 +85,7 @@
 						<div onclick="brokerage()" class="brokerage itrade"> 중개거래 </div>
 					</div>
 				</div>
-				
+				 
 				<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->
 				<!-- 거래방식 - 중개거래일 시 지도출력하여 중개거래소 선택 -->
 				<div id="outputMapField" style="display: none;"><!-- 지도 출력되는 구역 -->
