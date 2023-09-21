@@ -8,6 +8,8 @@
 <!-- 로그인 jsp -->
 </head>
 <body>
+		<%@include file = "../header.jsp" %>	
+	로그인 화면
 
 </body>
 </html>
