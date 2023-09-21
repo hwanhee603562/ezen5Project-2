@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ㅈ<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -24,76 +24,38 @@
 				<div class="inputDeskBox prtImg">
 					<div class="deskInfo">제품이미지</div>
 					<div class="rightInputBox" >
-						<label class="input-file-button" for="uploadFile1">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile1" name="file" style="display: none">
+						<div class="labelBox">
+							<label class="input-file-button" for="uploadFile1">
+								
+								<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+								
+							</label>
+							<span> ※ 이미지는 최대 10개까지 등록할 수 있습니다 </span>
+						</div>
 						
-						<label class="input-file-button" for="uploadFile2" style="display: none">
+						<div>
 							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile2" name="file" style="display: none">
+							<input onchange="fileUpload(this, 1)" type="file" id="uploadFile1" name="file" style="display: none">
 						
-						<label class="input-file-button" for="uploadFile3" style="display: none">
+							<input onchange="fileUpload(this, 2)" type="file" id="uploadFile2" name="file" style="display: none">
+	
+							<input onchange="fileUpload(this, 3)" type="file" id="uploadFile3" name="file" style="display: none">
+	
+							<input onchange="fileUpload(this, 4)" type="file" id="uploadFile4" name="file" style="display: none">
+	
+							<input onchange="fileUpload(this, 5)" type="file" id="uploadFile5" name="file" style="display: none">
 							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+							<input onchange="fileUpload(this, 6)" type="file" id="uploadFile6" name="file" style="display: none">
+	
+							<input onchange="fileUpload(this, 7)" type="file" id="uploadFile7" name="file" style="display: none">
+	
+							<input onchange="fileUpload(this, 8)" type="file" id="uploadFile8" name="file" style="display: none">
 							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile3" name="file" style="display: none">
+							<input onchange="fileUpload(this, 9)" type="file" id="uploadFile9" name="file" style="display: none">
+							
+							<input onchange="fileUpload(this, 10)" type="file" id="uploadFile10" name="file" style="display: none">
 						
-						<label class="input-file-button" for="uploadFile4" style="display: none">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile4" name="file" style="display: none">
-						
-						<label class="input-file-button" for="uploadFile5" style="display: none">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile5" name="file" style="display: none">
-						
-						<label class="input-file-button" for="uploadFile6" style="display: none">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile6" name="file" style="display: none">
-						
-						<label class="input-file-button" for="uploadFile7" style="display: none">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile7" name="file" style="display: none">
-						
-						<label class="input-file-button" for="uploadFile8" style="display: none">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile8" name="file" style="display: none">
-						
-						<label class="input-file-button" for="uploadFile9" style="display: none">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile9" name="file" style="display: none">
-						
-						<label class="input-file-button" for="uploadFile10" style="display: none">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile10" name="file" style="display: none">
-						
+						</div>
 					</div>
 				</div>
 				

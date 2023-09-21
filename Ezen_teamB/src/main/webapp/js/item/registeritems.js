@@ -292,83 +292,98 @@ function brokerage(){
 
 /* ============================= 이미지 출력/삭제 */
 
-
-let fileList = []	// 파일을 저장할 배열 선언
-
-// 1 이미지 파일 업로드
-function fileUpload( mimg ){
+// 1-1 이미지 파일 업로드
+function fileUpload( mimg, idNum ){
 	
-	fileList.push( mimg );
-	
-
-	
-	// 1. form dom객체 호출
-	let registerForm = document.querySelectorAll('.registerForm')[0];
-	let formData = new FormData( registerForm );
-	
-
-	if( fileList.length >= 10 ){
-		alert('이미지는 최대 10개 까지 저장가능합니다')
-		return;
-	}
 
 	// 파일을 읽는 객체 생성
 	let fileReader = new FileReader();
 	// 파일의 정보 읽기
 	fileReader.readAsDataURL( mimg.files[0] );	
 	
-	
-	
 	// 이미지를 출력할 구역 생성
 	document.querySelector('.outputImg').innerHTML +=	`
-			<img class="img${fileList.length}" alt="" src=""/>
-			<button onclick="fileDelete(${fileList.length})" type="button">x</button>
+			<div class="outBoxFiled${idNum}">
+				<img class="img${idNum}" alt="" src=""/>
+				<button onclick="fileDelete(${idNum})" type="button">x</button>
+			</div>
 		` 
 		
 		//각 출력되는 이미지에 대한 식별자는 이미지를 담는 배열의 길이로 함
 
 	// 읽어온 파일을 불러옴
 	fileReader.onload = e => {
-		document.querySelector(`.img${fileList.length}`).src = e.target.result;	
+		document.querySelector(`.img${idNum}`).src = e.target.result;	
 	}
 	
+	
+	// 파일 라벨의 for 포인터 변경
+	let checkImg = false;
+		// 10개의 input 파일 타입에 파일 객체가 존재하는지 탐색
+	for( let i=1; i<=10; i++ ){
+		var fileCheck = document.getElementById(`uploadFile${i}`).value;
+		
+		// 파일객체가 존재하지 않는 경우
+			// 라벨이 가리키는 id식별자( =for )를 변경
+		if(!fileCheck){
+			document.querySelector('.labelBox').innerHTML = `
+					<label class="input-file-button" for="uploadFile${i}">
+											
+						<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+											
+					</label>
+				`;
+			checkImg = true;
+			break;
+		}
+	}
+	// 등록된 이미지 파일이 10개가 넘었을 경우 
+	// 이후 라벨을 클릭할 시 접근을 금지하기 위해
+	// 접근 금지 메서드 기능 삽입
+	if( !checkImg ){
+		document.querySelector('.labelBox').innerHTML = `
+				<label onclick='forbidden()' class="input-file-button"">
+										
+					<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+										
+				</label>
+			`;
+	}
+	
+	
+}
+// 1-2 등록된 이미지 파일이 10개가 넘었을 경우 라벨 클릭 금지
+function forbidden(){
+	alert('이미지는 최대 10개까지 등록할 수 있습니다')
 }
 
 // 2 선택된 이미지 파일 삭제
-function fileDelete( fileNum ){
+function fileDelete( idNum ){
 	
-	// 배열 fileList 에서 선택된 파일 삭제
-	fileList.splice( fileNum, 1 );
+	// 삭제할 파일 구역을 초기화
+	$(`#uploadFile${idNum}`).val('');
+	document.querySelector(`.outBoxFiled${idNum}`).innerHTML = ``
 	
-	// 파일 이미지 출력구역을 공백으로 초기화
-	document.querySelector('.outputImg').innerHTML = ``;
 	
-	console.log('확인시작')
-	console.log(fileList[0].files[0])
-	console.log(fileList[1].files[0])
-	console.log(fileList[2].files[0])
-	
-	// 배열 fileList 에 저장된 객체를 순차적으로 다시 출력
-	fileList.forEach( ( fileData, i ) => {
+	// 파일 라벨의 for 포인터 변경
+	for( let i=1; i<=10; i++ ){
+		var fileCheck = document.getElementById(`uploadFile${i}`).value;
 		
-		
-		// 파일을 읽는 객체 생성
-		let fileReader = new FileReader();
-		
-		// 파일의 정보 읽기
-		fileReader.readAsDataURL( fileData.files[0] );	
-		
-		document.querySelector('.outputImg').innerHTML +=	`
-			<img class="img${i}" alt="" src=""/>
-			<button onclick="fileDelete(${i})" type="button">x</button>
-		`
-			// 읽어온 파일을 불러옴
-		fileReader.onload = e => {
-			document.querySelector(`.img${i}`).src = e.target.result;	
+		// 파일객체가 존재하지 않는 경우
+			// 라벨이 가리키는 id식별자( =for )를 변경
+		if(!fileCheck){
+			document.querySelector('.labelBox').innerHTML = `
+					<label class="input-file-button" for="uploadFile${i}">
+											
+						<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+											
+					</label>
+				`;
+
+			break;
 		}
-		
-	})
-	
+	}
+
 }
 
 

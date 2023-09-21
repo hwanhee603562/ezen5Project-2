@@ -121,6 +121,9 @@ body {
 
 /* ----------- 각 입력 박스구역 end ---------- */
 
+.labelBox span{
+	margin-left: 30px; 
+}
 
 /* 이미지 첨부 입력버튼 */
 .input-file-button{
@@ -137,12 +140,16 @@ body {
 	border: 1px solid #e8e8e8;
 }
 /* 이미지 출력구역 */
+.outputImg{
+	display: flex;
+	flex-wrap: wrap;
+}
+
 .outputImg img{
 	width: 150px;
 	height: 150px;
 	margin: 5px 0px 5px 19px;
 }
-
 
 #uploadFile{
 	display: none;
