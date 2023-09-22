@@ -13,7 +13,7 @@
 	<div class="webcontainer"> <!-- 글쓰기 전체 구역  -->
 		
 		<div>
-			<h3> 글등록 페이지 </h3>
+			<h3> 글수정 페이지 </h3>
 		</div>
 		<div>
 		<form class="writeForm">
@@ -30,15 +30,6 @@
 			
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

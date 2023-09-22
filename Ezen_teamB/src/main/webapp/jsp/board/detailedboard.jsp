@@ -10,11 +10,11 @@
 <body>
 	<%@include file ="../header.jsp" %>
 	<div class="webcontainer"> <!-- 페이지 전체 구역 -->
-		<div></div>
-	
-	
-	
-	
+		<h3>상세페이지</h3>
+		<div class="boardBox">
+		
+		
+		</div>
 	</div>
 	
 	

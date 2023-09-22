@@ -1,7 +1,12 @@
 package contoller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,10 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.ItemDao;
 import model.dto.CategoryDto;
+import model.dto.ItemsInfo;
 import model.dto.MemberList;
 
 
@@ -53,19 +63,102 @@ public class ItemController extends HttpServlet {
 		
 	}
 
-	// 제품 입력하기
+	// 제품 등록하기
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		System.out.println("doPost 시작");
 		
 		/* 로그인 기능 구현 전 임시적으로 로그인 세션저장 */
 		MemberList loginDto = new MemberList( 12, "azz258" );
 		request.getSession().setAttribute("loginDto", loginDto);
+		/* ---------------------------------- */
 		
 		
+		/* ============ 파일 업로드 setting ============ */
+		
+		// 1. 저장경로 [ 첨부파일이 저장될 폴더 위치 ] 
+		String uploadPath = request.getServletContext().getRealPath("/item/img");
+		
+		// 2. 파일아이템저장소 객체 : 업로드할 옵션  [ import org.apache.commons.fileupload.FileItem; ]
+		DiskFileItemFactory itemFactory = new DiskFileItemFactory();
+		itemFactory.setRepository( new File( uploadPath ) );	//  2.저장위치 [ File타입 ] 
+		itemFactory.setSizeThreshold( 1024 * 1024 * 1024 ); 	//  3.용량
+		itemFactory.setDefaultCharset("UTF-8");					//  4.한글인코딩
+		 
+		/* =========================================== */
+			
+			
+		// 3. 파일 업로드 객체 [ import org.apache.commons.fileupload.servlet.ServletFileUpload; ] 
+		ServletFileUpload fileUpload = new ServletFileUpload( itemFactory );
+		 
+		// 입력받은 물품 등록 정보
 		int mno = ((MemberList)request.getSession().getAttribute("loginDto")).getMno();
+		int iprice = -1;			// 가격
+		String ititle = "";			// 제목
+		String icontent = "";		// 내용
+		int itrade = -1;			// 거래방식
+		String itradeplace = "";	// 거래장소
+		int eno = -1;				// 중개거래소 pk
+		int isafepayment = 0;		// 안전결제 사용여부 [ 안전결제 여부 미사용일시 form객체가 생성되지 않기에 기본값 '0'으로 설정 ]
+		int dno = -1;				// 소분류 카테고리 pk
+		String dlat = "";			// 대면거래 위도
+		String dlng = "";			// 대면거래 경도
+		
+		Map< Integer , String > imgList = new HashMap<>(); // 업로드된 파일명들을 저장하기 위한 map컬렉션
+		
+		try {
+			
+			List< FileItem > fileList = fileUpload.parseRequest( request );
+			
+			int i=0;
+			for( FileItem item : fileList ) {
+				
+				if(item.isFormField()) { // 일반 form객체일 경우
+					
+					switch( item.getFieldName() ) {
+						
+						case "iprice" 		: iprice = Integer.parseInt(item.getString()); break;
+						case "ititle" 		: ititle = item.getString(); break;
+						case "icontent" 	: icontent = item.getString(); break;
+						case "itrade" 		: itrade = Integer.parseInt(item.getString()); break;
+						case "itradeplace" 	: itradeplace = item.getString(); break;
+						case "eno" 			: eno = Integer.parseInt(item.getString()); break;
+						case "isafepayment" : isafepayment = 1; break;
+						case "dno" 			: dno = Integer.parseInt(item.getString()); break;
+						case "dlat" 		: dlat = item.getString(); break;
+						case "dlng" 		: dlng = item.getString(); break;
+						
+					}
+					
+				} else {	// 파일 객체일 경우
+					
+					UUID uuid = UUID.randomUUID();
+					String filename = uuid+"-"+item.getName().replaceAll("-", "_");
+					File fileUploadPath = new File( uploadPath +"/"+filename );
+					// .write("저장할경로/파일명포함") 파일 업로드할 경로를 file타입으로 제공 
+					item.write( fileUploadPath );
+					
+					// 업로드된 파일명을 Map에 저장
+					imgList.put( i++ , filename ); // 저장시에는 이미지번호가 필요 없음
+					
+				}
+				
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+			
 		
 		
-		
-	}
+	} 
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

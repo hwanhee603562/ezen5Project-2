@@ -49,6 +49,7 @@ function getSubCategory( uno, uname ){
 				subhtml += `<li> <button onclick="selectedCategory( ${category.dno}, '${category.dname}' )" type="button"> ${ category.dname } </button> </li>`;
 			});
 
+			// 선택된 카테고리를 출력
 			subUl.innerHTML = subhtml;
 			
 		},
@@ -59,11 +60,12 @@ function getSubCategory( uno, uname ){
 }
 
 // 3. 소분류 카테고리 선택 시 form 객체 생성
+	// form 객체 전송을 위해 dno 변수 저장
 function selectedCategory( dno, dname ){
 	
 	document.querySelector('.checkSub').innerHTML = `${dname}`;
 	document.querySelector('.dno').value = `${dno}`;
-	
+
 }
 
 
@@ -89,7 +91,7 @@ function delivery(){
 	faceToFaceCSS.backgroundColor = "#EFEFEF";
 	brokerageCSS.backgroundColor = "#EFEFEF";
 	 
-	 document.querySelector('.outputMapField').innerHTML = ``;
+	 document.getElementById("outputMapField").style.display = "none";
 	 itrade = 1;
 }
 
@@ -286,27 +288,23 @@ function brokerage(){
 
 
 
-
-
-
-
-
 /* ============================= 거래방식 end */
 
 
 
 /* ============================= 이미지 출력/삭제 */
 
+// input 타입 file 1~10출력구역
+for(let i=1; i<=10; i++){
+	document.querySelector('.inpuImgBox').innerHTML += `
+		<div class="hiddenBox${i}"><input onchange="fileUpload(this, ${i})" type="file" id="uploadFile${i}" name="file" style="display: none"></div>
+	`
+}
 
-let fileList = []	// 파일을 저장할 배열 선언
 
-// 1 이미지 파일 업로드
-function fileUpload( mimg ){
-
-	if( fileList.length >= 10 ){
-		alert('이미지는 최대 10개 까지 저장가능합니다')
-		return;
-	}
+// 1-1 이미지 파일 업로드
+function fileUpload( mimg, idNum ){
+	
 
 	// 파일을 읽는 객체 생성
 	let fileReader = new FileReader();
@@ -315,42 +313,87 @@ function fileUpload( mimg ){
 	
 	// 이미지를 출력할 구역 생성
 	document.querySelector('.outputImg').innerHTML +=	`
-			<img class="img${fileList.length}" alt="" src=""/>
-			<button onclick="fileDelete(${fileList.length})" type="button">x</button>
+			<div class="outBoxFiled${idNum}">
+				<img class="img${idNum}" alt="" src=""/>
+				<button onclick="fileDelete(${idNum})" type="button">x</button>
+			</div>
 		` 
 		
 		//각 출력되는 이미지에 대한 식별자는 이미지를 담는 배열의 길이로 함
 
 	// 읽어온 파일을 불러옴
 	fileReader.onload = e => {
-		document.querySelector(`.img${fileList.length}`).src = e.target.result;	
-		fileList.push( e.target.result );
+		document.querySelector(`.img${idNum}`).src = e.target.result;	
 	}
 	
-	console.log('fileList 확인')
-	console.log(fileList)
+	
+	// 파일 라벨의 for 포인터 변경
+	let checkImg = false;
+		// 10개의 input 파일 타입에 파일 객체가 존재하는지 탐색
+	for( let i=1; i<=10; i++ ){
+		var fileCheck = document.getElementById(`uploadFile${i}`).value;
+		
+		// 파일객체가 존재하지 않는 경우
+			// 라벨이 가리키는 id식별자( =for )를 변경
+		if(!fileCheck){
+			document.querySelector('.labelBox').innerHTML = `
+					<label class="input-file-button" for="uploadFile${i}">
+											
+						<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+											
+					</label>
+				`;
+			checkImg = true;
+			break;
+		}
+	}
+	// 등록된 이미지 파일이 10개가 넘었을 경우 
+	// 이후 라벨을 클릭할 시 접근을 금지하기 위해
+	// 접근 금지 메서드 기능 삽입
+	if( !checkImg ){
+		document.querySelector('.labelBox').innerHTML = `
+				<label onclick='forbidden()' class="input-file-button"">
+										
+					<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+										
+				</label>
+			`;
+	}
+	
+	
+}
+// 1-2 등록된 이미지 파일이 10개가 넘었을 경우 라벨 클릭 금지
+function forbidden(){
+	alert('이미지는 최대 10개까지 등록할 수 있습니다')
 }
 
 // 2 선택된 이미지 파일 삭제
-function fileDelete( fileNum ){
+function fileDelete( idNum ){
 	
-	// 배열 fileList 에서 선택된 파일 삭제
-	fileList.splice( fileNum, 1 );
+	// 삭제할 파일 구역을 초기화
+	$(`#uploadFile${idNum}`).val('');
+	document.querySelector(`.outBoxFiled${idNum}`).innerHTML = ``
 	
-	// 파일 이미지 출력구역을 공백으로 초기화
-	document.querySelector('.outputImg').innerHTML = ``;
 	
-	// 배열 fileList 에 저장된 객체를 순차적으로 다시 출력
-	fileList.forEach( ( fileData, i ) => {
-		
-		document.querySelector('.outputImg').innerHTML +=	`
-			<img class="img${i}" alt="" src=""/>
-			<button onclick="fileDelete(${i})" type="button">x</button>
-		`
-		
-		document.querySelector(`.img${i}`).src = fileData;	
-	})
-	
+	// 파일 라벨의 for 포인터 변경
+	for( let i=1; i<=10; i++ ){
+		var fileCheck = document.getElementById(`uploadFile${i}`).value;
+		console.log( fileCheck )
+		// 파일객체가 존재하지 않는 경우
+			// 라벨이 가리키는 id식별자( =for )를 변경
+		if(!fileCheck){
+			document.querySelector('.labelBox').innerHTML = `
+					<label class="input-file-button" for="uploadFile${i}">
+											
+						<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+											
+					</label>
+				`;
+
+			break;
+		}
+	}
+
 }
 
 
@@ -359,10 +402,113 @@ function fileDelete( fileNum ){
 
 function registerItems(){
 	
+	/* -------- 유효성 검사 -------- */
+	
+	// 각 입력 구역에 value 확인
+	let ptitle = document.querySelector('.ptilte').value	// 입력된 제목
+	let pcontent = document.querySelector('.pcontent').value	// 입력된 내용
+	let dno = document.querySelector('.dno').value			// 선택된 소분류 카테고리
+	let pprice = document.querySelector('.pprice').value	// 입력된 가격
+	
+	if( ptitle == '' || ptitle == null ){
+		alert('제목을 입력하여 주십시오')
+		return;
+	}
+	if( pcontent == '' || pcontent == null ){
+		alert('제품설명을 입력하여 주십시오')
+		return;
+	}
+	if( dno == '' || dno == null ){
+		alert('카테고리를 선택하여 주십시오')
+		return;
+	}
+	if( itrade < 1 || itrade > 3 ){
+		alert('거래방식을 선택하여 주십시오')
+		return;
+	}
+	if( pprice == '' || pprice==null ){
+		alert('가격을 입력하여 주십시오')
+		return;
+	}
+	
+	// 거래방식이 대면거래임에도 거래위치를 지정하지 않을 경우
+	if( itrade==2 && (dlat == '' || dlat == '' || itradeplace=='') ){
+		alert('대면거래는 거래위치를 지정하여야 합니다')
+		return;
+	}
+	
+	/* -------- 물품등록 전 form 데이터 setting -------- */
+	
+	// 10개의 인풋박스 중 파일이 첨부되어있지 않은 input 삭제 form데이터 초기화
+		// 해당 input박스의 부모요소(div)를 공백으로 초기화
+		
+	for( let i=1; i<=10; i++ ){
+		var fileCheck = document.getElementById(`uploadFile${i}`).value;
+		
+		if( !fileCheck ){
+			document.querySelector(`.hiddenBox${i}`).innerHTML = ``;
+		}
+	}
+	
 	// 1. form dom객체 호출
 	let registerForm = document.querySelectorAll('.registerForm')[0];
 	let formData = new FormData( registerForm );
 	
-	console.log(formData)
 	
+	// name식별자에 해당되지 않는 데이터를 폼데이터에 별도로 추가 
+	formData.set('itrade', itrade )				// 거래방식 : 1 배송, 2 대면거래, 3 중개거래
+
+	// 서블릿에서 doPost에서 기능 구분을 위해 타입 생성 후 폼데이터에 별도로 추가
+	let type = "registerItems"
+	formData.set('type', type )
+	
+	// 거래방식이 '대면거래'일 시 대면거래에 대한 위경도, 주소값 저장
+	if( itrade == 2 ){
+		formData.set('dlat', dlat)					// 대면거래 이용 시 위도 저장
+		formData.set('dlng ', dlng )				// 대면거래 이용 시 경도 저장
+		formData.set('itradeplace ', itradeplace )	// 대면거래 이용 시 주소값 저장
+	}
+
+	/* -------- ajax 통신 -------- */
+	
+	$.ajax({
+		url: "/Ezen_teamB/ItemController",
+		method: "post",
+		data: formData,
+		contentType: false,
+		processData: false,
+		success: result =>{
+			
+			console.log('등록성공')
+			
+		},
+		errror: e =>{
+			console.log('제품등록 에러발생')
+		}
+		
+		
+	})
+
 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

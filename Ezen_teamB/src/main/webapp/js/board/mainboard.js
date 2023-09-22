@@ -6,13 +6,15 @@ function onWriteBtn(){
 	
 	location.href="/Ezen_teamB/jsp/board/writeboard.jsp"
 }
-
 /* 게시물 조회 */
-let pageObject = { type : 1 , cno : 0 , listsize : 20 , page : 1 , key : '' , keyword : ''}
+let pageObject = { type : 1 , cno : 0 , listsize : 10 , page : 1 , key : '' , keyword : ''}
 
 // 검색
 function boardSearch(){
 	console.log('검색버튼')
+	pageObject.key = document.querySelector('.key').value
+	pageObject.keyword = document.querySelector('.keyword').value
+	getList(1)
 }
 // 카테고리 선택
 function onCategory(cno){
@@ -21,7 +23,11 @@ function onCategory(cno){
 	pageObject.key = ''; pageObject.keyword = '';
 	getList(1);
 }
-
+// 게시물 출력 수
+function onListSize(){
+	pageObject.listsize = document.querySelector('.listsize').value
+	getList(1)
+}
 
 // 모든 게시글 출력
 getList(1);
@@ -41,7 +47,6 @@ function getList(page){
 					<th> 번호 </th>
 					<th> 카테고리 </th>
 					<th> 제목 </th>
-					<th> 내용 </th>
 					<th> 작성자 </th>
 					<th> 작성일 </th>
 				</tr>
@@ -52,8 +57,7 @@ function getList(page){
 					<tr>
 						<td>${b.bno}</td>
 						<td>${b.cname}</td>
-						<td>${b.btitle}</td>
-						<td>${b.bcontent}</td>
+						<td><a href="/Ezen_teamB/jsp/board/detailedboard.jsp?bno=${b.bno}">${b.btitle} </a> </td>
 						<td>${b.mid}</td>
 						<td>${b.bdate}</td>
 					</tr>
@@ -70,7 +74,14 @@ function getList(page){
 				}
 				html +=`<button onclick="getList(${page >= pageDto.totalpage ? page : page+1})" type="button"> > </button>`
 			document.querySelector('.pagebox').innerHTML=html;
-		
+			
+			let boardcount = document.querySelector('.boardcount');
+			// 1. 검색이 있을때 
+			if(pageObject.key == '' && pageObject.keyword == ''){
+				boardcount.innerHTML = ` 총 게시물 수 : ${ pageDto.totalsize }`
+			}else {
+				boardcount.innerHTML = ` 검색된 게시물 수 : ${ pageDto.totalsize }`
+			}
 		
 		} ,
 		error : e => {console.log(e)}

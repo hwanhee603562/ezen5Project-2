@@ -33,7 +33,7 @@
 
 				<div><span class="signfont">이메일</span></div>
 				<input class="form-floating mb-1 px-3" onkeyup="emailCheck()" id="signEmail" name="signEmail" maxlength="30" oninput="maxlength(this)"  type="text" placeholder="이메일" >
-				<div class="idCheck px-2"></div><br/>		<!-- 이메일 양식 맞춰서 -->
+				<div class="emailCheck px-2"></div><br/>		<!-- 이메일 양식 맞춰서 -->
 								
 				<div><span class="signfont">주소</span></div>
 						<!-- 우편번호 찾기 -->

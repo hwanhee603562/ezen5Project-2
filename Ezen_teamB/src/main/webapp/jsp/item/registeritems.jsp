@@ -23,14 +23,16 @@
 				
 				<div class="inputDeskBox prtImg">
 					<div class="deskInfo">제품이미지</div>
-					<div class="rightInputBox">
-						<label class="input-file-button" for="uploadFile">
-							
-							<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
-							
-						</label>
-						<input onchange="fileUpload(this)" type="file" id="uploadFile" name="file"><br>	
-						<span> ※ 이미지는 최대 10개까지 저장가능합니다 </span>
+					<div class="rightInputBox" >
+						<div class="labelBox">
+							<label class="input-file-button" for="uploadFile1">
+								<img class="labelImg" src="/Ezen_teamB/jsp/item/img/uploadImgLogo.png"/>
+							</label>
+							<span> ※ 이미지는 최대 10개까지 등록할 수 있습니다 </span>
+						</div>
+						
+						<div class="inpuImgBox">
+						</div>
 					</div>
 				</div>
 				
@@ -49,7 +51,7 @@
 				<div class="inputDeskBox prtContent">
 					<div class="deskInfo">제품설명</div>
 					<div class="rightInputBox">
-						<textarea name="pcontent" rows="" cols=""></textarea><br>
+						<textarea name="pcontent" class="pcontent" rows="" cols=""></textarea><br>
 					</div>
 				</div>
 					
@@ -103,17 +105,15 @@
 					<div class="rightInputBox">
 						<input name="pprice" class="pprice" type="number"><br>
 					</div>
+					
+				</div>
+				<div class="safePayment prtPayCheck">
+					안전결제 사용여부  <div><input name="isafepayment" type="checkbox"></div>
 				</div>
 				
-
 				<!-- 거래방식 : 배송일 경우 출력x -->
 				<!-- 거래방식 : 대면거래일 경우 대면거래 장소 주소 api로 입력 후 해당 주소위치 맵에 출력 -->
 				<!-- 거래방식 : 중개거래일 경우 지도상 중개거래소 선택 -->
-							
-							
-				<div class="safePayment">
-					추후 기능 추가시 안전결제 진행
-				</div>
 
 			</div>	<!-- 물품정보 입력 박스 end -->
 			
