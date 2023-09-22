@@ -90,7 +90,7 @@ public class ItemController extends HttpServlet {
 		
 		// 3. 파일 업로드 객체 [ import org.apache.commons.fileupload.servlet.ServletFileUpload; ] 
 		ServletFileUpload fileUpload = new ServletFileUpload( itemFactory );
-		
+		 
 		// 입력받은 물품 등록 정보
 		int mno = ((MemberList)request.getSession().getAttribute("loginDto")).getMno();
 		int iprice = -1;			// 가격
@@ -158,7 +158,7 @@ public class ItemController extends HttpServlet {
 			
 		
 		
-	}
+	} 
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
