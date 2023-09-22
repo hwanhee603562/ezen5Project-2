@@ -68,7 +68,7 @@ public class BoardController extends HttpServlet {
 			int listsize = Integer.parseInt(request.getParameter("listsize")); // 출력할 게시물 최대 게시물수 
 			int page = Integer.parseInt(request.getParameter("page")); // 페이지
 			
-			int startrow = (page-1)*listsize; // 페이지번호*최대게시물수
+			int starrow = (page-1)*listsize; // 페이지번호*최대게시물수
 			
 			int totalsize = BoardDao.getInstance().getTotalSize(cno,key,keyword);
 			int totalpage = totalsize%listsize == 0 ? totalsize/listsize : totalsize/listsize+1;
@@ -77,7 +77,7 @@ public class BoardController extends HttpServlet {
 			int endbtn = starbtn+(btnsize-1);
 			if( endbtn >= totalpage ) endbtn = totalpage;
 			ArrayList<Board> result = BoardDao.getInstance().getList(cno, listsize, endbtn, key, keyword);
-			PageDto pageDto = new PageDto(page, listsize, btnsize, totalsize, totalpage, starbtn, endbtn, result);
+			PageDto pageDto = new PageDto(page, listsize,btnsize, totalsize, totalpage, starbtn, endbtn, result);
 			
 			json = objectMapper.writeValueAsString(pageDto);
 		}
