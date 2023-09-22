@@ -1,1 +1,14 @@
 @charset "UTF-8";
+.boardTop{
+	border: 1px solid red;
+}
+.boardTable{
+	border: 1px solid red;
+	width: 1200px;
+}
+.boardBottom{
+	border: 1px solid red;
+	display: flex;
+	justify-content: center;
+}
+

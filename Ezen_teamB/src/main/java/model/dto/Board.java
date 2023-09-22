@@ -64,11 +64,40 @@ public class Board {
 		this.mno = mno;
 		this.mid = mid;
 	}
-
+	// 게시물 개별 조회
+	public Board(int bno,  String btitle,String bcontent , String bfile,String bdate, int mno,int cno,String mid,   
+			String cname) {
+		super();
+		this.cno = cno;
+		this.cname = cname;
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bdate = bdate;
+		this.bfile = bfile;
+		this.mno = mno;
+		this.mid = mid;
+	}
+	// 게시물 수정 생성자
+	public Board(int cno, int bno, String btitle, String bcontent, String bfile) {
+		super();
+		this.cno = cno;
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+	}
+	
 
 	public int getCno() {
 		return cno;
 	}
+
+
+	
+
+
+	
 
 
 	public void setCno(int cno) {
