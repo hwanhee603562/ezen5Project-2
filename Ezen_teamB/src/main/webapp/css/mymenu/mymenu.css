@@ -201,6 +201,25 @@
 	color: red;
 }
 
+/* 찜목록 삭제 버튼 */
+.wdbtn{
+	font-size: 12px !important;
+}
+
+
+
+/* ----------------- 모달창 ---------------------- */
+
+.adressBox{
+	display: flex;
+	justify-content: space-between;
+}
+
+/* 우편번호 찾기 버튼 */
+.adrbtn{
+	height: 58px;
+    margin-right: 20px;
+}
 
 
 

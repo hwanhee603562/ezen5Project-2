@@ -58,7 +58,14 @@ public class MemberList {
 		this.mid = mid;
 	}
 	
-	
+	// 회원정보수정용 생성자
+	public MemberList(int mno, String memail, String mpwd) {
+		super();
+		this.mno = mno;
+		this.memail = memail;
+		this.mpwd = mpwd;
+	}
+
 	// get, set
 	public int getMno() {
 		return mno;

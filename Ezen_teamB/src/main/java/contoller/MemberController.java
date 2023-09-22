@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -46,7 +47,7 @@ public class MemberController extends HttpServlet {
     	System.out.println("이메일" +signEamil);
     	String signAddress = multi.getParameter("addr2");
     	String signAddress2 = multi.getParameter("addr3");
-    	signAddress= signAddress+""+signAddress2;
+    	signAddress= signAddress+" "+signAddress2;
     	System.out.println("주소" +signAddress);
     	String signId = multi.getParameter("signId");
     	System.out.println("아이디" +signId);
@@ -65,13 +66,42 @@ public class MemberController extends HttpServlet {
     }
     
     
-
+    // 회원정보를 불러오기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String type = request.getParameter("type");
+		
+		if(type.equals("1")) {
+			
+			int mno = Integer.parseInt(request.getParameter("mno"));
+			
+			MemberList result = MemberDao.getInstance().memberInfo(mno);
+			
+			System.out.println(result);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String json = mapper.writeValueAsString(result);
+			
+			response.setContentType("application/json;charset=UTF-8");
+			response.getWriter().print(json);
+		}
+		
 	}
 
+	// 회원정보 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		String meamil = request.getParameter("memail");
+		String madress = request.getParameter("adress1") + " "
+				+ request.getParameter("adress2");
+		String mpwd = request.getParameter("mpwd");
+		
+		boolean result = MemberDao.getInstance().updateInfo(mno, meamil, madress, mpwd);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
+		
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
