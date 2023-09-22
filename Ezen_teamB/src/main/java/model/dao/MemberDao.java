@@ -50,5 +50,53 @@ public class MemberDao extends Dao{
 	
 	
 	
+	// 회원정보 조회
+	public MemberList memberInfo(int mno) {
+		
+		try {
+			String sql = "select mno, memail, mpwd from memberlist where mno = " + mno;
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				MemberList member = new MemberList(
+						rs.getInt(1), rs.getString(2), rs.getString(3));
+				return member;
+			}
+			
+		} catch (Exception e) {System.out.println("회원정보 조회 오류 : " + e);}
+		return null;
+	}
 	
-}
+	// 회원정보 수정
+	public boolean updateInfo(int mno, String memail, String madress, String mpwd) {
+		
+		try {
+			String sql = "update memberlist set memail = ? , madress = ?, mpwd = ? where mno = " + mno;
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, memail);
+			ps.setString(2, madress);
+			ps.setString(3, mpwd);
+			int count = ps.executeUpdate();
+			if(count == 1) {
+				return true;
+			}
+			
+		} catch (Exception e) {System.out.println("회원정보 수정 오류 : " + e);}
+		
+		return false;
+	}
+	
+	
+}	// dao end
+
+
+
+
+
+
+
+
+
+
+
+
