@@ -19,7 +19,7 @@ public class ItemsInfo {
 	private int iestate;			// 거래상태( 0 판매중 1 판매완료 )
 	private int dno;				// 소분류번호 pk
 	private int isafepayment;		// 안전결제사용여부( 0 미사용 1 사용 )
-	private int keepstate;			// 중개거래소 물품 보관 여부
+	private int keepstate;			// 중개거래소 물품 보관 여부( 0 미보관 1 보관 )
 	private int uno;				// 대분류번호 pk
 	private String uname;			// 대분류 카테고리명
 	private String dname;			// 소분류 카테고리명
@@ -68,6 +68,9 @@ public class ItemsInfo {
 		this.imgList = imgList;
 	}
 
+	
+	
+	
 	// getter setter
 	public int getIno() {
 		return ino;

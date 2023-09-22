@@ -95,9 +95,13 @@ body {
 	padding-top: 30px;
 }
 .prtContent{
-	height: 200px;
+	height: 600px;
 	border-bottom: 1px solid #e8e8e8;
 	padding-top: 30px;
+}
+.prtContent textarea{
+	height: 530px;
+	resize: none;
 }
 .prtCategory{
 	height: 350px;
@@ -112,11 +116,16 @@ body {
 	padding-top: 30px;
 }
 .prtPrice{
-	height: 130px;
+	height: 70px;
 	border-top: 1px solid #e8e8e8;	
-	border-bottom: 1px solid #e8e8e8;
 	padding-top: 30px;
 	margin-top: 80px;
+}
+.prtPayCheck{
+	border-bottom: 1px solid #e8e8e8;
+	padding-left: 120px;
+	padding-bottom: 30px;
+
 }
 
 /* ----------- 각 입력 박스구역 end ---------- */
@@ -149,6 +158,7 @@ body {
 	width: 150px;
 	height: 150px;
 	margin: 5px 0px 5px 19px;
+	object-fit: contain;
 }
 
 #uploadFile{
@@ -272,6 +282,7 @@ body {
 
 
 .bottomBtn{
+	margin-top: 54px;
     margin-bottom: 200px;
     text-align: center;
     border: none;
@@ -301,17 +312,31 @@ body {
 
 
 
-
-
-
-
-
 /* 안전결제 메시지 스타일 */
 .safePayment {
     margin-top: 20px;
-    font-style: italic;
-    color: #777;
+    color: red;
+    font-weight: bold;
+	vertical-align: middle;
+	display: flex;
 }
+.safePayment div{
+	margin-left: 10px;
+}
+.safePayment input[type="checkbox"] {
+	zoom: 2.0;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
