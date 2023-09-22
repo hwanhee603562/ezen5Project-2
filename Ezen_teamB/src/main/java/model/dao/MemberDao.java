@@ -12,7 +12,7 @@ public class MemberDao extends Dao{
 		return memberDao;
 	}
 	private MemberDao() {}
-	
+		
 	
 	// 회원가입 함수
 	public boolean signup(MemberList dto) {
