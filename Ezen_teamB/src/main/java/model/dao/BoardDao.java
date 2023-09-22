@@ -52,7 +52,7 @@ public class BoardDao extends Dao{
 				if( cno != 0 ) sql+=" and ";
 				else sql += " where ";
 				
-				sql +=" "+key+" like '%"+ keyword+"%' ";
+				sql += " "+key+" like '%"+keyword+"%' ";
 			}
 			
 			sql += " order by b.bdate desc limit ? , ?";
@@ -71,10 +71,29 @@ public class BoardDao extends Dao{
 			}
 		} catch (Exception e) {System.out.println(e);}
 		return list;
-	}
+	}	
 	
 	// 개별 게시물 출력
+	public Board getBoard( int bno ) {
+		try {
+			String sql = "select b.* , m.mid , c.cname from board b natural join memberlist m natural join category c where b.bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bno);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				Board boardDto = new Board(
+						rs.getInt("bno"),
+						rs.getString("btitle") , rs.getString("bcontent") ,
+						rs.getString("bfile") , rs.getString("bdate"),
+						rs.getInt("mno"),rs.getInt("cno"),
+						rs.getString("mid") , rs.getString("cname")
 	
+						);
+			return boardDto;
+			}
+		} catch (Exception e) {System.out.println(e);}
+		return null;
+	}
 	
 	// 개별 게시물 등록
 	public boolean bwrite( Board boardDto ) {
@@ -92,7 +111,20 @@ public class BoardDao extends Dao{
 	}
 	
 	// 개별 게시물 수정
-	
+	public boolean bUpdate( Board dto ) {
+		try {
+			String sql = "update board set btitle = ? , bcontent = ? , cno = ? ,bfile = ? where bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getBtitle());
+			ps.setString(2, dto.getBtitle());
+			ps.setInt(3, dto.getCno());
+			ps.setString(4, dto.getBtitle());
+			ps.setInt(5, dto.getBno());
+			int count = ps.executeUpdate();
+			if( count == 1) return true;
+		} catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
 	// 개별 게시물 삭제
 	
