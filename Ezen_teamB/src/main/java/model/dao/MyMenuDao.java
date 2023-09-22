@@ -141,13 +141,41 @@ public class MyMenuDao extends Dao{
 		return null;
 	}
 	
+	// 제품 찜하기 등록(찜하기 상태가 아닐때=조건에 따른 레코드가 없을때)/취소(찜하기 상태가 아닐때/조건에 따른 레코드가 있을때)
+	public boolean setWish(int mno, int ino) {
+		
+		String sql = "";
+		
+		try {		
+			sql += getWish(mno, ino) ? 
+				"delete from watchitem where mno = ? and ino = ?" : 
+				"insert into watchitem values(?, ?)";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.setInt(2, ino);
+			int count = ps.executeUpdate();
+			if(count == 1) {return true;}
+			
+		} catch (Exception e) {System.out.println(e);}	
+		return false;	
+	}
 	
-	// 개인정보변경
 	
-	
-	// 회원탈퇴
-	
-	
+	// 제품 찜하기 상태 출력
+	public boolean getWish(int mno , int ino) {
+		try {
+			String sql = "select*from watchitem where mno = ? and ino = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.setInt(2, ino);
+			rs = ps.executeQuery();
+			if(rs.next()) {return true;}
+			
+		} catch (Exception e) {System.out.println(e);}
+		return false;
+	}
+
 	
 	
 	

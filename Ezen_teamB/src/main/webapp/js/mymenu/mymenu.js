@@ -68,8 +68,10 @@ function infoPrint(){console.log('회원정보 출력 함수')
 						<div class="address"> 주소 ${r.madress}</div>
 						<div class="email"> 이메일 ${r.memail}</div>
 					</div>
-					<button onclick="updateModal()" class="btn btn-outline-dark btn-sm updateBtn"
+					<button onclick="updateModal()" class="btn btn-outline-info btn-sm updateBtn"
 					data-bs-toggle="modal" data-bs-target="#exampleModal">정보수정</button>
+					<button onclick="deleteModal()" class="btn btn-outline-danger btn-sm deleteBtn"
+					data-bs-toggle="modal" data-bs-target="#exampleModal2">회원탈퇴</button>
 				`
 				
 				
@@ -196,7 +198,7 @@ function transHistory(){console.log('거래내역 리스트')
 						      <td>${p.itrade}</td>
 						      <td>${p.uname}/${p.dname}</td>
 						      <td>${p.idate}</td>
-						      <td><div class="saleComplete">판매완료<div></td>
+						      <td><div class="saleComplete">거래완료<div></td>
 						    </tr>
 					   `
 					   
@@ -342,10 +344,14 @@ function deleteWishList(ino){console.log('찜목록 삭제함수')
 	let mno = 2;
 	
 	$.ajax({ 
-	       url : "/Ezen_teamB/MemberController",
-	       data : {type : "1", ino: ino, mno: mno},         // 보내는 데이터
-	       method : "get",
-	       success : r =>{console.log('통신성공');
+	       url : "/Ezen_teamB//MyMenuController",
+	       data : {ino: ino, mno: mno},         // 보내는 데이터
+	       method : "delete",
+	       success : r =>{console.log(r);
+	       		if(r){
+					   console.log('찜목록 삭제')
+					   PrintWishList();
+				}else{console.log('찜목록 삭제 실패')}
 	       		
 	       },
 	       error: e => {console.log(e)}

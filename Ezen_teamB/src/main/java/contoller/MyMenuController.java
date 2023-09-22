@@ -79,7 +79,15 @@ public class MyMenuController extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		int ino = Integer.parseInt(request.getParameter("ino"));
+		
+		boolean result = MyMenuDao.getInstance().setWish(mno, ino);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
+		
 	}
 
 }
