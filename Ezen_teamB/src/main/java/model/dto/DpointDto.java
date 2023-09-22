@@ -23,7 +23,14 @@ public class DpointDto {
 		this.ino = ino;
 	}
 	
-	
+	// 물품 등록시 사용되는 생성자
+	public DpointDto(String itradeplace, String dlat, String dlng) {
+		super();
+		this.itradeplace = itradeplace;
+		this.dlat = dlat;
+		this.dlng = dlng;
+	}
+
 	// getter setter
 	public int getDno() {
 		return dno;

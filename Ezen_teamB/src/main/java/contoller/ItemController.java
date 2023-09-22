@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.ItemDao;
 import model.dto.CategoryDto;
+import model.dto.DpointDto;
 import model.dto.ItemsInfo;
 import model.dto.MemberList;
 
@@ -96,7 +97,7 @@ public class ItemController extends HttpServlet {
 		int iprice = -1;			// 가격
 		String ititle = "";			// 제목
 		String icontent = "";		// 내용
-		int itrade = -1;			// 거래방식
+		int itrade = -1;			// 거래방식	( 1 배송, 2 대면거래, 3 중개거래 )
 		String itradeplace = "";	// 거래장소
 		int eno = -1;				// 중개거래소 pk
 		int isafepayment = 0;		// 안전결제 사용여부 [ 안전결제 여부 미사용일시 form객체가 생성되지 않기에 기본값 '0'으로 설정 ]
@@ -142,12 +143,34 @@ public class ItemController extends HttpServlet {
 					imgList.put( i++ , filename ); // 저장시에는 이미지번호가 필요 없음
 					
 				}
-				
-				
-				
-				
 			}
 			
+			// 거래방식에 따라 별도 데이터 처리
+			switch( itrade ) {
+				case 1: 
+					
+					break;
+				case 2:		// 대면거래
+					
+					// 물품정보 생성자
+					ItemsInfo itemsInfo = new ItemsInfo(
+						iprice, mno, ititle, icontent, itrade, dno, isafepayment, imgList
+					);
+					// 대면거래 장소 생성자
+					DpointDto dpointDto = new DpointDto( itradeplace, dlat, dlng );
+					
+					
+					
+					break;
+			}
+			
+			
+			// 물품정보 생성자
+			ItemsInfo itemsInfo = new ItemsInfo(
+				iprice, mno, ititle, icontent, itrade, eno, dno, isafepayment, imgList
+			);
+			// 대면거래시 장소 생성자
+			DpointDto dpointDto = new DpointDto( itradeplace, dlat, dlng );
 			
 			
 			

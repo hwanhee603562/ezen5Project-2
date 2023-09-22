@@ -3,6 +3,7 @@ package model.dao;
 import java.util.ArrayList;
 
 import model.dto.CategoryDto;
+import model.dto.DpointDto;
 import model.dto.ItemsInfo;
 
 // 판매물품 클래스
@@ -16,7 +17,26 @@ public class ItemDao extends Dao {
 	
 	
 	// 1 판매물품등록
-	
+		// 1-1 대면거래 물품 저장
+	public boolean uploadItem( ItemsInfo itemsInfo, DpointDto dpointDto ) {
+		
+		try {
+			// 물품저장
+			String sql = "insert into itemsinfo"
+					+ "(iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			
+			// 대면거래 위치정보 저장
+			
+			// 대면거래 이미지 저장 
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
 	
 	
 	// 2 판매물품조회
