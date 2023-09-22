@@ -9,26 +9,24 @@ function maxlength(object){
 
 // 아이디 유효성 검사
 function idcheck(){
-	console.log('아이디 체크 함수')
 	
 	// 입력한 id 값 호출
 	let signId = document.getElementById('signId').value;
-	console.log(signId)
 	
 	// 아이디 유효성 검사 출력 구역 
 	let idcheck = document.querySelector('.idCheck');	
 	
 	// 아이디 유효성 검사 / 영문 소,숫자 필수 // 최소5~20글자 까지
 	let idregular = /^(?=.*[a-z])(?=.*\d)[a-z\d]{5,20}$/
-	console.log(idregular.test(signId));
 	
 	if(idregular.test(signId)){		
 		
 		$.ajax({
 			
-			url : "/Ezen_teamB/MemberController",
+			url : "/Ezen_teamB/MemberFindController",
 			method : "get",
-			data : {dape : "signId" , data : signId},
+			async:false,
+			data : {type : "mid" , data : signId},
 			success : result => {
 				if(result){idcheck.innerHTML = `<span style="color:red; font-size:12px;">사용중인 아이디 입니다</span>`}
 				else{idcheck.innerHTML = `<span style="color:blue; font-size:12px;">사용 가능한 아이이디 입니다</span>`}
@@ -46,15 +44,10 @@ function idcheck(){
 function signPwdTest(){
 	let signPwd = document.getElementById('signPwd').value;
 	let signPwdCheck = document.getElementById('signPwdCheck').value;
-	
-	
-	console.log(signPwd)
-	console.log(signPwdCheck)
+
 	//비밀번호 정규식 표현
 	let pwregular = /^(?=.*[a-z])(?=.*\d)[a-z\d]{8,20}$/
-	console.log(pwregular.test(signPwdCheck))
-	console.log(pwregular.test(signPwdCheck))
-	
+
 	
 	if(pwregular.test(signPwd)){//정규식 표현이 정상 이라면
 		document.querySelector('.signPwdCheck1').innerHTML=`<span style="color:blue; font-size:12px;">사용 가능한 비밀번호</span>`;
@@ -82,16 +75,16 @@ function emailCheck(){
 	// 이메일 정보 호출
 	let signEmail = document.getElementById('signEmail').value;
 	//출력 구역
-	let idCheck = document.querySelector('.idCheck')
+	let emailCheck = document.querySelector('.emailCheck')
 
 	let emailregular = /^[a-zA-Z\d_-]+@[a-zA-Z\d_-]+\.[a-zA-Z]+$/
 	
 	if(signEmail==""){//이메일 공란이면 알림창 비우기
-		idCheck.innerHTML=``;
+		emailCheck.innerHTML=``;
 	}else if(emailregular.test(signEmail)){//정규표현식 정상일때
-		idCheck.innerHTML=`<span style="color:blue; font-size:12px;">이메일 사용가능</span>`
+		emailCheck.innerHTML=`<span style="color:blue; font-size:12px;">이메일 사용가능</span>`
 	}else{//정규표현식 비정상일때
-		idCheck.innerHTML=`<span style="color:red; font-size:12px;">이메일 사용불가</span>`
+		emailCheck.innerHTML=`<span style="color:red; font-size:12px;">이메일 사용불가</span>`
 	}
 	
 	
@@ -162,7 +155,7 @@ function signup(){
 	let signupform = document.querySelectorAll('.signupform')[0];
 	// 폼 데이터화
 	let signupData = new FormData(signupform);
-	console.log(signupData)
+
 	
 	$.ajax({
 		

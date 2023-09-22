@@ -65,6 +65,12 @@ public class MemberList {
 		this.memail = memail;
 		this.mpwd = mpwd;
 	}
+	
+	// 로그인 mno 가져오기
+	public MemberList(int mno) {
+		super();
+		this.mno = mno;
+	}
 
 	// get, set
 	public int getMno() {
