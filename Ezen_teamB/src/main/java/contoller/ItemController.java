@@ -86,7 +86,7 @@ public class ItemController extends HttpServlet {
 		itemFactory.setDefaultCharset("UTF-8");					//  4.한글인코딩
 		 
 		/* =========================================== */
-		
+			
 		
 		// 3. 파일 업로드 객체 [ import org.apache.commons.fileupload.servlet.ServletFileUpload; ] 
 		ServletFileUpload fileUpload = new ServletFileUpload( itemFactory );
