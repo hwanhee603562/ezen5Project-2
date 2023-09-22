@@ -87,7 +87,7 @@ public class ItemController extends HttpServlet {
 		 
 		/* =========================================== */
 			
-		
+			
 		// 3. 파일 업로드 객체 [ import org.apache.commons.fileupload.servlet.ServletFileUpload; ] 
 		ServletFileUpload fileUpload = new ServletFileUpload( itemFactory );
 		 
