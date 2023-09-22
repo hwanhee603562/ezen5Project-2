@@ -58,7 +58,12 @@ public class MemberList {
 		this.mid = mid;
 	}
 	
-	
+	// 로그인 mno 가져오기
+	public MemberList(int mno) {
+		super();
+		this.mno = mno;
+	}
+
 	// get, set
 	public int getMno() {
 		return mno;

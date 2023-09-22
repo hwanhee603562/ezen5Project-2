@@ -14,7 +14,7 @@ public class MemberDao extends Dao{
 	private MemberDao() {}
 	
 	
-	// 회원가입
+	// 회원가입 함수
 	public boolean signup(MemberList dto) {
 		
 		try {
@@ -38,17 +38,75 @@ public class MemberDao extends Dao{
 				return true;
 			}return false;
 			
-		} catch (Exception e) {System.out.println("회원가입 Dao 오류 : " + e);}
-		
+		} catch (Exception e) {System.out.println("signup Dao 오류 : " + e);}
 		return false;
 	}
 	
 	
 	
-	// 로그인
+	// 아이디 중복검사 함수
+	public boolean findId(String type , String signId) {	
 
+		try {
+			
+			String sql="select * from memberlist where "+type+" = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, signId);
+			
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {return true;}
+			
+		} catch (Exception e) {System.out.println("findId Dao 오류 : " + e);}
+		return false;
+	}//findId
+	
+	
+	// 로그인 함수
+	
+	public boolean login(String mid , String mpwd) {
+		
+		try {
+			
+			String sql = "";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sql);
+			ps.setString(2, sql);
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {return true;}
+			
+			
+		} catch (Exception e) {System.out.println("findId Dao 오류 : " + e);}
+		
+		return false;
+		
+	}//login
+	
+	
+	// 로그인 정보 호출
+	
+	public  MemberList info(String mid) {
+		
+		try {
+			
+			String sql = "select mno from memberlist where mid = ?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, mid);
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				MemberList memberList = new MemberList(rs.getInt(1));
+				return memberList;
+			}			
+		} catch (Exception e) {System.out.println("findId Dao 오류 : " + e);}
+			return null;
+	}
 	
 	
 	
 	
-}
+	
+}//class
