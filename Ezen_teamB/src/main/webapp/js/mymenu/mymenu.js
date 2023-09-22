@@ -261,7 +261,7 @@ function PrintWishList(){console.log('찜목록 리스트')
 						      <td>${p.itrade}</td>
 						      <td>${p.uname}/${p.dname}</td>
 						      <td><div class="saleContinue">판매중<div></td>
-						      <td><button onclick="deleteWishList()" class="btn btn-danger wdbtn" type="button">삭제</button></td>
+						      <td><button onclick="deleteWishList(${p.ino})" class="btn btn-danger wdbtn" type="button">삭제</button></td>
 						    </tr>
 					   `
 					   
@@ -337,24 +337,18 @@ function updateInfo(){
 
 
 // 찜목록 삭제함수
-function deleteWishList(){console.log('찜목록 삭제함수')
+function deleteWishList(ino){console.log('찜목록 삭제함수')
 
 	let mno = 2;
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB/MemberController",
-	       data : {type: '1' , mno: mno},         // 보내는 데이터
+	       data : {type : "1", ino: ino, mno: mno},         // 보내는 데이터
 	       method : "get",
-	       success : r =>{console.log(r);
+	       success : r =>{console.log('통신성공');
 	       		
-	       		let emailInput = document.querySelector('.emailInput');
-	       		let pwd = document.querySelector('.pwd');
-	       		let pwdCk = document.querySelector('.pwdCk')
-	       		emailInput.value = `${r.memail}`
-	       		pwd.value = `	${r.mpwd}`
-	       		pwdCk.value = `${r.mpwd}`
-	       		
-	       }
+	       },
+	       error: e => {console.log(e)}
 	});
 
 }
