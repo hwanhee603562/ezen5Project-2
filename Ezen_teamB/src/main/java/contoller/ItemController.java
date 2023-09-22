@@ -84,7 +84,7 @@ public class ItemController extends HttpServlet {
 		itemFactory.setRepository( new File( uploadPath ) );	//  2.저장위치 [ File타입 ] 
 		itemFactory.setSizeThreshold( 1024 * 1024 * 1024 ); 	//  3.용량
 		itemFactory.setDefaultCharset("UTF-8");					//  4.한글인코딩
-		
+		 
 		/* =========================================== */
 		
 		
