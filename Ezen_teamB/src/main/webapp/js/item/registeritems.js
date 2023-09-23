@@ -91,8 +91,15 @@ function delivery(){
 	faceToFaceCSS.backgroundColor = "#EFEFEF";
 	brokerageCSS.backgroundColor = "#EFEFEF";
 	 
-	 document.getElementById("outputMapField").style.display = "none";
-	 itrade = 1;
+	// 거래방식이 변경될때마다 대면거래 위치정보 초기화
+	dlat = '';
+	dlng = '';
+	itradeplace = '';
+	 
+	document.getElementById("outputMapField").style.display = "none";
+	document.getElementById("outputMapField2").style.display = "none";
+	
+	itrade = 1;
 }
 
 
@@ -115,9 +122,14 @@ function faceToFace(){
 	faceToFaceCSS.backgroundColor = "#6AAFE6";
 	brokerageCSS.backgroundColor = "#EFEFEF";
 	
+	// 거래방식이 변경될때마다 대면거래 위치정보 초기화
+	dlat = '';
+	dlng = '';
+	itradeplace = '';
+	
 	document.getElementById("outputMapField").style.display = "block";
 	//document.getElementsByClassName("outputMapField")[0].style.display = "block";
-	
+	document.getElementById("outputMapField2").style.display = "none";
 	
 	itrade = 2;
 	
@@ -280,11 +292,79 @@ function brokerage(){
 	faceToFaceCSS.backgroundColor = "#EFEFEF";
 	brokerageCSS.backgroundColor = "#6AAFE6";
 	
-	document.getElementById("outputMapField").style.display = "block";
+	// 거래방식이 변경될때마다 대면거래 위치정보 초기화
+	dlat = '';
+	dlng = '';
+	itradeplace = '';
+	
+	document.getElementById("outputMapField").style.display = "none";
+	document.getElementById("outputMapField2").style.display = "block";
 	
 	itrade = 3;
+
 	
-}	// 거래방식 - 대면거래 방식 클릭하였을 때 end
+}	
+
+var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
+mapOption2 = {
+	center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	level: 3 // 지도의 확대 레벨
+};
+
+
+// 지도를 생성합니다    
+var map2 = new kakao.maps.Map(mapContainer2, mapOption2);
+
+
+
+
+function sample5_execDaumPostcode2() {
+	new daum.Postcode({
+		oncomplete: function(data) {
+			var addr = data.address; // 최종 주소 변수
+
+
+			// 주소 정보를 해당 필드에 넣는다.
+			document.getElementById("sample5_address").value = addr;
+			// 주소로 상세 정보를 검색
+			geocoder2.addressSearch(data.address, function(results, status) {
+				// 정상적으로 검색이 완료됐으면
+				if (status === daum.maps.services.Status.OK) {
+
+					var result = results[0]; //첫번째 결과의 값을 활용
+					
+					// 주소 저장
+					itradeplace = result.address_name
+					document.querySelector('.selectedAddress span').innerHTML = `${itradeplace}`;
+
+
+					
+					// 해당 주소에 대한 좌표를 받아서
+					var coords = new daum.maps.LatLng(result.y, result.x);
+					
+					
+					// 지도를 보여준다.
+					mapContainer.style.display = "block";
+					map.relayout();
+					// 지도 중심을 변경한다.
+					map.setCenter(coords);
+
+				}
+			});
+		}
+	}).open();
+}
+
+
+
+
+
+
+// 거래방식 - 대면거래 방식 클릭하였을 때 end
+
+
+
+
 
 
 
@@ -407,16 +487,16 @@ function registerItems(){
 	/* -------- 유효성 검사 -------- */
 	
 	// 각 입력 구역에 value 확인
-	let ptitle = document.querySelector('.ptilte').value	// 입력된 제목
-	let pcontent = document.querySelector('.pcontent').value	// 입력된 내용
+	let ititle = document.querySelector('.ititle').value	// 입력된 제목
+	let icontent = document.querySelector('.icontent').value	// 입력된 내용
 	let dno = document.querySelector('.dno').value			// 선택된 소분류 카테고리
-	let pprice = document.querySelector('.pprice').value	// 입력된 가격
+	let iprice = document.querySelector('.iprice').value	// 입력된 가격
 	
-	if( ptitle == '' || ptitle == null ){
+	if( ititle == '' || ititle == null ){
 		alert('제목을 입력하여 주십시오')
 		return;
 	}
-	if( pcontent == '' || pcontent == null ){
+	if( icontent == '' || icontent == null ){
 		alert('제품설명을 입력하여 주십시오')
 		return;
 	}
@@ -428,7 +508,7 @@ function registerItems(){
 		alert('거래방식을 선택하여 주십시오')
 		return;
 	}
-	if( pprice == '' || pprice==null ){
+	if( iprice == '' || iprice==null ){
 		alert('가격을 입력하여 주십시오')
 		return;
 	}

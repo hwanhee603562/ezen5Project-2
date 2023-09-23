@@ -1,7 +1,7 @@
 package model.dao;
 
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import model.dto.CategoryDto;
 import model.dto.DpointDto;
@@ -18,16 +18,16 @@ public class ItemDao extends Dao {
 	
 	
 	// 1 판매물품등록
-		// 1-1 대면거래 물품 저장
 	public boolean uploadItem( ItemsInfo itemsInfo, DpointDto dpointDto ) {
 		
 		try {
 			// 물품저장
 			String sql = "insert into itemsinfo"
 					+ "(iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?);";
 			
-			ps = conn.prepareStatement(sql);
+			// DB에 저장된 autoIncreament 값을 찾기 위해 ps에 'Statement.RETURN_GENERATED_KEYS' 추가
+			ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			// 1 대면거래 위치정보 저장
 			ps.setInt( 1, itemsInfo.getIprice() );
@@ -61,13 +61,21 @@ public class ItemDao extends Dao {
 				}
 			}
 			
-			// 3 대면거래 위경도 저장
-			sql = "insert into dpoint(dlat, dlng, ino) values(?, ?, ?)";
-			ps = conn.prepareStatement(sql);
+			if( itemsInfo.getItrade() == 2 ) {
+				
+				// 3 대면거래 시 위경도 저장
+				sql = "insert into dpoint(dlat, dlng, ino) values(?, ?, ?)";
+				ps = conn.prepareStatement(sql);
+				
+				ps.setString( 1, dpointDto.getDlat() );
+				ps.setString( 2, dpointDto.getDlng() );
+				ps.setInt( 3, itemsInfo.getIno() );
+				
+				ps.executeUpdate();
+				
+			}
 			
-			ps.setString( 1, dpointDto.getDlat() );
-			ps.setString( 2, dpointDto.getDlng() );
-			ps.setInt( 3, itemsInfo.getIno() );
+			
 			
 			return true;
 			
@@ -77,6 +85,17 @@ public class ItemDao extends Dao {
 		
 		return false;
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// 2 판매물품조회

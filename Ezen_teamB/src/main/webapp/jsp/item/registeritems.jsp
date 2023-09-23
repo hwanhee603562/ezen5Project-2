@@ -43,7 +43,7 @@
 				<div class="inputDeskBox prtTitle">
 					<div class="deskInfo">제목</div>
 					<div class="rightInputBox">
-						<input name="ptitle" class="ptilte" type="text"><br>
+						<input name="ititle" class="ititle" type="text"><br>
 					</div>
 				</div>
 				 
@@ -51,7 +51,7 @@
 				<div class="inputDeskBox prtContent">
 					<div class="deskInfo">제품설명</div>
 					<div class="rightInputBox">
-						<textarea name="pcontent" class="pcontent" rows="" cols=""></textarea><br>
+						<textarea name="icontent" class="icontent" rows="" cols=""></textarea><br>
 					</div>
 				</div>
 					
@@ -88,11 +88,13 @@
 					</div>
 				</div>
 				 
-				<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->
-				<!-- 거래방식 - 중개거래일 시 지도출력하여 중개거래소 선택 -->
+				 <!-- 대면거래 지도 출력 구역 -->
+					<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->
 				<div id="outputMapField" style="display: none;"><!-- 지도 출력되는 구역 -->
 					<input type="text" id="sample5_address" placeholder="주소">
 					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+					
+					<!-- 대면거래 이용 map -->
 					<div id="map" style="width:100%;height:350px;"></div>
 					<div id="clickLatlng"> ※ 행정안전부에서 업데이트되지 않은 도로명주소는 지번주소로 대체됩니다 </div>
 					<div class="selectedAddress">
@@ -100,10 +102,23 @@
 					</div>
 				</div>
 				
+				<!-- 중개거래소 지도 출력 구역 -->
+				<!-- 거래방식 - 중개거래일 시 지도출력하여 중개거래소 선택 -->
+				<div id="outputMapField2" style="display: none;"><!-- 지도 출력되는 구역 -->
+					<input type="text" id="sample5_address" placeholder="주소">
+					<input type="button" onclick="sample5_execDaumPostcode2()" value="주소 검색"><br>
+					
+					<!-- 대면거래 이용 map -->
+					<div id="map2" style="width:100%;height:350px;"></div>
+					<div class="selectedAddress2">
+						선택한 중개거래소 : <span>  </span>
+					</div>
+				</div>
+				
 				<div class="inputDeskBox prtPrice">
 					<div class="deskInfo">판매가격</div>
 					<div class="rightInputBox">
-						<input name="pprice" class="pprice" type="number"><br>
+						<input name="iprice" class="iprice" type="number"><br>
 					</div>
 					
 				</div>
@@ -124,7 +139,7 @@
 	</div>
 	
 	<!-- 카카오지도 api -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51f4ebd6d93bf1f15d0f4ba2809fea5&libraries=services""></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51f4ebd6d93bf1f15d0f4ba2809fea5&libraries=services"></script>
 	
 	<!-- 카카오 우편번호 서비스 api -->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -78,7 +78,7 @@ public class ItemController extends HttpServlet {
 		/* ============ 파일 업로드 setting ============ */
 		
 		// 1. 저장경로 [ 첨부파일이 저장될 폴더 위치 ] 
-		String uploadPath = request.getServletContext().getRealPath("/item/img");
+		String uploadPath = request.getServletContext().getRealPath("/jsp/item/img");
 		
 		// 2. 파일아이템저장소 객체 : 업로드할 옵션  [ import org.apache.commons.fileupload.FileItem; ]
 		DiskFileItemFactory itemFactory = new DiskFileItemFactory();
@@ -114,7 +114,7 @@ public class ItemController extends HttpServlet {
 			
 			int i=0;	// imgList에 key값으로 활용 ( 증감 연산 )
 			for( FileItem item : fileList ) {
-				
+
 				if( item.isFormField() ) { // 일반 form객체일 경우
 					
 					switch( item.getFieldName() ) {
@@ -133,16 +133,18 @@ public class ItemController extends HttpServlet {
 					}
 					
 				} else {	// 파일 객체일 경우
-					
+										
 					UUID uuid = UUID.randomUUID();
 					String filename = uuid+"-"+item.getName().replaceAll("-", "_");
+
 					File fileUploadPath = new File( uploadPath +"/"+filename );
+
 					// .write("저장할경로/파일명포함") 파일 업로드할 경로를 file타입으로 제공 
 					item.write( fileUploadPath );
-					
+
 					// 업로드된 파일명을 Map에 저장
 					imgList.put( i++ , filename ); // 저장시에는 이미지번호가 필요 없음
-					
+
 				}
 			}
 		} catch (Exception e) {
@@ -154,29 +156,19 @@ public class ItemController extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		boolean result = false;
 		
-		switch( itrade ) {
-			case 1: 	// 거래방식 : 배송
-				
-				break;
-			case 2:		// 거래방식 : 대면거래
-				
-				// 물품정보 생성자
-				ItemsInfo itemsInfo = new ItemsInfo(
-					ino, iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment, imgList
-				);
-				// 대면거래 위치 생성자
-				DpointDto dpointDto = new DpointDto( dlat, dlng );
-				
-				// Dao 전달
-				result = ItemDao.getInstance().uploadItem( itemsInfo, dpointDto );
-				
-				break;
-				
-				
-			case 3: 	// 거래방식 : 배송
-				
-				break;
+		// 물품정보 생성자
+		ItemsInfo itemsInfo = new ItemsInfo(
+			ino, iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment, imgList
+		);
+		
+		// 거래방식이 대면거래일 경우 대면거래 위치생성자 매개값으로 전달
+		if( itrade == 2 ) {
+			DpointDto dpointDto = new DpointDto( dlat, dlng );
+			result = ItemDao.getInstance().uploadItem( itemsInfo, dpointDto );
+		} else {
+			result = ItemDao.getInstance().uploadItem( itemsInfo, null );
 		}
+		
 		
 		json = mapper.writeValueAsString(result);
 		
