@@ -93,6 +93,7 @@ public class ItemController extends HttpServlet {
 		ServletFileUpload fileUpload = new ServletFileUpload( itemFactory );
 		 
 		// 입력받은 물품 등록 정보
+		int ino = -1;				// 판매물품번호 pk	( dao에서 대면거래 장소를 DB에 저장하기 위해 필요 )
 		int mno = ((MemberList)request.getSession().getAttribute("loginDto")).getMno();
 		int iprice = -1;			// 가격
 		String ititle = "";			// 제목
@@ -111,10 +112,10 @@ public class ItemController extends HttpServlet {
 			
 			List< FileItem > fileList = fileUpload.parseRequest( request );
 			
-			int i=0;
+			int i=0;	// imgList에 key값으로 활용 ( 증감 연산 )
 			for( FileItem item : fileList ) {
 				
-				if(item.isFormField()) { // 일반 form객체일 경우
+				if( item.isFormField() ) { // 일반 form객체일 경우
 					
 					switch( item.getFieldName() ) {
 						
@@ -144,42 +145,43 @@ public class ItemController extends HttpServlet {
 					
 				}
 			}
-			
-			// 거래방식에 따라 별도 데이터 처리
-			switch( itrade ) {
-				case 1: 
-					
-					break;
-				case 2:		// 대면거래
-					
-					// 물품정보 생성자
-					ItemsInfo itemsInfo = new ItemsInfo(
-						iprice, mno, ititle, icontent, itrade, dno, isafepayment, imgList
-					);
-					// 대면거래 장소 생성자
-					DpointDto dpointDto = new DpointDto( itradeplace, dlat, dlng );
-					
-					
-					
-					break;
-			}
-			
-			
-			// 물품정보 생성자
-			ItemsInfo itemsInfo = new ItemsInfo(
-				iprice, mno, ititle, icontent, itrade, eno, dno, isafepayment, imgList
-			);
-			// 대면거래시 장소 생성자
-			DpointDto dpointDto = new DpointDto( itradeplace, dlat, dlng );
-			
-			
-			
-			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-			
 		
+		// 거래방식에 따라 별도 데이터 처리
+		String json = "";
+		ObjectMapper mapper = new ObjectMapper();
+		boolean result = false;
+		
+		switch( itrade ) {
+			case 1: 	// 거래방식 : 배송
+				
+				break;
+			case 2:		// 거래방식 : 대면거래
+				
+				// 물품정보 생성자
+				ItemsInfo itemsInfo = new ItemsInfo(
+					ino, iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment, imgList
+				);
+				// 대면거래 위치 생성자
+				DpointDto dpointDto = new DpointDto( dlat, dlng );
+				
+				// Dao 전달
+				result = ItemDao.getInstance().uploadItem( itemsInfo, dpointDto );
+				
+				break;
+				
+				
+			case 3: 	// 거래방식 : 배송
+				
+				break;
+		}
+		
+		json = mapper.writeValueAsString(result);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print( json );
 		
 	} 
 

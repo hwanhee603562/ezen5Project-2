@@ -400,6 +400,8 @@ function fileDelete( idNum ){
 /* ============================= 이미지 출력/삭제 end */
 
 
+/* ============================= 제품등록 */
+
 function registerItems(){
 	
 	/* -------- 유효성 검사 -------- */
@@ -479,7 +481,8 @@ function registerItems(){
 		processData: false,
 		success: result =>{
 			
-			console.log('등록성공')
+			if(result) console.log('등록성공')
+			
 			
 		},
 		errror: e =>{

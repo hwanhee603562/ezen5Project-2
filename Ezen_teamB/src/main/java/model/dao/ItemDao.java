@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.dto.CategoryDto;
 import model.dto.DpointDto;
@@ -26,10 +27,49 @@ public class ItemDao extends Dao {
 					+ "(iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment) "
 					+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			
-			// 대면거래 위치정보 저장
+			ps = conn.prepareStatement(sql);
 			
-			// 대면거래 이미지 저장 
+			// 1 대면거래 위치정보 저장
+			ps.setInt( 1, itemsInfo.getIprice() );
+			ps.setInt( 2, itemsInfo.getMno() );
+			ps.setString( 3, itemsInfo.getItitle() );
+			ps.setString( 4, itemsInfo.getIcontent() );
+			ps.setInt( 5, itemsInfo.getItrade() );
+			ps.setString( 6, itemsInfo.getItradeplace() );
+			ps.setInt( 7, itemsInfo.getDno() );
+			ps.setInt( 8, itemsInfo.getIsafepayment() );
 			
+			ps.executeUpdate();
+			
+			// insert되어진 필드에 대한 autoIncreament 값 대입
+			rs = ps.getGeneratedKeys();	
+			
+			if( rs.next() )	itemsInfo.setIno( rs.getInt(1) );	// autoIncreament 값 반환
+			else return false;
+			
+			// 2 대면거래 이미지 저장
+				// 이미지를 등록할 경우에만 DB저장
+			if( itemsInfo.getImgList().size() != 0 ) {
+				sql = "insert into pimg(pimg,ino) values(?, ?)";
+				ps = conn.prepareStatement(sql);
+				
+				for( int i=0; i<itemsInfo.getImgList().size(); i++ ) {
+					 ps.setString( 1, itemsInfo.getImgList().get(i) );
+					 ps.setInt( 2, itemsInfo.getIno() );
+					 
+					 ps.executeUpdate();
+				}
+			}
+			
+			// 3 대면거래 위경도 저장
+			sql = "insert into dpoint(dlat, dlng, ino) values(?, ?, ?)";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString( 1, dpointDto.getDlat() );
+			ps.setString( 2, dpointDto.getDlng() );
+			ps.setInt( 3, itemsInfo.getIno() );
+			
+			return true;
 			
 		} catch (Exception e) {
 			System.out.println(e);
