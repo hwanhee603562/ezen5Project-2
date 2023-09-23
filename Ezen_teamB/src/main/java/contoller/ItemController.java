@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.dao.ItemDao;
 import model.dto.CategoryDto;
 import model.dto.DpointDto;
+import model.dto.Emediation;
 import model.dto.ItemsInfo;
 import model.dto.MemberList;
 
@@ -37,6 +38,7 @@ public class ItemController extends HttpServlet {
     }
 
     // 제품 정보 가져오기
+    // 중개거래소 가져오기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String type = request.getParameter("type");
@@ -57,6 +59,14 @@ public class ItemController extends HttpServlet {
 			int uno = Integer.parseInt(request.getParameter("uno"));
 			ArrayList<CategoryDto> categoryList = ItemDao.getInstance().getSubCategory( uno );
 			json = mapper.writeValueAsString(categoryList);
+			
+		}
+		// 3. 중개거래소 가져오기
+		else if( type.equals("getEmediation") ) {
+			
+			ArrayList<Emediation> emediation = ItemDao.getInstance().getEmediation();
+			json = mapper.writeValueAsString(emediation);
+			
 		}
 		
 		response.setContentType("application/json;charset=UTF-8");

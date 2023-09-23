@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.dto.CategoryDto;
 import model.dto.DpointDto;
+import model.dto.Emediation;
 import model.dto.ItemsInfo;
 
 // 판매물품 클래스
@@ -164,9 +165,51 @@ public class ItemDao extends Dao {
 	
 	
 	
-	// 중개거래소 선정
+	// 중개거래소 찾기
+	public ArrayList<Emediation> getEmediation(){
+		
+		try {
+			
+			ArrayList<Emediation> list = new ArrayList<>();
+			
+			String sql = "select * from emediation";
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				Emediation emediation = new Emediation( 
+					rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5) 
+				);
+				
+				list.add(emediation);
+			}
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
 	
 	
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
