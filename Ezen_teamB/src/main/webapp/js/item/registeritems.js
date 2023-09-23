@@ -302,16 +302,27 @@ function brokerage(){
 	
 	itrade = 3;
 
+
+	// DB에 저장된 중개거래소 불러오기
+		// 각 중개거래소별 마커 추가하기
 	$.ajax({
 		url:"/Ezen_teamB/ItemController",
 		method: 'get',
 		data: { type : 'getEmediation' },
 		success : result => {
-			console.log(result)
-			result.forEach( s =>{
 				
-			});
-			
+			// 데이터에서 좌표 값을 가지고 마커를 표시합니다
+		    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		    var markers = result.map( s => {
+				console.log( s )
+		        return new kakao.maps.Marker({
+		            position : new kakao.maps.LatLng(s.elng, s.elat )
+		        });
+		    });
+		
+		    // 클러스터러에 마커들을 추가합니다
+		    clusterer2.addMarkers(markers);
+				
 		},
 		error: e => {
 			console.log('에러발생')
@@ -323,15 +334,16 @@ function brokerage(){
 	
 }	
 
-var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
-mapOption2 = {
-	center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	level: 3 // 지도의 확대 레벨
-};
 
 
 // 지도를 생성합니다    
-var map2 = new kakao.maps.Map(mapContainer2, mapOption2);
+var map2 = new kakao.maps.Map(document.getElementById('map2'), { // 지도를 표시할 div
+    center : new kakao.maps.LatLng(37.8890791, 128.825870), // 지도의 중심좌표
+    level : 12 // 지도의 확대 레벨
+});
+
+
+
 
 /* 카카오맵 클러스터 [ 마커 여러개일때 집합모양 ] */
 var clusterer2 = new kakao.maps.MarkerClusterer({
@@ -341,27 +353,13 @@ var clusterer2 = new kakao.maps.MarkerClusterer({
     disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
 });
 
-
-    // 데이터를 가져오기 위해 jQuery를 사용합니다
-    // 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
-    $.get("/download/web/data/chicken.json", function(data) {
-        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-        var markers = $(data.positions).map(function(i, position) {
-            return new kakao.maps.Marker({
-                position : new kakao.maps.LatLng(position.lat, position.lng)
-            });
-        });
-
-        // 클러스터러에 마커들을 추가합니다
-        clusterer.addMarkers(markers);
-    });
-
-
-kakao.maps.event.addListener(clusterer2, 'clusterclick', function(cluster2) {
+kakao.maps.event.addListener(clusterer2, 'clusterclick', function(cluster) {
     var level = map2.getLevel()-1;
-    map2.setLevel(level, {anchor: cluster2.getCenter()});
+    map2.setLevel(level, {anchor: cluster.getCenter()});
 });
+
+
+
 
 let centerY = '';
 let centerX = '';
