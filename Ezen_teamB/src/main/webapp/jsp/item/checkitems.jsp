@@ -14,11 +14,41 @@
 	
 	<div class="checkItemsWrap">	<!-- 전체물품조회 전체구역 -->	
 		
+		<h2> 물품 전체보기 </h2>
+		<!-- 제품 필터 선택구역 -->
+		<div class="topField">
+			<div class="searchWord"> 제목검색 <input type="text"> </div>
+			<div class="topCategory">	<!-- 대분류 카테고리 설정구역 -->
+				<div class="guideLabel"> 대분류 </div>
+				<table class="outputUmaincategory">
+					<tr>
+					    <td> 대분류 </td>
+					    <td> 대분류2 </td>
+					    <td> 대분류3 </td>
+					    <td> 대분류4 </td>
+					    <td> 대분류5 </td>
+					</tr>
+					<tr>
+					    <td> 대분류1 </td>
+					    <td> 대분류2 </td>
+					    <td> 대분류3 </td>
+					    <td> 대분류4 </td>
+					    <td> 대분류5 </td>
+					</tr>
+				
+				</table>
+				<div> 선택된 카테고리 : </div> <div>  </div>
+			</div>
+
+			<div class="bottomCategory">	<!-- 소분류 카테고리 설정구역 -->
+	
+			</div>
+			
+			
+		</div>
 		
 		<div class="itemCardBox">	<!-- 카드가 출력되는 박스구역 -->
-		<h2> 물품 전체보기 </h2>
-		
-			<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div class="row row-cols-1 row-cols-md-5 g-4">
 				<div class="col">
 					<div class="card">
 						<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">

@@ -39,6 +39,7 @@ public class ItemController extends HttpServlet {
 
     // 제품 정보 가져오기
     // 중개거래소 가져오기
+    // 카테고리 가져오기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String type = request.getParameter("type");
@@ -85,8 +86,8 @@ public class ItemController extends HttpServlet {
 		/* ---------------------------------- */
 		
 		
-		/* ============ 파일 업로드 setting ============ */
-		
+		/* ------------ 파일 업로드 setting ------------ */
+			
 		// 1. 저장경로 [ 첨부파일이 저장될 폴더 위치 ] 
 		String uploadPath = request.getServletContext().getRealPath("/jsp/item/img");
 		
@@ -96,7 +97,7 @@ public class ItemController extends HttpServlet {
 		itemFactory.setSizeThreshold( 1024 * 1024 * 1024 ); 	//  3.용량
 		itemFactory.setDefaultCharset("UTF-8");					//  4.한글인코딩
 		 
-		/* =========================================== */
+		/* ------------------------------------------ */
 			
 			
 		// 3. 파일 업로드 객체 [ import org.apache.commons.fileupload.servlet.ServletFileUpload; ] 

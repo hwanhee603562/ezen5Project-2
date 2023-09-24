@@ -1,8 +1,78 @@
 @charset "UTF-8";
 
-.itemCardBox{
-	width: 800px;
+/* ===================== 물품조회 상단 검색, 필터 기능 */
+.checkItemsWrap{
+	width: 1100px;
 	margin: 0 auto;
 	padding: 40px;
 	border: 1px solid #e8e8e8;
 }
+.searchWord{
+	border-bottom: 1px solid #e8e8e8;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+.topField{
+	border: 2px solid black;
+	border-radius: 23px;
+	margin-bottom: 20px;
+	padding: 20px;
+}
+/* 카테고리 선택구역 */
+	/* 대분류 */
+.topCategory{
+	border-bottom: 1px solid #e8e8e8;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	
+}
+.topCategory table{
+	width: 100%
+}
+.topCategory td{
+	border: 1px solid #e8e8e8;
+	width: 203px;
+}
+	/* 소분류 */
+.bottomCategory{
+	border-bottom: 1px solid #e8e8e8;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	
+}
+.bottomCategory table{
+	width: 100%
+}
+.bottomCategory td{
+	border: 1px solid #e8e8e8;
+	width: 203px;
+}
+
+.guideLabel{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
