@@ -105,11 +105,15 @@
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	        ...
+	      	<h6>회원탈퇴를 원하시면 비밀번호를 입력해주세요.</h6>
+	        <div class="form-floating mb-3">
+			  <input type="password" class="form-control deletepwd" id="floatingPassword">
+			  <label for="floatingPassword">비밀번호</label>
+			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">탈퇴</button>
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button onclick="deleteInfo()" type="button" class="btn btn-primary">탈퇴</button>
 	      </div>
 	    </div>
 	  </div>

@@ -106,9 +106,31 @@ public class MemberController extends HttpServlet {
 		response.getWriter().print(result);
 		
 	}
-
+	
+	
+	// 회원탈퇴
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		String mpwd = request.getParameter("mpwd");
+		
+		boolean result = MemberDao.getInstance().deleteMember(mno, mpwd);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
+		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

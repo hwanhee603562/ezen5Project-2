@@ -360,6 +360,32 @@ function deleteWishList(ino){console.log('찜목록 삭제함수')
 }
 
 
+// 회원탈퇴 함수
+function deleteInfo(){
+	
+	let mno = 2;
+	let deletepwd = document.querySelector('.deletepwd').value;
+	console.log(deletepwd);
+	
+	$.ajax({ 
+	       url : "/Ezen_teamB//MemberController",
+	       data : {mno: mno, mpwd : deletepwd},         // 보내는 데이터
+	       method : "delete",
+	       success : r =>{console.log('통신성공');
+	       		if(r){
+					   alert('회원탈퇴가 완료되었습니다.')
+					   location.href = "/Ezen_teamB/jsp/index.jsp"
+				}else{
+					alert('비밀번호가 틀렸습니다.')
+				}
+	       		
+	       },
+	       error: e => {console.log(e)}
+	});
+	
+}
+
+
 
 /* 주소 검색 api */				// 추후 header에서 통일 가능
 
