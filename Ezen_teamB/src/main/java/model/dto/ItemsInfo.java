@@ -68,22 +68,9 @@ public class ItemsInfo {
 		this.imgList = imgList;
 	}
 	
-	// 물품 등록 생성자 [ 대면거래 ]
-	public ItemsInfo(int iprice, int mno, String ititle, String icontent, int itrade, int dno,
-			int isafepayment, Map<Integer, String> imgList) {
-		super();
-		this.iprice = iprice;
-		this.mno = mno;
-		this.ititle = ititle;
-		this.icontent = icontent;
-		this.itrade = itrade;
-		this.dno = dno;
-		this.isafepayment = isafepayment;
-		this.imgList = imgList;
-	}
 	
-	// 물품 등록 생성자 [ 대면거래 ]
-	public ItemsInfo(int ino, int iprice, int mno, String ititle, String icontent, int itrade, String itradeplace, int dno,
+	// 물품 등록 생성자
+	public ItemsInfo(int ino, int iprice, int mno, String ititle, String icontent, int itrade, String itradeplace, int eno, int dno,
 			int isafepayment, Map<Integer, String> imgList) {
 		super();
 		this.ino = ino;
@@ -93,6 +80,7 @@ public class ItemsInfo {
 		this.icontent = icontent;
 		this.itrade = itrade;
 		this.itradeplace = itradeplace;
+		this.eno = eno;
 		this.dno = dno;
 		this.isafepayment = isafepayment;
 		this.imgList = imgList;
