@@ -22,23 +22,54 @@ public class ItemDao extends Dao {
 	public boolean uploadItem( ItemsInfo itemsInfo, DpointDto dpointDto ) {
 		
 		try {
-			// 물품저장
-			String sql = "insert into itemsinfo"
-					+ "(iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, ?);";
 			
-			// DB에 저장된 autoIncreament 값을 찾기 위해 ps에 'Statement.RETURN_GENERATED_KEYS' 추가
-			ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			String sql = "";
 			
-			// 1 대면거래 위치정보 저장
-			ps.setInt( 1, itemsInfo.getIprice() );
-			ps.setInt( 2, itemsInfo.getMno() );
-			ps.setString( 3, itemsInfo.getItitle() );
-			ps.setString( 4, itemsInfo.getIcontent() );
-			ps.setInt( 5, itemsInfo.getItrade() );
-			ps.setString( 6, itemsInfo.getItradeplace() );
-			ps.setInt( 7, itemsInfo.getDno() );
-			ps.setInt( 8, itemsInfo.getIsafepayment() );
+			// 거래방식이 중개거래소일 경우에만 중개거래소 필드를 추가하여 삽입
+			if( itemsInfo.getItrade() == 3 ) {
+				
+				Emediation emediation = ( getEmediationInfo( itemsInfo.getEno() ) );
+				
+				// 물품저장
+				sql = "insert into itemsinfo"
+						+ "(iprice, mno, ititle, icontent, itrade, itradeplace, eno, dno, isafepayment) "
+						+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				
+				// DB에 저장된 autoIncreament 값을 찾기 위해 ps에 'Statement.RETURN_GENERATED_KEYS' 추가
+				ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				
+				// 1 대면거래 위치정보 저장
+				ps.setInt( 1, itemsInfo.getIprice() );
+				ps.setInt( 2, itemsInfo.getMno() );
+				ps.setString( 3, itemsInfo.getItitle() );
+				ps.setString( 4, itemsInfo.getIcontent() );
+				ps.setInt( 5, itemsInfo.getItrade() );
+				ps.setString( 6, emediation.getEadress() );
+				ps.setInt( 7, itemsInfo.getEno() );
+				ps.setInt( 8, itemsInfo.getDno() );
+				ps.setInt( 9, itemsInfo.getIsafepayment() );
+				
+			} else {
+				
+				// 물품저장
+				sql = "insert into itemsinfo"
+						+ "(iprice, mno, ititle, icontent, itrade, itradeplace, dno, isafepayment) "
+						+ "values(?, ?, ?, ?, ?, ?, ?, ?);";
+				
+				// DB에 저장된 autoIncreament 값을 찾기 위해 ps에 'Statement.RETURN_GENERATED_KEYS' 추가
+				ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				
+				// 1 대면거래 위치정보 저장
+				ps.setInt( 1, itemsInfo.getIprice() );
+				ps.setInt( 2, itemsInfo.getMno() );
+				ps.setString( 3, itemsInfo.getItitle() );
+				ps.setString( 4, itemsInfo.getIcontent() );
+				ps.setInt( 5, itemsInfo.getItrade() );
+				ps.setString( 6, itemsInfo.getItradeplace() );
+				ps.setInt( 7, itemsInfo.getDno() );
+				ps.setInt( 8, itemsInfo.getIsafepayment() );
+				
+			}
 			
 			ps.executeUpdate();
 			
@@ -75,9 +106,7 @@ public class ItemDao extends Dao {
 				ps.executeUpdate();
 				
 			}
-			
-			
-			
+
 			return true;
 			
 		} catch (Exception e) {
@@ -124,7 +153,7 @@ public class ItemDao extends Dao {
 		return null;
 	}
 	
-		// 2-1 카테고리 조회 ( 소분류 )
+		// 2-2 카테고리 조회 ( 소분류 )
 	public ArrayList<CategoryDto> getSubCategory( int uno ){
 		
 		try {
@@ -152,20 +181,7 @@ public class ItemDao extends Dao {
 	}
 	
 	
-	
-	// 판매물품수정
-	
-	
-	
-	//판매물품삭제
-	
-	
-	
-	// 물품거래내역조회
-	
-	
-	
-	// 중개거래소 찾기
+		// 2-3 전체 중개거래소 조회
 	public ArrayList<Emediation> getEmediation(){
 		
 		try {
@@ -192,6 +208,50 @@ public class ItemDao extends Dao {
 		
 		return null;
 	}
+	
+	
+		// 2-4 개별 중개거래소 조회
+	public Emediation getEmediationInfo( int eno ) {
+		
+		try {
+			
+			String sql = "select * from emediation where eno = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, eno);
+			rs = ps.executeQuery();			
+			
+			if( rs.next() ) {
+				return new Emediation( 
+					rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5) 
+				);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
+	// 판매물품수정
+	
+	
+	
+	//판매물품삭제
+	
+	
+	
+	// 물품거래내역조회
+	
+	
+	
+
+
 	
 	
 	
