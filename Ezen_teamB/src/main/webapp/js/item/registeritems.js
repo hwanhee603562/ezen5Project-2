@@ -95,6 +95,13 @@ function delivery(){
 	dlat = '';
 	dlng = '';
 	itradeplace = '';
+	document.querySelector('.selectedAddress span').innerHTML = '';
+	
+	// 거래방식이 변경될 때마다 중개거래소 정보 초기화
+	emediationInfo = { eno : '', ename : '', eadress : '' }
+	document.querySelector('.emediationName').innerHTML = '';
+	document.querySelector('.emediationAdress').innerHTML = '';
+	
 	 
 	document.getElementById("outputMapField").style.display = "none";
 	document.getElementById("outputMapField2").style.display = "none";
@@ -126,6 +133,11 @@ function faceToFace(){
 	dlat = '';
 	dlng = '';
 	itradeplace = '';
+	
+	// 거래방식이 변경될 때마다 중개거래소 정보 초기화
+	emediationInfo = { eno : '', ename : '', eadress : '' }
+	document.querySelector('.emediationName').innerHTML = '';
+	document.querySelector('.emediationAdress').innerHTML = '';
 	
 	document.getElementById("outputMapField").style.display = "block";
 	//document.getElementsByClassName("outputMapField")[0].style.display = "block";
@@ -287,18 +299,32 @@ function sample5_execDaumPostcode() {
 
 
 // 3. 거래방식 - 중개거래소 방식 클릭하였을 때
+// 중개거래소 정보
+	// pk
+	// 업체명
+	// 주소
+let emediationInfo = { eno : '', ename : '', eadress : '' }
+
 function brokerage(){
-	deliveryCSS.backgroundColor = "#EFEFEF";
-	faceToFaceCSS.backgroundColor = "#EFEFEF";
-	brokerageCSS.backgroundColor = "#6AAFE6";
 	
-	// 거래방식이 변경될때마다 대면거래 위치정보 초기화
-	dlat = '';
-	dlng = '';
-	itradeplace = '';
+	// 클러스터가 출력되는 것을 막기 위해 클러스터 배열을 clear함
+	clusterer2.clear()
+	positions = []
 	
-	document.getElementById("outputMapField").style.display = "none";
-	document.getElementById("outputMapField2").style.display = "block";
+	if( itrade != 3 ){
+		deliveryCSS.backgroundColor = "#EFEFEF";
+		faceToFaceCSS.backgroundColor = "#EFEFEF";
+		brokerageCSS.backgroundColor = "#6AAFE6";
+		
+		// 거래방식이 변경될때마다 대면거래 위치정보 초기화
+		dlat = '';
+		dlng = '';
+		itradeplace = '';
+		document.querySelector('.selectedAddress span').innerHTML = ''
+		
+		document.getElementById("outputMapField").style.display = "none";
+		document.getElementById("outputMapField2").style.display = "block";
+	}
 	
 	itrade = 3;
 
@@ -314,34 +340,95 @@ function brokerage(){
 			// 데이터에서 좌표 값을 가지고 마커를 표시합니다
 		    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 		    var markers = result.map( s => {
-				console.log( s )
-		        return new kakao.maps.Marker({
-		            position : new kakao.maps.LatLng(s.elng, s.elat )
-		        });
-		    });
-		
-		    // 클러스터러에 마커들을 추가합니다
-		    clusterer2.addMarkers(markers);
 				
+				// 지도의 현재 level < 클러스터 최소 출력 level
+					// 클러스터가 출력될 시 개별 마커 정보는 출력되지 않음
+				if( map2.b.H < clusterer2._model.minLevel ){
+					
+					positions.push({
+						content: s.eno+'_'+s.ename+'_'+s.eadress,		// pk,중개거래소명,주소
+						latlng: new kakao.maps.LatLng(s.elat, s.elng)	// 중개거래소 위.경도
+					})
+					
+				} else {
+					
+			        return new kakao.maps.Marker({
+			            position : new kakao.maps.LatLng(s.elat, s.elng)
+			        });
+		        }
+		    });
+		    
+		    
+		    // 지도의 현재 level > 클러스터 최소 출력 level
+				// 클러스터가 출력될 시 개별 마커 정보는 출력되지 않음
+		    if( map2.b.H >= clusterer2._model.minLevel ){
+				
+				// 클러스터러에 마커들을 추가합니다
+		    	clusterer2.addMarkers(markers);
+
+		    }
+		    
+			for (var i = 0; i < positions.length; i++) {
+				
+				// 마커를 생성합니다
+				var marker2 = new kakao.maps.Marker({
+					map: map2, // 마커를 표시할 지도
+					position: positions[i].latlng // 마커의 위치
+				});
+
+				// 마커에 표시할 인포윈도우를 생성합니다 
+				var infowindow = new kakao.maps.InfoWindow({
+					content: positions[i].content // 인포윈도우에 표시할 내용
+				});
+
+				// 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+				// 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+				(function(marker2, infowindow) {
+					// 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
+					kakao.maps.event.addListener(marker2, 'mouseover', function() {
+
+						infowindow.open(map2, marker2);
+
+					});
+
+					kakao.maps.event.addListener(marker2, 'click', function() {
+
+						emediationInfo.eno = infowindow.cc.split('_')[0];
+						emediationInfo.ename = infowindow.cc.split('_')[1];
+						emediationInfo.eadress = infowindow.cc.split('_')[2];
+
+						document.querySelector('.emediationName').innerHTML = `${emediationInfo.ename}`
+						document.querySelector('.emediationAdress').innerHTML = `${emediationInfo.eadress}`
+
+					});
+
+					// 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
+					kakao.maps.event.addListener(marker2, 'mouseout', function() {
+
+						infowindow.close();
+
+					});
+				})(marker2, infowindow);
+			}
+		    
 		},
 		error: e => {
 			console.log('에러발생')
 		}
-		
-		
+
 	})
 	
 	
 }	
 
-
+// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+var positions = [];
 
 // 지도를 생성합니다    
 var map2 = new kakao.maps.Map(document.getElementById('map2'), { // 지도를 표시할 div
     center : new kakao.maps.LatLng(37.8890791, 128.825870), // 지도의 중심좌표
     level : 12 // 지도의 확대 레벨
 });
-
 
 
 
@@ -359,10 +446,8 @@ kakao.maps.event.addListener(clusterer2, 'clusterclick', function(cluster) {
 });
 
 
-
-
-let centerY = '';
-let centerX = '';
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder2 = new kakao.maps.services.Geocoder();
 
 function sample5_execDaumPostcode2() {
 	new daum.Postcode({
@@ -379,17 +464,8 @@ function sample5_execDaumPostcode2() {
 
 					var result = results[0]; //첫번째 결과의 값을 활용
 					
-					// 주소 저장
-					itradeplace = result.address_name
-					document.querySelector('.selectedAddress span').innerHTML = `${itradeplace}`;
-
-
-					
 					// 해당 주소에 대한 좌표를 받아서
 					var coords = new daum.maps.LatLng(result.y, result.x);
-					
-					centerY = result.y
-					centerX = result.x
 					
 					// 지도를 보여준다.
 					mapContainer.style.display = "block";
@@ -403,8 +479,14 @@ function sample5_execDaumPostcode2() {
 	}).open();
 }
 
-
-
+// 카카오지도에서 드래그를 하고 끝났을 때 1번 함수 재실행
+kakao.maps.event.addListener(map2, 'dragend', function(){
+	brokerage();
+});
+// 카카오지도에서 스크롤확대/축소 하고 끝났을 때 1번 함수 재실행
+kakao.maps.event.addListener(map2, 'idle', function(){
+	brokerage();
+});
 
 
 
@@ -566,6 +648,11 @@ function registerItems(){
 		alert('대면거래는 거래위치를 지정하여야 합니다')
 		return;
 	}
+	// 거래방식이 중개거래임에도 중개거래소를 지정하지 않을 경우
+	if( itrade==3 && emediationInfo.eno == '' ){
+		alert('중개거래는 중개거래소를 지정하여야 합니다')
+		return;
+	}
 	
 	/* -------- 물품등록 전 form 데이터 setting -------- */
 	
@@ -595,8 +682,13 @@ function registerItems(){
 	// 거래방식이 '대면거래'일 시 대면거래에 대한 위경도, 주소값 저장
 	if( itrade == 2 ){
 		formData.set('dlat', dlat)					// 대면거래 이용 시 위도 저장
-		formData.set('dlng ', dlng )				// 대면거래 이용 시 경도 저장
-		formData.set('itradeplace ', itradeplace )	// 대면거래 이용 시 주소값 저장
+		formData.set('dlng', dlng )					// 대면거래 이용 시 경도 저장
+		formData.set('itradeplace', itradeplace )	// 대면거래 이용 시 주소값 저장
+	}
+	
+	if( itrade == 3 ){
+		formData.set('eno', emediationInfo.eno )				// 중개거래소 pk 저장
+		formData.set('itradeplace', emediationInfo.eadress )	// 중개거래소 이용 시 주소값 저장
 	}
 
 	/* -------- ajax 통신 -------- */

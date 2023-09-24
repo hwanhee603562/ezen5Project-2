@@ -111,7 +111,9 @@
 					<!-- 대면거래 이용 map -->
 					<div id="map2" style="width:100%;height:350px;"></div>
 					<div class="selectedAddress2">
-						선택한 중개거래소 : <span>  </span>
+						<div class="guideEmediation">선택한 중개거래소</div>
+						업체명 : <span class="emediationName">  </span><br>
+						주소 : <span class="emediationAdress">  </span>
 					</div>
 				</div>
 				

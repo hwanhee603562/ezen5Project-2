@@ -134,6 +134,10 @@ body {
 	margin-left: 30px; 
 }
 
+.guideEmediation{
+	color: red;
+}
+
 /* 이미지 첨부 입력버튼 */
 .input-file-button{
 	border-radius: 4px;
