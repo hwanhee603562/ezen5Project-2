@@ -265,6 +265,7 @@ public class ItemDao extends Dao {
 				);
 				
 				list.add(itemsInfo);
+				
 			}
 			return list;
 			

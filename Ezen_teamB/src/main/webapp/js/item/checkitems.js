@@ -6,6 +6,7 @@ function getItemList(){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data: { type : "getItemList" },
 		success: s => {
 			
@@ -30,6 +31,7 @@ function getMainCategory(){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data: { type : "getMainCategory" },
 		success: s => {
 			
