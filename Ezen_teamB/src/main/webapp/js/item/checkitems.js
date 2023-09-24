@@ -1,6 +1,4 @@
 
-
-
 // 전체 물품 출력
 getItemList()
 function getItemList(){
@@ -8,10 +6,33 @@ function getItemList(){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		data: { type : "getItemList" },
+		success: s => {
+			
+			console.log('성공')
+			console.log(s)
+			
+		},
+		error: e => {
+			
+			console.log('실패')
+			console.log(e)
+		}
+	})
+	
+}
+
+
+// 대분류 카테고리 출력
+getMainCategory()
+function getMainCategory(){
+	
+	$.ajax({
+		url: "/Ezen_teamB/ItemController",
+		method: "get",
 		data: { type : "getMainCategory" },
 		success: s => {
 			
-			// 대분류 카테고리 출력
 			let html = `<tr>`
 			for( let i=0; i<s.length; i++ ){
 				
@@ -75,9 +96,7 @@ function outputSubCategory( uno ){
 }
 
 
-function outputFilter(){
-	
-}
+
 
 
 

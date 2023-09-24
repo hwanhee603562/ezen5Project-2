@@ -69,6 +69,13 @@ public class ItemController extends HttpServlet {
 			json = mapper.writeValueAsString(emediation);
 			
 		}
+		// 4. 전체 물품 조회
+		else if( type.equals("getItemList") ) {
+			
+			ArrayList<ItemsInfo> itemsInfo = ItemDao.getInstance().getItemList();
+			json = mapper.writeValueAsString(itemsInfo);
+			
+		}
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print( json );

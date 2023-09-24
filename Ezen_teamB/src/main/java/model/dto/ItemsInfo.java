@@ -86,6 +86,26 @@ public class ItemsInfo {
 		this.imgList = imgList;
 	}
 
+	// DB에 물품 정보 요청 생성자 
+	public ItemsInfo(int ino, int iprice, int mno, String ititle, String icontent, int itrade, String itradeplace, String idate,
+			int eno, int iestate, int dno, int isafepayment, int keepstate, Map<Integer, String> imgList) {
+		super();
+		this.ino = ino;
+		this.iprice = iprice;
+		this.mno = mno;
+		this.ititle = ititle;
+		this.icontent = icontent;
+		this.itrade = itrade;
+		this.itradeplace = itradeplace;
+		this.idate = idate;
+		this.eno = eno;
+		this.iestate = iestate;
+		this.dno = dno;
+		this.isafepayment = isafepayment;
+		this.keepstate = keepstate;
+		this.imgList = imgList;
+	}
+	
 	// getter setter
 	public int getIno() {
 		return ino;

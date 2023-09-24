@@ -2,6 +2,8 @@ package model.dao;
 
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import model.dto.CategoryDto;
 import model.dto.DpointDto;
@@ -235,6 +237,43 @@ public class ItemDao extends Dao {
 		return null;
 	}
 	
+		// 2-5 전체 물품 조회
+	public ArrayList<ItemsInfo> getItemList(  ){
+		
+		try {
+			ArrayList<ItemsInfo> list = new ArrayList<>();
+			
+			// 기본 물품 정보에 대표 이미지 1개만 조회
+			String sql = "select distinct a.ino, a.iprice, a.mno, a.ititle, "
+					+ "a.icontent, a.itrade, a.itradeplace, a.idate, a.eno, "
+					+ "a.iestate, a.dno, a.isafepayment, a.keepstate, b.pimg "
+					+ "from itemsinfo a left outer join pimg b "
+					+ "on a.ino = b.ino order by idate desc;";
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				
+				Map<Integer, String> map = new HashMap<>();
+				map.put(1, rs.getString(14));
+				
+				ItemsInfo itemsInfo = new ItemsInfo(
+					rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5),
+					rs.getInt(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getInt(10),
+					rs.getInt(11), rs.getInt(12), rs.getInt(13), map
+				);
+				
+				list.add(itemsInfo);
+			}
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
 	
 	
 	
