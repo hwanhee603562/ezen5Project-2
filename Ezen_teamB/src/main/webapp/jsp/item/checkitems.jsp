@@ -13,17 +13,22 @@
 	<%@ include file = "../header.jsp" %>
 	
 	<div class="checkItemsWrap">	<!-- 전체물품조회 전체구역 -->	
-	
-		<div class="itemCardBox">	<!-- 카드가 출력되는 박스구역 -->
 		
-			<div class="row row-cols-1 row-cols-md-4 g-4">
+		
+		<div class="itemCardBox">	<!-- 카드가 출력되는 박스구역 -->
+		<h2> 물품 전체보기 </h2>
+		
+			<div class="row row-cols-1 row-cols-md-3 g-4">
 				<div class="col">
 					<div class="card">
 						<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
 						<div class="card-body">
 							<div class="itemCardTitle"> Title </div>
 							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> adress </div>
+							<div class="itemCardAdress"> 거래방식 </div>
+							<div class="itemCardAdress"> 거래위치 </div>
+							<div class="itemCardAdress"> 안전결제 여부 </div>
+							<div class="itemCardAdress"> 등록일자 </div>
 							<div class="itemWatchCount"> 찜 </div>
 						</div>
 					</div>
@@ -34,7 +39,10 @@
 						<div class="card-body">
 							<div class="itemCardTitle"> Title </div>
 							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> adress </div>
+							<div class="itemCardAdress"> 거래방식 </div>
+							<div class="itemCardAdress"> 거래위치 </div>
+							<div class="itemCardAdress"> 안전결제 여부 </div>
+							<div class="itemCardAdress"> 등록일자 </div>
 							<div class="itemWatchCount"> 찜 </div>
 						</div>
 					</div>
@@ -45,7 +53,10 @@
 						<div class="card-body">
 							<div class="itemCardTitle"> Title </div>
 							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> adress </div>
+							<div class="itemCardAdress"> 거래방식 </div>
+							<div class="itemCardAdress"> 거래위치 </div>
+							<div class="itemCardAdress"> 안전결제 여부 </div>
+							<div class="itemCardAdress"> 등록일자 </div>
 							<div class="itemWatchCount"> 찜 </div>
 						</div>
 					</div>
@@ -56,7 +67,10 @@
 						<div class="card-body">
 							<div class="itemCardTitle"> Title </div>
 							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> adress </div>
+							<div class="itemCardAdress"> 거래방식 </div>
+							<div class="itemCardAdress"> 거래위치 </div>
+							<div class="itemCardAdress"> 안전결제 여부 </div>
+							<div class="itemCardAdress"> 등록일자 </div>
 							<div class="itemWatchCount"> 찜 </div>
 						</div>
 					</div>
