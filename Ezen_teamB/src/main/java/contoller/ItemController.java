@@ -72,7 +72,11 @@ public class ItemController extends HttpServlet {
 		// 4. 전체 물품 조회
 		else if( type.equals("getItemList") ) {
 			
-			ArrayList<ItemsInfo> itemsInfo = ItemDao.getInstance().getItemList();
+			String filterCategory = request.getParameter("filterCategory");
+			int filterNum = Integer.parseInt( request.getParameter("filterNum") );
+			String searchWord = request.getParameter("searchWord");
+			
+			ArrayList<ItemsInfo> itemsInfo = ItemDao.getInstance().getItemList( filterCategory, filterNum, searchWord );
 			json = mapper.writeValueAsString(itemsInfo);
 			
 		}

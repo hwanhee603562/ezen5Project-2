@@ -1,17 +1,55 @@
 
+// 검색 필터를 위한 대분류 소분류 번호
+let filterNum = -1
+// 대분류 소분류 식별자
+let filterCategory = ''
+// 검색 기능을 위한 검색어
+let searchWord = ''
+
+
 // 전체 물품 출력
 getItemList()
-function getItemList(){
+function getItemList(  ){
 	
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
 		async: false,
-		data: { type : "getItemList" },
+		data: { type : "getItemList",
+				filterCategory : filterCategory,	// 대분류 소분류 식별자
+				filterNum : filterNum, 				// 검색 필터를 위한 대분류 소분류 번호
+				searchWord : searchWord 			// 검색 기능을 위한 검색어
+		},
 		success: s => {
 			
 			console.log('성공')
 			console.log(s)
+			
+			let html = ``;
+			s.forEach( p => {
+				
+				html += `
+					<div class="col">
+						<div class="card">
+							<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
+							<div class="card-body">
+								<div class="itemCardTitle"> Title </div>
+								<div class="itemCardPrice"> price </div>
+								<div class="itemCardAdress"> 거래방식 </div>
+								<div class="itemCardAdress"> 거래위치 </div>
+								<div class="itemCardAdress"> 안전결제 여부 </div>
+								<div class="itemCardAdress"> 등록일자 </div>
+							</div>
+						</div>
+					</div>
+				`
+				
+			})
+			
+			document.querySelector('.row').innerHTML = html
+			
+			// 검색 완료 후 검색 필드 초기화
+			searchWord = '';
 			
 		},
 		error: e => {
@@ -57,6 +95,11 @@ function getMainCategory(){
 // 상세 카테고리 출력
 function outputSubCategory( uno ){
 	
+	// 상세 카테고리 필터기능 수행
+	filterNum = uno
+	filterCategory = 'uno';
+	getItemList();
+	
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
@@ -73,7 +116,7 @@ function outputSubCategory( uno ){
 				if( i==5 || ( i>4 && i%5==0 ) ){
 					html += `</tr><tr>`
 				}
-				html += `<td onclick="outputFilter(${s[i].dno})"> ${s[i].dname} </td>`
+				html += `<td onclick="subCategoryFilter(${s[i].dno})"> ${s[i].dname} </td>`
 			}
 			
 			// 테이블의 간격을 일정하게 유지하기 위해 
@@ -97,11 +140,39 @@ function outputSubCategory( uno ){
 	})
 }
 
+// 상세 카테고리 필터
+function subCategoryFilter( dno ){
+	
+	// 상세 카테고리 필터기능 수행
+	filterNum = dno
+	filterCategory = 'dno'
+	getItemList();
+	
+}
 
+// 검색어를 통한 검색
+function searchByWord(){
+	
+	let searchValue = document.querySelector('.searchValue').value;
+	
+	if( searchValue == '' ){
+		alert('검색어를 입력하십시오')
+		return
+	}
+	
+	// 검색 기능 수행
+	searchWord = searchValue
+	getItemList();
+	
+}
 
-
-
-
+// 카테고리 전체보기
+function searchAll(){
+	
+	filterCategory = ''
+	searchWord = ''
+	getItemList();
+}
 
 
 

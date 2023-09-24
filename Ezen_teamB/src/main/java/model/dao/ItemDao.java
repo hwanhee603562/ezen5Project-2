@@ -182,7 +182,6 @@ public class ItemDao extends Dao {
 		return null;
 	}
 	
-	
 		// 2-3 전체 중개거래소 조회
 	public ArrayList<Emediation> getEmediation(){
 		
@@ -238,17 +237,48 @@ public class ItemDao extends Dao {
 	}
 	
 		// 2-5 전체 물품 조회
-	public ArrayList<ItemsInfo> getItemList(  ){
+	public ArrayList<ItemsInfo> getItemList( String filterCategory, int filterNum, String searchWord ){
 		
 		try {
 			ArrayList<ItemsInfo> list = new ArrayList<>();
 			
+			String sql = "select distinct a.ino, a.iprice, a.mno, a.ititle, a.icontent, "
+						+ "a.itrade, a.itradeplace, a.idate, a.eno, a.iestate, a.dno, a.isafepayment, a.keepstate, b.pimg " 
+						+ "from itemsinfo a left outer join pimg b on a.ino = b.ino ";
+			
+			
 			// 기본 물품 정보에 대표 이미지 1개만 조회
-			String sql = "select distinct a.ino, a.iprice, a.mno, a.ititle, "
-					+ "a.icontent, a.itrade, a.itradeplace, a.idate, a.eno, "
-					+ "a.iestate, a.dno, a.isafepayment, a.keepstate, b.pimg "
-					+ "from itemsinfo a left outer join pimg b "
-					+ "on a.ino = b.ino order by idate desc;";
+			if( filterCategory.equals("dno") ) {
+
+				 sql += "where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%')"
+					  + " and dno = "+filterNum+" order by idate desc";
+			
+			} 
+			
+			else if( filterCategory.equals("uno") ) {
+				
+				// 대분류 pk를 통해 소분류 정보 반환
+				ArrayList<CategoryDto> dsubCategory = getSubCategory(filterNum);
+				
+				System.out.println(dsubCategory);
+				
+				sql += "where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%') and (";
+				
+				for( int i=0; i<dsubCategory.size(); i++ ) {
+					
+					sql += " dno = "+dsubCategory.get(i).getDno();
+					if( i == dsubCategory.size()-1) break;
+					sql += " or ";
+						
+				}
+				sql += " ) order by idate desc";
+				
+			}
+				
+			else {
+				sql += "where ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%' order by idate desc";
+			}
+			
 			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
