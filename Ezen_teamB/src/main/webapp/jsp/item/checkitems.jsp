@@ -23,73 +23,19 @@
 				<table class="outputUmaincategory">
 					<!-- 대분류 카테고리 출력구역 -->
 				</table>
-				<div> 선택된 카테고리 : </div> <div>  </div>
 			</div>
 
 			<div class="bottomCategory">	
 				<!-- 소분류 카테고리 출력구역 -->
 			</div>
-			
+			<span> 선택된 카테고리 : </span> <span class="selCategory1">  </span> <span class="selCategory2">  </span>
 			
 		</div>
 		
 		<div class="itemCardBox">	<!-- 카드가 출력되는 박스구역 -->
 			<div class="row row-cols-1 row-cols-md-5 g-4">
-				<div class="col">
-					<div class="card">
-						<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<div class="itemCardTitle"> Title </div>
-							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> 거래방식 </div>
-							<div class="itemCardAdress"> 거래위치 </div>
-							<div class="itemCardAdress"> 안전결제 여부 </div>
-							<div class="itemCardAdress"> 등록일자 </div>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card">
-						<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<div class="itemCardTitle"> Title </div>
-							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> 거래방식 </div>
-							<div class="itemCardAdress"> 거래위치 </div>
-							<div class="itemCardAdress"> 안전결제 여부 </div>
-							<div class="itemCardAdress"> 등록일자 </div>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card">
-						<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<div class="itemCardTitle"> Title </div>
-							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> 거래방식 </div>
-							<div class="itemCardAdress"> 거래위치 </div>
-							<div class="itemCardAdress"> 안전결제 여부 </div>
-							<div class="itemCardAdress"> 등록일자 </div>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card">
-						<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<div class="itemCardTitle"> Title </div>
-							<div class="itemCardPrice"> price </div>
-							<div class="itemCardAdress"> 거래방식 </div>
-							<div class="itemCardAdress"> 거래위치 </div>
-							<div class="itemCardAdress"> 안전결제 여부 </div>
-							<div class="itemCardAdress"> 등록일자 </div>
-							<div class="itemWatchCount"> 찜 </div>
-						</div>
-					</div>
-				</div>
-			</div>
 
+			</div>
 		</div> 	<!-- 카드가 출력되는 박스구역 end -->
 		
 	</div>	<!-- 전체구역 end -->

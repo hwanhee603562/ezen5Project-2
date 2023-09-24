@@ -89,8 +89,6 @@ public class ItemController extends HttpServlet {
 	// 제품 등록하기
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("doPost 시작");
-		
 		/* 로그인 기능 구현 전 임시적으로 로그인 세션저장 */
 		MemberList loginDto = new MemberList( 12, "azz258" );
 		request.getSession().setAttribute("loginDto", loginDto);

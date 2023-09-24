@@ -33,12 +33,12 @@ function getItemList(  ){
 						<div class="card">
 							<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
 							<div class="card-body">
-								<div class="itemCardTitle"> Title </div>
-								<div class="itemCardPrice"> price </div>
-								<div class="itemCardAdress"> 거래방식 </div>
-								<div class="itemCardAdress"> 거래위치 </div>
-								<div class="itemCardAdress"> 안전결제 여부 </div>
-								<div class="itemCardAdress"> 등록일자 </div>
+								<div class="itemCardTitle"> ${p.ititle} </div>
+								<div class="itemCardPrice"> ${p.iprice} </div>
+								<div class="itemCardAdress"> ${p.itrade == 1 ? '' : p.itrade == 2 ? '대면거래' : '중개거래' } </div>
+								<div class="itemCardAdress"> ${ p.itrade == 1 ? '배송' : p.itradeplace } </div>
+								<div class="itemCardAdress"> ${ p.isafepayment == 0 ? '안전결제사용' : '' } </div>
+								<div class="itemCardAdress"> ${ p.idate } </div>
 							</div>
 						</div>
 					</div>
@@ -79,7 +79,9 @@ function getMainCategory(){
 				if( i==5 || ( i>4 && i%5==0 ) ){
 					html += `</tr><tr>`
 				}
-				html += `<td onclick="outputSubCategory(${s[i].uno})"> ${s[i].uname} </td>`
+
+				html += `<td onclick="outputSubCategory(${s[i].uno}, '${s[i].uname}')"> ${s[i].uname} </td>`
+				console.log(s[i].uname)
 			}
 			html += `</tr>`
 			
@@ -92,12 +94,14 @@ function getMainCategory(){
 	
 }
 
-// 상세 카테고리 출력
-function outputSubCategory( uno ){
+// 대분류 카테고리 필터
+function outputSubCategory( uno, uname ){
 	
 	// 상세 카테고리 필터기능 수행
 	filterNum = uno
 	filterCategory = 'uno';
+	document.querySelector('.selCategory1').innerHTML = ` ${uname}`
+	document.querySelector('.selCategory2').innerHTML = ``
 	getItemList();
 	
 	$.ajax({
@@ -116,7 +120,7 @@ function outputSubCategory( uno ){
 				if( i==5 || ( i>4 && i%5==0 ) ){
 					html += `</tr><tr>`
 				}
-				html += `<td onclick="subCategoryFilter(${s[i].dno})"> ${s[i].dname} </td>`
+				html += `<td onclick="subCategoryFilter(${s[i].dno}, '${s[i].dname}' )"> ${s[i].dname} </td>`
 			}
 			
 			// 테이블의 간격을 일정하게 유지하기 위해 
@@ -140,10 +144,11 @@ function outputSubCategory( uno ){
 	})
 }
 
-// 상세 카테고리 필터
-function subCategoryFilter( dno ){
+// 소분류 카테고리 필터
+function subCategoryFilter( dno, dname ){
 	
 	// 상세 카테고리 필터기능 수행
+	document.querySelector('.selCategory2').innerHTML = ` > ${dname}`
 	filterNum = dno
 	filterCategory = 'dno'
 	getItemList();
@@ -171,6 +176,9 @@ function searchAll(){
 	
 	filterCategory = ''
 	searchWord = ''
+	document.querySelector('.selCategory1').innerHTML = ``
+	document.querySelector('.selCategory2').innerHTML = ``
+	
 	getItemList();
 }
 

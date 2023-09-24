@@ -260,8 +260,6 @@ public class ItemDao extends Dao {
 				// 대분류 pk를 통해 소분류 정보 반환
 				ArrayList<CategoryDto> dsubCategory = getSubCategory(filterNum);
 				
-				System.out.println(dsubCategory);
-				
 				sql += "where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%') and (";
 				
 				for( int i=0; i<dsubCategory.size(); i++ ) {

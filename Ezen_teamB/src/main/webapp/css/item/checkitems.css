@@ -18,6 +18,9 @@
 	margin-bottom: 20px;
 	padding: 20px;
 }
+.topField span{
+	color: red;
+}
 /* 카테고리 선택구역 */
 	/* 대분류 */
 .topCategory{
