@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.dto.CategoryDto;
+import model.dto.DetailedItems;
 import model.dto.DpointDto;
 import model.dto.Emediation;
 import model.dto.ItemsInfo;
@@ -236,7 +237,14 @@ public class ItemDao extends Dao {
 		return null;
 	}
 	
-		// 2-5 전체 물품 조회
+		// 2-5 개별 대면거래 위치 조회
+	public DpointDto getDpointInfo( int ino ) {
+		
+		
+		return null;
+	}
+	
+		// 2-6 전체 물품 조회
 	public ArrayList<ItemsInfo> getItemList( String filterCategory, int filterNum, String searchWord ){
 		
 		try {
@@ -303,6 +311,49 @@ public class ItemDao extends Dao {
 		
 		return null;
 	}
+		// 2-7 개별 물품 조회
+	public DetailedItems getDetailedItems( int ino, int itrade ) {
+		
+		try {
+			
+			String sql = "";
+			
+			// 거래방식에 따른 조회방법
+				// 1. 거래방식 : 배송 - 단순 물품정보 조회
+			if( ino == 1 ) {
+				sql = "select * from itemsinfo where ino = "+ino;
+			}
+				// 2. 거래방식 : 대면거래 - 물품정보와 대면거래 위치 테이블 조인하여 조회
+			else if( ino == 2 ) {
+				sql = "select a.*, b.dlat, b.dlng, c.mid "
+						+ "from itemsinfo a join dpoint b join memberlist c"
+						+ " on a.ino = b.ino where a.ino = "+ino+" and a.mno = c.mno";
+			}
+				// 3. 거래방식 : 중개거래 - 물품정보와 중개거래소 위치 테이블 조인하여 조회
+			else if( ino == 3 ) {
+				sql = "select a.*, b.elat, b.elng, c.mid "
+						+ "from itemsinfo a join emediation b join memberlist c"
+						+ " on a.eno = b.eno where a.ino = "+ino+" and a.mno = c.mno";
+			}
+			
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				
+				ItemsInfo itemsInfo = new ItemsInfo();
+				
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
+	
+
 	
 	
 	

@@ -6,7 +6,6 @@ import java.util.Map;
 // 물품 판매정보 and 물품 카테고리 and 제품별 여러 개의 이미지
 public class ItemsInfo {
 	  
-
 	private int ino;				// 판매물품번호 pk
 	private int iprice;				// 판매가격
 	private int mno;				// 판매자

@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.ItemDao;
 import model.dto.CategoryDto;
+import model.dto.DetailedItems;
 import model.dto.DpointDto;
 import model.dto.Emediation;
 import model.dto.ItemsInfo;
@@ -80,6 +81,18 @@ public class ItemController extends HttpServlet {
 			json = mapper.writeValueAsString(itemsInfo);
 			
 		}
+		// 5. 개별 물품 조회
+		else if( type.equals("getDetailedItems") ) {
+			
+			int ino = Integer.parseInt( request.getParameter("ino") );
+			int itrade = Integer.parseInt( request.getParameter("itrade") );
+			DetailedItems detailedItems = ItemDao.getInstance().getDetailedItems( ino, itrade );
+			
+			json = mapper.writeValueAsString( detailedItems );
+			
+		}
+		
+		
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print( json );

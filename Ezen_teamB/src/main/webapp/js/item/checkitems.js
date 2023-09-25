@@ -30,7 +30,7 @@ function getItemList(  ){
 				
 				html += `
 					<div class="col">
-						<a href="/Ezen_teamB/jsp/item/detaileditems.jsp?ino=${p.ino}">
+						<a href="/Ezen_teamB/jsp/item/detaileditems.jsp?ino=${p.ino}?itrade=${p.itrade}">
 							<div class="card">
 								
 								<img src="/Ezen_teamB/jsp/item/img/${ Object.values(p.imgList)[0] == null ? 'defaultImg.png' : Object.values(p.imgList)[0] }" class="card-img-top" alt="...">
