@@ -131,7 +131,12 @@ public class BoardController extends HttpServlet {
 	}
 	// 4. 게시판 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// 1. 요청
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
+		
+		
+		
 	}
 
 }
