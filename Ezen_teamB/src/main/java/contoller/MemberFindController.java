@@ -39,15 +39,18 @@ public class MemberFindController extends HttpServlet {
 
 	// 로그인 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		String mid = request.getParameter("mid");
-		String mpwd = request.getParameter("mpwd");
+			// 매개변수 호출
+		String mid = request.getParameter("signId");
+		String mpwd = request.getParameter("signPwd");
 		
+		
+			// 다오 
 		boolean result = MemberDao.getInstance().login(mid , mpwd);
 		
+		// 결과가 true 라면
 		if (result == true) {
 			MemberList loginDto = MemberDao.getInstance().info(mid);
-			
+			//세션 저장
 			request.getSession().setAttribute("loginSession" ,loginDto );
 			MemberList sessin = (MemberList) request.getSession().getAttribute("loginSession");
 			System.out.println("로그인 세션 상태 : " + sessin);
