@@ -601,7 +601,7 @@ function fileDelete( idNum ){
 				`;
 
 			break;
-		}
+		}	
 	}
 			
 }
