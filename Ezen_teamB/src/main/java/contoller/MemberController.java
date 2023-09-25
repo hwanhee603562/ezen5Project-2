@@ -80,8 +80,6 @@ public class MemberController extends HttpServlet {
 			
 			MemberList result = MemberDao.getInstance().memberInfo(mno);
 			
-			System.out.println(result);
-			
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(result);
 			
@@ -115,6 +113,7 @@ public class MemberController extends HttpServlet {
 		String mpwd = request.getParameter("mpwd");
 		
 		boolean result = MemberDao.getInstance().deleteMember(mno, mpwd);
+		System.out.println(result);
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);

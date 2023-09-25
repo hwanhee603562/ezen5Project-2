@@ -150,7 +150,7 @@ public class MemberDao extends Dao{
 		try {
 			String sql = "delete from memberlist where mno = ? and mpwd = ? ";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(mno, mno); 	ps.setString(2, mpwd);
+			ps.setInt(1, mno); 	ps.setString(2, mpwd);
 			int count = ps.executeUpdate();
 			if(count == 1) {
 				return true;
