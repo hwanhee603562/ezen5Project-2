@@ -41,12 +41,14 @@ public class MemberFindController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// 매개변수 호출
 		String mid = request.getParameter("signId");
+		System.out.println("dopost mid :" + mid);
 		String mpwd = request.getParameter("signPwd");
+		System.out.println("dopost mpwd :" + mpwd);
 		
 		
 			// 다오 
 		boolean result = MemberDao.getInstance().login(mid , mpwd);
-		
+		System.out.println("로그인 컨트롤러 result 확인 : " + result);
 		// 결과가 true 라면
 		if (result == true) {
 			MemberList loginDto = MemberDao.getInstance().info(mid);

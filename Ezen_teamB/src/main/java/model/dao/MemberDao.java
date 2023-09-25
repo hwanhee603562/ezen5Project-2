@@ -68,17 +68,17 @@ public class MemberDao extends Dao{
 		
 		try {
 			
-			String sql = "";
+			String sql = "select * from memberlist where mid = ? and mpwd = ?;";
 			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, sql);
-			ps.setString(2, sql);
+			ps.setString(1, mid);
+			ps.setString(2, mpwd);
 			rs=ps.executeQuery();
 			
 			if(rs.next()) {return true;}
 			
 			
-		} catch (Exception e) {System.out.println("findId Dao 오류 : " + e);}
+		} catch (Exception e) {System.out.println("findId login 오류 : " + e);}
 		
 		return false;
 		
