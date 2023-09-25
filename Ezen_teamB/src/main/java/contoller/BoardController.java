@@ -71,13 +71,15 @@ public class BoardController extends HttpServlet {
 			
 			int starrow = (page-1)*listsize; // 페이지번호*최대게시물수
 			
+			
 			int totalsize = BoardDao.getInstance().getTotalSize(cno,key,keyword);
-			int totalpage = totalsize%listsize == 0  ? totalsize/listsize : totalsize/listsize;
+			int totalpage = totalsize%listsize == 0  ? totalsize/listsize : totalsize/listsize+1;
 			int btnsize = 5;
 			int starbtn =((page-1)/btnsize)*btnsize+1; System.out.println(starbtn);
 			int endbtn = starbtn+(btnsize-1); 
 			if( endbtn >= totalpage ) endbtn = totalpage;
-			ArrayList<Board> result = BoardDao.getInstance().getList(cno, listsize, endbtn, key, keyword);
+			
+			ArrayList<Board> result = BoardDao.getInstance().getList(cno, listsize, starrow, key, keyword);
 			PageDto pageDto = new PageDto(page, listsize,btnsize, totalsize, totalpage, starbtn, endbtn, result);
 			
 			json = objectMapper.writeValueAsString(pageDto);
@@ -134,9 +136,16 @@ public class BoardController extends HttpServlet {
 		// 1. 요청
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		
+			String filename = BoardDao.getInstance().getBoard(bno).getBfile();
 		
-		
-		
+			boolean result = BoardDao.getInstance().bDelete(bno);
+			
+			if(result) {
+				filename = request.getServletContext().getRealPath("/jsp/board/upload")+"/"+filename;
+				FileService.fileDelete(filename);
+			}
+			response.setContentType("application/json; charset=UTF-8"); 
+			response.getWriter().print(result);
 	}
 
 }

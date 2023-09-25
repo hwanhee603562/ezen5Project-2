@@ -23,11 +23,9 @@
 			</select>
 			제목 : <input name="btitle" type="text">
 			내용 : <textarea name="bcontent"></textarea>
-			첨부파일 : <input type="file" name="bfile" class="">
-		</form>
-			<button onclick="" type="button">수정</button>
-			<button onclick="" type="button">삭제</button>
-			
+			첨부파일 : <input type="file" name="bfile" class="bfile">
+			<button onclick="bUpdate()" type="button">수정</button>
+			</form>
 		</div>
 	</div>
 	

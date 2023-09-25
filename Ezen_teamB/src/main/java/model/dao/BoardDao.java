@@ -127,7 +127,16 @@ public class BoardDao extends Dao{
 	}
 	
 	// 개별 게시물 삭제
-	
+	public boolean bDelete(int bno) {
+		try {
+			String sql = "delete from board where bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bno);
+			int count = ps.executeUpdate();
+			if(count == 1) return true;
+		} catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
 	
 	
