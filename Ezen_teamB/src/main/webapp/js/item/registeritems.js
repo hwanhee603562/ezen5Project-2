@@ -588,7 +588,7 @@ function fileDelete( idNum ){
 	// 파일 라벨의 for 포인터 변경
 	for( let i=1; i<=10; i++ ){
 		var fileCheck = document.getElementById(`uploadFile${i}`).value;
-		console.log( fileCheck )
+		
 		// 파일객체가 존재하지 않는 경우
 			// 라벨이 가리키는 id식별자( =for )를 변경
 		if(!fileCheck){
@@ -658,10 +658,8 @@ function registerItems(){
 	
 	// 10개의 인풋박스 중 파일이 첨부되어있지 않은 input 삭제 form데이터 초기화
 		// 해당 input박스의 부모요소(div)를 공백으로 초기화
-		
 	for( let i=1; i<=10; i++ ){
 		var fileCheck = document.getElementById(`uploadFile${i}`).value;
-		
 		if( !fileCheck ){
 			document.querySelector(`.hiddenBox${i}`).innerHTML = ``;
 		}
@@ -703,9 +701,9 @@ function registerItems(){
 			
 			if(result) console.log('등록성공')
 			
-			
 		},
-		errror: e =>{
+		error: e =>{
+			console.log(e)
 			console.log('제품등록 에러발생')
 		}
 	})

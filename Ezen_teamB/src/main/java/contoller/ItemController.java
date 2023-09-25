@@ -178,7 +178,7 @@ public class ItemController extends HttpServlet {
 		
 		// 물품정보 생성자
 		ItemsInfo itemsInfo = new ItemsInfo(
-			ino, iprice, mno, ititle, icontent, itrade, itradeplace, eno, dno, isafepayment, imgList
+			ino, iprice, 2/* mno 로그인 기능 완성 시 로그인세션에서 받은 mno 기입 예정 */, ititle, icontent, itrade, itradeplace, eno, dno, isafepayment, imgList
 		);
 		
 		// 거래방식이 대면거래일 경우 대면거래 위치생성자 매개값으로 전달

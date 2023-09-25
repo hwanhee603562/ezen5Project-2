@@ -30,17 +30,22 @@ function getItemList(  ){
 				
 				html += `
 					<div class="col">
-						<div class="card">
-							<img src="/jspweb/img/카드1.png" class="card-img-top" alt="...">
-							<div class="card-body">
-								<div class="itemCardTitle"> ${p.ititle} </div>
-								<div class="itemCardPrice"> ${p.iprice} </div>
-								<div class="itemCardAdress"> ${p.itrade == 1 ? '' : p.itrade == 2 ? '대면거래' : '중개거래' } </div>
-								<div class="itemCardAdress"> ${ p.itrade == 1 ? '배송' : p.itradeplace } </div>
-								<div class="itemCardAdress"> ${ p.isafepayment == 0 ? '안전결제사용' : '' } </div>
-								<div class="itemCardAdress"> ${ p.idate } </div>
+						<a href="/Ezen_teamB/jsp/item/detaileditems.jsp?ino=${p.ino}">
+							<div class="card">
+								
+								<img src="/Ezen_teamB/jsp/item/img/${ Object.values(p.imgList)[0] == null ? 'defaultImg.png' : Object.values(p.imgList)[0] }" class="card-img-top" alt="...">
+								
+								<div  class="card-body">
+									<div class="itemCardTitle"> ${p.ititle} </div>
+									<div class="itemCardPrice"> ${p.iprice} </div>
+									<div class="itemCardAdress"> ${p.itrade == 1 ? '' : p.itrade == 2 ? '대면거래' : '중개거래' } </div>
+									<div class="itemCardAdress"> ${ p.itrade == 1 ? '배송' : p.itradeplace } </div>
+									<div class="itemCardAdress"> ${ p.isafepayment == 0 ? '안전결제사용' : '' } </div>
+									<div class="itemCardAdress"> ${ p.idate } </div>
+								</div>
+								
 							</div>
-						</div>
+						</a>
 					</div>
 				`
 				
@@ -81,7 +86,6 @@ function getMainCategory(){
 				}
 
 				html += `<td onclick="outputSubCategory(${s[i].uno}, '${s[i].uname}')"> ${s[i].uname} </td>`
-				console.log(s[i].uname)
 			}
 			html += `</tr>`
 			
