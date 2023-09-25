@@ -385,6 +385,12 @@ function deleteInfo(){
 	
 }
 
+// 채팅목록 출력함수
+function chattingList(){
+	
+}
+
+
 
 
 /* 주소 검색 api */				// 추후 header에서 통일 가능

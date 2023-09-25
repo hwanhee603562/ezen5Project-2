@@ -31,7 +31,7 @@
 					    <a onclick="PrintWishList()" id="smenu3" class="nav-link" href="#">찜목록</a>
 					  </li>
 					  <li class="nav-item smenu4">
-					    <a id="smenu4" class="nav-link" href="#">채팅목록</a>
+					    <a onclick="chattingList()" id="smenu4" class="nav-link" href="#">채팅목록</a>
 					  </li>
 					</ul>
 				</div>
