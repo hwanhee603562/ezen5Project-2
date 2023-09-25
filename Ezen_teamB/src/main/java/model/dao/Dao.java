@@ -22,7 +22,7 @@ public class Dao {
 			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedtrade"
 					, "root", "1234");
 			*/
-
+			
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 
