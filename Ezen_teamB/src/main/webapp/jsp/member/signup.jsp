@@ -66,7 +66,7 @@
 				<input class="form-floating mb-1 px-3" onkeyup="idcheck()" id="signId" name="signId" maxlength="20" oninput="maxlength(this)"  type="text" placeholder="아이디"><br/>
 				<div class="idCheck px-2"></div><br/>		<!-- 중복검사, 영문+숫자 조합 최소 5글자 이상 -->
 
-				 <input type="text" style="display:none;"/>			
+
 				<div><span class="signfont">비밀번호</span></div>
 				<div ><span style="color:gray; font-size:12px;">영문 + 숫자 조합 8자 이상 입력해주세요</span></div>
 				<input class="form-floating mb-1 px-3" onkeyup="signPwdTest()"  id="signPwd" name="signPwd" maxlength="20" oninput="maxlength(this)"  type="password" placeholder="비밀번호">
