@@ -91,14 +91,15 @@ public class MemberDao extends Dao{
 		
 		try {
 			
-			String sql = "select mno from memberlist where mid = ?";
+			String sql = "select mno, mid from memberlist where mid = ?";
 			
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, mid);
+
 			rs=ps.executeQuery();
 			
 			if(rs.next()) {
-				MemberList memberList = new MemberList(rs.getInt(1));
+				MemberList memberList = new MemberList(rs.getInt(1),rs.getString(2));
 				return memberList;
 			}			
 		} catch (Exception e) {System.out.println("findId Dao 오류 : " + e);}

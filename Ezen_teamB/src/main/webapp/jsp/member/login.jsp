@@ -5,29 +5,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 로그인 jsp -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<link href="/Ezen_teamB/css/signup/signup.css" rel="stylesheet">
+
 </head>
 <body>
-		<%@include file = "../header.jsp" %>	
-	로그인 화면
+		<%@include file = "../header.jsp" %>
 	<div class="container">
-		<div><span class="signfont">아이디</span></div> <!-- onkeyup="idcheck()" -->
-		<input class="form-floating mb-1 px-3" id="signId" name="signId" maxlength="20" oninput="maxlength(this)"  type="text" placeholder="아이디"><br/>
-			
-		<div><span class="signfont">비밀번호</span></div>
-		<input class="form-floating mb-1 px-3" id="signPwd" name="signPwd" maxlength="20" oninput="maxlength(this)"  type="password" placeholder="비밀번호">
-
-				<div>
-					<button class="signbtn btn btn-outline-dark" type="button" onclick="login()">로그인</button>
-				</div>
-
-
+		<div class="signupform">
+				<h3 class="loginInfo">로그인 페이지</h3>
+			<div>
+				<span class="signfont">아이디</span>
+			</div>
 	
+			<input class="form-floating mb-4 px-3 " id="signId" name="signId"
+				maxlength="20" oninput="maxlength(this)" type="text"
+				placeholder="아이디"><br />
+	
+			<div>
+				<span class="signfont">비밀번호</span>
+			</div>
+			<input class="form-floating mb-4 px-3" id="signPwd" name="signPwd"
+				maxlength="20" oninput="maxlength(this)" type="password"
+				placeholder="비밀번호">
+	
+	
+			<div>
+				<button class="loginbtn btn btn-outline-dark" type="button"
+					onclick="login()">로그인</button>
+			</div>
+	
+			<div class="search">
+				<a href="#" >아이디 찾기</a>
+				<a href="#" >비밀번호 찾기</a>
+			</div>
+	
+		</div>
 	</div><!-- container end -->
-	
-	
-	
-	
+
+
+
+
 
 
 
