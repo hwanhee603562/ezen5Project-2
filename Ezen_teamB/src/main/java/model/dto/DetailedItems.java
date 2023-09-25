@@ -52,11 +52,34 @@ public class DetailedItems {
 		this.mid = mid;
 	}
 	
+	// 배송거래 생성자
+		// 위치정보( 장소, 위도, 경도 ) 제외
+	public DetailedItems(int ino, int iprice, int mno, String ititle, String icontent, int itrade, String idate,
+			int eno, int iestate, int dno, int isafepayment, int keepstate, Map<Integer, String> imgList, String mid) {
+		super();
+		this.ino = ino;
+		this.iprice = iprice;
+		this.mno = mno;
+		this.ititle = ititle;
+		this.icontent = icontent;
+		this.itrade = itrade;
+		this.idate = idate;
+		this.eno = eno;
+		this.iestate = iestate;
+		this.dno = dno;
+		this.isafepayment = isafepayment;
+		this.keepstate = keepstate;
+		this.imgList = imgList;
+		this.mid = mid;
+	}
+	
 	
 	// getter setter
 	public int getIno() {
 		return ino;
 	}
+
+	
 
 	public void setIno(int ino) {
 		this.ino = ino;

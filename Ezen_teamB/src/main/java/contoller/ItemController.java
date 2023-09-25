@@ -86,6 +86,7 @@ public class ItemController extends HttpServlet {
 			
 			int ino = Integer.parseInt( request.getParameter("ino") );
 			int itrade = Integer.parseInt( request.getParameter("itrade") );
+			
 			DetailedItems detailedItems = ItemDao.getInstance().getDetailedItems( ino, itrade );
 			
 			json = mapper.writeValueAsString( detailedItems );

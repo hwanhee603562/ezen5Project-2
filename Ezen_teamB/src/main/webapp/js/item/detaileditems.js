@@ -1,7 +1,7 @@
 let ino = new URL( location.href ).searchParams.get("ino");
 let itrade = new URL( location.href ).searchParams.get("itrade");
 
-
+getDetailedItems();
 function getDetailedItems(){
 	
 	$.ajax({
@@ -11,7 +11,7 @@ function getDetailedItems(){
 		data: { 
 			type : "getDetailedItems", 
 			ino : ino,
-			let : itrade
+			itrade : itrade
 		},
 		success: s => {
 			console.log(s)

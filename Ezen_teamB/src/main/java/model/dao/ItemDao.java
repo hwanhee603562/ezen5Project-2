@@ -237,9 +237,28 @@ public class ItemDao extends Dao {
 		return null;
 	}
 	
-		// 2-5 개별 대면거래 위치 조회
-	public DpointDto getDpointInfo( int ino ) {
+		// 2-5 이미지리스트 조회
+	public Map<Integer, String> getImgList( int ino ) {
 		
+		try {
+			
+			Map<Integer, String> map = new HashMap<>();
+
+			String sql = "select * from pimg where ino = "+ino;
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			int i=0;
+			while( rs.next() ) {
+				map.put(i++, rs.getString("pimg"));
+			}
+			
+			return map;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		
 		return null;
 	}
@@ -317,34 +336,64 @@ public class ItemDao extends Dao {
 		try {
 			
 			String sql = "";
+			DetailedItems detailedItems = new DetailedItems();
+			// 조회 물품의 이미지 리스트 조회
+			Map<Integer, String> map = getImgList( ino );
 			
 			// 거래방식에 따른 조회방법
 				// 1. 거래방식 : 배송 - 단순 물품정보 조회
-			if( ino == 1 ) {
-				sql = "select * from itemsinfo where ino = "+ino;
+			if( itrade == 1 ) {
+				sql = "select * from itemsinfo a join memberlist b on a.mno = b.mno where ino = "+ino;
+				
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
+				
+				if( rs.next() ) {
+					detailedItems = new DetailedItems(
+							rs.getInt("ino"), rs.getInt("iprice"), rs.getInt("mno"), rs.getString("ititle"), rs.getString("icontent"),
+							rs.getInt("itrade"), rs.getString("idate"), rs.getInt("eno"), rs.getInt("iestate"),
+							rs.getInt("dno"), rs.getInt("isafepayment"), rs.getInt("keepstate"), map, rs.getString("mid")
+					);
+				}
+				
 			}
 				// 2. 거래방식 : 대면거래 - 물품정보와 대면거래 위치 테이블 조인하여 조회
-			else if( ino == 2 ) {
+			else if( itrade == 2 ) {
 				sql = "select a.*, b.dlat, b.dlng, c.mid "
 						+ "from itemsinfo a join dpoint b join memberlist c"
 						+ " on a.ino = b.ino where a.ino = "+ino+" and a.mno = c.mno";
+				
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
+				
+				if( rs.next() ) {
+					detailedItems = new DetailedItems(
+							rs.getInt("ino"), rs.getInt("iprice"), rs.getInt("mno"), rs.getString("ititle"), rs.getString("icontent"),
+							rs.getInt("itrade"), rs.getString("itradeplace"), rs.getString("idate"), rs.getInt("eno"), rs.getInt("iestate"),
+							rs.getInt("dno"), rs.getInt("isafepayment"), rs.getInt("keepstate"), map, rs.getString("dlat"), rs.getString("dlng"), rs.getString("mid")
+					);
+				}
+				
 			}
 				// 3. 거래방식 : 중개거래 - 물품정보와 중개거래소 위치 테이블 조인하여 조회
-			else if( ino == 3 ) {
+			else if( itrade == 3 ) {
 				sql = "select a.*, b.elat, b.elng, c.mid "
 						+ "from itemsinfo a join emediation b join memberlist c"
 						+ " on a.eno = b.eno where a.ino = "+ino+" and a.mno = c.mno";
-			}
-			
-			
-			rs = ps.executeQuery();
-			
-			while( rs.next() ) {
 				
-				ItemsInfo itemsInfo = new ItemsInfo();
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
 				
+				if( rs.next() ) {
+					detailedItems = new DetailedItems(
+							rs.getInt("ino"), rs.getInt("iprice"), rs.getInt("mno"), rs.getString("ititle"), rs.getString("icontent"),
+							rs.getInt("itrade"), rs.getString("itradeplace"), rs.getString("idate"), rs.getInt("eno"), rs.getInt("iestate"),
+							rs.getInt("dno"), rs.getInt("isafepayment"), rs.getInt("keepstate"), map, rs.getString("elat"), rs.getString("elng"), rs.getString("mid")
+					);
+				}
 			}
-			
+
+			return detailedItems;
 			
 		} catch (Exception e) {
 			System.out.println(e);
