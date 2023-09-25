@@ -30,6 +30,7 @@ public class Dao {
 
 			this.conn = DriverManager.getConnection("jdbc:mysql://database-1.ccmmlpcfyswe.us-east-1.rds.amazonaws.com:3306/usedtrade"
 							, "admin", "12341234a");
+							
 			
 			
 			System.out.println("안내] DB연동성공");

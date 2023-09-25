@@ -144,8 +144,43 @@ public class MemberDao extends Dao{
 		return false;
 	}
 	
+	// 회원탈퇴
+	public boolean deleteMember(int mno, String mpwd) {
+		
+		try {
+			String sql = "delete from memberlist where mno = ? and mpwd = ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(mno, mno); 	ps.setString(2, mpwd);
+			int count = ps.executeUpdate();
+			if(count == 1) {
+				return true;
+			}
+			
+		} catch (Exception e) {}
+		
+		
+		return false;
+	}
+	
 	
 }	// dao end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

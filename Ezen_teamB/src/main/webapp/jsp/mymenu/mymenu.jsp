@@ -31,7 +31,7 @@
 					    <a onclick="PrintWishList()" id="smenu3" class="nav-link" href="#">찜목록</a>
 					  </li>
 					  <li class="nav-item smenu4">
-					    <a id="smenu4" class="nav-link" href="#">채팅목록</a>
+					    <a onclick="chattingList()" id="smenu4" class="nav-link" href="#">채팅목록</a>
 					  </li>
 					</ul>
 				</div>
@@ -47,7 +47,7 @@
 		</div>
 	</div>	<!-- 마이메뉴 전체구역 end -->
 	
-	<!-- Modal -->
+	<!-- Modal(회원정보 수정) -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
@@ -91,6 +91,29 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 	        <button onclick="updateInfo()" type="button" class="btn btn-primary">수정</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Modal(회원탈퇴) -->
+	<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">회원탈퇴</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<h6>회원탈퇴를 원하시면 비밀번호를 입력해주세요.</h6>
+	        <div class="form-floating mb-3">
+			  <input type="password" class="form-control deletepwd" id="floatingPassword">
+			  <label for="floatingPassword">비밀번호</label>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	        <button onclick="deleteInfo()" type="button" class="btn btn-primary">탈퇴</button>
 	      </div>
 	    </div>
 	  </div>

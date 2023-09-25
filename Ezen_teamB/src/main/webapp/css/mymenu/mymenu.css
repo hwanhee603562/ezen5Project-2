@@ -182,6 +182,14 @@
     right: 10px;
 }
 
+/* 회원탈퇴 버튼 */
+.deleteBtn{
+	font-size: 10px !important;
+	position: absolute;
+    top: 115px;
+    right: 10px;
+}
+
 .nav-tabs{
 	width: 100%;
 	border-radius: 0;
