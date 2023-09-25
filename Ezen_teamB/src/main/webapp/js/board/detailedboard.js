@@ -26,7 +26,7 @@ function getBoard(){
 				첨부파일 : <div> ${r.bfile} </div>
 
 			`;
-			
+			html +='<a href="mainboard.jsp"><button type="button">목록보기</button></a>';
 			
 	
 			
