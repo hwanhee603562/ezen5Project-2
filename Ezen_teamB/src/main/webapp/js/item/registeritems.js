@@ -603,7 +603,7 @@ function fileDelete( idNum ){
 			break;
 		}
 	}
-	
+		
 }
 
 
