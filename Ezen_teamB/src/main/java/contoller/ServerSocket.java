@@ -82,6 +82,7 @@ public class ServerSocket {
 			// 2-1 받은 메시지를 접속된 회원들에게 모두 전송
 			for(ClientDto clientDto : clientList ) {	// 회원목록에서 하나씩 회원 꺼내기
 				clientDto.getSession().getBasicRemote().sendText(jsonMsg);	// 예외처리 필수!
+				System.out.println("메세지 전송");
 			}
 			
 		}
