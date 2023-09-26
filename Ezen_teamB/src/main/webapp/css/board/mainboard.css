@@ -1,14 +1,108 @@
-@charset "UTF-8";
-.boardTop{
-	border: 1px solid red;
-}
-.boardTable{
-	border: 1px solid red;
-	width: 1200px;
-}
-.boardBottom{
-	border: 1px solid red;
-	display: flex;
-	justify-content: center;
+/* Style for the webcontainer */
+ .webcontainer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+} 
+
+/* Style for the boardTop */
+.boardTop {
+    background-color:#85337F;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
 }
 
+/* Style for the h3 inside boardTop */
+.boardTop h3 {
+    margin: 0;
+}
+
+/* Style for the boardmid */
+.boardmid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Style for the select in listsize */
+.listsize {
+    padding: 5px;
+}
+
+/* Style for the buttons in boardmid */
+.boardmid button {
+    padding: 10px 20px;
+    background-color:#85337F;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Style for the boardTable */
+.boardTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Style for the table rows */
+.boardTable tr {
+    border-bottom: 1px solid #ccc;
+}
+
+/* Style for the table headings */
+.boardTable th {
+    background-color:#85337F;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style for the table cells */
+.boardTable td {
+    padding: 10px;
+}
+
+/* Style for the boardBottom */
+.boardBottom {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Style for the pagebox inside boardBottom */
+.pagebox {
+    display: inline-block;
+}
+
+/* Style for the search */
+.search {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Style for the key select in search */
+.key {
+    padding: 5px;
+}
+
+/* Style for the keyword input in search */
+.keyword {
+    padding: 5px;
+}
+
+/* Style for the search button in search */
+.search button {
+    padding: 10px 20px;
+    background-color:#85337F;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+/* Style for table rows when hovered */
+.boardTable tr:hover {
+    background-color: #e0e0e0; /* Change this to the desired hover color */
+}

@@ -111,7 +111,11 @@ public class BoardController extends HttpServlet {
 
 	// 3. 게시판 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MultipartRequest multi = new MultipartRequest(request, request.getServletContext().getRealPath("/jsp/board/upload"),1024*1024*1024,"UTF-8", new DefaultFileRenamePolicy());
+		MultipartRequest multi = new MultipartRequest(
+				request, 
+				request.getServletContext().getRealPath("/jsp/board/upload"),
+				1024*1024*1024,"UTF-8", 
+				new DefaultFileRenamePolicy());
 		int cno = Integer.parseInt("cno");
 		String btitle = multi.getParameter("btitle");
 		String bcontent = multi.getParameter("bcontent");
@@ -120,6 +124,7 @@ public class BoardController extends HttpServlet {
 		int bno = Integer.parseInt(multi.getParameter("bno"));
 		Board updateDto = new Board(cno,bno,btitle,bcontent,bfile);
 		if(updateDto.getBfile() == null ) {
+			// 
 			updateDto.setBfile(BoardDao.getInstance().getBoard(bno).getBfile());
 		}else {
 			String filename = BoardDao.getInstance().getBoard(bno).getBfile();
