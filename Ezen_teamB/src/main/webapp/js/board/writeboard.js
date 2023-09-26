@@ -13,6 +13,7 @@ function writeBtn() {
 		success : r => { console.log(r) 
 		if(r){
 			alert('글등록성공')
+			location.href="/Ezen_teamB/jsp/board/mainboard.jsp";
 		}else{ alert('글등록실패') }
 		},
 		error : e => { console.log(e )}
