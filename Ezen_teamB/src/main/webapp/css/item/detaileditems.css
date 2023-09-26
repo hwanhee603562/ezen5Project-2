@@ -12,8 +12,8 @@
 /* 이미지 출력구역 */
 .outputImg{
 	width: 700px;
-	height: 700px;
-	border: 1px solid blue;
+	height: 500px;
+	border: 1px solid black;
 	margin: 0 auto;
 }
 .itemImg{
@@ -27,81 +27,144 @@
 .carousel-indicators [data-bs-target]{
 	background-color: black !important;
 }
-
-
-
-
-
-/* 판매자 id / 등록일자 출력구역 */
-.outputBasicInfo{
-	width: 1000px;
-	height: 100px;
-	border: 1px solid blue;
-	display: flex;
+/* 캐러셀 전체구역을 outputImg 구역 기준으로 100% 설정하여 고정 */
+#carouselExampleIndicators{
+	height: 100% !important;
 }
+
+
+
+
+/* ============== 판매자 id / 등록일자 / 제목 출력구역 */
 .basicInfoLeft{
-	width: 500px;
-	border: 1px solid red;
+	width: 1000px;
+	border-top: 1px solid #e8e8e8;
+	margin-top: 20px;
+	padding-top: 20px;
 }
 .basicInfoRight{
-	width: 500px;
-	border: 1px solid red;
+	width: 1000px;
+	border-bottom: 1px solid #e8e8e8;
 	text-align: right;
 }
 
+/* 판매 제목 */
+.outputTitle{
+	width: 1000px;
+	height: 100px;
+	padding-top: 15px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+/* -------- 내용 안내 구역 */
+
+.buyerInfo{
+	font-size: 18px;
+	font-weight: bold;
+}
+.uploadDate{
+	font-size: 15px;
+}
+.itemTitle{
+	font-size: 22px;
+	font-weight: bold;
+}
+	
 
 
 
-/* 판매기본 정보와 판매내용을 좌우로 출력하는 구역 */
+
+/* ============== 판매자 id / 등록일자 출력구역 end */
+
+/* ============== 판매기본정보 */
 .mainInformation{
 	width: 1000px;
-	height: 600px;
+	height: 400px;
 	display: flex;
-	border: 1px solid blue;
+	border-bottom: 1px solid #e8e8e8;
+	padding-top: 20px;
 }
 
 /* 좌측 판매 기본정보 출력 */
 .mainInfoLeft{
 	width: 500px; 
-	border: 1px solid red;
 }
 /* 우측 판매 기본정보 출력 */
 .mainInfoRight{
 	width: 500px;
-	border: 1px solid red;
+
 }
 
 
-/* 판매 제목 */
-.outputTitle{
-	width: 480px;
-	height: 100px;
-	border: 1px solid blue;
-}
-/* 거래방식, 판매가격, 안전결제 사용여부 */
+
+
+
+/* -------- 거래방식, 판매가격, 안전결제 사용여부 */
 .outputTradeMethod{
 	width: 480px;
 	height: 400px;
-	border: 1px solid blue;
-}
-.outputPlace{
-
 }
 
 
+.tradeInfo{
+	height: 80px;
+}
+.priceInfo{
+	height: 80px;
+}
+.safePaymentInfo{
+	height: 80px;
+}
 
 
+/* -------- 내용 안내 구역 */
+.itemTrade{
+	font-size: 17px; 
+	font-weight: bold;
+}
+.itemPrice{
+	font-size: 17px; 
+	font-weight: bold;
+}
+.itemSafePayment{
+	font-size: 17px; 
+	font-weight: bold;
+}
+.cautionComment{
+	font-size: 15px; 
+	color: gray;
+}
+
+
+/* ============== 판매기본정보 end */
 
 
 /* 판매내용 */
 .outputContent{
 	width: 1000px;
 	height: 500px;
-	border: 1px solid blue;
+	border: 1px solid #e8e8e8;
+	padding: 20px;
 }
-/* 거래방식에 따른 위치정보 출력 구역 */
 
 
+
+/* ============== 버튼 구역 */
+.buttonField{
+	width: 400px;
+	height: 70px;
+	margin: 0 auto;
+	display: flex;
+	margin-top: 30px;
+}
+.watchItemBtn{
+	width: 200px;
+	height: 70px;
+}
+.chatBtn{
+	width: 200px;
+	height: 70px;
+}
 
 
 

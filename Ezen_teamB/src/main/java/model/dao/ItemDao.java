@@ -269,9 +269,8 @@ public class ItemDao extends Dao {
 		try {
 			ArrayList<ItemsInfo> list = new ArrayList<>();
 			
-			String sql = "select distinct a.ino, a.iprice, a.mno, a.ititle, a.icontent, "
-						+ "a.itrade, a.itradeplace, a.idate, a.eno, a.iestate, a.dno, a.isafepayment, a.keepstate, b.pimg " 
-						+ "from itemsinfo a left outer join pimg b on a.ino = b.ino ";
+			String sql = "select a.ino, a.iprice, a.mno, a.ititle, a.icontent, a.itrade, a.itradeplace, a.idate, a.eno, a.iestate, a.dno, a.isafepayment, a.keepstate, "
+					+ "(select pimg from pimg  p where p.ino = a.ino limit 1) pimg from itemsinfo a ";
 			
 			
 			// 기본 물품 정보에 대표 이미지 1개만 조회
