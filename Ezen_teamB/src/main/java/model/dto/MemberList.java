@@ -72,6 +72,23 @@ public class MemberList {
 		this.mno = mno;
 	}
 
+	
+	// 아이디 & 비밀번호 찾기 생성자
+
+	public MemberList(String mname, String mphone) {
+		super();
+		this.mname = mname;
+		this.mphone = mphone;
+	}
+	
+
+	// 아이디 & 비밀번호 반환  생성자
+	
+	public MemberList(String mid) {
+		super();
+		this.mid = mid;
+	}
+
 	// get, set
 	public int getMno() {
 		return mno;

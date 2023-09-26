@@ -91,14 +91,15 @@ public class MemberDao extends Dao{
 		
 		try {
 			
-			String sql = "select mno from memberlist where mid = ?";
+			String sql = "select mno, mid from memberlist where mid = ?";
 			
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, mid);
+
 			rs=ps.executeQuery();
 			
 			if(rs.next()) {
-				MemberList memberList = new MemberList(rs.getInt(1));
+				MemberList memberList = new MemberList(rs.getInt(1),rs.getString(2));
 				return memberList;
 			}			
 		} catch (Exception e) {System.out.println("findId Dao 오류 : " + e);}
@@ -161,6 +162,40 @@ public class MemberDao extends Dao{
 		
 		return false;
 	}
+	
+// 아이디 찾기 함수
+	
+	public MemberList idSearch(MemberList dto) {
+		try {
+			
+			String sql = "select mid from memberlist where mname = ? and mphone = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getMname());
+			ps.setString(2, dto.getMphone());
+			
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				MemberList member = new MemberList(rs.getString(1));
+				return member;}
+			
+			
+		} catch (Exception e) {
+			System.out.println("아이디찾기 다오 오류 "+ e) ;
+		}
+		
+		return null;
+	}
+	
+// 비밀번호 찾기 함수
+	
+	public MemberList pwdSearch(MemberList dto) {
+		
+		
+		return null;
+	}
+	
 	
 	
 }	// dao end

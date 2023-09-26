@@ -20,6 +20,7 @@ input::placeholder{ font-size: 12px; }
 .signInfo{margin: 50px 0px; width: 350px;text-align: center;
 color: #9767EB ; font-weight: bold;}
 
+
 /* 스크롤바 항상 보이기 */
 ::-webkit-scrollbar {
     width: 10px;
@@ -60,5 +61,26 @@ color: #9767EB ; font-weight: bold;}
 /* 주민번호 입력칸 사이즈 조정 */
 #signResidentNumF{ width: 165px;}
 #signResidentNumS{ width: 165px;}
+
+
+
+/* ----------------------로그인 화면 css ------------- */
+/* 상단 로그인 글자 */
+.loginInfo{margin: 150px 0px 50px 0px; width: 350px;text-align: center;
+color: #9767EB ; font-weight: bold;}
+
+/* 로그인 버튼 */
+.loginbtn{
+	width: 350px; 
+	border: 1px solid #9767EB !important; 
+	background-color: #9767EB !important; 
+	font-weight: bold !important; 
+	color: white !important;
+	height: 50px;
+
+}
+.search{
+	width : 280px; padding-left: 90px;
+	display: flex;justify-content: space-between; margin: 20px 0px; font-size: 13px; font-weight: bold;}
 
 
