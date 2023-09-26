@@ -50,7 +50,7 @@ function getItemList(  ){
 				`
 				
 			})
-				
+					
 			document.querySelector('.row').innerHTML = html
 			
 			// 검색 완료 후 검색 필드 초기화
