@@ -23,12 +23,18 @@ function getBoard(){
 				작성일 : <div> ${r.bdate} </div>
 				제목 : <div> ${r.btitle} </div>
 				내용 : <div> ${r.bcontent}</div>
-				첨부파일 : <div> ${r.bfile} </div>
+				첨부파일 : <div> <a href="/Ezen_teamB/BoardFileDownload="${r.bfile}>${r.bfile}</a> </div>
 
 			`;
-			html +='<a href="mainboard.jsp"><button type="button">목록보기</button></a>';
-			
-	
+			html +=`<a href="mainboard.jsp"><button type="button">목록보기</button></a>
+			<button onclick="bUpdate(${r.bno})" type="button">수정</button>
+			<button onclick="bDelete(${r.bno})" type="button">삭제</button>
+			`;
+		/*	if(r.ishost){
+				html +=`
+						<button onclick="bDelete(${r.bno})" type="button">삭제</button>`;
+			}
+	*/
 			
 			boardBox.innerHTML = html
 		
@@ -39,3 +45,27 @@ function getBoard(){
 	
 	
 }
+// 게시물 수정
+function bUpdate(bno){
+	location.href=`/Ezen_teamB/jsp/board/updateboard.jsp?bno=${bno}`;
+}
+// 게시물 삭제
+function bDelete(bno) {
+	$.ajax({
+		url : "/Ezen_teamB/BoardController",
+		method : "delete" ,
+		data : { bno : bno } ,
+		success : r => { console.log("통신성공")
+			if(r) {
+				alert('삭제 성공')
+				location.href="/Ezen_teamB/jsp/board/mainboard.jsp"
+			}else { alert('삭제 실패')}
+		} ,
+		error : e => { console.log("통신실패") }
+	})
+}
+
+
+
+
+

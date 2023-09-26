@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 개별게시판 jsp -->
+	<link href="/css/board/detailedboard.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file ="../header.jsp" %>
@@ -14,6 +15,13 @@
 		<div class="boardBox">
 		
 		
+		</div>
+		<div>
+			<input placeholder="답글을등록해주세요" type="text">
+			<button type="button">답글등록</button>
+		</div>
+		<div>
+			<div>답글출력구역</div>
 		</div>
 	</div>
 	
