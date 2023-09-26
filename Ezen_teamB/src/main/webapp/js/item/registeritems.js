@@ -1,5 +1,9 @@
 
 /* ================================ 카테고리 */
+if( !loginState ){
+	alert('물품등록페이지는 로그인 후 이용가능합니다')
+	location.href = "/Ezen_teamB/jsp/item/checkitems.jsp"
+}
 
 getMainCategory()
 // 1. 카테고리 대분류/소분류 출력

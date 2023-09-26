@@ -1,4 +1,4 @@
-console.log('헤더 js 정상')
+console.log('헤더 js')
 
 
 let loginState = false;
@@ -13,7 +13,6 @@ function getMemberInfo(){
       async : false, 
       data : {type : "info"} ,
       success : r => {
-		  console.log('getMemberInfo 결과값 아래꺼')
 		  console.log(r)
 		  
       let submenu = document.querySelector('.submenu')
