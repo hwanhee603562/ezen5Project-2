@@ -5,14 +5,18 @@ import javax.websocket.Session;
 public class ClientDto {
 	
 	private Session session;
-	private String mid;
+	private String cmid;
+	private String rmid;
+	private int ino;
 	
 	public ClientDto() {}
 
-	public ClientDto(Session session, String mid) {
+	public ClientDto(Session session, String cmid, String rmid, int ino) {
 		super();
 		this.session = session;
-		this.mid = mid;
+		this.cmid = cmid;
+		this.rmid = rmid;
+		this.ino = ino;
 	}
 
 	public Session getSession() {
@@ -23,17 +27,35 @@ public class ClientDto {
 		this.session = session;
 	}
 
-	public String getMid() {
-		return mid;
+	public String getCmid() {
+		return cmid;
 	}
 
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setCmid(String cmid) {
+		this.cmid = cmid;
+	}
+
+	public String getRmid() {
+		return rmid;
+	}
+
+	public void setRmid(String rmid) {
+		this.rmid = rmid;
+	}
+	
+
+	public int getIno() {
+		return ino;
+	}
+
+	public void setIno(int ino) {
+		this.ino = ino;
 	}
 
 	@Override
 	public String toString() {
-		return "ClientDto [session=" + session + ", mid=" + mid + "]";
+		return "ClientDto [session=" + session + ", cmid=" + cmid + ", rmid=" + rmid +  ", ino="+ ino + "]";
 	}
+
 
 }
