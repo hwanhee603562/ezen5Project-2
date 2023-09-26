@@ -36,8 +36,8 @@
 			</div>
 	
 			<div class="search">
-				<a href="#" >아이디 찾기</a>
-				<a href="#" >비밀번호 찾기</a>
+				<a href="/Ezen_teamB/jsp/member/search.jsp" >아이디 찾기</a>
+				<a href="/Ezen_teamB/jsp/member/search.jsp" >비밀번호 찾기</a>
 			</div>
 	
 		</div>
