@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@ include file = "../header.jsp" %>
-	
+		
 	<div class="checkItemsWrap">	<!-- 전체물품조회 전체구역 -->	
 		
 		<h2> 물품 전체보기 </h2>
