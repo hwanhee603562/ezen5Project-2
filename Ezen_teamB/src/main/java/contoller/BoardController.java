@@ -43,9 +43,11 @@ public class BoardController extends HttpServlet {
     	String bcontent = multi.getParameter("bcontent");
     	String bfile = multi.getFilesystemName("bfile");
     	
+    	int mno = ( (MemberList)request.getSession().getAttribute("loginSession") ).getMno(); System.out.println(mno);
     	int cno = Integer.parseInt(multi.getParameter("cno")); 
     	
-    	Board boardDto = new Board(cno, btitle, bcontent, bfile);
+    	
+    	Board boardDto = new Board(cno, btitle, bcontent, bfile, mno); System.out.println(boardDto);
     	
     	boolean result = BoardDao.getInstance().bwrite(boardDto);
     	
@@ -92,7 +94,7 @@ public class BoardController extends HttpServlet {
 			
 			Board result = BoardDao.getInstance().getBoard(bno);
 			
-			Object object = request.getSession().getAttribute("loginDto");
+			Object object = request.getSession().getAttribute("loginSession");
 			
 			if(object == null ) {
 				//result.setIshost(false);
@@ -116,7 +118,7 @@ public class BoardController extends HttpServlet {
 				request.getServletContext().getRealPath("/jsp/board/upload"),
 				1024*1024*1024,"UTF-8", 
 				new DefaultFileRenamePolicy());
-		int cno = Integer.parseInt("cno");
+		int cno = Integer.parseInt(multi.getParameter("cno"));
 		String btitle = multi.getParameter("btitle");
 		String bcontent = multi.getParameter("bcontent");
 		String bfile = multi.getFilesystemName("bfile");

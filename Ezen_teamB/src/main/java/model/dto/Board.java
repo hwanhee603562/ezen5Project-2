@@ -38,13 +38,13 @@ public class Board {
 	}
 	
 	// 글쓰기 생성자
-	public Board(int cno, String btitle, String bcontent, String bfile) {
+	public Board(int cno, String btitle, String bcontent, String bfile, int mno) {
 		super();
 		this.cno = cno;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bfile = bfile;
-		
+		this.mno = mno;
 	}
 	
 	
@@ -64,6 +64,9 @@ public class Board {
 		this.mno = mno;
 		this.mid = mid;
 	}
+	
+
+
 	// 게시물 개별 조회
 	public Board(int bno,  String btitle,String bcontent , String bfile,String bdate, int mno,int cno,String mid,   
 			String cname) {

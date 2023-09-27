@@ -19,15 +19,12 @@
 		<div>
 		<form class="writeForm">
 			<select name="cno" class="cno">
-				<option value="1">공지사항</option>
-				<option value="2">건의사항</option>
 			</select>
 			제목 : <input name="btitle" class="btitle" type="text">
 			내용 : <textarea name="bcontent" class="bcontent"></textarea>
 			첨부파일 : <input type="file" name="bfile" class="bfile">
 			<div class="oldfile"></div>
-			<button onclick="bUpdate()" type="button">수정</button>
-			
+			<button onclick="bUpdate()"type="button">수정</button>
 			</form>
 		</div>
 	</div>
