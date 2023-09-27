@@ -8,11 +8,11 @@ public class ClientDto {
 	private String cmid;				// 발신자
 	private String rmid;				// 수신자
 	private int ino;					// 물품번호
-	private int rno;					// 채팅방번호
+	private String rno;					// 채팅방번호
 	
 	public ClientDto() {}
 
-	public ClientDto(Session session, String cmid, String rmid, int ino, int rno) {
+	public ClientDto(Session session, String cmid, String rmid, int ino, String rno) {
 		super();
 		this.session = session;
 		this.cmid = cmid;
@@ -54,11 +54,11 @@ public class ClientDto {
 		this.ino = ino;
 	}
 
-	public int getRno() {
+	public String getRno() {
 		return rno;
 	}
 
-	public void setRno(int rno) {
+	public void setRno(String rno) {
 		this.rno = rno;
 	}
 

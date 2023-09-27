@@ -3,6 +3,7 @@ console.log('채팅페이지')
 
 let ino = new URL( location.href ).searchParams.get("ino");
 let rno = new URL( location.href ).searchParams.get("rno");
+console.log(rno)
 
 
 // 서버소켓 접속
@@ -37,6 +38,19 @@ function onMsg(e){
 	console.log(msg.msg)
 	
 	msg.msg.content = msg.msg.content.replace(/\n/g,'<br>');
+	
+	$.ajax({
+      url :  "/Ezen_teamB/ChattingController",
+      method : "get" ,
+      async : false, 
+      data : {rno : rno} ,
+      success : r => {console.log('통신성공 ' + r)
+		  
+	  },
+	  error : r => {}
+	})  
+	
+	
 }
 
 

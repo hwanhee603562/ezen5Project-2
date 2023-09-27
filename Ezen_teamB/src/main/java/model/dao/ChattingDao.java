@@ -49,14 +49,14 @@ public class ChattingDao extends Dao{
 	}
 	
 	// 메시지를 보낼때마다 DB에 저장
-	public boolean recordMsg(int cmno, int rmno, String msg, int ino, int rno) {
+	public boolean recordMsg(int cmno, int rmno, String msg, int ino, String rno) {
 		
 		try {
 			String sql = "insert into jchatting(caller, receiver,jcontent,ino,rno) values(?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cmno);	ps.setInt(2, rmno);
 			ps.setString(3, msg);	ps.setInt(4, ino);
-			ps.setInt(5, rno);
+			ps.setString(5, rno);
 			int count = ps.executeUpdate();
 			if(count == 1) {return true;}
 		
@@ -87,12 +87,13 @@ public class ChattingDao extends Dao{
 		
 		try {
 			String sql = "select rno from jchatting where caller = ? and receiver = ?";
+			System.out.println(sql);
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cmno);
 			ps.setInt(2, rmno);
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				return rs.getNString(1);
+				return rs.getString(1);
 			}
 			
 		} catch (Exception e) {System.out.println("findRno 오류 : " + e);}
