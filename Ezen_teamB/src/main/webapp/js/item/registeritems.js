@@ -303,11 +303,12 @@ function sample5_execDaumPostcode() {
 
 
 // 3. 거래방식 - 중개거래소 방식 클릭하였을 때
-// 중개거래소 정보
-	// pk
-	// 업체명
-	// 주소
+	// 중개거래소 정보
+		// pk
+		// 업체명
+		// 주소
 let emediationInfo = { eno : '', ename : '', eadress : '' }
+	// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 
 function brokerage(){
 	
@@ -347,6 +348,7 @@ function brokerage(){
 				
 				// 지도의 현재 level < 클러스터 최소 출력 level
 					// 클러스터가 출력될 시 개별 마커 정보는 출력되지 않음
+					// 1. 마커 출력
 				if( map2.b.H < clusterer2._model.minLevel ){
 					
 					positions.push({
@@ -354,8 +356,11 @@ function brokerage(){
 						latlng: new kakao.maps.LatLng(s.elat, s.elng)	// 중개거래소 위.경도
 					})
 					
-				} else {
 					
+					
+				} else {	// 2. 
+					
+					// 중개거래소의 위도 경도를 저장
 			        return new kakao.maps.Marker({
 			            position : new kakao.maps.LatLng(s.elat, s.elng)
 			        });
@@ -363,13 +368,25 @@ function brokerage(){
 		    });
 		    
 		    
+		    
 		    // 지도의 현재 level > 클러스터 최소 출력 level
 				// 클러스터가 출력될 시 개별 마커 정보는 출력되지 않음
+			// 1. 클러스터 출력을 위해 클러스터러에 마커의 정보를 저장
 		    if( map2.b.H >= clusterer2._model.minLevel ){
 				
 				// 클러스터러에 마커들을 추가합니다
 		    	clusterer2.addMarkers(markers);
-
+				
+				
+				console.log('map 범위 초과되어 마커 삭제')
+				console.log('markers 확인')
+				console.log(markers)
+				// 현재 마커 전체 삭제
+				for (var i = 0; i < markers.length; i++) {
+        			markers[i].setMap(null);
+        			console.log( markers[i].getMap() )
+    			}
+				
 		    }
 		    
 			for (var i = 0; i < positions.length; i++) {
@@ -379,7 +396,10 @@ function brokerage(){
 					map: map2, // 마커를 표시할 지도
 					position: positions[i].latlng // 마커의 위치
 				});
-
+				/*
+				// 추후 마커를 삭제하기 위해 배열에 마커 push
+				markers.push(marker2);
+					*/
 				// 마커에 표시할 인포윈도우를 생성합니다 
 				var infowindow = new kakao.maps.InfoWindow({
 					content: positions[i].content // 인포윈도우에 표시할 내용
