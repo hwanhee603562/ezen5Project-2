@@ -124,7 +124,19 @@
 		<div class="outputContent">
 			<!-- 판매 내용 -->
 			
+<<<<<<< HEAD
 
+=======
+			
+		<div class="outputContent">	<!-- 판매 내용 -->
+		판매 내용
+		
+		</div>
+		
+		<div class="buttonField">	<!-- 버튼 구역 -->
+			<button class="watchItemBtn" type="button"> 찜 </button>
+			<button onclick="chatStart()" class="chatBtn" type="button"> 가지톡 </button>
+>>>>>>> branch 'master' of https://github.com/hwanhee603562/ezen5Project-2
 		</div>
 
 		<div class="buttonField">

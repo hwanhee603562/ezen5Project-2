@@ -13,12 +13,35 @@ public class Dao {
 	
 	public Dao() {
 		try { 
+<<<<<<< HEAD
 			
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");	
+=======
+		
+			/*
+			 * Class.forName("com.mysql.cj.jdbc.Driver");
+			 * 
+			 * 
+			 * 
+			 * this.conn =
+			 * DriverManager.getConnection("jdbc:mysql://localhost:3306/usedtrade" , "root",
+			 * "1234");
+			 * 
+			 * 
+			 */
+>>>>>>> branch 'master' of https://github.com/hwanhee603562/ezen5Project-2
 			
-					
+			 Class.forName("com.mysql.cj.jdbc.Driver");
+			  
+			 
+			 
+			 
+			 this.conn = DriverManager.getConnection(
+			 "jdbc:mysql://database-1.ccmmlpcfyswe.us-east-1.rds.amazonaws.com:3306/usedtrade"
+			 , "admin", "12341234a");
 			
+<<<<<<< HEAD
 			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedtrade"
 					, "root", "1234");
 			
@@ -31,6 +54,9 @@ public class Dao {
 			this.conn = DriverManager.getConnection("jdbc:mysql://database-1.ccmmlpcfyswe.us-east-1.rds.amazonaws.com:3306/usedtrade"
 							, "admin", "12341234a"); 
 				*/			
+=======
+							
+>>>>>>> branch 'master' of https://github.com/hwanhee603562/ezen5Project-2
 			
 			
 			System.out.println("안내] DB연동성공");

@@ -9,7 +9,7 @@ public class ChattingDao extends Dao{
 	}
 	private ChattingDao() {}
 	
-	// 메시지 받는 사람의 mid를 구하는 메소드(첫 메시지 수신자 mid)
+	// 메시지 받는 사람의 mid또는 mno를 구하는 메소드(첫 메시지 수신자 mid)
 	public String findRMid(String type, int ino) {
 		String sql = "";
 		
@@ -49,19 +49,55 @@ public class ChattingDao extends Dao{
 	}
 	
 	// 메시지를 보낼때마다 DB에 저장
-	public boolean recordMsg(int cmno, int rmno, String msg, int ino) {
+	public boolean recordMsg(int cmno, int rmno, String msg, int ino, int rno) {
 		
 		try {
-			String sql = "insert into jchatting(caller, receiver,jcontent,ino) values(?, ?, ?, ?)";
+			String sql = "insert into jchatting(caller, receiver,jcontent,ino,rno) values(?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cmno);	ps.setInt(2, rmno);
 			ps.setString(3, msg);	ps.setInt(4, ino);
+			ps.setInt(5, rno);
 			int count = ps.executeUpdate();
 			if(count == 1) {return true;}
 		
 		} catch (Exception e) {System.out.println("recordMsg 오류" + e);}
 
 		return false;
+	}
+	
+	// 판매자의 회원번호를 가져오는 메소드
+	public int ifindMno(int ino) {
+		
+		try {
+			String sql = "select mno from itemsinfo where ino = " + ino;
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		} catch (Exception e) {System.out.println("ifindMno 오류 : " + e);}
+		
+		return 0;
+	}
+	
+	
+	// 채팅방 번호를 가져오는 메소드
+	public String findRno(int cmno, int rmno) {
+		
+		try {
+			String sql = "select rno from jchatting where caller = ? and receiver = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cmno);
+			ps.setInt(2, rmno);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getNString(1);
+			}
+			
+		} catch (Exception e) {System.out.println("findRno 오류 : " + e);}
+		
+		return null;
 	}
 	
 	

@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.dao.ChattingDao;
 import model.dao.ItemDao;
 import model.dto.CategoryDto;
 import model.dto.DetailedItems;
@@ -41,6 +42,7 @@ public class ItemController extends HttpServlet {
     // 제품 정보 가져오기
     // 중개거래소 가져오기
     // 카테고리 가져오기
+    // 채팅방번호 가져오기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String type = request.getParameter("type");
@@ -91,6 +93,23 @@ public class ItemController extends HttpServlet {
 			
 			json = mapper.writeValueAsString( detailedItems );
 			
+		}
+		
+		// 6. 채팅방번호 가져오기
+		else if(type.equals("getChatRno")) {
+			
+			int cmno = Integer.parseInt( request.getParameter("mno") );
+			int ino = Integer.parseInt( request.getParameter("ino") );
+			int rmno = ChattingDao.getInstance().ifindMno(ino);
+			String rno = UUID.randomUUID().toString();
+			
+			String result = ChattingDao.getInstance().findRno(cmno, rmno);
+			
+			if(result == null) {
+				json = mapper.writeValueAsString(rno);
+			}else {
+				json = mapper.writeValueAsString(result);
+			}
 		}
 		
 		
