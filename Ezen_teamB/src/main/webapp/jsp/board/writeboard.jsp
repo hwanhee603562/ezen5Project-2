@@ -23,8 +23,8 @@
 			내용 : <textarea name="bcontent" class="bcontent"></textarea>
 			첨부파일 : <input type="file" name="bfile" class="bfile">
 			<select name="cno" class="cno">
-				<option value="1">공지사항</option>
-				<option value="2">건의사항</option>
+				
+				
 			</select>
 		
 			<button onclick="writeBtn()" type="button">글등록</button>

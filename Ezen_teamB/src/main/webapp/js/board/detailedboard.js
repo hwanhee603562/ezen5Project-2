@@ -1,6 +1,5 @@
 
 /* 개별 조회 */
-
 getBoard()
 function getBoard(){
 	
@@ -26,15 +25,14 @@ function getBoard(){
 				첨부파일 : <div> <a href="/Ezen_teamB/BoardFileDownload="${r.bfile}>${r.bfile}</a> </div>
 
 			`;
-			html +=`<a href="mainboard.jsp"><button type="button">목록보기</button></a>
-			<button onclick="bUpdate(${r.bno})" type="button">수정</button>
-			<button onclick="bDelete(${r.bno})" type="button">삭제</button>
-			`;
-		/*	if(r.ishost){
-				html +=`
-						<button onclick="bDelete(${r.bno})" type="button">삭제</button>`;
+			html +='<a href="mainboard.jsp"><button type="button">목록보기</button></a>';
+			if(r.ishost){
+			
+				html+=`
+					<button onclick="bUpdate(${r.bno})" type="button">수정</button>
+					<button onclick="bDelete(${r.bno})" type="button">삭제</button>`;
 			}
-	*/
+	
 			
 			boardBox.innerHTML = html
 		

@@ -1,4 +1,11 @@
+if (loginMid == 'admin') {
+	document.querySelector('.cno').innerHTML = `<option value="1"> 공지사항 </option>
+	  	 											 <option value="2">건의사항</option> `
+} else { document.querySelector('.cno').innerHTML = `<option value="2">건의사항</option>` }
+
 function writeBtn() {
+	
+	
 	console.log( '글등록 버튼' )
 	let form = document.querySelectorAll('.writeForm')[0];
 	
@@ -11,12 +18,15 @@ function writeBtn() {
 		contentType : false,
 		processData : false,
 		success : r => { console.log(r) 
-		if(r){
-			alert('글등록성공')
-			location.href="/Ezen_teamB/jsp/board/mainboard.jsp";
-		}else{ alert('글등록실패') }
+			if(r){
+				alert('글등록성공')
+				location.href="/Ezen_teamB/jsp/board/mainboard.jsp";
+			}else{ alert('글등록실패') }
 		},
-		error : e => { console.log(e )}
+		error : e => { 
+			console.log('에러')
+			console.log(e )
+		}
 
 	})
 }

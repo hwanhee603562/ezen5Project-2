@@ -2,8 +2,10 @@
 function onWriteBtn(){
 	console.log('글쓰기버튼')
 	if(loginState){
-		location.href="/Ezen_teamB/jsp/writeboard.jsp"
-	}else{alert('회원전용입니다.')}
+		location.href="/Ezen_teamB/jsp/board/writeboard.jsp"
+	}else{alert('회원전용입니다.')
+		location.href="/Ezen_teamB/jsp/member/login.jsp"
+	}
 	
 }
 /* 게시물 조회 */
