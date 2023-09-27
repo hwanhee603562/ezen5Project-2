@@ -1,11 +1,12 @@
 console.log('채팅페이지')
 
-let loginmid = 'abc1234';		// 샘플아이디(첫 메시지 전송자)
-let ino	= 3;			// 샘플물품번호(첫 메시지 수신자판별용)
-let rno	= 1;			// 채팅방 번호
+
+let ino = new URL( location.href ).searchParams.get("ino");
+let rno = new URL( location.href ).searchParams.get("rno");
+
 
 // 서버소켓 접속
-let clientSocket = new WebSocket(`ws://localhost:80/Ezen_teamB/serversocket/${loginmid}/${ino}/${rno}`);
+let clientSocket = new WebSocket(`ws://localhost:80/Ezen_teamB/serversocket/${loginMid}/${ino}/${rno}`);
 
 clientSocket.onerror = e=>{console.log('서버와 오류발생 ' + e)};
 clientSocket.onclose = e=>{console.log('서버와 연결끊김 ' + e)};

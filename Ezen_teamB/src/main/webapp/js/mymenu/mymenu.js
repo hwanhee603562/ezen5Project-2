@@ -38,10 +38,11 @@ document.querySelector('.smenu4').addEventListener("click",(e)=>{
 })
 
 // 회원정보 출력 함수   ---> 기능 완성후 html 출력기능 함수로 합칠것
+
+let mno = loginMno;
+
 infoPrint();
 function infoPrint(){console.log('회원정보 출력 함수')
-	
-	let mno = 2;
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB/MyMenuController",
@@ -90,8 +91,6 @@ function infoPrint(){console.log('회원정보 출력 함수')
 saleList();
 // 판매중인상품 리스트 출력 함수
 function saleList(){console.log('판매중인상품 리스트')
-
-	let mno = 2;
 
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
@@ -170,8 +169,6 @@ function updateItem(ino){
 
 // 거래내역 출력함수
 function transHistory(){console.log('거래내역 리스트')
-
-	let mno = 2;
 	
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
@@ -235,8 +232,6 @@ function transHistory(){console.log('거래내역 리스트')
 
 // 찜목록 출력함수
 function PrintWishList(){console.log('찜목록 리스트')
-	
-	let mno = 2;
 	
 	$.ajax({
 		url : "/Ezen_teamB/MyMenuController",
@@ -302,8 +297,6 @@ function PrintWishList(){console.log('찜목록 리스트')
 // 회원정보 수정 모달창 함수
 function updateModal(){ console.log('회원정보 변경 함수')
 	
-	let mno = 2;
-	
 	$.ajax({ 
 	       url : "/Ezen_teamB/MemberController",
 	       data : {type: '1' , mno: mno},         // 보내는 데이터
@@ -324,8 +317,6 @@ function updateModal(){ console.log('회원정보 변경 함수')
 
 // 회원정보 수정 함수
 function updateInfo(){
-	
-	let mno = 2
 	
 	let emailInput = document.querySelector('.emailInput').value;
 	let adrInput2 = document.querySelector('.adrInput2').value;
@@ -350,8 +341,6 @@ function updateInfo(){
 
 // 찜목록 삭제함수
 function deleteWishList(ino){console.log('찜목록 삭제함수')
-
-	let mno = 2;
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB//MyMenuController",
@@ -373,7 +362,6 @@ function deleteWishList(ino){console.log('찜목록 삭제함수')
 // 회원탈퇴 함수
 function deleteInfo(){
 	
-	let mno = 2;
 	let deletepwd = document.querySelector('.deletepwd').value;
 	console.log(deletepwd);
 	

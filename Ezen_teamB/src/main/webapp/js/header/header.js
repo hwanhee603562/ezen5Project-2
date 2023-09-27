@@ -4,6 +4,7 @@ console.log('헤더 js 정상')
 let loginState = false;
 
 let loginMid = '';
+let loginMno = 0;
 
 getMemberInfo()
 function getMemberInfo(){
@@ -26,9 +27,10 @@ function getMemberInfo(){
 			  `			
 		}
 		else{
-			loginState = true; loginMid = r.mid;
+			loginState = true; loginMid = r.mid; loginMno = r.mno;
 			console.log(loginState)
 			console.log(r.mid)
+			console.log(r.mno)
 			
 			html +=`
 			<li><a href="/Ezen_teamB/jsp/mymenu/mymenu.jsp">마이페이지</a></li>

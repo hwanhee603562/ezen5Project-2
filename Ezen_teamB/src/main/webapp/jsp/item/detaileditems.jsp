@@ -110,7 +110,7 @@
 		
 		<div class="buttonField">	<!-- 버튼 구역 -->
 			<button class="watchItemBtn" type="button"> 찜 </button>
-			<button class="chatBtn" type="button"> 가지톡 </button>
+			<button onclick="chatStart()" class="chatBtn" type="button"> 가지톡 </button>
 		</div>
 
 	</div>	<!-- detailedItems 전체구역 end -->
