@@ -1,10 +1,51 @@
 
-/* ================================ 카테고리 */
 if( !loginState ){
 	alert('물품등록페이지는 로그인 후 이용가능합니다')
 	location.href = "/Ezen_teamB/jsp/item/checkitems.jsp"
 }
 
+// 쿼리스트링을 통해 인수
+let ino = new URL( location.href ).searchParams.get("ino");
+let itrade = new URL( location.href ).searchParams.get("itrade");
+
+// 지도 출력에 따른 초기 지도 중심위치(위경도), 주소에 사용할 변수
+	// (대면거래/중개거래와 관계없이 동일)
+let fLat;
+let fLng;
+let fTradeplace;
+
+// 해당 기등록된 물품(ino)에 대한 기존 정보 불러오기
+existingInfo();
+function existingInfo(){
+	
+	$.ajax({
+		url: "/Ezen_teamB/ItemController",
+		method: "get",
+		data: {
+			type: "getDetailedItems", 
+			ino: ino,
+			itrade : itrade
+		},
+		success: s => {
+			console.log('성공')
+			console.log(s)
+		},
+		error: e => {
+			console.log('에러발생')
+		}
+		
+		
+	})
+	
+	
+}
+
+
+
+
+
+
+/* ================================ 카테고리 */
 getMainCategory()
 // 1. 카테고리 대분류/소분류 출력
 function getMainCategory(){
@@ -85,7 +126,6 @@ let brokerageCSS = document.getElementsByClassName("brokerage")[0].style;	// 중
 
 
 // 현재 거래방식을 저장하는 변수
-let itrade = 0;
 	// 1 배송, 2 대면거래, 3 중개거래
 
 
@@ -693,10 +733,12 @@ function registerItems(){
 		}
 	}
 	
-	// 1. form dom객체 호출
+	// form dom객체 호출
 	let registerForm = document.querySelectorAll('.registerForm')[0];
 	let formData = new FormData( registerForm );
 	
+	// 해당 기등록된 ino를 form객체에 추가
+	formData.set('ino', ino);
 	
 	// name식별자에 해당되지 않는 데이터를 폼데이터에 별도로 추가 
 	formData.set('itrade', itrade )				// 거래방식 : 1 배송, 2 대면거래, 3 중개거래
@@ -721,7 +763,7 @@ function registerItems(){
 	
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
-		method: "post",
+		method: "put",
 		data: formData,
 		contentType: false,
 		processData: false,

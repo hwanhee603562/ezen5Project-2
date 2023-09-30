@@ -94,8 +94,16 @@ public class ItemController extends HttpServlet {
 			json = mapper.writeValueAsString( detailedItems );
 			
 		}
-		
-		// 6. 채팅방번호 가져오기
+		// 6. 기등록된 물품에 대한 정보 불러오기
+		else if( type.equals("getDetailedItems") ) {
+			
+			int ino = Integer.parseInt( request.getParameter("ino") );
+			
+			
+			
+		}
+	 	
+		// 7. 채팅방번호 가져오기
 		else if(type.equals("getChatRno")) {
 			
 			int cmno = Integer.parseInt( request.getParameter("mno") );
@@ -222,7 +230,6 @@ public class ItemController extends HttpServlet {
 			result = ItemDao.getInstance().uploadItem( itemsInfo, null );
 		}
 		
-		
 		json = mapper.writeValueAsString(result);
 		
 		response.setContentType("application/json;charset=UTF-8");
@@ -231,7 +238,7 @@ public class ItemController extends HttpServlet {
 	} 
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
