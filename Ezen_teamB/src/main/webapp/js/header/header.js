@@ -1,4 +1,4 @@
-console.log('헤더 js 정상')
+console.log('헤더 js')
 
 
 let loginState = false;
@@ -14,7 +14,6 @@ function getMemberInfo(){
       async : false, 
       data : {type : "info"} ,
       success : r => {
-		  console.log('getMemberInfo 결과값 아래꺼')
 		  console.log(r)
 		  
       let submenu = document.querySelector('.submenu')
@@ -28,9 +27,6 @@ function getMemberInfo(){
 		}
 		else{
 			loginState = true; loginMid = r.mid; loginMno = r.mno;
-			console.log(loginState)
-			console.log(r.mid)
-			console.log(r.mno)
 			
 			html +=`
 			<li><a href="/Ezen_teamB/jsp/mymenu/mymenu.jsp">마이페이지</a></li>

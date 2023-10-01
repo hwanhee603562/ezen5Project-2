@@ -120,11 +120,16 @@ function saleList(){console.log('판매중인상품 리스트')
 	       		
 	       		// 회원번호에 따른 판매중인 상품 출력
 	       		jsonArray.forEach((p,i)=>{
+					   let itrade;
+					   
 					   if(p.itrade == 1){
+						   itrade = 1;
 						   p.itrade = '배송'
 					   }else if(p.itrade == 2){
+						   itrade = 2
 						   p.itrade = '직거래'
 					   }else if(p.itrade == 3){
+						   itrade = 3
 						   p.itrade = '중개소거래'
 					   }
 					   
@@ -138,7 +143,7 @@ function saleList(){console.log('판매중인상품 리스트')
 								      <td width="10%">${p.itrade}</td>
 								      <td width="20%">${p.uname}/${p.dname}</td>
 								      <td>${p.idate}</td>
-								      <td><button onclick="updateItem(${p.ino})" type="button" class="btn btn-success">수정</button></td>
+								      <td><button onclick="updateItem(${p.ino}, ${itrade})" type="button" class="btn btn-success">수정</button></td>
 								      <td><button type="button" class="btn btn-danger">삭제</button></td>
 								    </tr>
 					   `
@@ -159,9 +164,9 @@ function saleList(){console.log('판매중인상품 리스트')
 }		// function end
 
 // 판매물품 수정 버튼 함수
-function updateItem(ino){
+function updateItem(ino, itrade){
 	
-	location.href = `/Ezen_teamB/jsp/item/updateitems.jsp?ino=${ino}`;
+	location.href = `/Ezen_teamB/jsp/item/updateitems.jsp?ino=${ino}&itrade=${itrade}`;
 	
 }
 

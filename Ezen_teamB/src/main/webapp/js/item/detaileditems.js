@@ -1,9 +1,6 @@
 let ino = new URL( location.href ).searchParams.get("ino");
 let itrade = new URL( location.href ).searchParams.get("itrade");
 
-let lat;
-let lng;
-
 
 
 getDetailedItems();
@@ -19,7 +16,6 @@ function getDetailedItems(){
 			itrade : itrade
 		},
 		success: s => {
-			console.log(s)
 			
 			// 1. 이미지의 개수만큼 이미지 출력구역 생성 후 이미지 출력
 				// * 메인 이미지 출력공간은 이미지 존재유무와 관계없이 생성되어야함
@@ -61,35 +57,42 @@ function getDetailedItems(){
 			document.querySelector('.itemPriceWord').innerHTML = s.iprice;
 			// 7. 안전결제사용여부 출력
 			document.querySelector('.itemSafePaymentWord').innerHTML = s.isafepayment==0 ? '미사용' : '사용';
-			// 8. 주소 출력
-			document.querySelector('.outputPlace').innerHTML = s.itradeplace==null ? '※ 거래방식이 \'배송\'일 경우 위치는 출력되지 않습니다' : '거래위치 : '+s.itradeplace;
-			// 9. 판매 내용 출력
+			// 8. 판매 내용 출력
 			document.querySelector('.outputContent').innerHTML = s.icontent;
 			
-			
-			/* 지도출력 */
-			
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			    mapOption = { 
-			        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			        level: 3 // 지도의 확대 레벨
-			    };
-			
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			
-			// 마커가 표시될 위치입니다 
-			var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-			
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-			    position: markerPosition
-			});
-			
-			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);
-			
-			
-			
+			// 9. 주소 / 지도출력
+			if( s.itradeplace==null ){
+				
+				document.querySelector('.adressInfo').innerHTML = 
+				'※ 거래방식이 \'배송\'일 경우 위치는 출력되지 않습니다'
+				
+				document.querySelector('.mapBox').innerHTML = ``
+				
+			} else {
+				
+				document.querySelector('.adressInfo').innerHTML = '거래위치 : '+s.itradeplace
+				
+				/* 지도출력 */
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				    mapOption = { 
+				        center: new kakao.maps.LatLng(s.lat, s.lng), // 지도의 중심좌표
+				        level: 3 // 지도의 확대 레벨
+				    };
+				
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+				
+				// 마커가 표시될 위치입니다 
+				var markerPosition  = new kakao.maps.LatLng(s.lat, s.lng); 
+				
+				// 마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+				    position: markerPosition
+				});
+				
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+			}
+
 		},
 		error: e => {
 			console.log('에러발생')

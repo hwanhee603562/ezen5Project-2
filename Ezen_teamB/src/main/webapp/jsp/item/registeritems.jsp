@@ -43,7 +43,7 @@
 				<div class="inputDeskBox prtTitle">
 					<div class="deskInfo">제목</div>
 					<div class="rightInputBox">
-						<input name="ititle" class="ititle" type="text"><br>
+						<input name="ititle" class="ititle" type="text" maxlength="50" placeholder=" 최대 50글자"><br>
 					</div>
 				</div>
 				 

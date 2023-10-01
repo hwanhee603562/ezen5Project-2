@@ -28,7 +28,7 @@ public class MemberInfoController extends HttpServlet {
     // 로그인정보 호출 // 로그아웃 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
-		System.out.println("type 무야 " + type);
+		
 		if (type.equals("info")) {
 			//세션에 저장된 로그인객체 꺼내기
 
