@@ -106,8 +106,6 @@ function getDetailedItems(){
 
 // 채팅버튼을 눌렀을때 실행되는 함수
 function chatStart(){
-	let mno = 2;
-	let rno = '';
 	
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
@@ -115,7 +113,7 @@ function chatStart(){
 		async:false,
 		data: { 
 			type : "getChatRno", 
-			mno : mno,
+			mno : loginMno,
 			ino : ino
 		},
 		success: r => {console.log('통신성공')
@@ -125,7 +123,7 @@ function chatStart(){
 		error : e =>{console.log(e)}
 	})	
 	
-	location.href = `/Ezen_teamB/jsp/chatting/chatting.jsp?ino=${ino}rno=${rno}`;
+	location.href = `/Ezen_teamB/jsp/chatting/chatting.jsp?ino=${ino}&rno=${rno}`;
 	
 }
 

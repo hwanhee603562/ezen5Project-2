@@ -30,7 +30,7 @@ public class ServerSocket {
 		// 1. 클라이언트 소켓으로 부터 접속받았을때. JS(new WebSocket)
 		@OnOpen		// 매개변수 : 1. 접속된 클라이언트소켓(세션) 2. 접속된 회원아이디
 		public void onOpen(Session session,@PathParam("mid") String cmid,@PathParam("ino") int ino,
-				@PathParam("rno") int rno) {
+				@PathParam("rno") String rno) {
 			System.out.println("클라이언트 소켓이 입장했습니다." + session);
 			System.out.println("접속한 회원 아이디 : " + cmid);
 			System.out.println("연결된 물품 번호 : " + ino);
@@ -38,8 +38,8 @@ public class ServerSocket {
 			String rmid = ChattingDao.getInstance().findRMid("1", ino);
 			if(rmid.equals(cmid)) {
 				rmid = ChattingDao.getInstance().findRMid("2", ino);
-				System.out.println(rmid);
 			}
+			System.out.println(rmid);
 			// 1-1 : 접속된 클라이언트소켓을 리스트에 저장
 			ClientDto clientDto = new ClientDto(session, cmid, rmid, ino,rno);
 			clientList.add(clientDto);

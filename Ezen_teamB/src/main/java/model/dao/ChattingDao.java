@@ -1,5 +1,10 @@
 package model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.dto.MsgDto;
+
 // 채팅기능 클래스
 public class ChattingDao extends Dao{
 	
@@ -49,14 +54,14 @@ public class ChattingDao extends Dao{
 	}
 	
 	// 메시지를 보낼때마다 DB에 저장
-	public boolean recordMsg(int cmno, int rmno, String msg, int ino, int rno) {
+	public boolean recordMsg(int cmno, int rmno, String msg, int ino, String rno) {
 		
 		try {
 			String sql = "insert into jchatting(caller, receiver,jcontent,ino,rno) values(?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cmno);	ps.setInt(2, rmno);
 			ps.setString(3, msg);	ps.setInt(4, ino);
-			ps.setInt(5, rno);
+			ps.setString(5, rno);
 			int count = ps.executeUpdate();
 			if(count == 1) {return true;}
 		
@@ -87,12 +92,13 @@ public class ChattingDao extends Dao{
 		
 		try {
 			String sql = "select rno from jchatting where caller = ? and receiver = ?";
+			System.out.println(sql);
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, cmno);
 			ps.setInt(2, rmno);
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				return rs.getNString(1);
+				return rs.getString(1);
 			}
 			
 		} catch (Exception e) {System.out.println("findRno 오류 : " + e);}
@@ -100,6 +106,53 @@ public class ChattingDao extends Dao{
 		return null;
 	}
 	
+	// 채팅목록들을 가져오는 메소드
+	public List<MsgDto> getMsgs(String rno){
+		
+		List<MsgDto> list = new ArrayList<MsgDto>();
+		
+		try {
+			String sql = "m.mid, jcontent, jchatdate, ino from jchatting j, memberlist m  where j.caller = m.mno and rno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, rno);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				MsgDto mDto = new MsgDto(
+						rs.getString(1), rs.getString(2),
+						rs.getString(3), rs.getInt(4));
+				list.add(mDto);		
+			}
+			return list;
+			
+			
+		} catch (Exception e) {}
+		
+		return null;
+	}
+	
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
