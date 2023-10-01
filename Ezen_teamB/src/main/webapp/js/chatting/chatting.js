@@ -44,8 +44,47 @@ function onMsg(e){
       method : "get" ,
       async : false, 
       data : {rno : rno} ,
-      success : r => {console.log('통신성공 ' + r)
+      success : r => {console.log(r)
+	  	let chatcont = document.querySelector('.chatcont')
+	  	let html = ``;
+      	for(let i = 0; i < r.length; i++){
+			  r[i].jcontent = JSON.parse(r[i].jcontent)
+			  if(r[i].jcontent.type == 'alram'){
+				  html = `${typeHTML(r[i].jcontent)}`;
+			  }
+			  else if(r[i].caller == loginMid){
+				  html +=
+				  `
+				  	<div class="rcont">
+						<div class="subcont">
+							<div class="date">${r[i].jchatdate}</div>
+							${typeHTML(r[i].jcontent)}
+						</div>
+					</div>
+					`;
+				  
+			  }
+			  
+			  else{
+				  html += 
+				  
+				  `
+				  	<div class="lcont">
+						<div class="tocont">
+							<div class="name">${r[i].caller}</div>
+							<div class="subcont">
+								${typeHTML(r[i].jcontent)}
+								<div class="date">${r[i].jchatdate}</div>
+							</div>
+						</div>
+					</div>
+				  `
+				  
+			  }
+		  }
+		  chatcont.innerHTML = html;
 		  
+		  chatcont.scrollTop = chatcont.scrollHeight;
 	  },
 	  error : e => {console.log('오류내용' + e)}
 	})  
@@ -54,6 +93,32 @@ function onMsg(e){
 }
 
 
+
+
+// 메시지 타입 구분 함수
+function typeHTML(msg){
+	
+	let html = ``;
+	console.log(msg);
+	
+	// 1. 메시지 타입 일때는 <div> 반환
+	if(msg.type == 'message'){
+		console.log('msg 함수 정상작동')
+		html += `<div class="content">${msg.content}</div>`;
+	}
+	
+	// 2. 이모티콘 타입 일때는 <img> 반환
+	else if(msg.type == 'emo'){
+		html += `<img src="/jspweb/img/emo${msg.content}.gif"/>`;
+	}
+	// 3. 만약 알람 타입일때는 <div> 반환
+	else if(msg.type == 'alram'){
+		html += `<div class="alram">${msg.content}</div>`
+	}
+	
+	return html;
+	
+}
 
 
 

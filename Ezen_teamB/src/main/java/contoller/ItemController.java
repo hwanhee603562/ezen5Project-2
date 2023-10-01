@@ -112,11 +112,16 @@ public class ItemController extends HttpServlet {
 			String rno = UUID.randomUUID().toString();
 			
 			String result = ChattingDao.getInstance().findRno(cmno, rmno);
+			String result2 = ChattingDao.getInstance().findRno(rmno, cmno);
 			
-			if(result == null) {
+			if(result == null && result2 == null) {
 				json = mapper.writeValueAsString(rno);
 			}else {
-				json = mapper.writeValueAsString(result);
+				if(result == null) {
+					json = mapper.writeValueAsString(result2);
+				}else {
+					json = mapper.writeValueAsString(result);
+				}
 			}
 		}
 		

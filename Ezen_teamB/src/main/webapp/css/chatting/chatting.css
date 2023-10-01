@@ -52,6 +52,10 @@
 	background-color: #A287D6;
 }
 
+.date{
+	color: white;
+}
+
 /* 받았을때 */
 .lcont{
 	display: flex;
@@ -61,6 +65,10 @@
 
 .lcont .content{
 	background-color: #ffffff;
+}
+
+.name{
+	color: white;
 }
 
 .lcont .subcont{
