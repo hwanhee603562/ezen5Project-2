@@ -54,17 +54,15 @@ function existingInfo(){
 						// 	 기존 이미지 삭제 함수 fileDelete() 함수와는 다른 함수 생성
 						
 						// 기존 저장된 이미지의 개수 만큼 저장
-			console.log(Object.keys(s.imgList).length);
+
 			selectedImgCount = Object.keys(s.imgList).length;
-			console.log( selectedImgCount );
-			console.log('count확인')
 			for( let i=0; i<selectedImgCount; i++ ){
-				console.log('반복')
+
 				// 이미지를 출력할 구역 생성
 				document.querySelector('.outputImg').innerHTML +=	`
 						<div class="outExistingFiled${s.imgList[i]}">
-							<img class="existingImg${s.imgList[i]}" alt="" src="Ezen_teamB/jsp/item/img/${s.imgList[i]}"/>
-							<button onclick="existingImgDelete(${s.imgList[i]})" type="button">x</button>
+							<img class="existingImg${s.imgList[i]}" alt="" src="/Ezen_teamB/jsp/item/img/${s.imgList[i]}"/>
+							<button onclick="existingImgDelete('${s.imgList[i]}')" type="button">x</button>
 						</div>
 					` 
 			}
@@ -669,7 +667,35 @@ function forbidden(){
 	alert('이미지는 최대 10개까지 등록할 수 있습니다')
 }
 
-// 2 선택된 이미지 파일 삭제
+// 2-1 [기존 DB에 저장된 이미지] 선택된 이미지 파일 삭제
+function existingImgDelete( pimg ){
+	
+	console.log( pimg )
+	
+	$.ajax({
+		url: "/Ezen_teamB/ItemController",
+		method: "delete",
+		data: {	type : 'deleteExistingImg',
+				ino : ino,
+				pimg : pimg },
+		success: s =>{
+			
+			console.log(s)
+			selectedImgCount--;
+			console.log('DB 삭제 후 카운팅 확인')
+			console.log(selectedImgCount)
+			
+		},
+		error: e =>{
+			console.log('에러발생')
+		}
+		
+		
+	})
+	
+}
+
+// 2-2 [수정하려는 신규 등록된 이미지] 선택된 이미지 파일 삭제
 function fileDelete( idNum ){
 	
 	// 삭제할 파일 구역을 초기화

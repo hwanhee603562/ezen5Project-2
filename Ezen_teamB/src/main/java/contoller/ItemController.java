@@ -121,7 +121,6 @@ public class ItemController extends HttpServlet {
 		}
 		
 		
-		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print( json );
 		
@@ -242,7 +241,26 @@ public class ItemController extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		String type = request.getParameter("type");
+		System.out.println(type);
+		boolean result = false;
+		
+		// 물품 수정시 기존 이미지 DB에서 삭제하기
+		if( type.equals("deleteExistingImg") ) {
+			
+			int ino = Integer.parseInt(request.getParameter("ino"));
+			String pimg = request.getParameter("pimg");
+			
+			result = ItemDao.getInstance().deleteExistingImg( ino, pimg );
+			
+		}
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print( result );
+		
+		
+		
 	}
 
 }

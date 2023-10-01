@@ -410,7 +410,25 @@ public class ItemDao extends Dao {
 	
 	
 	//판매물품삭제
-	
+	public boolean deleteExistingImg( int ino, String pimg ) {
+		
+		try {
+			
+			String sql = "delete from pimg where ino = ? and pimg = ?;";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt( 1, ino );
+			ps.setString( 2, pimg );
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
 	
 	
 	// 물품거래내역조회

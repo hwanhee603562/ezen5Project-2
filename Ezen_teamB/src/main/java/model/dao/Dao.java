@@ -15,7 +15,7 @@ public class Dao {
 		try { 
 
 
-			
+			/*
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
 				
@@ -25,8 +25,8 @@ public class Dao {
 						
 
 
-
-			/*
+			*/	
+			
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
 			
@@ -34,7 +34,7 @@ public class Dao {
 			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedtrade"
 					, "root", "1234");
 			
-			*/	
+			
 			
 			
 			System.out.println("안내] DB연동성공");
