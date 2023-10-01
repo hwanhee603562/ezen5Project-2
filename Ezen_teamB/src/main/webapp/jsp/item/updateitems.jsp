@@ -141,6 +141,12 @@
 	</div>
 	
 	
+	<!-- 카카오지도 api -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51f4ebd6d93bf1f15d0f4ba2809fea5&libraries=services,clusterer"></script>
+	
+	<!-- 카카오 우편번호 서비스 api -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 	<script src="/Ezen_teamB/js/item/updateitems.js" type="text/javascript"></script>
 	
 </body>

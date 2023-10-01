@@ -1,6 +1,6 @@
 
 if( !loginState ){
-	alert('물품등록페이지는 로그인 후 이용가능합니다')
+	alert('물품수정페이지는 로그인 후 이용가능합니다')
 	location.href = "/Ezen_teamB/jsp/item/checkitems.jsp"
 }
 
@@ -14,6 +14,16 @@ let fLat;
 let fLng;
 let fTradeplace;
 
+// 중개거래소 정보
+	// pk
+	// 업체명
+	// 주소
+let emediationInfo = { eno : '', ename : '', eadress : '' }
+
+
+// 기존 저장된 이미지의 개수를 저장
+	// 기존 이미지 삭제시 감소연산
+let selectedImgCount = 0;
 // 해당 기등록된 물품(ino)에 대한 기존 정보 불러오기
 existingInfo();
 function existingInfo(){
@@ -21,6 +31,7 @@ function existingInfo(){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data: {
 			type: "getDetailedItems", 
 			ino: ino,
@@ -29,6 +40,38 @@ function existingInfo(){
 		success: s => {
 			console.log('성공')
 			console.log(s)
+			
+			// 응답된 기존 저장 정보를 html에 띄움
+				// 1 이미지 출력 구역 생성
+					// 1-1 input 타입 file 1~10 출력구역 생성
+			for( let i=1; i<=10; i++ ){
+				document.querySelector('.inpuImgBox').innerHTML += `
+					<div class="hiddenBox${i}"><input onchange="fileUpload(this, ${i})" type="file" id="uploadFile${i}" name="file" style="display: none"></div>
+				`
+			}
+					// 1-2 생성된 input 파일 첨부 공간에 기존 이미지 대입 
+						// - 이미지를 하나 삭제할 시 삭제버튼을 클릭한 이미지 하나씩 DB 삭제처리를 위해
+						// 	 기존 이미지 삭제 함수 fileDelete() 함수와는 다른 함수 생성
+						
+						// 기존 저장된 이미지의 개수 만큼 저장
+			console.log(Object.keys(s.imgList).length);
+			selectedImgCount = Object.keys(s.imgList).length;
+			console.log( selectedImgCount );
+			console.log('count확인')
+			for( let i=0; i<selectedImgCount; i++ ){
+				console.log('반복')
+				// 이미지를 출력할 구역 생성
+				document.querySelector('.outputImg').innerHTML +=	`
+						<div class="outExistingFiled${s.imgList[i]}">
+							<img class="existingImg${s.imgList[i]}" alt="" src="Ezen_teamB/jsp/item/img/${s.imgList[i]}"/>
+							<button onclick="existingImgDelete(${s.imgList[i]})" type="button">x</button>
+						</div>
+					` 
+			}
+			
+			
+			
+			
 		},
 		error: e => {
 			console.log('에러발생')
@@ -53,6 +96,7 @@ function getMainCategory(){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data : {type : "getMainCategory"},
 		success: s => {
 			
@@ -343,13 +387,6 @@ function sample5_execDaumPostcode() {
 
 
 // 3. 거래방식 - 중개거래소 방식 클릭하였을 때
-	// 중개거래소 정보
-		// pk
-		// 업체명
-		// 주소
-let emediationInfo = { eno : '', ename : '', eadress : '' }
-	// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-
 function brokerage(){
 	
 	// 클러스터가 출력되는 것을 막기 위해 클러스터 배열을 clear함
@@ -568,14 +605,6 @@ kakao.maps.event.addListener(map2, 'idle', function(){
 
 /* ============================= 이미지 출력/삭제 */
 
-// input 타입 file 1~10출력구역
-for(let i=1; i<=10; i++){
-	document.querySelector('.inpuImgBox').innerHTML += `
-		<div class="hiddenBox${i}"><input onchange="fileUpload(this, ${i})" type="file" id="uploadFile${i}" name="file" style="display: none"></div>
-	`
-}
-
-
 // 1-1 이미지 파일 업로드
 function fileUpload( mimg, idNum ){
 	
@@ -592,8 +621,6 @@ function fileUpload( mimg, idNum ){
 				<button onclick="fileDelete(${idNum})" type="button">x</button>
 			</div>
 		` 
-		
-		//각 출력되는 이미지에 대한 식별자는 이미지를 담는 배열의 길이로 함
 
 	// 읽어온 파일을 불러옴
 	fileReader.onload = e => {
@@ -602,9 +629,10 @@ function fileUpload( mimg, idNum ){
 	
 	
 	// 파일 라벨의 for 포인터 변경
+	// 등록된 이미지가 10개를 초과하는지 확인하는 스위치
 	let checkImg = false;
 		// 10개의 input 파일 타입에 파일 객체가 존재하는지 탐색
-	for( let i=1; i<=10; i++ ){
+	for( let i=1; i<=(10-selectedImgCount); i++ ){
 		var fileCheck = document.getElementById(`uploadFile${i}`).value;
 		
 		// 파일객체가 존재하지 않는 경우
