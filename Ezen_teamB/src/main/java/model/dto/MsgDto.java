@@ -23,6 +23,14 @@ public class MsgDto {
 		this.jchatdate = sdf.format(date);	// 현재시간을 정의한형식으로 변환시킴	
 	}
 
+	public MsgDto(String caller, String jcontent, String jchatdate, int ino) {
+		super();
+		this.caller = caller;
+		this.jcontent = jcontent;
+		this.jchatdate = jchatdate;
+		this.ino = ino;
+	}
+
 	public String getCaller() {
 		return caller;
 	}

@@ -1,5 +1,10 @@
 package model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.dto.MsgDto;
+
 // 채팅기능 클래스
 public class ChattingDao extends Dao{
 	
@@ -101,6 +106,53 @@ public class ChattingDao extends Dao{
 		return null;
 	}
 	
+	// 채팅목록들을 가져오는 메소드
+	public List<MsgDto> getMsgs(String rno){
+		
+		List<MsgDto> list = new ArrayList<MsgDto>();
+		
+		try {
+			String sql = "m.mid, jcontent, jchatdate, ino from jchatting j, memberlist m  where j.caller = m.mno and rno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, rno);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				MsgDto mDto = new MsgDto(
+						rs.getString(1), rs.getString(2),
+						rs.getString(3), rs.getInt(4));
+				list.add(mDto);		
+			}
+			return list;
+			
+			
+		} catch (Exception e) {}
+		
+		return null;
+	}
+	
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

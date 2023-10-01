@@ -34,10 +34,10 @@ function onMsg(e){
 
 	console.log(msg);
 	
-	msg.msg = JSON.parse(msg.msg)
-	console.log(msg.msg)
+	msg.jcontent = JSON.parse(msg.jcontent)
+	console.log(msg.jcontent)
 	
-	msg.msg.content = msg.msg.content.replace(/\n/g,'<br>');
+	msg.jcontent.content = msg.jcontent.content.replace(/\n/g,'<br>');
 	
 	$.ajax({
       url :  "/Ezen_teamB/ChattingController",
@@ -47,7 +47,7 @@ function onMsg(e){
       success : r => {console.log('통신성공 ' + r)
 		  
 	  },
-	  error : r => {}
+	  error : e => {console.log('오류내용' + e)}
 	})  
 	
 	
