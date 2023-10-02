@@ -402,13 +402,165 @@ public class ItemDao extends Dao {
 		
 		return null;
 	}
-	
+		// 2-8 물품 번호 조회
+	public int getItrade( int ino ) {
+		
+		try {
+			
+			String sql = "select itrade from itemsinfo where ino = "+ino;
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			return rs.getInt(1);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return -1;
+	}
 
 	
 	
 	
-	// 판매물품수정
-	
+	// 3 판매물품수정
+	public boolean updateItem(ItemsInfo itemsInfo, DpointDto dpointDto) {
+
+		try {
+
+			String sql = "";
+
+			
+			// 기존 물품번호에 대한 거래방식 확인
+			/*
+			 * 
+			 	기존 		변경				처리
+				=================================
+				대면			대면			=> update
+				
+				
+				배송			대면			=> insert
+				(중개포함)
+				
+				대면			배송			=> delete
+							(중개포함)
+				
+				
+			 */
+			int existingItrade = getItrade( itemsInfo.getIno() );
+
+			if( existingItrade==2 && itemsInfo.getItrade()==2 ) {
+					
+				sql = "update dpoint set dlat = ?, dlng = ? where ino = ?";
+				
+				ps = conn.prepareStatement(sql);
+
+				ps.setString(1, dpointDto.getDlat());
+				ps.setString(2, dpointDto.getDlng());
+				ps.setInt(3, itemsInfo.getIno());
+
+				ps.executeUpdate();
+				
+			} 
+			if( (existingItrade==1 || existingItrade==3) && itemsInfo.getItrade()==2 ) {
+					
+				sql = "insert into dpoint(dlat, dlng, ino) values(?, ?, ?)";
+				
+				ps = conn.prepareStatement(sql);
+
+				ps.setString(1, dpointDto.getDlat());
+				ps.setString(2, dpointDto.getDlng());
+				ps.setInt(3, itemsInfo.getIno());
+
+				ps.executeUpdate();
+				
+			}
+			if ( existingItrade==2 && ( itemsInfo.getItrade()==1 || itemsInfo.getItrade()==3 ) ) {
+				
+				sql = "delete from dpoint where ino = " + itemsInfo.getIno();
+				
+				ps.setInt(1, itemsInfo.getIno());
+				ps.executeUpdate();
+				
+			}
+
+			
+			// 거래방식이 중개거래소일 경우에만 중개거래소 필드를 추가하여 삽입
+			if (itemsInfo.getItrade() == 3) {
+
+				Emediation emediation = getEmediationInfo(itemsInfo.getEno());
+
+				// 물품저장
+				sql = "update itemsinfo set "
+						+ "iprice=?, mno=?, ititle=?, icontent=?, itrade=?, itradeplace=?, "
+						+ "eno=?, dno=?, isafepayment=? where ino = ?";
+
+				// DB에 저장된 autoIncreament 값을 찾기 위해 ps에 'Statement.RETURN_GENERATED_KEYS' 추가
+				ps = conn.prepareStatement(sql);
+
+				// 1 대면거래 위치정보 저장
+				ps.setInt(1, itemsInfo.getIprice());
+				ps.setInt(2, itemsInfo.getMno());
+				ps.setString(3, itemsInfo.getItitle());
+				ps.setString(4, itemsInfo.getIcontent());
+				ps.setInt(5, itemsInfo.getItrade());
+				ps.setString(6, emediation.getEadress());
+				ps.setInt(7, itemsInfo.getEno());
+				ps.setInt(8, itemsInfo.getDno());
+				ps.setInt(9, itemsInfo.getIsafepayment());
+				ps.setInt(10, itemsInfo.getIno());
+
+			} else {
+
+				// 물품저장
+				sql = "update itemsinfo set "
+						+ "iprice=?, mno=?, ititle=?, icontent=?, itrade=?, "
+						+ "itradeplace=?, dno=?, isafepayment=? where ino = ?";
+
+				// DB에 저장된 autoIncreament 값을 찾기 위해 ps에 'Statement.RETURN_GENERATED_KEYS' 추가
+				ps = conn.prepareStatement(sql);
+
+				// 1 대면거래 위치정보 저장
+				ps.setInt(1, itemsInfo.getIprice());
+				ps.setInt(2, itemsInfo.getMno());
+				ps.setString(3, itemsInfo.getItitle());
+				ps.setString(4, itemsInfo.getIcontent());
+				ps.setInt(5, itemsInfo.getItrade());
+				ps.setString(6, itemsInfo.getItradeplace());
+				ps.setInt(7, itemsInfo.getDno());
+				ps.setInt(8, itemsInfo.getIsafepayment());
+				ps.setInt(9, itemsInfo.getIno());
+
+			}
+
+			ps.executeUpdate();
+
+			// 2 이미지 저장
+				// 이미지를 등록할 경우에만 DB저장
+			if( itemsInfo.getImgList().size() != 0 ) {
+				
+				sql = "insert into pimg(pimg,ino) values(?, ?)";
+				ps = conn.prepareStatement(sql);
+
+				for (int i = 0; i < itemsInfo.getImgList().size(); i++) {
+					
+					ps.setString( 1, itemsInfo.getImgList().get(i) );
+					ps.setInt( 2, itemsInfo.getIno() );
+
+					ps.executeUpdate();
+					
+				}
+			}
+
+			return true;
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return false;
+	}
 	
 	
 	//판매물품삭제

@@ -806,47 +806,12 @@ function fileDelete( idNum ){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ============================= 이미지 출력/삭제 end */
 
 
-/* ============================= 제품등록 */
+/* ============================= 제품수정 */
 
-function registerItems(){
+function updateItems(){
 	
 	/* -------- 유효성 검사 -------- */
 	
@@ -892,7 +857,7 @@ function registerItems(){
 		return;
 	}
 	
-	/* -------- 물품등록 전 form 데이터 setting -------- */
+	/* -------- 물품수정 전 form 데이터 setting -------- */
 	
 	// 10개의 인풋박스 중 파일이 첨부되어있지 않은 input 삭제 form데이터 초기화
 		// 해당 input박스의 부모요소(div)를 공백으로 초기화
@@ -940,6 +905,8 @@ function registerItems(){
 		success: result =>{
 			
 			if(result) console.log('등록성공')
+			
+			
 			
 		},
 		error: e =>{
