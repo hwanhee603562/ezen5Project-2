@@ -422,8 +422,6 @@ public class ItemDao extends Dao {
 	}
 
 	
-	
-	
 	// 3 판매물품수정
 	public boolean updateItem(ItemsInfo itemsInfo, DpointDto dpointDto) {
 
@@ -476,7 +474,7 @@ public class ItemDao extends Dao {
 				
 			}
 			if ( existingItrade==2 && ( itemsInfo.getItrade()==1 || itemsInfo.getItrade()==3 ) ) {
-				System.out.println(11111111);
+				
 				sql = "delete from dpoint where ino = " + itemsInfo.getIno();
 				
 				ps = conn.prepareStatement(sql);
@@ -488,7 +486,7 @@ public class ItemDao extends Dao {
 			
 			// 거래방식이 중개거래소일 경우에만 중개거래소 필드를 추가하여 삽입
 			if (itemsInfo.getItrade() == 3) {
-				System.out.println(222222);
+				
 				Emediation emediation = getEmediationInfo(itemsInfo.getEno());
 
 				// 물품저장
