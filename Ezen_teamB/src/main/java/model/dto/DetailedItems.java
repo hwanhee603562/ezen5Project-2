@@ -16,6 +16,7 @@ public class DetailedItems {
 	private String idate;			// 판매물품 등록일시
 	private int eno;				// 중개소 번호( 중개소거래를 이용할 시 )
 	private int iestate;			// 거래상태( 0 판매중 1 판매완료 )
+	private int uno;
 	private int dno;				// 소분류번호 pk
 	private int isafepayment;		// 안전결제사용여부( 0 미사용 1 사용 )
 	private int keepstate;			// 중개거래소 물품 보관 여부( 0 미보관 1 보관 )
@@ -30,7 +31,7 @@ public class DetailedItems {
 	}
 
 	public DetailedItems(int ino, int iprice, int mno, String ititle, String icontent, int itrade, String itradeplace,
-			String idate, int eno, int iestate, int dno, int isafepayment, int keepstate, Map<Integer, String> imgList,
+			String idate, int eno, int iestate, int uno, int dno, int isafepayment, int keepstate, Map<Integer, String> imgList,
 			String lat, String lng, String mid) {
 		super();
 		this.ino = ino;
@@ -43,6 +44,7 @@ public class DetailedItems {
 		this.idate = idate;
 		this.eno = eno;
 		this.iestate = iestate;
+		this.uno = uno;
 		this.dno = dno;
 		this.isafepayment = isafepayment;
 		this.keepstate = keepstate;
@@ -55,7 +57,7 @@ public class DetailedItems {
 	// 배송거래 생성자
 		// 위치정보( 장소, 위도, 경도 ) 제외
 	public DetailedItems(int ino, int iprice, int mno, String ititle, String icontent, int itrade, String idate,
-			int eno, int iestate, int dno, int isafepayment, int keepstate, Map<Integer, String> imgList, String mid) {
+			int eno, int iestate, int uno, int dno, int isafepayment, int keepstate, Map<Integer, String> imgList, String mid) {
 		super();
 		this.ino = ino;
 		this.iprice = iprice;
@@ -66,6 +68,7 @@ public class DetailedItems {
 		this.idate = idate;
 		this.eno = eno;
 		this.iestate = iestate;
+		this.uno = uno;
 		this.dno = dno;
 		this.isafepayment = isafepayment;
 		this.keepstate = keepstate;
@@ -78,8 +81,6 @@ public class DetailedItems {
 	public int getIno() {
 		return ino;
 	}
-
-	
 
 	public void setIno(int ino) {
 		this.ino = ino;
@@ -156,7 +157,15 @@ public class DetailedItems {
 	public void setIestate(int iestate) {
 		this.iestate = iestate;
 	}
+	
+	public int getUno() {
+		return uno;
+	}
 
+	public void setUno(int uno) {
+		this.uno = uno;
+	}
+	
 	public int getDno() {
 		return dno;
 	}
@@ -217,10 +226,12 @@ public class DetailedItems {
 	public String toString() {
 		return "DetailedItems [ino=" + ino + ", iprice=" + iprice + ", mno=" + mno + ", ititle=" + ititle
 				+ ", icontent=" + icontent + ", itrade=" + itrade + ", itradeplace=" + itradeplace + ", idate=" + idate
-				+ ", eno=" + eno + ", iestate=" + iestate + ", dno=" + dno + ", isafepayment=" + isafepayment
-				+ ", keepstate=" + keepstate + ", imgList=" + imgList + ", lat=" + lat + ", lng=" + lng + ", mid=" + mid
-				+ "]";
+				+ ", eno=" + eno + ", iestate=" + iestate + ", uno=" + uno + ", dno=" + dno + ", isafepayment="
+				+ isafepayment + ", keepstate=" + keepstate + ", imgList=" + imgList + ", lat=" + lat + ", lng=" + lng
+				+ ", mid=" + mid + "]";
 	}
+
+	
 	
 	
 	

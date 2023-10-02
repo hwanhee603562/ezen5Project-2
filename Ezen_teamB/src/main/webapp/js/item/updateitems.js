@@ -1,8 +1,12 @@
 
+
+//$("#brokerage_3").trigger('click');
 if( !loginState ){
 	alert('물품수정페이지는 로그인 후 이용가능합니다')
 	location.href = "/Ezen_teamB/jsp/item/checkitems.jsp"
 }
+
+/* =============== 공유변수 선언부 =============== */
 
 // 쿼리스트링을 통해 인수
 let ino = new URL( location.href ).searchParams.get("ino");
@@ -20,10 +24,29 @@ let fTradeplace;
 	// 주소
 let emediationInfo = { eno : '', ename : '', eadress : '' }
 
+// JS에서 CSS 제어
+let deliveryCSS = document.getElementsByClassName("delivery")[0].style;		// 배송
+let faceToFaceCSS = document.getElementsByClassName("faceToFace")[0].style;	// 대면거래
+let brokerageCSS = document.getElementsByClassName("brokerage")[0].style;	// 중개거래소
 
-// 기존 저장된 이미지의 개수를 저장
-	// 기존 이미지 삭제시 감소연산
-let selectedImgCount = 0;
+// 대면거래 이용 시 위도 저장
+let dlat = '';
+// 대면거래 이용 시 경도 저장
+let dlng = '';
+// 대면거래 이용 시 주소값 저장
+let itradeplace = ''
+
+
+
+// 기존 저장된 이미지의 파일명을 저장하는 배열
+let selectedImgCount = [];
+
+
+/* =============== 공유변수 end =============== */
+
+
+
+
 // 해당 기등록된 물품(ino)에 대한 기존 정보 불러오기
 existingInfo();
 function existingInfo(){
@@ -42,7 +65,7 @@ function existingInfo(){
 			console.log(s)
 			
 			// 응답된 기존 저장 정보를 html에 띄움
-				// 1 이미지 출력 구역 생성
+				// 1 이미지 출력
 					// 1-1 input 타입 file 1~10 출력구역 생성
 			for( let i=1; i<=10; i++ ){
 				document.querySelector('.inpuImgBox').innerHTML += `
@@ -52,42 +75,82 @@ function existingInfo(){
 					// 1-2 생성된 input 파일 첨부 공간에 기존 이미지 대입 
 						// - 이미지를 하나 삭제할 시 삭제버튼을 클릭한 이미지 하나씩 DB 삭제처리를 위해
 						// 	 기존 이미지 삭제 함수 fileDelete() 함수와는 다른 함수 생성
-						
+			
 						// 기존 저장된 이미지의 개수 만큼 저장
-
-			selectedImgCount = Object.keys(s.imgList).length;
-			for( let i=0; i<selectedImgCount; i++ ){
-
-				// 이미지를 출력할 구역 생성
+			for( let i=0; i<Object.keys(s.imgList).length; i++ ){
+				
+				selectedImgCount.push( Object.values( s.imgList )[i] )
 				document.querySelector('.outputImg').innerHTML +=	`
-						<div class="outExistingFiled${s.imgList[i]}">
-							<img class="existingImg${s.imgList[i]}" alt="" src="/Ezen_teamB/jsp/item/img/${s.imgList[i]}"/>
-							<button onclick="existingImgDelete('${s.imgList[i]}')" type="button">x</button>
+						<div class="outExistingFiled${i}">
+							<img class="existingImg${i}" alt="" src="/Ezen_teamB/jsp/item/img/${s.imgList[i]}"/>
+							<button onclick="existingImgDelete(${i}, '${s.imgList[i]}')" type="button">x</button>
 						</div>
 					` 
 			}
 			
+				// 2 제목 출력
+			document.querySelector('.ititle').value = s.ititle
 			
+				// 3 내용 출력
+			document.querySelector('.icontent').value = s.icontent
 			
+				// 4 카테고리 출력
+					// 3-1 카테고리 출력구역 생성
+			getMainCategory()
+					// 3-2 대분류/소분류 카테고리 강제 클릭
+			document.getElementById(`getMainCategory${s.uno}`).click();
+			document.getElementById(`getSubCategory${s.dno}`).click();
+			
+				// 5 거래방식 출력
+					// 각 거래방식에 해당되는 버튼 강제클릭 
+					// 5-1 배송
+			if( s.itrade == 1 )	{
+				$("delivery_1").trigger('click');
+			}
+					// 5-2 대면거래
+			if( s.itrade == 2 )	{
+				
+				$("#faceToFace_2").trigger('click');
+				
+				// 위도 저장
+				dlat = fLat = s.lat;
+				// 경도 저장
+				dlng = fLng = s.lng;
+				// 주소값 저장
+				itradeplace = fTradeplace = s.itradeplace;
+				
+				document.querySelector('.selectedAddress span').innerHTML = `${itradeplace}`;
+			}
+					// 5-3 중개거래
+			if( s.itrade == 3 )	{
+
+				// 위도 저장
+				fLat = s.lat;
+				// 경도 저장
+				fLng = s.lng;
+				// 주소값 저장
+				fTradeplace = s.itradeplace;
+				
+				document.querySelector('.emediationAdress').innerHTML = `${fTradeplace}`;
+			}
+			
+				// 6 가격 출력
+			document.querySelector('.iprice').value = `${s.iprice}`;
+				// 7 안전결제 사용여부 출력
+			document.querySelector('.isafepaymentCheck').checked = `${ s.isafepayment==1 ? 'on' : 'off' }`;
 			
 		},
 		error: e => {
 			console.log('에러발생')
 		}
-		
-		
 	})
-	
-	
 }
 
 
 
 
-
-
 /* ================================ 카테고리 */
-getMainCategory()
+
 // 1. 카테고리 대분류/소분류 출력
 function getMainCategory(){
 	
@@ -101,8 +164,8 @@ function getMainCategory(){
 			let mainUl = document.querySelector('.mainUl');
 			let mainhtml = ``;
 			
-			s.forEach( category => {
-				mainhtml += `<li> <button onclick="getSubCategory( ${category.uno}, '${category.uname}' )" type="button"> ${ category.uname } </button> </li>`;
+			s.forEach( ( category ) => {
+				mainhtml += `<li> <button id="getMainCategory${category.uno}" onclick="getSubCategory( ${category.uno}, '${category.uname}' )" type="button"> ${ category.uname } </button> </li>`;
 			});
 
 			mainUl.innerHTML = mainhtml;
@@ -125,6 +188,7 @@ function getSubCategory( uno, uname ){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data : {type : "getSubCategory", uno : uno},
 		success: s => {
 			let subUl = document.querySelector('.subUl');
@@ -132,8 +196,8 @@ function getSubCategory( uno, uname ){
 			
 			// 해당 대분류에 소분류 카테고리가 없으면 등록되어있지 않음을 출력
 			if( s.length == 0 ) subhtml += `<li> <button onclick="" type="button"> 현재 소분류 카테고리가<br> 등록되어있지 않습니다 </button> </li>`;
-			s.forEach( category => {
-				subhtml += `<li> <button onclick="selectedCategory( ${category.dno}, '${category.dname}' )" type="button"> ${ category.dname } </button> </li>`;
+			s.forEach( ( category ) => {
+				subhtml += `<li> <button id="getSubCategory${category.dno}" onclick="selectedCategory( ${category.dno}, '${category.dname}' )" type="button"> ${ category.dname } </button> </li>`;
 			});
 
 			// 선택된 카테고리를 출력
@@ -161,10 +225,7 @@ function selectedCategory( dno, dname ){
 
 
 /* ============================= 거래방식 */
-// JS에서 CSS 제어
-let deliveryCSS = document.getElementsByClassName("delivery")[0].style;		// 배송
-let faceToFaceCSS = document.getElementsByClassName("faceToFace")[0].style;	// 대면거래
-let brokerageCSS = document.getElementsByClassName("brokerage")[0].style;	// 중개거래소
+
 
 
 // 현재 거래방식을 저장하는 변수
@@ -202,14 +263,6 @@ function delivery(){
 
 
 // 2. 거래방식 - 대면거래 방식 클릭하였을 때
-
-	// 대면거래 이용 시 위도 저장
-let dlat = '';
-	// 대면거래 이용 시 경도 저장
-let dlng = '';
-	// 대면거래 이용 시 주소값 저장
-let itradeplace = ''
-
 function faceToFace(){
 	deliveryCSS.backgroundColor = "#EFEFEF";
 	faceToFaceCSS.backgroundColor = "#6AAFE6";
@@ -236,7 +289,7 @@ function faceToFace(){
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
-	center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	center: new kakao.maps.LatLng(fLat, fLng), // 지도의 중심좌표
 	level: 3 // 지도의 확대 레벨
 };
 
@@ -247,15 +300,12 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-
 //마커 생성
 var marker = new daum.maps.Marker({
-	position: new daum.maps.LatLng(37.537187, 127.005476),
+	position: new daum.maps.LatLng(fLat, fLng),
 	map: map
 });
 var infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-
 
 
 
@@ -331,15 +381,16 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 function displayCenterInfo(result, status) {
     if (status === kakao.maps.services.Status.OK) {
         var infoDiv = document.getElementById('centerAddr');
-
-        for(var i = 0; i < result.length; i++) {
-            // 행정동의 region_type 값은 'H' 이므로
-            if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
-                break;
-            }
-        }
-    }    
+		
+	    for(var i = 0; i < result.length; i++) {
+	        // 행정동의 region_type 값은 'H' 이므로
+	        if (result[i].region_type === 'H') {
+	            infoDiv.innerHTML = result[i].address_name;
+	            break;
+	        }
+	    }
+        
+    }     
 }
 
 function sample5_execDaumPostcode() {
@@ -387,6 +438,8 @@ function sample5_execDaumPostcode() {
 // 3. 거래방식 - 중개거래소 방식 클릭하였을 때
 function brokerage(){
 	
+	console.log(3333)
+	
 	// 클러스터가 출력되는 것을 막기 위해 클러스터 배열을 clear함
 	clusterer2.clear()
 	positions = []
@@ -414,6 +467,7 @@ function brokerage(){
 	$.ajax({
 		url:"/Ezen_teamB/ItemController",
 		method: 'get',
+		async: false,
 		data: { type : 'getEmediation' },
 		success : result => {
 				
@@ -459,7 +513,6 @@ function brokerage(){
 				// 현재 마커 전체 삭제
 				for (var i = 0; i < markers.length; i++) {
         			markers[i].setMap(null);
-        			console.log( markers[i].getMap() )
     			}
 				
 		    }
@@ -520,16 +573,13 @@ function brokerage(){
 	
 }	
 
-// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-var positions = [];
+
 
 // 지도를 생성합니다    
 var map2 = new kakao.maps.Map(document.getElementById('map2'), { // 지도를 표시할 div
-    center : new kakao.maps.LatLng(37.8890791, 128.825870), // 지도의 중심좌표
+    center : new kakao.maps.LatLng(fLat, fLng), // 지도의 중심좌표
     level : 12 // 지도의 확대 레벨
 });
-
-
 
 /* 카카오맵 클러스터 [ 마커 여러개일때 집합모양 ] */
 var clusterer2 = new kakao.maps.MarkerClusterer({
@@ -539,14 +589,37 @@ var clusterer2 = new kakao.maps.MarkerClusterer({
     disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
 });
 
+
 kakao.maps.event.addListener(clusterer2, 'clusterclick', function(cluster) {
     var level = map2.getLevel()-1;
     map2.setLevel(level, {anchor: cluster.getCenter()});
 });
 
+/*
+
+	카카오 지도 css 적용시 에러발생으로 인해 중개거래만 별도로 출력처리함
+
+*/
+if( itrade == 3 ){
+	
+	deliveryCSS.backgroundColor = "#EFEFEF";
+	faceToFaceCSS.backgroundColor = "#EFEFEF";
+	brokerageCSS.backgroundColor = "#6AAFE6";
+	
+	$("#brokerage_3").trigger('click');
+
+} else {
+	
+	document.getElementById("outputMapField2").style.display = "none";
+	
+}
+
+
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder2 = new kakao.maps.services.Geocoder();
+
+
 
 function sample5_execDaumPostcode2() {
 	new daum.Postcode({
@@ -586,6 +659,7 @@ kakao.maps.event.addListener(map2, 'dragend', function(){
 kakao.maps.event.addListener(map2, 'idle', function(){
 	brokerage();
 });
+
 
 
 
@@ -630,7 +704,7 @@ function fileUpload( mimg, idNum ){
 	// 등록된 이미지가 10개를 초과하는지 확인하는 스위치
 	let checkImg = false;
 		// 10개의 input 파일 타입에 파일 객체가 존재하는지 탐색
-	for( let i=1; i<=(10-selectedImgCount); i++ ){
+	for( let i=1; i<=10-selectedImgCount.length; i++ ){
 		var fileCheck = document.getElementById(`uploadFile${i}`).value;
 		
 		// 파일객체가 존재하지 않는 경우
@@ -668,8 +742,9 @@ function forbidden(){
 }
 
 // 2-1 [기존 DB에 저장된 이미지] 선택된 이미지 파일 삭제
-function existingImgDelete( pimg ){
+function existingImgDelete( pno, pimg ){
 	
+	console.log( pno )
 	console.log( pimg )
 	
 	$.ajax({
@@ -680,10 +755,16 @@ function existingImgDelete( pimg ){
 				pimg : pimg },
 		success: s =>{
 			
-			console.log(s)
-			selectedImgCount--;
-			console.log('DB 삭제 후 카운팅 확인')
-			console.log(selectedImgCount)
+			// 배열에서 선택된 이미지 삭제
+			for( let i=0; i<selectedImgCount.length; i++ ){
+				
+				if( selectedImgCount[i] == pimg ){
+					selectedImgCount.splice( i, 1 )
+					break;
+				}
+			}
+			
+			document.querySelector(`.outExistingFiled${pno}`).innerHTML = ``;
 			
 		},
 		error: e =>{
@@ -723,6 +804,41 @@ function fileDelete( idNum ){
 	}
 			
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ============================= 이미지 출력/삭제 end */

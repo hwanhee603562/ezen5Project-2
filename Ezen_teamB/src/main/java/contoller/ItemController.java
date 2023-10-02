@@ -243,7 +243,6 @@ public class ItemController extends HttpServlet {
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String type = request.getParameter("type");
-		System.out.println(type);
 		boolean result = false;
 		
 		// 물품 수정시 기존 이미지 DB에서 삭제하기
