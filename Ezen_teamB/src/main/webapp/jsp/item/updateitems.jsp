@@ -136,7 +136,7 @@
 			
 		</form>	<!-- form 식별구역 end -->
 		<div class="bottomBtn">
-			<button onclick="updateItems()" type="button" style="background-color: #A287D6;"> 등록 </button><button type="button" style="background-color: white;"> 취소 </button>
+			<button onclick="updateItems()" type="button" style="background-color: #A287D6;"> 수정 </button><button type="button" style="background-color: white;"> 취소 </button>
 		</div>
 	</div>
 	

@@ -105,7 +105,12 @@ function existingInfo(){
 					// 각 거래방식에 해당되는 버튼 강제클릭 
 					// 5-1 배송
 			if( s.itrade == 1 )	{
-				$("delivery_1").trigger('click');
+				
+				$("#delivery_1").trigger('click');
+				
+				fLat = 37.5751;
+				fLng =  126.9768;
+				
 			}
 					// 5-2 대면거래
 			if( s.itrade == 2 )	{
@@ -324,7 +329,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 	var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
 	message += '경도는 ' + latlng.getLng() + ' 입니다';
-
 
 	// 위 경도 좌표 저장
 		// form객체 전송을 위함
@@ -905,9 +909,7 @@ function updateItems(){
 		success: result =>{
 			
 			if(result) console.log('등록성공')
-			
-			
-			
+
 		},
 		error: e =>{
 			console.log(e)

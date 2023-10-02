@@ -412,7 +412,7 @@ public class ItemDao extends Dao {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
-			return rs.getInt(1);
+			if( rs.next() ) return rs.getInt(1);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -430,7 +430,6 @@ public class ItemDao extends Dao {
 		try {
 
 			String sql = "";
-
 			
 			// 기존 물품번호에 대한 거래방식 확인
 			/*
@@ -464,7 +463,7 @@ public class ItemDao extends Dao {
 				
 			} 
 			if( (existingItrade==1 || existingItrade==3) && itemsInfo.getItrade()==2 ) {
-					
+				
 				sql = "insert into dpoint(dlat, dlng, ino) values(?, ?, ?)";
 				
 				ps = conn.prepareStatement(sql);
@@ -477,10 +476,11 @@ public class ItemDao extends Dao {
 				
 			}
 			if ( existingItrade==2 && ( itemsInfo.getItrade()==1 || itemsInfo.getItrade()==3 ) ) {
-				
+				System.out.println(11111111);
 				sql = "delete from dpoint where ino = " + itemsInfo.getIno();
 				
-				ps.setInt(1, itemsInfo.getIno());
+				ps = conn.prepareStatement(sql);
+				
 				ps.executeUpdate();
 				
 			}
@@ -488,7 +488,7 @@ public class ItemDao extends Dao {
 			
 			// 거래방식이 중개거래소일 경우에만 중개거래소 필드를 추가하여 삽입
 			if (itemsInfo.getItrade() == 3) {
-
+				System.out.println(222222);
 				Emediation emediation = getEmediationInfo(itemsInfo.getEno());
 
 				// 물품저장
