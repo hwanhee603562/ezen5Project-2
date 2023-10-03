@@ -3,16 +3,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-	<link href="/Ezen_teamB/css/manager/memberList.css" rel="stylesheet">
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	
+	<link href="/Ezen_teamB/css/manager/memberList.css" rel="stylesheet">
+
 </head>
 <body>
 
 
-	회원관리
+	<div>	<!-- 검색구역 -->
+		<select>
+			<option value="회원아이디"> 아이디 </option>
+			<option value="이름"> 이름 </option>
+			<option value="주민번호"> 주민번호 </option>
+			<option value="이메일"> 이메일 </option>
+			<option value="전화번호"> 전화번호 </option>
+		</select>
+		<input type="text">
+	</div>
 
 
 

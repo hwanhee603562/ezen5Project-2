@@ -1,36 +1,58 @@
 
-// 1. 회원관리
+
+
+// 1. 회원관리 경로이동
 function goToMemberList(){
-	
-	document.querySelector('.rightMainOutput').innerHTML = `
-		<%@ include file = "./memberList.jsp" %>
-	`
+
+	fetch('./memberList.jsp')
+		.then(response => response.text())
+		.then(data => {
+			document.querySelector('.rightMainOutput').innerHTML = data;
+		})
+		.catch(error => {
+			console.error('데이터를 가져오는 중 오류 발생:', error);
+		});
 
 }
 
-// 2. 통계
+// 2. 통계 경로이동
 function goToStatistics(){
 	
-	document.querySelector('.rightMainOutput').innerHTML = `
-		<%@ include file = "./statistics.jsp" %>
-	`
+	fetch('./statistics.jsp')
+		.then(response => response.text())
+		.then(data => {
+			document.querySelector('.rightMainOutput').innerHTML = data;
+		})
+		.catch(error => {
+			console.error('데이터를 가져오는 중 오류 발생:', error);
+		});
 
 }
 
-// 3. 거래내역
+// 3. 거래내역 경로이동
 function goToTradeLog(){
 	
-	document.querySelector('.rightMainOutput').innerHTML = `
-		<%@ include file = "./tradelog.jsp" %>
-	`
+	fetch('./tradelog.jsp')
+		.then(response => response.text())
+		.then(data => {
+			document.querySelector('.rightMainOutput').innerHTML = data;
+		})
+		.catch(error => {
+			console.error('데이터를 가져오는 중 오류 발생:', error);
+		});
 
 }
 
-// 4. 중개거래소관리
+// 4. 중개거래소관리 경로이동
 function goToemEdiation(){
 	
-	document.querySelector('.rightMainOutput').innerHTML = `
-		<%@ include file = "./emediation.jsp" %>
-	`
+	fetch('./emediation.jsp')
+		.then(response => response.text())
+		.then(data => {
+			document.querySelector('.rightMainOutput').innerHTML = data;
+		})
+		.catch(error => {
+			console.error('데이터를 가져오는 중 오류 발생:', error);
+		});
 
 }
