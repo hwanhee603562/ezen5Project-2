@@ -1,4 +1,8 @@
 @charset "UTF-8";
 
-
-
+.memberListTable th{
+	border: 1px solid black;
+}
+.memberListTable td{
+	border: 1px solid black;
+}

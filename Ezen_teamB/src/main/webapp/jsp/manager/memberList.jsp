@@ -22,6 +22,30 @@
 		</select>
 		<input type="text">
 	</div>
+	
+	<div>
+		<table class="memberListTable">
+			<tr>
+				<th> 성명 </th>
+				<th> 주민번호 </th>
+				<th> 전화번호 </th>
+				<th> 이메일 </th>
+				<th> 주소 </th>
+				<th> 아이디 </th>
+				<th> 포인트 </th>
+			</tr>
+			<tr>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+			</tr>
+			
+		</table>
+	</div>
 
 
 
