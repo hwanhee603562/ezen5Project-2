@@ -693,6 +693,7 @@ function registerItems(){
 		}
 	}
 	
+	
 	// 1. form dom객체 호출
 	let registerForm = document.querySelectorAll('.registerForm')[0];
 	let formData = new FormData( registerForm );
@@ -740,7 +741,6 @@ function registerItems(){
 /* ============================= 제품등록 end */
 
 /* ============================= 제품상세페이지 조회 */
-
 
 
 

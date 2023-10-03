@@ -19,7 +19,7 @@
 		<div class="topField">
 			<div class="searchWord"> 검색 <input class="searchValue" type="text" placeholder="제목 또는 거래장소"> <button onclick="searchByWord()" type="button"> 검색 </button> </div>
 			<div class="topCategory">	<!-- 대분류 카테고리 설정구역 -->
-				<div class="guideLabel"> 대분류 <button onclick="searchAll()" type="button"> 전체보기 </button> </div>
+				<div class="guideLabel"> 대분류 <button class="searchAllBtn" onclick="searchAll()" type="button"> 전체보기 </button> </div>
 				<table class="outputUmaincategory">
 					<!-- 대분류 카테고리 출력구역 -->
 				</table>

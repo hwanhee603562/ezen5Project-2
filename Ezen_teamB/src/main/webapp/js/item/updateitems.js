@@ -441,9 +441,7 @@ function sample5_execDaumPostcode() {
 
 // 3. 거래방식 - 중개거래소 방식 클릭하였을 때
 function brokerage(){
-	
-	console.log(3333)
-	
+		
 	// 클러스터가 출력되는 것을 막기 위해 클러스터 배열을 clear함
 	clusterer2.clear()
 	positions = []

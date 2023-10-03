@@ -211,6 +211,9 @@ public class ItemController extends HttpServlet {
 			System.out.println(e);
 		}
 		
+		// icontent 상 줄바꿈 처리를 위해 치환
+		icontent = icontent.replaceAll( "\n", "<br>" );
+		
 		// 거래방식에 따라 별도 데이터 처리
 		String json = "";
 		ObjectMapper mapper = new ObjectMapper();
@@ -318,6 +321,9 @@ public class ItemController extends HttpServlet {
 			System.out.println(e);
 		}
 
+		// icontent 상 줄바꿈 처리를 위해 치환
+		icontent = icontent.replaceAll( "\n", "<br>" );
+		
 		// 거래방식에 따라 별도 데이터 처리
 		String json = "";
 		ObjectMapper mapper = new ObjectMapper();
