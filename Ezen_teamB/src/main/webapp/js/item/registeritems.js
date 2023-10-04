@@ -335,7 +335,7 @@ function brokerage(){
 	}
 	
 	itrade = 3;
-
+	
 	
 	// DB에 저장된 중개거래소 불러오기
 		// 각 중개거래소별 마커 추가하기
