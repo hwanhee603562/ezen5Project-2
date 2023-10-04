@@ -12,6 +12,7 @@ function getMainCategory(){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data : {type : "getMainCategory"},
 		success: s => {
 			
@@ -42,6 +43,7 @@ function getSubCategory( uno, uname ){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data : {type : "getSubCategory", uno : uno},
 		success: s => {
 			let subUl = document.querySelector('.subUl');
@@ -154,8 +156,8 @@ function faceToFace(){
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
-	center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	level: 3 // 지도의 확대 레벨
+	center: new kakao.maps.LatLng(37.5663, 126.9779), // 지도의 중심좌표
+	level: 6 // 지도의 확대 레벨
 };
 
 
@@ -316,7 +318,6 @@ function brokerage(){
 	console.log('brokerage실행')
 	// 클러스터가 출력되는 것을 막기 위해 클러스터 배열을 clear함
 	clusterer2.clear()
-	positions = []
 	
 	
 	if( itrade != 3 ){
@@ -345,99 +346,34 @@ function brokerage(){
 		async: false,
 		data: { type : 'getEmediation' },
 		success : result => {
-			console.log(result)
+			var markers
 			// 데이터에서 좌표 값을 가지고 마커를 표시합니다
-		    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		    markers = result.map( s => {
+			// 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+			markers = result.map( s => {
 				
-				// 지도의 현재 level < 클러스터 최소 출력 level
-					// 클러스터가 출력될 시 개별 마커 정보는 출력되지 않음
-					// 1. 마커 출력
-				if( map2.b.H < clusterer2._model.minLevel ){
+				// 중개거래소 1개 당 마커 1개 '객체' 선언
+				let maker2 = new kakao.maps.Marker({
+					// 마커 1개의 위치 지정
+					position: new kakao.maps.LatLng(s.elat, s.elng),
+					clickable: true
+				});
+				// 해당 마커에 클릭이벤트 지정
+				kakao.maps.event.addListener( maker2, 'click', function() {
+					document.querySelector('.emediationName').innerHTML = s.ename
+					document.querySelector('.emediationAdress').innerHTML = s.eadress
 					
-					positions.push({
-						content: s.eno+'_'+s.ename+'_'+s.eadress,		// pk,중개거래소명,주소
-						latlng: new kakao.maps.LatLng(s.elat, s.elng)	// 중개거래소 위.경도
-					})
+					emediationInfo = { eno : s.eno, ename : s.ename, eadress : s.eadress }
 					
-				} else {	// 2. 
-									
-					// 중개거래소의 위도 경도를 저장
-			        return new kakao.maps.Marker({
-			            position : new kakao.maps.LatLng(s.elat, s.elng)
-			        });
-		        }
-		    });
-		    
-		    
-		    // 지도의 현재 level > 클러스터 최소 출력 level
-				// 클러스터가 출력될 시 개별 마커 정보는 출력되지 않음
-			// 1. 클러스터 출력을 위해 클러스터러에 마커의 정보를 저장
-		    if( map2.b.H >= clusterer2._model.minLevel ){
+				});
 				
-				// 클러스터러에 마커들을 추가합니다
-		    	clusterer2.addMarkers(markers);
-		    	
-		    	console.log('map 범위 초과되어 마커 삭제')
-				console.log('markers 확인')
-				console.log(markers)
-				// 현재 마커 전체 삭제
-				for (var i = 0; i < markers.length; i++) {
-        			markers[i].setMap(null);
-    			}
+				// return 을 통해 중개거래소 마커 1개를 markers에 대입 후 다음 중개거래소 마커들 선언
+				return maker2;
+				
+			});
+			
+			// 클러스터러에 마커들을 추가합니다
+			clusterer2.addMarkers(markers);
 
-		    } else {
-				
-				for (var i = 0; i < positions.length; i++) {
-					
-					// 마커를 생성합니다
-					var marker2 = new kakao.maps.Marker({
-						map: map2, // 마커를 표시할 지도
-						position: positions[i].latlng // 마커의 위치
-					});
-					
-					/*
-					// 추후 마커를 삭제하기 위해 배열에 마커 push
-					markers.push(marker2);
-						*/
-					// 마커에 표시할 인포윈도우를 생성합니다 
-					var infowindow = new kakao.maps.InfoWindow({
-						content: positions[i].content // 인포윈도우에 표시할 내용
-					});
-	
-					// 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
-					// 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-					(function(marker2, infowindow) {
-						// 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
-						kakao.maps.event.addListener(marker2, 'mouseover', function() {
-	
-							infowindow.open(map2, marker2);
-	
-						});
-	
-						kakao.maps.event.addListener(marker2, 'click', function() {
-	
-							emediationInfo.eno = infowindow.cc.split('_')[0];
-							emediationInfo.ename = infowindow.cc.split('_')[1];
-							emediationInfo.eadress = infowindow.cc.split('_')[2];
-	
-							document.querySelector('.emediationName').innerHTML = `${emediationInfo.ename}`
-							document.querySelector('.emediationAdress').innerHTML = `${emediationInfo.eadress}`
-	
-						});
-	
-						// 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
-						kakao.maps.event.addListener(marker2, 'mouseout', function() {
-	
-							infowindow.close();
-	
-						});
-					})(marker2, infowindow);
-				}
-			}
-		    
-
-		    
 		},
 		error: e => {
 			console.log('에러발생')
@@ -448,16 +384,12 @@ function brokerage(){
 	
 }	
 
-// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-var positions = [];
 
 // 지도를 생성합니다    
 var map2 = new kakao.maps.Map(document.getElementById('map2'), { // 지도를 표시할 div
-    center : new kakao.maps.LatLng(37.8890791, 128.825870), // 지도의 중심좌표
-    level : 12 // 지도의 확대 레벨
+    center : new kakao.maps.LatLng(37.5663, 126.9779), // 지도의 중심좌표
+    level : 7 // 지도의 확대 레벨
 });
-
-
 
 /* 카카오맵 클러스터 [ 마커 여러개일때 집합모양 ] */
 var clusterer2 = new kakao.maps.MarkerClusterer({
@@ -472,6 +404,9 @@ kakao.maps.event.addListener(clusterer2, 'clusterclick', function(cluster) {
     map2.setLevel(level, {anchor: cluster.getCenter()});
 });
 
+
+brokerage()
+delivery()
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder2 = new kakao.maps.services.Geocoder();
@@ -508,13 +443,11 @@ function sample5_execDaumPostcode2() {
 
 // 카카오지도에서 드래그를 하고 끝났을 때 1번 함수 재실행
 kakao.maps.event.addListener(map2, 'dragend', function(){
-	console.log('drg')
 	brokerage();
 });
 
 // 카카오지도에서 스크롤확대/축소 하고 끝났을 때 1번 함수 재실행
 kakao.maps.event.addListener(map2, 'idle', function(){
-	console.log('idle')
 	brokerage();
 });
 

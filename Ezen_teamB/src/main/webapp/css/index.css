@@ -7,13 +7,74 @@
 	border: 1px solid #e8e8e8; 
 }
 
+
 .topField{
-	width: 1100px;
-	height: 230px; 
-	margin: 30px 0px 30px 0px;
-	border: 1px solid red;
-	/*border-bottom: 1px solid #e8e8e8;*/
+	width: 800px;
+    margin: 0 auto;
+	border: 2px solid black;
+	border-radius: 23px;
+	margin-bottom: 20px;
+	padding: 20px;
 }
+.topField span{
+	color: red;
+}
+/* 카테고리 선택구역 */
+	/* 대분류 */
+.topCategory{
+	border-bottom: 1px solid #e8e8e8;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	
+}
+.searchAllBtn{
+	border-radius: 20px;
+	background-color: #A287D6;
+	padding: 3px;
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.topCategory table{
+	width: 100%
+}
+.topCategory td{
+	border: 1px solid #e8e8e8;
+	width: 203px;
+	padding-left: 12px;
+}
+	/* 소분류 */
+.bottomCategory{
+	border-bottom: 1px solid #e8e8e8;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	
+}
+.bottomCategory table{
+	width: 100%
+}
+.bottomCategory td{
+	border: 1px solid #e8e8e8;
+	width: 203px;
+	padding-left: 12px;
+}
+
+.guideLabel{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .mainField{
 	width: 800px;
 	height: 800px;

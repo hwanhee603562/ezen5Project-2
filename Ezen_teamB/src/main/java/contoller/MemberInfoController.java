@@ -38,6 +38,7 @@ public class MemberInfoController extends HttpServlet {
 			
 		ObjectMapper objectMapper = new ObjectMapper();
 			// ObjectMapper 객체 만들고 objectMapper.writeValueAsString 이걸로 json에 대입
+		
 		String json = objectMapper.writeValueAsString(loginDto);
 		
 		response.setContentType("application/json;charset=UTF-8");

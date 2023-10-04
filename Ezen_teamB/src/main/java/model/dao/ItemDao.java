@@ -272,15 +272,21 @@ public class ItemDao extends Dao {
 			String sql = "select a.ino, a.iprice, a.mno, a.ititle, a.icontent, a.itrade, a.itradeplace, a.idate, a.eno, a.iestate, a.dno, a.isafepayment, a.keepstate, "
 					+ "(select pimg from pimg  p where p.ino = a.ino limit 1) pimg from itemsinfo a ";
 			
-			
-			// 기본 물품 정보에 대표 이미지 1개만 조회
+			// indexPage에서 사용하는 대면거래 방식만 필요할 경우
+			boolean useIndexPage = false;
+			if( searchWord.equals("posts/df6fdea1-10c3-474c-ae62-e63def80de0b") ) {
+				searchWord = "";
+				useIndexPage = !useIndexPage;
+			}
+
+			// 대분류 필터 + 검색어 필터
 			if( filterCategory.equals("dno") ) {
 
 				 sql += "where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%')"
-					  + " and dno = "+filterNum+" order by idate desc";
+					  + " and dno = "+filterNum;
 			
 			} 
-			
+			// 소분류 필터 + 검색어 필터
 			else if( filterCategory.equals("uno") ) {
 				
 				// 대분류 pk를 통해 소분류 정보 반환
@@ -295,14 +301,25 @@ public class ItemDao extends Dao {
 					sql += " or ";
 						
 				}
-				sql += " ) order by idate desc";
+				sql += " )";
 				
 			}
-				
+			// 검색어 필터
 			else {
-				sql += "where ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%' order by idate desc";
+				sql += " where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%')";
 			}
 			
+			// indexPage에서 사용하는 대면거래 방식만 필요할 경우
+			// 대면거래방식만 출력
+			if(useIndexPage) {
+				sql += " and a.itrade = 2";
+			}
+			
+			
+			
+			sql += " order by idate desc";
+			
+			System.out.println(sql);
 			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -421,6 +438,7 @@ public class ItemDao extends Dao {
 		return -1;
 	}
 
+	
 	
 	// 3 판매물품수정
 	public boolean updateItem(ItemsInfo itemsInfo, DpointDto dpointDto) {

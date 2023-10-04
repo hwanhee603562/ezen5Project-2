@@ -22,28 +22,35 @@
 	
 	<!-- index 전체구역 -->
 	<div class="indexWrap">
-	
+		
+		<div class="mainField"> <!-- 본문 지도출력 구역 -->
+			
+			<div id="map" style="width:800px;height:800px;"></div>
+		
+		</div>
+		
 		<div class="topField">	<!-- 상단 제품추천 구역 -->
 			
-			<h2> 가지가지의 추천 상품 </h2>
-			
-			<div>	<!-- 제품출력구역 -->	
+			<div>	<!-- 카테고리 출력구역 -->	
 				
+				<div class="topCategory">	<!-- 대분류 카테고리 설정구역 -->
+				<div class="guideLabel"> 대분류 <button class="searchAllBtn" onclick="searchAll()" type="button"> 전체보기 </button> </div>
+				<table class="outputUmaincategory">
+					<!-- 대분류 카테고리 출력구역 -->
+				</table>
 				
+			</div>
+
+			<div class="bottomCategory">	
+				<!-- 소분류 카테고리 출력구역 -->
+			</div>
+			<span> 선택된 카테고리 : </span> <span class="selCategory1">  </span> <span class="selCategory2">  </span>
 			
 			</div>
 		
 		</div>
 	
-		
-		<div class="mainField"> <!-- 본문 지도출력 구역 -->
-			
-			
-		
-		</div>
-		
-	
-	
+
 	</div>
 
 

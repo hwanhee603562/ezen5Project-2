@@ -69,7 +69,6 @@ public class ItemController extends HttpServlet {
 		else if( type.equals("getEmediation") ) {
 			
 			ArrayList<Emediation> emediation = ItemDao.getInstance().getEmediation();
-			System.out.println(emediation);
 			json = mapper.writeValueAsString(emediation);
 			
 		}
@@ -79,8 +78,9 @@ public class ItemController extends HttpServlet {
 			String filterCategory = request.getParameter("filterCategory");
 			int filterNum = Integer.parseInt( request.getParameter("filterNum") );
 			String searchWord = request.getParameter("searchWord");
-			
+			System.out.println(searchWord);
 			ArrayList<ItemsInfo> itemsInfo = ItemDao.getInstance().getItemList( filterCategory, filterNum, searchWord );
+			
 			json = mapper.writeValueAsString(itemsInfo);
 			
 		}
@@ -131,7 +131,7 @@ public class ItemController extends HttpServlet {
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print( json );
 		
-	}
+	}	
 
 	// 제품 등록하기
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
