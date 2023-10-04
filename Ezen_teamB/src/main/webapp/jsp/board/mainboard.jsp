@@ -17,10 +17,11 @@
 	
 	
 			<div class="boardTop"> <!-- 상단 메뉴 -->
-			<h3> 게시판 </h3>
+			<h3> 가지가지마켓 게시판 </h3>
 			</div> <!-- 상단 메뉴 end -->
+			
 			<div class="boardmid">
-				<div>
+				<div class="boardSearch">
 					<select class="listsize" onchange="onListSize()">
 						<option value="10">10</option>
 						<option value="15">15</option>
@@ -38,7 +39,7 @@
 		
 		
 		
-		<div> <!-- 게시물이 출력 -->
+		<div class="boardcontent"> <!-- 게시물이 출력 -->
 			<table class="boardTable">
 				<!-- 
 				게시물이 출력되는 구역 
