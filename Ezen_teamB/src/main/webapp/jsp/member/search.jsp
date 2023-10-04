@@ -57,7 +57,7 @@
 					<span class="signfont">이메일</span>
 				</div>
 				<input class="form-floating mb-3 px-3" id="searchEmail" name="signPwd"
-					maxlength="20" oninput="maxlength(this)" type="password"
+					maxlength="20" oninput="maxlength(this)" type="email"
 					placeholder="이메일"><br/>
 					<span class="signfont">인증번호 입력</span>					
 				<div class="pwdCertified"><!-- 인증번호 입력 -->

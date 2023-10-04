@@ -176,9 +176,11 @@ public class MemberDao extends Dao{
 			
 			rs=ps.executeQuery();
 			
+			
 			if(rs.next()) {
 				MemberList member = new MemberList(rs.getString(1));
-				return member;}
+						return member;
+				}
 			
 			
 		} catch (Exception e) {
