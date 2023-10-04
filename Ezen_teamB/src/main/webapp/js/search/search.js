@@ -26,8 +26,7 @@ function idSearch(){ console.log('아이디 찾기 함수 실행')
 			if(result=='null'){
 				alert('정보가 일치하지 않습니다')
 			}else if(result !='null'){
-				
-			
+				alert('고객님의 아이디는 '+result+' 입니다' )
 			}
 
 			
@@ -54,9 +53,10 @@ function pwdSearch(){ console.log('비밀번호 찾기 함수 실행')
 		data :{type : "pwd" , mid : mid , memail : memail},
 		success : result => {console.log(result)
 
-			if(result==""){
-				alert('등록된 정보가 없습니다')
-			}else if(result !=""){
+			if(result=='null'){
+				alert('정보가 일치하지 않습니다')
+			}else if(result !='null'){
+				
 				alert('고객님의 비밀번호는 '+result+' 입니다' )
 			}
 			
