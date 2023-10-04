@@ -112,7 +112,7 @@ public class ChattingDao extends Dao{
 		List<MsgDto> list = new ArrayList<MsgDto>();
 		
 		try {
-			String sql = "m.mid, jcontent, jchatdate, ino from jchatting j, memberlist m  where j.caller = m.mno and rno = ?";
+			String sql = "select m.mid, jcontent, jchatdate, ino from jchatting j, memberlist m  where j.caller = m.mno and rno = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, rno);
 			rs = ps.executeQuery();
@@ -120,7 +120,7 @@ public class ChattingDao extends Dao{
 				MsgDto mDto = new MsgDto(
 						rs.getString(1), rs.getString(2),
 						rs.getString(3), rs.getInt(4));
-				list.add(mDto);		
+				list.add(mDto);
 			}
 			return list;
 			

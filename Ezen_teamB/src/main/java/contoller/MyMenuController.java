@@ -48,8 +48,6 @@ public class MyMenuController extends HttpServlet {
 			int mno = Integer.parseInt(request.getParameter("mno"));
 			int tradeCount = MyMenuDao.getInstance().tradeCount(mno);
 			
-			System.out.println(mno + " " + tradeCount);
-			
 			Mymenu result = MyMenuDao.getInstance().printMemberInfo(mno);
 			result.setTradelog(tradeCount);
 			json = mapper.writeValueAsString(result);
