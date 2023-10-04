@@ -25,7 +25,7 @@
 		
 		<div class="mainField"> <!-- 본문 지도출력 구역 -->
 			
-			<div id="map" style="width:800px;height:800px;"></div>
+			<div id="map" style="width:800px;height:600px;"></div>
 		
 		</div>
 		

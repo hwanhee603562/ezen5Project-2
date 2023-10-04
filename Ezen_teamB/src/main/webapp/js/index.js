@@ -99,7 +99,7 @@ function getItemList(  ){
 // 지도 출력
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
 	center : new kakao.maps.LatLng(37.5663, 126.9779), // 지도의 중심좌표
-	level : 15 // 지도의 확대 레벨
+	level : 10 // 지도의 확대 레벨
 });
 
 /* 카카오맵 클러스터 [ 마커 여러개일때 집합모양 ] */
@@ -220,6 +220,16 @@ function subCategoryFilter( dno, dname ){
 	
 }
 
+// 카테고리 전체보기
+function searchAll(){
+	
+	filterCategory = ''
+	searchWord = ''
+	document.querySelector('.selCategory1').innerHTML = ``
+	document.querySelector('.selCategory2').innerHTML = ``
+	
+	getItemList();
+}
 
 
 
