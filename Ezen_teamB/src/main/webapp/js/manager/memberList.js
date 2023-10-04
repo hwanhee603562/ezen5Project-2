@@ -1,9 +1,0 @@
-
-function getMemberList(){
-	
-	$.ajax({
-		url: 
-	})
-	
-	
-}

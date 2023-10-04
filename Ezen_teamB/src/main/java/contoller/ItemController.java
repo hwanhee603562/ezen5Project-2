@@ -69,6 +69,7 @@ public class ItemController extends HttpServlet {
 		else if( type.equals("getEmediation") ) {
 			
 			ArrayList<Emediation> emediation = ItemDao.getInstance().getEmediation();
+			System.out.println(emediation);
 			json = mapper.writeValueAsString(emediation);
 			
 		}

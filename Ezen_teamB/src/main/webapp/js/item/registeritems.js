@@ -345,7 +345,7 @@ function brokerage(){
 		async: false,
 		data: { type : 'getEmediation' },
 		success : result => {
-				
+			console.log(result)
 			// 데이터에서 좌표 값을 가지고 마커를 표시합니다
 		    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 		    markers = result.map( s => {
@@ -378,8 +378,16 @@ function brokerage(){
 				// 클러스터러에 마커들을 추가합니다
 		    	clusterer2.addMarkers(markers);
 		    	
+		    	console.log('map 범위 초과되어 마커 삭제')
+				console.log('markers 확인')
+				console.log(markers)
+				// 현재 마커 전체 삭제
+				for (var i = 0; i < markers.length; i++) {
+        			markers[i].setMap(null);
+    			}
 
 		    } else {
+				
 				for (var i = 0; i < positions.length; i++) {
 					
 					// 마커를 생성합니다
@@ -387,6 +395,7 @@ function brokerage(){
 						map: map2, // 마커를 표시할 지도
 						position: positions[i].latlng // 마커의 위치
 					});
+					
 					/*
 					// 추후 마커를 삭제하기 위해 배열에 마커 push
 					markers.push(marker2);
@@ -499,10 +508,13 @@ function sample5_execDaumPostcode2() {
 
 // 카카오지도에서 드래그를 하고 끝났을 때 1번 함수 재실행
 kakao.maps.event.addListener(map2, 'dragend', function(){
+	console.log('drg')
 	brokerage();
 });
+
 // 카카오지도에서 스크롤확대/축소 하고 끝났을 때 1번 함수 재실행
 kakao.maps.event.addListener(map2, 'idle', function(){
+	console.log('idle')
 	brokerage();
 });
 
