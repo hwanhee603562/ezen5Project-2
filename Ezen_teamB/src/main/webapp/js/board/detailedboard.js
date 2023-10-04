@@ -17,20 +17,30 @@ function getBoard(){
 			let boardBox = document.querySelector('.boardBox')
 			
 			let html =`
-				카테고리 : <div> ${r.cname}</div>
-				아이디 : <div> ${r.mid} </div>
+				<div class="detailedTop">
+				<div> 제목 : ${r.btitle} </div>
+				<div> 아이디 :  ${r.mid} </div>
+				<div> 카테고리 :  ${r.cname} </div>
+				</div>
+				
+				<div class="detailedMid">
+				첨부파일 :  <a href="/Ezen_teamB/BoardFileDownload="${r.bfile}>${r.bfile}</a>
+				내용 : ${r.bcontent}
+				</div>
+				
 				작성일 : <div> ${r.bdate} </div>
-				제목 : <div> ${r.btitle} </div>
-				내용 : <div> ${r.bcontent}</div>
-				첨부파일 : <div> <a href="/Ezen_teamB/BoardFileDownload="${r.bfile}>${r.bfile}</a> </div>
 
 			`;
 			html +='<a href="mainboard.jsp"><button type="button">목록보기</button></a>';
 			if(r.ishost){
 			
 				html+=`
+					<div>
 					<button onclick="bUpdate(${r.bno})" type="button">수정</button>
-					<button onclick="bDelete(${r.bno})" type="button">삭제</button>`;
+					<button onclick="bDelete(${r.bno})" type="button">삭제</button>
+					</div>
+					`;
+					
 			}
 	
 			

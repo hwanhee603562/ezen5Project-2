@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 개별게시판 jsp -->
-	<link href="/css/board/detailedboard.css" rel="stylesheet">
+	<link href="/Ezen_teamB/css/board/detailedboard.css" rel="stylesheet">
 </head>
 <body>
 	<%@include file ="../header.jsp" %>
 	<div class="webcontainer"> <!-- 페이지 전체 구역 -->
-		<h3>상세페이지</h3>
+		<h3>가지가지 게시판</h3>
 		<div class="boardBox">
 		
 		

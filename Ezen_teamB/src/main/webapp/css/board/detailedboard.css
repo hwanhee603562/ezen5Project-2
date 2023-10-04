@@ -1,1 +1,7 @@
-@charset "UTF-8";
+.boardBox{
+	border: 1px solid red;
+}
+.detailedTop{
+	display: flex;
+	justify-content: space-around;
+}
