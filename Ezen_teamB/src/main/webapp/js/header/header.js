@@ -48,7 +48,7 @@ function getMemberInfo() {
 		error: e => { e }
 	});
 }
-	
+		
 function getMemberInfo() {
 	$.ajax({
 		url: "/Ezen_teamB/MemberInfoController",
