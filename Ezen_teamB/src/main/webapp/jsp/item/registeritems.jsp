@@ -51,7 +51,7 @@
 				<div class="inputDeskBox prtContent">
 					<div class="deskInfo">제품설명</div>
 					<div class="rightInputBox">
-						<textarea name="icontent" class="icontent" rows="" cols=""></textarea><br>
+						<textarea name="icontent" id="icontent" class="icontent" rows="" cols=""></textarea><br>
 					</div>
 				</div>
 					
@@ -116,6 +116,7 @@
 						주소 : <span class="emediationAdress">  </span>
 					</div>
 				</div>
+			
 				
 				<div class="inputDeskBox prtPrice">
 					<div class="deskInfo">판매가격</div>

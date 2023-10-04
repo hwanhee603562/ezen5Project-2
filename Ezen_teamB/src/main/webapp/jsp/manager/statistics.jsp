@@ -9,5 +9,8 @@
 </head>
 <body>
 
+	통계
+
+
 </body>
 </html>

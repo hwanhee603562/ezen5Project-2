@@ -35,7 +35,7 @@ public class MemberInfoController extends HttpServlet {
 		Object session = request.getSession().getAttribute("loginSession");
 			// 타입변환[부모 -> 자식으로 객체타입변환(캐스팅)]
 		MemberList loginDto = (MemberList)session;		
-			System.out.println("loginDto 결과값 : "  +loginDto);
+			
 		ObjectMapper objectMapper = new ObjectMapper();
 			// ObjectMapper 객체 만들고 objectMapper.writeValueAsString 이걸로 json에 대입
 		String json = objectMapper.writeValueAsString(loginDto);

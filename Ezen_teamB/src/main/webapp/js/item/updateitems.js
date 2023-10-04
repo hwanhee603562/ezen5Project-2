@@ -1,8 +1,12 @@
 
+
+//$("#brokerage_3").trigger('click');
 if( !loginState ){
 	alert('물품수정페이지는 로그인 후 이용가능합니다')
 	location.href = "/Ezen_teamB/jsp/item/checkitems.jsp"
 }
+
+/* =============== 공유변수 선언부 =============== */
 
 // 쿼리스트링을 통해 인수
 let ino = new URL( location.href ).searchParams.get("ino");
@@ -20,10 +24,29 @@ let fTradeplace;
 	// 주소
 let emediationInfo = { eno : '', ename : '', eadress : '' }
 
+// JS에서 CSS 제어
+let deliveryCSS = document.getElementsByClassName("delivery")[0].style;		// 배송
+let faceToFaceCSS = document.getElementsByClassName("faceToFace")[0].style;	// 대면거래
+let brokerageCSS = document.getElementsByClassName("brokerage")[0].style;	// 중개거래소
 
-// 기존 저장된 이미지의 개수를 저장
-	// 기존 이미지 삭제시 감소연산
-let selectedImgCount = 0;
+// 대면거래 이용 시 위도 저장
+let dlat = '';
+// 대면거래 이용 시 경도 저장
+let dlng = '';
+// 대면거래 이용 시 주소값 저장
+let itradeplace = ''
+
+
+
+// 기존 저장된 이미지의 파일명을 저장하는 배열
+let selectedImgCount = [];
+
+
+/* =============== 공유변수 end =============== */
+
+
+
+
 // 해당 기등록된 물품(ino)에 대한 기존 정보 불러오기
 existingInfo();
 function existingInfo(){
@@ -42,7 +65,7 @@ function existingInfo(){
 			console.log(s)
 			
 			// 응답된 기존 저장 정보를 html에 띄움
-				// 1 이미지 출력 구역 생성
+				// 1 이미지 출력
 					// 1-1 input 타입 file 1~10 출력구역 생성
 			for( let i=1; i<=10; i++ ){
 				document.querySelector('.inpuImgBox').innerHTML += `
@@ -52,44 +75,87 @@ function existingInfo(){
 					// 1-2 생성된 input 파일 첨부 공간에 기존 이미지 대입 
 						// - 이미지를 하나 삭제할 시 삭제버튼을 클릭한 이미지 하나씩 DB 삭제처리를 위해
 						// 	 기존 이미지 삭제 함수 fileDelete() 함수와는 다른 함수 생성
-						
+			
 						// 기존 저장된 이미지의 개수 만큼 저장
-			console.log(Object.keys(s.imgList).length);
-			selectedImgCount = Object.keys(s.imgList).length;
-			console.log( selectedImgCount );
-			console.log('count확인')
-			for( let i=0; i<selectedImgCount; i++ ){
-				console.log('반복')
-				// 이미지를 출력할 구역 생성
+			for( let i=0; i<Object.keys(s.imgList).length; i++ ){
+				
+				selectedImgCount.push( Object.values( s.imgList )[i] )
 				document.querySelector('.outputImg').innerHTML +=	`
-						<div class="outExistingFiled${s.imgList[i]}">
-							<img class="existingImg${s.imgList[i]}" alt="" src="Ezen_teamB/jsp/item/img/${s.imgList[i]}"/>
-							<button onclick="existingImgDelete(${s.imgList[i]})" type="button">x</button>
+						<div class="outExistingFiled${i}">
+							<img class="existingImg${i}" alt="" src="/Ezen_teamB/jsp/item/img/${s.imgList[i]}"/>
+							<button onclick="existingImgDelete(${i}, '${s.imgList[i]}')" type="button">x</button>
 						</div>
 					` 
 			}
 			
+				// 2 제목 출력
+			document.querySelector('.ititle').value = s.ititle
 			
+				// 3 내용 출력
+			document.querySelector('.icontent').value = s.icontent
 			
+				// 4 카테고리 출력
+					// 3-1 카테고리 출력구역 생성
+			getMainCategory()
+					// 3-2 대분류/소분류 카테고리 강제 클릭
+			document.getElementById(`getMainCategory${s.uno}`).click();
+			document.getElementById(`getSubCategory${s.dno}`).click();
+			
+				// 5 거래방식 출력
+					// 각 거래방식에 해당되는 버튼 강제클릭 
+					// 5-1 배송
+			if( s.itrade == 1 )	{
+				
+				$("#delivery_1").trigger('click');
+				
+				fLat = 37.5751;
+				fLng =  126.9768;
+				
+			}
+					// 5-2 대면거래
+			if( s.itrade == 2 )	{
+				
+				$("#faceToFace_2").trigger('click');
+				
+				// 위도 저장
+				dlat = fLat = s.lat;
+				// 경도 저장
+				dlng = fLng = s.lng;
+				// 주소값 저장
+				itradeplace = fTradeplace = s.itradeplace;
+				
+				document.querySelector('.selectedAddress span').innerHTML = `${itradeplace}`;
+			}
+					// 5-3 중개거래
+			if( s.itrade == 3 )	{
+
+				// 위도 저장
+				fLat = s.lat;
+				// 경도 저장
+				fLng = s.lng;
+				// 주소값 저장
+				fTradeplace = s.itradeplace;
+				
+				document.querySelector('.emediationAdress').innerHTML = `${fTradeplace}`;
+			}
+			
+				// 6 가격 출력
+			document.querySelector('.iprice').value = `${s.iprice}`;
+				// 7 안전결제 사용여부 출력
+			document.querySelector('.isafepaymentCheck').checked = `${ s.isafepayment==1 ? 'on' : 'off' }`;
 			
 		},
 		error: e => {
 			console.log('에러발생')
 		}
-		
-		
 	})
-	
-	
 }
 
 
 
 
-
-
 /* ================================ 카테고리 */
-getMainCategory()
+
 // 1. 카테고리 대분류/소분류 출력
 function getMainCategory(){
 	
@@ -103,8 +169,8 @@ function getMainCategory(){
 			let mainUl = document.querySelector('.mainUl');
 			let mainhtml = ``;
 			
-			s.forEach( category => {
-				mainhtml += `<li> <button onclick="getSubCategory( ${category.uno}, '${category.uname}' )" type="button"> ${ category.uname } </button> </li>`;
+			s.forEach( ( category ) => {
+				mainhtml += `<li> <button id="getMainCategory${category.uno}" onclick="getSubCategory( ${category.uno}, '${category.uname}' )" type="button"> ${ category.uname } </button> </li>`;
 			});
 
 			mainUl.innerHTML = mainhtml;
@@ -127,6 +193,7 @@ function getSubCategory( uno, uname ){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
+		async: false,
 		data : {type : "getSubCategory", uno : uno},
 		success: s => {
 			let subUl = document.querySelector('.subUl');
@@ -134,8 +201,8 @@ function getSubCategory( uno, uname ){
 			
 			// 해당 대분류에 소분류 카테고리가 없으면 등록되어있지 않음을 출력
 			if( s.length == 0 ) subhtml += `<li> <button onclick="" type="button"> 현재 소분류 카테고리가<br> 등록되어있지 않습니다 </button> </li>`;
-			s.forEach( category => {
-				subhtml += `<li> <button onclick="selectedCategory( ${category.dno}, '${category.dname}' )" type="button"> ${ category.dname } </button> </li>`;
+			s.forEach( ( category ) => {
+				subhtml += `<li> <button id="getSubCategory${category.dno}" onclick="selectedCategory( ${category.dno}, '${category.dname}' )" type="button"> ${ category.dname } </button> </li>`;
 			});
 
 			// 선택된 카테고리를 출력
@@ -163,10 +230,7 @@ function selectedCategory( dno, dname ){
 
 
 /* ============================= 거래방식 */
-// JS에서 CSS 제어
-let deliveryCSS = document.getElementsByClassName("delivery")[0].style;		// 배송
-let faceToFaceCSS = document.getElementsByClassName("faceToFace")[0].style;	// 대면거래
-let brokerageCSS = document.getElementsByClassName("brokerage")[0].style;	// 중개거래소
+
 
 
 // 현재 거래방식을 저장하는 변수
@@ -204,14 +268,6 @@ function delivery(){
 
 
 // 2. 거래방식 - 대면거래 방식 클릭하였을 때
-
-	// 대면거래 이용 시 위도 저장
-let dlat = '';
-	// 대면거래 이용 시 경도 저장
-let dlng = '';
-	// 대면거래 이용 시 주소값 저장
-let itradeplace = ''
-
 function faceToFace(){
 	deliveryCSS.backgroundColor = "#EFEFEF";
 	faceToFaceCSS.backgroundColor = "#6AAFE6";
@@ -238,7 +294,7 @@ function faceToFace(){
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
-	center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	center: new kakao.maps.LatLng(fLat, fLng), // 지도의 중심좌표
 	level: 3 // 지도의 확대 레벨
 };
 
@@ -249,15 +305,12 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-
 //마커 생성
 var marker = new daum.maps.Marker({
-	position: new daum.maps.LatLng(37.537187, 127.005476),
+	position: new daum.maps.LatLng(fLat, fLng),
 	map: map
 });
 var infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-
 
 
 
@@ -276,7 +329,6 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
 	var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
 	message += '경도는 ' + latlng.getLng() + ' 입니다';
-
 
 	// 위 경도 좌표 저장
 		// form객체 전송을 위함
@@ -333,15 +385,16 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 function displayCenterInfo(result, status) {
     if (status === kakao.maps.services.Status.OK) {
         var infoDiv = document.getElementById('centerAddr');
-
-        for(var i = 0; i < result.length; i++) {
-            // 행정동의 region_type 값은 'H' 이므로
-            if (result[i].region_type === 'H') {
-                infoDiv.innerHTML = result[i].address_name;
-                break;
-            }
-        }
-    }    
+		
+	    for(var i = 0; i < result.length; i++) {
+	        // 행정동의 region_type 값은 'H' 이므로
+	        if (result[i].region_type === 'H') {
+	            infoDiv.innerHTML = result[i].address_name;
+	            break;
+	        }
+	    }
+        
+    }     
 }
 
 function sample5_execDaumPostcode() {
@@ -385,10 +438,11 @@ function sample5_execDaumPostcode() {
 	}).open();
 }
 
+var markers
 
 // 3. 거래방식 - 중개거래소 방식 클릭하였을 때
 function brokerage(){
-	
+		
 	// 클러스터가 출력되는 것을 막기 위해 클러스터 배열을 clear함
 	clusterer2.clear()
 	positions = []
@@ -416,12 +470,13 @@ function brokerage(){
 	$.ajax({
 		url:"/Ezen_teamB/ItemController",
 		method: 'get',
+		async: false,
 		data: { type : 'getEmediation' },
 		success : result => {
 				
 			// 데이터에서 좌표 값을 가지고 마커를 표시합니다
 		    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		    var markers = result.map( s => {
+		    markers = result.map( s => {
 				
 				// 지도의 현재 level < 클러스터 최소 출력 level
 					// 클러스터가 출력될 시 개별 마커 정보는 출력되지 않음
@@ -461,56 +516,57 @@ function brokerage(){
 				// 현재 마커 전체 삭제
 				for (var i = 0; i < markers.length; i++) {
         			markers[i].setMap(null);
-        			console.log( markers[i].getMap() )
     			}
 				
-		    }
-		    
-			for (var i = 0; i < positions.length; i++) {
-				
-				// 마커를 생성합니다
-				var marker2 = new kakao.maps.Marker({
-					map: map2, // 마커를 표시할 지도
-					position: positions[i].latlng // 마커의 위치
-				});
-				/*
-				// 추후 마커를 삭제하기 위해 배열에 마커 push
-				markers.push(marker2);
-					*/
-				// 마커에 표시할 인포윈도우를 생성합니다 
-				var infowindow = new kakao.maps.InfoWindow({
-					content: positions[i].content // 인포윈도우에 표시할 내용
-				});
-
-				// 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
-				// 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-				(function(marker2, infowindow) {
-					// 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
-					kakao.maps.event.addListener(marker2, 'mouseover', function() {
-
-						infowindow.open(map2, marker2);
-
+		    } else {
+				for (var i = 0; i < positions.length; i++) {
+					
+					// 마커를 생성합니다
+					var marker2 = new kakao.maps.Marker({
+						map: map2, // 마커를 표시할 지도
+						position: positions[i].latlng // 마커의 위치
 					});
-
-					kakao.maps.event.addListener(marker2, 'click', function() {
-
-						emediationInfo.eno = infowindow.cc.split('_')[0];
-						emediationInfo.ename = infowindow.cc.split('_')[1];
-						emediationInfo.eadress = infowindow.cc.split('_')[2];
-
-						document.querySelector('.emediationName').innerHTML = `${emediationInfo.ename}`
-						document.querySelector('.emediationAdress').innerHTML = `${emediationInfo.eadress}`
-
+					/*
+					// 추후 마커를 삭제하기 위해 배열에 마커 push
+					markers.push(marker2);
+						*/
+					// 마커에 표시할 인포윈도우를 생성합니다 
+					var infowindow = new kakao.maps.InfoWindow({
+						content: positions[i].content // 인포윈도우에 표시할 내용
 					});
-
-					// 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
-					kakao.maps.event.addListener(marker2, 'mouseout', function() {
-
-						infowindow.close();
-
-					});
-				})(marker2, infowindow);
+	
+					// 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
+					// 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+					(function(marker2, infowindow) {
+						// 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
+						kakao.maps.event.addListener(marker2, 'mouseover', function() {
+	
+							infowindow.open(map2, marker2);
+	
+						});
+	
+						kakao.maps.event.addListener(marker2, 'click', function() {
+	
+							emediationInfo.eno = infowindow.cc.split('_')[0];
+							emediationInfo.ename = infowindow.cc.split('_')[1];
+							emediationInfo.eadress = infowindow.cc.split('_')[2];
+	
+							document.querySelector('.emediationName').innerHTML = `${emediationInfo.ename}`
+							document.querySelector('.emediationAdress').innerHTML = `${emediationInfo.eadress}`
+	
+						});
+	
+						// 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
+						kakao.maps.event.addListener(marker2, 'mouseout', function() {
+	
+							infowindow.close();
+	
+						});
+					})(marker2, infowindow);
+				}
 			}
+		    
+			
 		    
 		},
 		error: e => {
@@ -522,16 +578,13 @@ function brokerage(){
 	
 }	
 
-// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-var positions = [];
+
 
 // 지도를 생성합니다    
 var map2 = new kakao.maps.Map(document.getElementById('map2'), { // 지도를 표시할 div
-    center : new kakao.maps.LatLng(37.8890791, 128.825870), // 지도의 중심좌표
+    center : new kakao.maps.LatLng(fLat, fLng), // 지도의 중심좌표
     level : 12 // 지도의 확대 레벨
 });
-
-
 
 /* 카카오맵 클러스터 [ 마커 여러개일때 집합모양 ] */
 var clusterer2 = new kakao.maps.MarkerClusterer({
@@ -541,14 +594,37 @@ var clusterer2 = new kakao.maps.MarkerClusterer({
     disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
 });
 
+
 kakao.maps.event.addListener(clusterer2, 'clusterclick', function(cluster) {
     var level = map2.getLevel()-1;
     map2.setLevel(level, {anchor: cluster.getCenter()});
 });
 
+/*
+
+	카카오 지도 css 적용시 에러발생으로 인해 중개거래만 별도로 출력처리함
+
+*/
+if( itrade == 3 ){
+	
+	deliveryCSS.backgroundColor = "#EFEFEF";
+	faceToFaceCSS.backgroundColor = "#EFEFEF";
+	brokerageCSS.backgroundColor = "#6AAFE6";
+	
+	$("#brokerage_3").trigger('click');
+
+} else {
+	
+	document.getElementById("outputMapField2").style.display = "none";
+	
+}
+
+
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder2 = new kakao.maps.services.Geocoder();
+
+
 
 function sample5_execDaumPostcode2() {
 	new daum.Postcode({
@@ -588,6 +664,7 @@ kakao.maps.event.addListener(map2, 'dragend', function(){
 kakao.maps.event.addListener(map2, 'idle', function(){
 	brokerage();
 });
+
 
 
 
@@ -632,7 +709,7 @@ function fileUpload( mimg, idNum ){
 	// 등록된 이미지가 10개를 초과하는지 확인하는 스위치
 	let checkImg = false;
 		// 10개의 input 파일 타입에 파일 객체가 존재하는지 탐색
-	for( let i=1; i<=(10-selectedImgCount); i++ ){
+	for( let i=1; i<=10-selectedImgCount.length; i++ ){
 		var fileCheck = document.getElementById(`uploadFile${i}`).value;
 		
 		// 파일객체가 존재하지 않는 경우
@@ -669,7 +746,42 @@ function forbidden(){
 	alert('이미지는 최대 10개까지 등록할 수 있습니다')
 }
 
-// 2 선택된 이미지 파일 삭제
+// 2-1 [기존 DB에 저장된 이미지] 선택된 이미지 파일 삭제
+function existingImgDelete( pno, pimg ){
+	
+	console.log( pno )
+	console.log( pimg )
+	
+	$.ajax({
+		url: "/Ezen_teamB/ItemController",
+		method: "delete",
+		data: {	type : 'deleteExistingImg',
+				ino : ino,
+				pimg : pimg },
+		success: s =>{
+			
+			// 배열에서 선택된 이미지 삭제
+			for( let i=0; i<selectedImgCount.length; i++ ){
+				
+				if( selectedImgCount[i] == pimg ){
+					selectedImgCount.splice( i, 1 )
+					break;
+				}
+			}
+			
+			document.querySelector(`.outExistingFiled${pno}`).innerHTML = ``;
+			
+		},
+		error: e =>{
+			console.log('에러발생')
+		}
+		
+		
+	})
+	
+}
+
+// 2-2 [수정하려는 신규 등록된 이미지] 선택된 이미지 파일 삭제
 function fileDelete( idNum ){
 	
 	// 삭제할 파일 구역을 초기화
@@ -702,9 +814,9 @@ function fileDelete( idNum ){
 /* ============================= 이미지 출력/삭제 end */
 
 
-/* ============================= 제품등록 */
+/* ============================= 제품수정 */
 
-function registerItems(){
+function updateItems(){
 	
 	/* -------- 유효성 검사 -------- */
 	
@@ -750,7 +862,7 @@ function registerItems(){
 		return;
 	}
 	
-	/* -------- 물품등록 전 form 데이터 setting -------- */
+	/* -------- 물품수정 전 form 데이터 setting -------- */
 	
 	// 10개의 인풋박스 중 파일이 첨부되어있지 않은 input 삭제 form데이터 초기화
 		// 해당 input박스의 부모요소(div)를 공백으로 초기화
@@ -798,7 +910,7 @@ function registerItems(){
 		success: result =>{
 			
 			if(result) console.log('등록성공')
-			
+
 		},
 		error: e =>{
 			console.log(e)

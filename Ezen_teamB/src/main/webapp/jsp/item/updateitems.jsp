@@ -82,9 +82,9 @@
 				<div class="inputDeskBox prtTrade">
 					<div class="deskInfo">거래방식</div>
 					<div class="rightInputBox itradeBox">
-						<div onclick="delivery()" class="delivery itrade"> 배송 </div>
-						<div onclick="faceToFace()" class="faceToFace itrade"> 대면거래 </div>
-						<div onclick="brokerage()" class="brokerage itrade"> 중개거래 </div>
+						<div onclick="delivery()" id="delivery_1" class="delivery itrade"> 배송 </div>
+						<div onclick="faceToFace()" id="faceToFace_2" class="faceToFace itrade"> 대면거래 </div>
+						<div onclick="brokerage()" id="brokerage_3" class="brokerage itrade"> 중개거래 </div>
 					</div>
 				</div>
 				 
@@ -104,7 +104,7 @@
 				
 				<!-- 중개거래소 지도 출력 구역 -->
 				<!-- 거래방식 - 중개거래일 시 지도출력하여 중개거래소 선택 -->
-				<div id="outputMapField2" style="display: none;"><!-- 지도 출력되는 구역 -->
+				<div id="outputMapField2" style="display: block;"><!-- 지도 출력되는 구역 -->
 					<input type="text" id="sample5_address" placeholder="주소">
 					<input type="button" onclick="sample5_execDaumPostcode2()" value="주소 검색"><br>
 					
@@ -125,7 +125,7 @@
 					
 				</div>
 				<div class="safePayment prtPayCheck">
-					안전결제 사용여부  <div><input name="isafepayment" type="checkbox"></div>
+					안전결제 사용여부  <div><input name="isafepayment" class="isafepaymentCheck" type="checkbox"></div>
 				</div>
 				
 				<!-- 거래방식 : 배송일 경우 출력x -->
@@ -136,10 +136,12 @@
 			
 		</form>	<!-- form 식별구역 end -->
 		<div class="bottomBtn">
-			<button onclick="registerItems()" type="button" style="background-color: #A287D6;"> 등록 </button><button type="button" style="background-color: white;"> 취소 </button>
+			<button onclick="updateItems()" type="button" style="background-color: #A287D6;"> 수정 </button><button type="button" style="background-color: white;"> 취소 </button>
 		</div>
 	</div>
 	
+	<!-- jqeury -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	
 	<!-- 카카오지도 api -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51f4ebd6d93bf1f15d0f4ba2809fea5&libraries=services,clusterer"></script>

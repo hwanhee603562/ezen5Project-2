@@ -23,7 +23,12 @@ function idSearch(){ console.log('아이디 찾기 함수 실행')
 		method : "get",
 		data :{type : "id" , mname : mname , mphone : mphone},
 		success : result => {console.log(result)
-		
+			if(result=='null'){
+				alert('정보가 일치하지 않습니다')
+			}else if(result !='null'){
+				
+			
+			}
 
 			
 		},
@@ -42,24 +47,18 @@ function pwdSearch(){ console.log('비밀번호 찾기 함수 실행')
 	console.log('아이디찾기 가져온 아이디 ' + memail)	
 
 
-	let pwdCertified = document.querySelector('pwdCertified')
-	html = '';
-
 	$.ajax({
 		
 		url:"/Ezen_teamB/SearchController",
 		method : "get",
 		data :{type : "pwd" , mid : mid , memail : memail},
 		success : result => {console.log(result)
-			if(result == true){
-				
-				
-				
-				
-				
-				
+
+			if(result==""){
+				alert('등록된 정보가 없습니다')
+			}else if(result !=""){
+				alert('고객님의 비밀번호는 '+result+' 입니다' )
 			}
-			pwdCertified.innerHTML=html;
 			
 			
 		},
