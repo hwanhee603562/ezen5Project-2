@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.dao.ChattingDao;
 import model.dao.MyMenuDao;
 import model.dto.ItemsInfo;
+import model.dto.MsgRoom;
 import model.dto.Mymenu;
 
 
@@ -60,7 +62,14 @@ public class MyMenuController extends HttpServlet {
 			
 			List<ItemsInfo> result = MyMenuDao.getInstance().printWishList(mno);
 			json = mapper.writeValueAsString(result);
+		}
+		
+		// 채팅목록 출력
+		else if(type.equals("4")) {
+			int mno = Integer.parseInt(request.getParameter("mno"));
 			
+			List<MsgRoom> result = ChattingDao.getInstance().getMsgRoom(mno);
+			json = mapper.writeValueAsString(result);
 		}
 		
 		response.setContentType("application/json;charset=UTF-8");

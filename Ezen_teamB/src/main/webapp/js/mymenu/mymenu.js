@@ -1,5 +1,10 @@
 console.log('마이메뉴 JS');
 
+if(loginState == false){
+	alert('로그인이 필요한 서비스 입니다.')
+	location.href = "/Ezen_teamB/jsp/member/login.jsp";
+}
+
 /* 네비게이션 이벤트 함수 */
 document.querySelector('.smenu1').addEventListener("click",(e)=>{
 	console.log('1번클릭');
@@ -389,7 +394,66 @@ function deleteInfo(){
 }
 
 // 채팅목록 출력함수
-function chattingList(){
+function chattingList(){console.log('채팅목록 출력함수 실행')
+	
+	$.ajax({
+		url : "/Ezen_teamB/MyMenuController",
+		async : false,
+		data : {type : '4', mno : loginMno},
+		method : "get", 
+		success : jsonArray =>{ console.log(jsonArray)
+			let cardInfo = document.querySelector('.cardInfo');
+			let productCount = document.querySelector('.productCount');
+	       	let html = ``;
+	       	productCount.innerHTML = html;
+	       	
+	       	html = 
+				`
+	       			<table class="table table-hover align-middle text-center">
+						  <tbody class="tableBody">
+	       		`;
+			
+			
+			if(jsonArray.length < 1){
+					   tableBody.innerHTML = `텅...`;
+					   return;
+			}
+			
+			jsonArray.forEach((p,i)=>{
+				p.jchatdate = (p.jchatdate).substr(0,10);
+				p.jcontent = JSON.parse(p.jcontent)
+				html +=
+				
+				`
+					<tr onclick="goChat(${p.ino}, '${p.rno}')" class="tableContent">
+				      <th scope="row">${i+1}</th>
+				      <td>${p.jcontent.content}</td>
+				      <td>${p.jchatdate}</td>
+				      <td><button type="button" class="btn btn-danger">나가기</button></td>
+				    </tr>
+				`
+				
+			})
+			
+			html += 
+				   `
+				   			</tbody>
+						</table>
+				   `
+			
+			
+			cardInfo.innerHTML = html;
+			
+		},
+		error : e => {console.log(e)}	
+	})
+	
+}
+
+// 채팅방 이동함수
+function goChat(ino, rno){
+	console.log('채팅방 이동함수')
+	location.href = `/Ezen_teamB/jsp/chatting/chatting.jsp?ino=${ino}&rno=${rno}`
 	
 }
 

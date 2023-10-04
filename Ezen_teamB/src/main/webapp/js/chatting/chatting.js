@@ -40,7 +40,7 @@ function onMsg(e){
 	msg.jcontent.content = msg.jcontent.content.replace(/\n/g,'<br>');
 	  
 	
-	
+	roadChat();
 }
 
 roadChat();
