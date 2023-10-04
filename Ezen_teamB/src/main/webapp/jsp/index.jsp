@@ -28,7 +28,7 @@
 			<div id="map" style="width:800px;height:600px;"></div>
 		
 		</div>
-		
+			
 		<div class="topField">	<!-- 상단 제품추천 구역 -->
 			
 			<div>	<!-- 카테고리 출력구역 -->	
