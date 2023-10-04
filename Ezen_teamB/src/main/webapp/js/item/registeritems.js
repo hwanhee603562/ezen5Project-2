@@ -311,7 +311,7 @@ function sample5_execDaumPostcode() {
 		// 주소
 let emediationInfo = { eno : '', ename : '', eadress : '' }
 	// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
-var markers;
+
 
 
 function brokerage(){
@@ -320,20 +320,20 @@ function brokerage(){
 	clusterer2.clear()
 	
 	
-	if( itrade != 3 ){
-		deliveryCSS.backgroundColor = "#EFEFEF";
-		faceToFaceCSS.backgroundColor = "#EFEFEF";
-		brokerageCSS.backgroundColor = "#6AAFE6";
-		
-		// 거래방식이 변경될때마다 대면거래 위치정보 초기화
-		dlat = '';
-		dlng = '';
-		itradeplace = '';
-		document.querySelector('.selectedAddress span').innerHTML = ''
-		
-		document.getElementById("outputMapField").style.display = "none";
-		document.getElementById("outputMapField2").style.display = "block";
-	}
+
+	deliveryCSS.backgroundColor = "#EFEFEF";
+	faceToFaceCSS.backgroundColor = "#EFEFEF";
+	brokerageCSS.backgroundColor = "#6AAFE6";
+
+	// 거래방식이 변경될때마다 대면거래 위치정보 초기화
+	dlat = '';
+	dlng = '';
+	itradeplace = '';
+	document.querySelector('.selectedAddress span').innerHTML = ''
+
+	document.getElementById("outputMapField").style.display = "none";
+	document.getElementById("outputMapField2").style.display = "block";
+
 	
 	itrade = 3;
 	

@@ -67,17 +67,42 @@
 
 
 
-
-
-
-
-
-
-
-
+/* ==================== 지도구역 */
 .mainField{
 	width: 800px;
 	height: 800px;
 	margin: 0 auto;
 	border: 1px solid blue;
+}
+
+
+/* ==================== 카드구역 */
+.card{
+	height: 222px !important;
+	border: 3px solid #9767EB !important;
+	border-radius: 0% !important;
+}
+.card-img-top{
+	width: 150px;
+	height: 120px;
+	object-fit: contain !important;
+}
+.itemCardTitle{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 10 !important;
+	font-weight: bold;
+}
+.itemCardPrice{
+	font-size: 8 !important;
+}
+.itemCardAdress{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 8 !important;
+}
+.card-body div{
+	border-top: 1px solid #e8e8e8;
 }

@@ -26,6 +26,7 @@ import model.dto.CategoryDto;
 import model.dto.DetailedItems;
 import model.dto.DpointDto;
 import model.dto.Emediation;
+import model.dto.FaceToFaceDto;
 import model.dto.ItemsInfo;
 import model.dto.MemberList;
 
@@ -78,7 +79,7 @@ public class ItemController extends HttpServlet {
 			String filterCategory = request.getParameter("filterCategory");
 			int filterNum = Integer.parseInt( request.getParameter("filterNum") );
 			String searchWord = request.getParameter("searchWord");
-			System.out.println(searchWord);
+
 			ArrayList<ItemsInfo> itemsInfo = ItemDao.getInstance().getItemList( filterCategory, filterNum, searchWord );
 			
 			json = mapper.writeValueAsString(itemsInfo);
@@ -99,9 +100,7 @@ public class ItemController extends HttpServlet {
 		else if( type.equals("getDetailedItems") ) {
 			
 			int ino = Integer.parseInt( request.getParameter("ino") );
-			
-			
-			
+
 		}
 	 	
 		// 7. 채팅방번호 가져오기
@@ -125,6 +124,18 @@ public class ItemController extends HttpServlet {
 				}
 
 			}
+		}
+		
+		// 8. 인덱스 대면거래 아이템리스트 조회
+		else if(type.equals("getIndexItemList")) {
+			
+			String filterCategory = request.getParameter("filterCategory");
+			int filterNum = Integer.parseInt( request.getParameter("filterNum") );
+
+			ArrayList<FaceToFaceDto> itemsInfo = ItemDao.getInstance().getIndexItemList( filterCategory, filterNum );
+			
+			json = mapper.writeValueAsString(itemsInfo);
+			
 		}
 		
 		

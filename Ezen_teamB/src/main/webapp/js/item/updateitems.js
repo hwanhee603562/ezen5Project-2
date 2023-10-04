@@ -447,20 +447,20 @@ function brokerage(){
 	clusterer2.clear()
 	positions = []
 	
-	if( itrade != 3 ){
-		deliveryCSS.backgroundColor = "#EFEFEF";
-		faceToFaceCSS.backgroundColor = "#EFEFEF";
-		brokerageCSS.backgroundColor = "#6AAFE6";
-		
-		// 거래방식이 변경될때마다 대면거래 위치정보 초기화
-		dlat = '';
-		dlng = '';
-		itradeplace = '';
-		document.querySelector('.selectedAddress span').innerHTML = ''
-		
-		document.getElementById("outputMapField").style.display = "none";
-		document.getElementById("outputMapField2").style.display = "block";
-	}
+	
+	deliveryCSS.backgroundColor = "#EFEFEF";
+	faceToFaceCSS.backgroundColor = "#EFEFEF";
+	brokerageCSS.backgroundColor = "#6AAFE6";
+
+	// 거래방식이 변경될때마다 대면거래 위치정보 초기화
+	dlat = '';
+	dlng = '';
+	itradeplace = '';
+	document.querySelector('.selectedAddress span').innerHTML = ''
+
+	document.getElementById("outputMapField").style.display = "none";
+	document.getElementById("outputMapField2").style.display = "block";
+	
 	
 	itrade = 3;
 
@@ -532,27 +532,7 @@ kakao.maps.event.addListener(clusterer2, 'clusterclick', function(cluster) {
     map2.setLevel(level, {anchor: cluster.getCenter()});
 });
 
-
-brokerage()
-
-/*
-
-	카카오 지도 css 적용시 에러발생으로 인해 중개거래만 별도로 출력처리함
-
-*/
-if( itrade == 3 ){
-	
-	deliveryCSS.backgroundColor = "#EFEFEF";
-	faceToFaceCSS.backgroundColor = "#EFEFEF";
-	brokerageCSS.backgroundColor = "#6AAFE6";
-	
-	$("#brokerage_3").trigger('click');
-
-} else {
-	
-	document.getElementById("outputMapField2").style.display = "none";
-	
-}
+ 
 
 
 
@@ -605,6 +585,11 @@ kakao.maps.event.addListener(map2, 'idle', function(){
 
 // 거래방식 - 대면거래 방식 클릭하였을 때 end
 
+
+// 거래방식 3 별도 처리
+if( itrade == 3 ) brokerage();
+	
+	
 
 
 

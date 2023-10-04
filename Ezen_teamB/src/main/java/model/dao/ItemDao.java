@@ -9,6 +9,7 @@ import model.dto.CategoryDto;
 import model.dto.DetailedItems;
 import model.dto.DpointDto;
 import model.dto.Emediation;
+import model.dto.FaceToFaceDto;
 import model.dto.ItemsInfo;
 
 // 판매물품 클래스
@@ -271,22 +272,15 @@ public class ItemDao extends Dao {
 			
 			String sql = "select a.ino, a.iprice, a.mno, a.ititle, a.icontent, a.itrade, a.itradeplace, a.idate, a.eno, a.iestate, a.dno, a.isafepayment, a.keepstate, "
 					+ "(select pimg from pimg  p where p.ino = a.ino limit 1) pimg from itemsinfo a ";
-			
-			// indexPage에서 사용하는 대면거래 방식만 필요할 경우
-			boolean useIndexPage = false;
-			if( searchWord.equals("posts/df6fdea1-10c3-474c-ae62-e63def80de0b") ) {
-				searchWord = "";
-				useIndexPage = !useIndexPage;
-			}
 
-			// 대분류 필터 + 검색어 필터
+			// 소분류 필터 + 검색어 필터
 			if( filterCategory.equals("dno") ) {
 
 				 sql += "where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%')"
 					  + " and dno = "+filterNum;
 			
 			} 
-			// 소분류 필터 + 검색어 필터
+			// 대분류 필터 + 검색어 필터
 			else if( filterCategory.equals("uno") ) {
 				
 				// 대분류 pk를 통해 소분류 정보 반환
@@ -309,17 +303,8 @@ public class ItemDao extends Dao {
 				sql += " where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%')";
 			}
 			
-			// indexPage에서 사용하는 대면거래 방식만 필요할 경우
-			// 대면거래방식만 출력
-			if(useIndexPage) {
-				sql += " and a.itrade = 2";
-			}
-			
-			
-			
 			sql += " order by idate desc";
 			
-			System.out.println(sql);
 			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -437,8 +422,66 @@ public class ItemDao extends Dao {
 		
 		return -1;
 	}
+		// 2-9 인덱스 대면거래 아이템리스트 조회
+	public ArrayList<FaceToFaceDto> getIndexItemList( String filterCategory, int filterNum ){
+		
+		try {
+			
+			ArrayList<FaceToFaceDto> list = new ArrayList<>();
+			
+			String sql = "select a.ino, a.iprice, a.ititle, a.isafepayment, "
+					+ "(select pimg from pimg  p where p.ino = a.ino limit 1) pimg, "
+					+ "b.dlat, b.dlng from itemsinfo a join dpoint b on a.ino = b.ino ";
 
-	
+			// 소분류 필터
+			if( filterCategory.equals("dno") ) {
+
+				 sql += "where dno = "+filterNum+" and a.itrade = 2 and a.iestate = 0";
+			
+			} 
+			// 대분류 필터
+			else if( filterCategory.equals("uno") ) {
+				
+				// 대분류 pk를 통해 소분류 정보 반환
+				ArrayList<CategoryDto> dsubCategory = getSubCategory(filterNum);
+				
+				sql += "where (";
+				
+				for( int i=0; i<dsubCategory.size(); i++ ) {
+					
+					sql += " dno = "+dsubCategory.get(i).getDno();
+					if( i == dsubCategory.size()-1) break;
+					sql += " or ";
+						
+				}
+				sql += " ) and a.itrade = 2 and a.iestate = 0";
+				
+			}
+			// 카테고리 필터가 없는 경우
+			else {
+				sql += " where a.itrade = 2 and a.iestate = 0";
+			}
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				FaceToFaceDto faceToFaceDto = new FaceToFaceDto( 
+					rs.getInt("ino"), rs.getInt("iprice"), 
+					rs.getString("ititle"), rs.getInt("isafepayment"), 
+					rs.getString("pimg"), rs.getString("dlat"), rs.getString("dlng") 
+				);
+				list.add(faceToFaceDto);
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return null;
+	}
 	
 	// 3 판매물품수정
 	public boolean updateItem(ItemsInfo itemsInfo, DpointDto dpointDto) {
@@ -579,7 +622,7 @@ public class ItemDao extends Dao {
 	}
 	
 	
-	//판매물품삭제
+	// 4 판매물품삭제
 	public boolean deleteExistingImg( int ino, String pimg ) {
 		
 		try {
