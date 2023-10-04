@@ -48,6 +48,8 @@ public class SearchController extends HttpServlet {
 				String mid2 = "null";
 				json = mapper.writeValueAsString(mid2);
 			}else if(result != null) {
+				
+				
 				String mid2 = String.valueOf(result.getMid());
 				json = mapper.writeValueAsString(mid2);
 		
