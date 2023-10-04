@@ -38,6 +38,14 @@ function onMsg(e){
 	console.log(msg.jcontent)
 	
 	msg.jcontent.content = msg.jcontent.content.replace(/\n/g,'<br>');
+	  
+	
+	
+}
+
+roadChat();
+// 채팅방입장시 예전 채팅 불러오는 함수
+function roadChat(){
 	
 	$.ajax({
       url :  "/Ezen_teamB/ChattingController",
@@ -87,8 +95,7 @@ function onMsg(e){
 		  chatcont.scrollTop = chatcont.scrollHeight;
 	  },
 	  error : e => {console.log('오류내용' + e)}
-	})  
-	
+	})
 	
 }
 

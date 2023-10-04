@@ -43,10 +43,10 @@ let mno = loginMno;
 
 infoPrint();
 function infoPrint(){console.log('회원정보 출력 함수')
-	
+	console.log(loginMno)
 	$.ajax({ 
 	       url : "/Ezen_teamB/MyMenuController",
-	       data : {type: '2' , mno: mno},         // 보내는 데이터
+	       data : {type: '2' , mno: loginMno},         // 보내는 데이터
 	       method : "get",
 	       async: false,
 	       success : r =>{console.log(r);
@@ -94,7 +94,7 @@ function saleList(){console.log('판매중인상품 리스트')
 
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
-	       data : {type: '1' , mno: mno, estate : 1},         // 보내는 데이터
+	       data : {type: '1' , mno: loginMno, estate : 1},         // 보내는 데이터
 	       method : "get",
 	       async: false,
 	       success : jsonArray =>{console.log(jsonArray);
@@ -138,7 +138,7 @@ function saleList(){console.log('판매중인상품 리스트')
 					   `
 							   		<tr class="tableContent">
 								      <th scope="row">${i+1}</th>
-								      <td width="10%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
+								      <td width="10%"><img src="/Ezen_teamB/jsp/item/img/${Object.values(p.imgList)[0]}"></td>
 								      <td width="30%">${p.ititle}</td>
 								      <td width="10%">${p.itrade}</td>
 								      <td width="20%">${p.uname}/${p.dname}</td>
@@ -177,7 +177,7 @@ function transHistory(){console.log('거래내역 리스트')
 	
 	$.ajax( { 
 	       url : "/Ezen_teamB/MyMenuController",
-	       data : {type: '1' , mno: mno, estate : 2},         // 보내는 데이터
+	       data : {type: '1' , mno: loginMno, estate : 2},         // 보내는 데이터
 	       method : "get",
 	       async: false,
 	       success : jsonArray =>{console.log(jsonArray);
@@ -241,7 +241,7 @@ function PrintWishList(){console.log('찜목록 리스트')
 	$.ajax({
 		url : "/Ezen_teamB/MyMenuController",
 		async : false,
-		data : {type : '3', mno : mno},
+		data : {type : '3', mno : loginMno},
 		method : "get", 
 		success : jsonArray =>{console.log(jsonArray);
 		
@@ -304,7 +304,7 @@ function updateModal(){ console.log('회원정보 변경 함수')
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB/MemberController",
-	       data : {type: '1' , mno: mno},         // 보내는 데이터
+	       data : {type: '1' , mno: loginMno},         // 보내는 데이터
 	       method : "get",
 	       success : r =>{console.log(r);
 	       		
@@ -330,7 +330,7 @@ function updateInfo(){
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB/MemberController",
-	       data : {mno: mno, memail : emailInput,
+	       data : {mno: loginMno, memail : emailInput,
 	       adress1 : adrInput2, adress2 : adrInput3, mpwd : pwd},
 	       method : "put",
 	       success : r =>{console.log(r);
@@ -349,7 +349,7 @@ function deleteWishList(ino){console.log('찜목록 삭제함수')
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB//MyMenuController",
-	       data : {ino: ino, mno: mno},         // 보내는 데이터
+	       data : {ino: ino, mno: loginMno},         // 보내는 데이터
 	       method : "delete",
 	       success : r =>{console.log(r);
 	       		if(r){
@@ -372,7 +372,7 @@ function deleteInfo(){
 	
 	$.ajax({ 
 	       url : "/Ezen_teamB//MemberController",
-	       data : {mno: mno, mpwd : deletepwd},         // 보내는 데이터
+	       data : {mno: loginMno, mpwd : deletepwd},         // 보내는 데이터
 	       method : "delete",
 	       success : r =>{console.log('통신성공');
 	       		if(r){

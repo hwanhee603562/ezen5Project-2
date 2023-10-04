@@ -25,12 +25,15 @@ public class MyMenuDao extends Dao{
 		Mymenu mDto = new Mymenu();
 		
 		try {
-			String sql = "select m.mid, m.mlevel, count(i.ino) as 판매물품, m.mpoint, m.mname, m.madress, m.memail "
-					+ "from memberlist m, itemsinfo i "
-					+ "where m.mno = i.mno and i.iestate = 0 "
-					+ "group by m.mno "
-					+ "having m.mno = " + mno;
+			String sql = "select m.mid, m.mlevel, count(i.ino) as 판매물품, m.mpoint, m.mname, m.madress, m.memail\r\n"
+					+ "from memberlist m left join itemsinfo i\r\n"
+					+ "on m.mno = i.mno\r\n"
+					+ "where if(i.ino is null , m.mno = ?, i.iestate = 0)\r\n"
+					+ "group by m.mno \r\n"
+					+ "having m.mno = ?";
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.setInt(2, mno);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				mDto = new Mymenu(

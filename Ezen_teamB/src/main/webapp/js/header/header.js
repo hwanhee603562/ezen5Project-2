@@ -27,6 +27,7 @@ function getMemberInfo(){
 		}
 		else{
 			loginState = true; loginMid = r.mid; loginMno = r.mno;
+			console.log(loginMno)
 			
 			html +=`
 			<li><a href="/Ezen_teamB/jsp/mymenu/mymenu.jsp">마이페이지</a></li>
