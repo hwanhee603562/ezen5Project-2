@@ -29,6 +29,14 @@
 	font-weight: bold;
 	font-size: 20px;
 }
+.onSearchMemberBtn{
+	padding: 2px;
+	width: 56px;
+	height: 32px;
+	border-radius: 5px;
+}
+
+
 
 /* =================== 테이블 스타일 */
 .memberTableBox{
@@ -67,7 +75,6 @@
 }
 .secessionBtn{
 	background-color: black;
-	margin-left: 6px;
 	border: 3px solid black;
 	font-size: 14px;
 	padding: 1px;
@@ -75,6 +82,12 @@
 	font-weight: bold;
 	color: white;
 }
+td:nth-child(7) {
+    width: 37px;
+    padding-left: 0px !important;
+}
+
+
 
 
 /* 첫 번째 th (성명) 스타일 */
@@ -84,7 +97,7 @@ th:nth-child(1) {
 
 /* 두 번째 th (생년월일) 스타일 */
 th:nth-child(2) {
-    width: 87px;
+    width: 100px;
 }
 
 /* 세 번째 th (전화번호) 스타일 */

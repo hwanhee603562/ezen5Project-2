@@ -20,7 +20,7 @@
 				<option value="memail"> 이메일 </option>
 				<option value="mphone"> 전화번호 </option>
 			</select>
-			<input class="searchMemberKeyword" type="text">	<button onclick="onSearchMember()" type="button"> 검색 </button>
+			<input class="searchMemberKeyword" type="text">	<button class="onSearchMemberBtn" onclick="onSearchMember()" type="button"> 검색 </button>
 		</div>
 		<div class="totalMember">	<!-- 현재 조회된 회원수 출력 -->
 			<div class="totalInnerBox"> 조회된 회원 : <span class="totalMemeberCount"> </span>명 </div>
