@@ -432,11 +432,11 @@ public class ItemDao extends Dao {
 			String sql = "select a.ino, a.iprice, a.ititle, a.isafepayment, "
 					+ "(select pimg from pimg  p where p.ino = a.ino limit 1) pimg, "
 					+ "b.dlat, b.dlng from itemsinfo a join dpoint b on a.ino = b.ino ";
-
+			
 			// 소분류 필터
 			if( filterCategory.equals("dno") ) {
-
-				 sql += "where dno = "+filterNum+" and a.itrade = 2 and a.iestate = 0";
+				
+				 sql += "where a.dno = "+filterNum+" and a.itrade = 2 and a.iestate = 0";
 			
 			} 
 			// 대분류 필터
@@ -449,13 +449,13 @@ public class ItemDao extends Dao {
 				
 				for( int i=0; i<dsubCategory.size(); i++ ) {
 					
-					sql += " dno = "+dsubCategory.get(i).getDno();
+					sql += " a.dno = "+dsubCategory.get(i).getDno();
 					if( i == dsubCategory.size()-1) break;
 					sql += " or ";
 						
 				}
 				sql += " ) and a.itrade = 2 and a.iestate = 0";
-				
+					
 			}
 			// 카테고리 필터가 없는 경우
 			else {

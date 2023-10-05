@@ -90,7 +90,7 @@
 				 
 				 <!-- 대면거래 지도 출력 구역 -->
 					<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->
-				<div id="outputMapField" style="display: none;"><!-- 지도 출력되는 구역 -->
+				<div id="outputMapField" style="height: 0px;"><!-- 지도 출력되는 구역 -->
 					<input type="text" id="sample5_address" placeholder="주소">
 					<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
 					
@@ -104,7 +104,7 @@
 				
 				<!-- 중개거래소 지도 출력 구역 -->
 				<!-- 거래방식 - 중개거래일 시 지도출력하여 중개거래소 선택 -->
-				<div id="outputMapField2" style="display: block;"><!-- 지도 출력되는 구역 -->
+				<div id="outputMapField2" style="height: 0px;"><!-- 지도 출력되는 구역 -->
 					<input type="text" id="sample5_address" placeholder="주소">
 					<input type="button" onclick="sample5_execDaumPostcode2()" value="주소 검색"><br>
 					

@@ -42,6 +42,8 @@
 .topCategory td{
 	border: 1px solid #e8e8e8;
 	width: 203px;
+	height: 34px;
+	font-size: 15px;
 	padding-left: 12px;
 }
 	/* 소분류 */
@@ -57,7 +59,19 @@
 .bottomCategory td{
 	border: 1px solid #e8e8e8;
 	width: 203px;
-	padding-left: 12px;
+	font-size: 15px;
+	padding-left: 6px;
+	height: 34px;
+}
+
+/* 마우스 오버(마우스 올렸을때) */
+.topCategory td:hover {
+	background-color: silver;
+	cursor: pointer;
+}
+.bottomCategory td:hover {
+	background-color: silver;
+	cursor: pointer;
 }
 
 .guideLabel{

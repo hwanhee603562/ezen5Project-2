@@ -7,7 +7,7 @@
 	display: flex;
 }
 .leftSubOutput{
-	width: 300px;
+	width: 210px;
 	height: 600px;
 	border: 1px solid blue; 
 }
@@ -15,11 +15,22 @@
 	width: 880px;
 	border: 1px solid green;
 }
+.leftSubOutput{
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #001364;
+	color: white;
+}
 
+.leftSubOutput div{
+	margin: 17px;
+	margin-top: 32px;
+	border-bottom : 1px solid #e8e8e8; 
+}
 
-
-
-
+.leftSubOutput div:hover {
+    cursor: pointer;
+}
 
 
 
