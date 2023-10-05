@@ -13,6 +13,16 @@ function getBoard(){
 			document.querySelector('.bcontent').innerHTML=`${r.bcontent}`
 			document.querySelector('.bfile').innerHTML=`${r.bfile}`
 			
+	$(document).ready(function() {
+	
+	let option ={
+		lang : 'ko-KR' , 
+		height : 500 ,
+		placeholder : '여기에 내용작성'
+	}
+	$('#summernote').summernote(option);
+  
+});
 			
 		} ,
 		error : e =>{ console.log('통신실패') }

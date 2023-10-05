@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 <!-- 전체 게시판 jsp -->
 	
-	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 	<link href="/Ezen_teamB/css/board/mainboard.css" rel="stylesheet">
+	
 </head>
 <body>
 	<%@include file ="../header.jsp" %>
@@ -29,7 +30,7 @@
 					</select>
 					<span class="boardcount"> </span>
 				</div>
-				<div>
+				<div class="mainBoardBtn">
 					<button onclick="onWriteBtn()" type="button">글쓰기</button>
 					<button onclick="onCategory(0)" type="button">전체보기</button>
 					<button onclick="onCategory(1)" type="button">공지사항</button>
@@ -40,10 +41,13 @@
 		
 		
 		<div class="boardcontent"> <!-- 게시물이 출력 -->
-			<table class="boardTable">
-				<!-- 
+			<!-- <table class="boardTable">
+				
 				게시물이 출력되는 구역 
-				-->
+				
+			</table> -->
+			<table class="table table-striped table-hover boardTable">
+ 
 			</table>
 
 		</div> <!-- 게시물 출력 end -->
@@ -69,7 +73,7 @@
 			<!-- 검색구역 END -->
 		
 	</div> <!-- 게시물 전체구역 end -->
-	
+	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<script  src="/Ezen_teamB/js/board/mainboard.js" type="text/javascript"></script>
 </body>
 </html>
