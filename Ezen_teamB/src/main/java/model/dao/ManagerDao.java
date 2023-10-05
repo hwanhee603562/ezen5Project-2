@@ -76,7 +76,25 @@ public class ManagerDao extends Dao{
 		
 		return null;
 	}
-	
+		// 1-3 회원강제탈퇴
+	public boolean exileMemeber( int mno ) {
+		
+		try {
+			
+			String sql = "delete from memberlist where mno = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println();
+		}
+		
+		return false;
+	}
 	
 	
 	

@@ -77,9 +77,16 @@ public class MemberManagement extends HttpServlet {
 
 	}
 
-
+	// 회원 강제 탈퇴
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int mno = Integer.parseInt( request.getParameter("mno") );
+		
+		boolean result = ManagerDao.getInstance().exileMemeber( mno );
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
+		
 	}
 
 }

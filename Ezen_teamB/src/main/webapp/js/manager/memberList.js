@@ -100,7 +100,32 @@ function onSearchMember(){
 
 // 회원 강제 탈퇴
 function exileMemeber( mno ){
-	console.log( mno )
+	
+	let promptObj = prompt(`해당 회원의 회원번호 '${mno}'을(를) 입력 후 확인버튼을 눌러주십시오`)
+	
+	if( promptObj == null ) return;
+	if( promptObj != mno ){
+		alert('입력하신 정보가 회원번호와 일치하지 않습니다')
+		return;
+	}
+	
+	$.ajax({
+		url: "/Ezen_teamB/MemberManagement",
+		method: "delete",
+		data: { mno : mno },
+		success: ( s=> {
+			if( s ){
+				alert('해당 회원을 강제탈퇴하였습니다')
+			}
+			
+		}),
+		error: e =>{
+			console.log('에러발생')
+		}
+		
+	})
+	getMemberList( 1 )
+	
 }
 
 
