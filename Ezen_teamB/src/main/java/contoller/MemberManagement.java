@@ -35,10 +35,11 @@ public class MemberManagement extends HttpServlet {
 		int maxSize = Integer.parseInt( request.getParameter("maxSize") );
 		int page = Integer.parseInt( request.getParameter("page") );
 		
-		// 페이지 레코드 시작번호 ( 0, 14, 28 ... )
+		// 페이지 레코드 시작번호 ( 0, 13, 26 ... )
 		int startRow = (page-1) * maxSize;
 		// 총 회원수
 		int totalMemeberCount = ManagerDao.getInstance().getTotalPageCount(key, keyword);
+		
 		// 마지막 페이지 번호 == 총 페이지 수
 		int totalPageCount = 
 				totalMemeberCount%maxSize == 0 

@@ -33,12 +33,12 @@
 /* =================== 테이블 스타일 */
 .memberTableBox{
 	width: 100%;
-	height: 484px;
+	height: 448px;
 }
 .memberListTable {
     border-collapse: collapse;
     width: 100%;
-    
+    box-sizing: border-box;
 }
 
 .memberListTable th, .memberListTable td {
@@ -51,11 +51,13 @@
     background-color: #f2f2f2;
     height: 44px;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .memberListTable td{
 	height: 30px;	
-	
+	padding-left: 10px;
+	box-sizing: border-box;
 }
 
 
@@ -87,7 +89,7 @@ th:nth-child(2) {
 
 /* 세 번째 th (전화번호) 스타일 */
 th:nth-child(3) {
-    width: 190px;
+    width: 174px;
 }
 
 /* 네 번째 th (이메일) 스타일 */
@@ -110,15 +112,28 @@ th:nth-child(6) {
 /* ============= 페이징 버튼 구역 */
 .pagingBtnField{
 	
-	border: 1px solid red;
 	width: 350px;
 	text-align: center;
 	margin: 0 auto;
 		
 }
-
-
-
+.pagingBtnField button{
+	width: 28px;
+	height: 28px;
+	font-weight: bold;
+	background-color: #FAFAFA;
+	border: 1px solid #E1E1E1;
+}
+.beforePageBtn{
+	margin-right: 10px;
+}
+.afterPageBtn{
+	margin-left: 10px;
+}
+.centerPageBtn{
+	width: 35px !important;
+	height: 31px !important;
+}
 
 
 

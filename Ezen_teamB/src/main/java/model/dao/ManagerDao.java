@@ -21,14 +21,18 @@ public class ManagerDao extends Dao{
 		
 		try {
 			
-			if( key.isEmpty() || keyword.isEmpty() ) return 0;
+			String sql = "select count(*) from memberlist";
 			
-			String sql = "select count(*) from memberlist where "+key+" like ? '%"+keyword+"%'"; 
+			if( !key.isEmpty() && !keyword.isEmpty() ) {
+				sql += " where "+key+" like '%"+keyword+"%'";
+			}
 			
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			
-			if( rs.next() ) return rs.getInt(1);
+
+			if( rs.next() ) {
+				return rs.getInt(1);
+			}
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -43,13 +47,13 @@ public class ManagerDao extends Dao{
 			
 			ArrayList<MemberList> list = new ArrayList<>();
 			
-			String sql = "select mno, mname, msno1, mphone, memail, mid, mpoint from memberlist order by mno desc";
+			String sql = "SELECT mno, mname, msno1, mphone, memail, mid, mpoint FROM memberlist";
 			
 			if( !key.isEmpty() && !keyword.isEmpty() ) {
-				sql = " where "+key+" like ? '%"+keyword+"%'";
+				sql += " where "+key+" like '%"+keyword+"%'";
 			}
 			
-			sql += " limit ?, ?";
+			sql += " ORDER BY mno DESC limit ?, ?";
 			
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, startRow);
@@ -58,13 +62,8 @@ public class ManagerDao extends Dao{
 			rs = ps.executeQuery();
 			while( rs.next() ) {
 				MemberList memberList = new MemberList(
-						rs.getInt(1),
-						rs.getString(2),
-						rs.getString(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getString(6),
-						rs.getInt(7)
+						rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getInt(7)
 				);
 				list.add(memberList);
 			}

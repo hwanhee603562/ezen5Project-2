@@ -13,17 +13,17 @@
 
 	<div class="memberListTopField">
 		<div class="searchMember">	<!-- 검색구역 -->
-			<select>
-				<option value="회원아이디"> 아이디 </option>
-				<option value="이름"> 이름 </option>
-				<option value="생년월일"> 생년월일 </option>
-				<option value="이메일"> 이메일 </option>
-				<option value="전화번호"> 전화번호 </option>
+			<select id="selectMemberFilter">
+				<option value="mid"> 아이디 </option>
+				<option value="mname"> 이름 </option>
+				<option value="msno1"> 생년월일 </option>
+				<option value="memail"> 이메일 </option>
+				<option value="mphone"> 전화번호 </option>
 			</select>
-			<input type="text">	<button type="button"> 검색 </button>
+			<input class="searchMemberKeyword" type="text">	<button onclick="onSearchMember()" type="button"> 검색 </button>
 		</div>
 		<div class="totalMember">	<!-- 현재 조회된 회원수 출력 -->
-			<div class="totalInnerBox"> 조회된 회원 : <span> 230</span>명 </div>
+			<div class="totalInnerBox"> 조회된 회원 : <span class="totalMemeberCount"> </span>명 </div>
 		</div>
 	</div>
 	
@@ -37,15 +37,7 @@
 				<th> 아이디 </th>
 				<th> 포인트 </th>
 			</tr>
-			<tr>
-				<td>  </td>
-				<td>  </td>
-				<td>  </td>
-				<td>  </td>
-				<td>  </td>
-				<td>  </td>
-				<td> <button class="secessionBtn" type="button">탈퇴</button> </td>
-			</tr>
+
 			
 			
 		</table>
