@@ -43,10 +43,10 @@ public class ManagerDao extends Dao{
 			
 			ArrayList<MemberList> list = new ArrayList<>();
 			
-			String sql = "select mno, mname, msno1, mphone, memail, mid, mpoint from memberlist";
+			String sql = "select mno, mname, msno1, mphone, memail, mid, mpoint from memberlist order by mno desc";
 			
 			if( !key.isEmpty() && !keyword.isEmpty() ) {
-				sql = " order by mno desc where "+key+" like ? '%"+keyword+"%'";
+				sql = " where "+key+" like ? '%"+keyword+"%'";
 			}
 			
 			sql += " limit ?, ?";
