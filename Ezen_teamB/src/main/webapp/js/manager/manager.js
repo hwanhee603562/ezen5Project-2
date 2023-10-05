@@ -1,4 +1,6 @@
-
+function clearManagerMode(){
+	location.href="/Ezen_teamB/jsp/index.jsp";
+}
 
 
 // 1. 회원관리 경로이동

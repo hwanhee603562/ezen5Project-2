@@ -1,11 +1,46 @@
 @charset "UTF-8";
 
+#header{
+	display: none !important;
+}
+
+#backgroundWrap {
+	width: 100%;
+	height: 100%;
+	background-color: #6D6D6D; 
+}
+        
 .managerWrap{
 	border: 1px solid red;
 	width: 1100px;
 	margin: 0 auto;
 	display: flex;
+	
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	    /* 다음 줄은 페이지 크기에 따라 가로 및 세로 중앙 정렬을 유지하기 위해 사용할 수 있는 예시입니다. */
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    overflow: auto;
+    box-sizing: border-box;
+	
 }
+/* 반응형 스타일링을 적용하기 위해 미디어 쿼리를 사용할 수 있습니다. */
+@media (max-width: 768px) {
+    .managerWrap {
+        /* 화면 너비가 768px 이하일 때 적용되는 스타일 */
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+}
+
+
 .leftSubOutput{
 	width: 210px;
 	height: 600px;
@@ -22,21 +57,42 @@
 	color: white;
 }
 
-.leftSubOutput div{
+
+.memberListManager,
+.statisticsManager,
+.tradelogManager,
+.emediationManager{
+	border-bottom : 1px solid #e8e8e8; 
 	margin: 17px;
 	margin-top: 32px;
-	border-bottom : 1px solid #e8e8e8; 
 }
 
-.leftSubOutput div:hover {
+.memberListManager,
+.statisticsManager,
+.tradelogManager,
+.emediationManager:hover {
     cursor: pointer;
 }
 
 
+/* 좌측 버튼 구역 */
+.SubBottomBox {
+	padding-top: 200px; 
+	text-align: center;
+}
 
-
-
-
+.clearManagerMode, .logoutManagerBtn{
+	width: 140px;
+	height: 40px;
+	border-radius: 6px;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #6D6D6D;
+	border: 1px solid black;
+}
+.logoutManagerBtn {
+    margin-top: 20px;
+}
 
 
 

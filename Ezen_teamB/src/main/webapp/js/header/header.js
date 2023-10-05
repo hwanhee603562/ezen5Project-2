@@ -30,7 +30,7 @@ function getMemberInfo() {
 			else if( r.mid == 'admin' ){
 				
 				html = `
-						<li><a href="/Ezen_teamB/jsp/manager/managerPage.jsp">관리자페이지</a></li>
+						<li><a href="/Ezen_teamB/jsp/manager/managerPage.jsp">관리자모드</a></li>
 						<li> <a onclick="logout()" href="/Ezen_teamB/jsp/index.jsp">로그아웃</a> </li>
 					`
 			}

@@ -5,7 +5,9 @@
 <head>
 
 	<link href="/Ezen_teamB/css/manager/manager.css" rel="stylesheet">
-
+	
+	
+	
 	<!-- 부트스트랩 css -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -19,26 +21,34 @@
 <body>
 	<%@ include file = "../header.jsp" %>
 	
-	<div class="managerWrap">	<!-- 관리자 페이지 전체구역 -->
-	
-		<div class="leftSubOutput">	<!-- 좌측 카테고리 구역 -->
-			
-			<div onclick="goToMemberList()" class="memberListManager"> 회원 관리 </div>
-			<div onclick="goToStatistics()" class="statisticsManager"> 통계 </div>
-			<div onclick="goToTradeLog()" class="tradelogManager"> 거래내역 </div>
-			<div onclick="goToemEdiation()" class="emediationManager"> 중개거래소 관리 </div>
-			<div> 이벤트관리 </div>
-					  
-		</div>
-			
-		<div class="rightMainOutput">	<!-- 우측 본문 출력 구역 -->
+	<div id="backgroundWrap">
+		<div class="managerWrap">	<!-- 관리자 페이지 전체구역 -->
 		
-			<%@ include file = "./memberList.jsp" %>
+			<div class="leftSubOutput">	<!-- 좌측 카테고리 구역 -->
+				
+				<div onclick="goToMemberList()" class="memberListManager"> 회원 관리 </div>
+				<div onclick="goToStatistics()" class="statisticsManager"> 통계 </div>
+				<div onclick="goToTradeLog()" class="tradelogManager"> 거래내역 </div>
+				<div onclick="goToemEdiation()" class="emediationManager"> 중개거래소 관리 </div>
+				
+				
+				<div class="SubBottomBox">
+					<div><button onclick="clearManagerMode()" class="clearManagerMode"> 관리자모드 해제 </button></div>
+					<div><a href="/Ezen_teamB/jsp/index.jsp"><button onclick="logout()" class="logoutManagerBtn"> 로그아웃 </button></a></div>
+				</div>
+						  
+			</div>
+				
+			<div class="rightMainOutput">	<!-- 우측 본문 출력 구역 -->
+			
+				<%@ include file = "./memberList.jsp" %>
+			
+			</div>
 		
 		</div>
-	
 	</div>
 	
+	 
 		<!-- 부트스트랩에서 만든 JS 적용 -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
