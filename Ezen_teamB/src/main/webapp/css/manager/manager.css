@@ -5,13 +5,13 @@
 }
 
 #backgroundWrap {
-	width: 100%;
-	height: 100%;
-	background-color: #6D6D6D; 
+	width: 5000px;
+	height: 5000px;
+	background-color: #242F40; 
 }
         
 .managerWrap{
-	border: 1px solid red;
+	border: 1px solid #001364;
 	width: 1100px;
 	margin: 0 auto;
 	display: flex;
@@ -44,11 +44,10 @@
 .leftSubOutput{
 	width: 210px;
 	height: 600px;
-	border: 1px solid blue; 
 }
 .rightMainOutput{
 	width: 880px;
-	border: 1px solid green;
+	background-color: white;
 }
 .leftSubOutput{
 	font-size: 18px;

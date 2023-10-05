@@ -34,7 +34,6 @@
 .memberTableBox{
 	width: 100%;
 	height: 484px;
-	border: 1px solid orange;
 }
 .memberListTable {
     border-collapse: collapse;
@@ -56,6 +55,7 @@
 
 .memberListTable td{
 	height: 30px;	
+	
 }
 
 

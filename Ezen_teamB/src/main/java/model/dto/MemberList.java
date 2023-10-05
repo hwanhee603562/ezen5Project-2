@@ -89,6 +89,18 @@ public class MemberList {
 		this.mid = mid;
 	}
 
+	// 관리자 모드 회원관리 출력 생성자
+	public MemberList(int mno, String mname, String msno1, String mphone, String memail, String mid, int mpoint) {
+		super();
+		this.mno = mno;
+		this.mname = mname;
+		this.msno1 = msno1;
+		this.mphone = mphone;
+		this.memail = memail;
+		this.mid = mid;
+		this.mpoint = mpoint;
+	}
+
 	// get, set
 	public int getMno() {
 		return mno;
