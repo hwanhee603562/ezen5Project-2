@@ -74,13 +74,12 @@
     border: none; /* border 제거 */
 }
 .secessionBtn{
-	background-color: black;
-	border: 3px solid black;
-	font-size: 14px;
+	background-color: #f2f2f2;
+	border: 3px solid #f2f2f2 !important;
+	font-size: 10px;
 	padding: 1px;
 	padding-right: 2px;
 	font-weight: bold;
-	color: white;
 }
 td:nth-child(7) {
     width: 37px;
