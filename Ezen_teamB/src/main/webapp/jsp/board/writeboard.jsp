@@ -31,6 +31,7 @@
 		</form>	
 		</div>
 	</div>
+		<%@include file = "../footer.jsp" %>
 	<script  src="/Ezen_teamB/js/board/writeboard.js" type="text/javascript"></script>
 </body>
 </html>

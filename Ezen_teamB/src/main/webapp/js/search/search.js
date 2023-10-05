@@ -41,15 +41,16 @@ function idSearch(){ console.log('아이디 찾기 함수 실행')
 // 비밀번호 찾기 함수
 function pwdSearch(){ console.log('비밀번호 찾기 함수 실행')
 	let mid = document.getElementById('searchId').value;
-	console.log('아이디찾기 가져온 아이디 ' + mid)	
+	console.log('비밀번호찾기 가져온 아이디 ' + mid)	
 	let memail = document.getElementById('searchEmail').value;
-	console.log('아이디찾기 가져온 아이디 ' + memail)	
+	console.log('비밀번호찾기 가져온 아이디 ' + memail)	
 
 
 	$.ajax({
 		
 		url:"/Ezen_teamB/SearchController",
 		method : "get",
+		sasync:false,
 		data :{type : "pwd" , mid : mid , memail : memail},
 		success : result => {console.log(result)
 
@@ -57,7 +58,7 @@ function pwdSearch(){ console.log('비밀번호 찾기 함수 실행')
 				alert('정보가 일치하지 않습니다')
 			}else if(result !='null'){
 				
-				alert('고객님의 비밀번호는 '+result+' 입니다' )
+				alert('고객님의 임시 비밀번호는 '+result+' 입니다' )
 			}
 			
 			
