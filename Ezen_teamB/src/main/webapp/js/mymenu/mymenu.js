@@ -254,22 +254,21 @@ function transHistory(){console.log('거래내역 리스트')
 	
 }
 
+/* 안전결제내역 조회 조건 객체 */
+let pageObject = { maxSize : 13, page: 1, key : '', keyword : '' }
+	// * maxSize 	: 하나의 페이지에 최대표시할 멤버수
+	// * page		: 현재 출력되는 페이지의 하단 번호
+	// * key 		: select 내 옵션 목록
+	// * keyword 	: 검색할 데이터(키워드)
+
 
 // 안전결제 관리 함수
+	// 1-1 안전결제 구매관리 
 function safePayManagement() {
 	
-	let cardInfo = document.querySelector('.cardInfo');
-	
-	let html = ` 
-	       <div class="safepayStateBox">
-						
-				<div class="safepayBtnBox">
-					<button class="buyLogBtn" type="button"> 구매관리 </button>
-					<button class="sellLogBtn" type="button"> 판매관리 </button>
-				</div>
-						
-				<table class="safepayStateTable">
-		`;
+	// 기본 구매관리 버튼 클릭
+	document.querySelector(".buyLogBtn").click()
+		
 	/*
 	$.ajax({
 		rul: "/Ezen_teamB/MyMenuController",
@@ -278,13 +277,41 @@ function safePayManagement() {
 	})
 	*/
 	
-	html += `
-				</table>
-			</div>
-	`
+
 	
 }
+	// 1-2 안전결제 구매관리
+function buyManagement(){
+	
+	document.getElementsByClassName("buyLogBtn")[0].style.backgroundColor = "#9767EB";
+	document.getElementsByClassName("sellLogBtn")[0].style.backgroundColor = "#A2A7E8";
+	
+	let cardInfo = document.querySelector('.cardInfo');
 
+	let html = ` 
+	       <div class="safepayStateBox">
+						
+				<div class="safepayBtnBox">
+					<button onclick="buyManagement()" class="buyLogBtn" type="button"> 구매관리 </button>
+					<button onclick="sellManagement()" class="sellLogBtn" type="button"> 판매관리 </button>
+				</div>
+						
+				<table class="safepayStateTable">
+		`			
+				
+				
+	
+	html += `
+				</table >
+			</div >
+		`
+	
+}
+	// 1-3 안전결제 판매관리
+function sellManagement(){
+	document.getElementsByClassName("buyLogBtn")[0].style.backgroundColor = "#A2A7E8";
+	document.getElementsByClassName("sellLogBtn")[0].style.backgroundColor = "#9767EB";
+}
 
 
 

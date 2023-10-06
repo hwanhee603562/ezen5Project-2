@@ -46,8 +46,8 @@
 						
 						
 						<div class="safepayBtnBox">
-							<button class="buyLogBtn" type="button"> 구매관리 </button>
-							<button class="sellLogBtn" type="button"> 판매관리 </button>
+							<button onclick="buyManagement()" class="buyLogBtn" type="button"> 구매관리 </button>
+							<button onclick="sellManagement()" class="sellLogBtn" type="button"> 판매관리 </button>
 						</div>
 						
 						<div class="safepaySearchField">

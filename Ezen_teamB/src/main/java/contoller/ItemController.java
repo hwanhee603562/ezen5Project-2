@@ -148,8 +148,7 @@ public class ItemController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		/* 로그인 기능 구현 전 임시적으로 로그인 세션저장 */
-		MemberList loginDto = new MemberList( 12, "azz258" );
-		request.getSession().setAttribute("loginDto", loginDto);
+
 		/* ---------------------------------- */
 		
 		

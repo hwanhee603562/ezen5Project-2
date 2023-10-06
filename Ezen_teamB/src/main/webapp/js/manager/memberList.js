@@ -18,7 +18,6 @@ function getMemberList( page ){
 			console.log('성공')
 			console.log(r)
 			
-			
 			/* 테이블 생성 */
 			let memberListTable = document.querySelector('.memberListTable');
 			
