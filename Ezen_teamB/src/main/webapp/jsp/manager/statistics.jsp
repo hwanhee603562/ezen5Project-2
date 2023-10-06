@@ -10,12 +10,9 @@
 <!-- 통계페이지 -->
 </head>
 <body>
-<<<<<<< HEAD
 
-	통계
-	<button onclick="sfsfd()" type="button"> 안녕 </button>
-	<script src="/Ezen_teamB/js/manager/statistics.js" type="text/javascript"></script>
-=======
+
+
 	<!-- 날짜 검색 구역 -->
 	<div class="dateInput">
 		<div class="inputBox">
@@ -37,9 +34,6 @@
 		
 	
 	</div>
-	
-	
->>>>>>> branch '최의선' of https://github.com/hwanhee603562/ezen5Project-2
 
 </body>
 </html>
