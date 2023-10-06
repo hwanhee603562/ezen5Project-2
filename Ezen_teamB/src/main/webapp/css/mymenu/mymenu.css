@@ -153,7 +153,7 @@
 	border-bottom: 1px solid #e8e8e8;
 	border-left: 1px solid #e8e8e8;
 	border-right: 1px solid #e8e8e8;
-	height: 500px;
+	height: 820px;
 }
 
 /* 상품정보 텍스트 */
@@ -235,11 +235,103 @@
 }
 
 
+/* -------------- 안전결제 --------------- */
+/* 안전결제 전체구역 */
+.safepayStateBox {
+    width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #e8e8e8;
+    padding: 10px; /* 상자 주위에 간격을 추가합니다. */
+}
+
+/* 안전결제 상단 구역 */
+.safepayBtnBox {
+    text-align: center; /* 버튼을 가운데 정렬합니다. */
+    margin-bottom: 10px; /* 버튼 아래에 간격을 추가합니다. */
+}
+
+.buyLogBtn, .sellLogBtn {
+	width: 584px;
+    background-color: #A2A7E8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.safepaySearchField{
+	display: flex;
+	justify-content: space-between;
+}
+.selectDateBox{
+	margin-bottom: 10px;
+}
+.selectDateBox input{
+	width: 250px;
+	height: 35px;
+	padding-left: 25px;
+}
+.dateStartBtn{
+	margin-right: 10px;
+}
+.dateEndBtn{
+	margin-left: 10px;
+}
+.selectFilterBox{
+	margin-left: 20px;
+	height: 35px;
+	width: 180px;
+}
 
 
 
+/* 테이블 */
+.safepayStateTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.safepayStateTable th, .safepayStateTable td {
+    border: none; /* 테이블 셀의 border 제거 */
+    padding: 8px;
+    text-align: center;
+}
+
+.safepayStateTable th {
+    background-color: #e8e8e8;
+}
+
+/* 버튼 스타일 */
+.safepayStateTable button {
+    background-color: #A0A0C1;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.buyLogBtn:hover, .sellLogBtn:hover {
+    background-color: #9767EB; /* 호버 시 배경색 변경 */
+}
 
 
+/* 각 th에 다른 너비 적용 */
+	/* 진행상태 */
+.safepayStateTable th:nth-child(1) {
+    width: 100px; /* 첫 번째 th의 너비 */
+}
+	/* 물품제목 */
+.safepayStateTable th:nth-child(2) {
+    width: 695px; /* 두 번째 th의 너비 */
+}
+	/* 판매자ID */
+.safepayStateTable th:nth-child(3) {
+    width: 136px; /* 세 번째 th의 너비 */
+}
+	/* 일시 */
+.safepayStateTable th:nth-child(4) {
+    width: 167px; /* 네 번째 th의 너비 */
+}
 
 
 

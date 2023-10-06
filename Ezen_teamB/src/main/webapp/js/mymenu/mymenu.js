@@ -256,7 +256,32 @@ function transHistory(){console.log('거래내역 리스트')
 
 
 // 안전결제 관리 함수
-function safePayManagement(){
+function safePayManagement() {
+	
+	let cardInfo = document.querySelector('.cardInfo');
+	
+	let html = ` 
+	       <div class="safepayStateBox">
+						
+				<div class="safepayBtnBox">
+					<button class="buyLogBtn" type="button"> 구매관리 </button>
+					<button class="sellLogBtn" type="button"> 판매관리 </button>
+				</div>
+						
+				<table class="safepayStateTable">
+		`;
+	/*
+	$.ajax({
+		rul: "/Ezen_teamB/MyMenuController",
+		method: "get"
+		
+	})
+	*/
+	
+	html += `
+				</table>
+			</div>
+	`
 	
 }
 
