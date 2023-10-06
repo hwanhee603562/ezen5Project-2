@@ -262,6 +262,7 @@
 .safepaySearchField{
 	display: flex;
 	justify-content: space-between;
+	margin-top: 30px;
 }
 .selectDateBox{
 	margin-bottom: 10px;
@@ -273,6 +274,7 @@
 }
 .dateStartBtn{
 	margin-right: 10px;
+	margin-left: 10px;
 }
 .dateEndBtn{
 	margin-left: 10px;
@@ -318,22 +320,27 @@
 /* 각 th에 다른 너비 적용 */
 	/* 진행상태 */
 .safepayStateTable th:nth-child(1) {
-    width: 100px; /* 첫 번째 th의 너비 */
+    width: 140px; /* 첫 번째 th의 너비 */
 }
 	/* 물품제목 */
 .safepayStateTable th:nth-child(2) {
-    width: 695px; /* 두 번째 th의 너비 */
+    width: 555px; /* 두 번째 th의 너비 */
 }
 	/* 판매자ID */
 .safepayStateTable th:nth-child(3) {
-    width: 136px; /* 세 번째 th의 너비 */
+    width: 170px; /* 세 번째 th의 너비 */
 }
 	/* 일시 */
 .safepayStateTable th:nth-child(4) {
     width: 167px; /* 네 번째 th의 너비 */
 }
 
-
+.searchBtn{
+	width: 60px;
+	height: 35px;
+	padding: 5px 10px;
+	margin-right: 10px;
+}
 
 
 

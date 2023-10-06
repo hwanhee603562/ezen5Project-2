@@ -64,7 +64,7 @@
 								</select>
 							</div>
 							<div>
-								<button class="" type="button"> 검색 </button>
+								<button class="searchBtn" type="button"> 검색 </button>
 							</div>
 						</div>	
 						
@@ -75,6 +75,7 @@
 								<th> 물품제목 </th>
 								<th> 판매자ID </th>
 								<th> 일시 </th>
+								<th></th>
 							</tr>
 							<tr>
 								<td> 요청 </td>

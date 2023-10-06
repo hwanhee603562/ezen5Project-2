@@ -49,10 +49,7 @@
 	</div>
 	
 	 <script src="/Ezen_teamB/js/manager/statistics.js" type="text/javascript"></script>
-<<<<<<< HEAD
-=======
 	 
->>>>>>> branch '최의선' of https://github.com/hwanhee603562/ezen5Project-2
 		<!-- 부트스트랩에서 만든 JS 적용 -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
