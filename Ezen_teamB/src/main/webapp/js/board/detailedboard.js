@@ -87,13 +87,18 @@ function bDelete(bno) {
 	})
 }
 // 답글
-function replyWrite(){
+function replyWrite(bno){
 	console.log("답글")
+	let rWrite = document.querySelector('.rWrite').value
+	console.log(rWrite);
 	$.ajax({
-		url : "" ,
-		method : "" ,
-		data : {} ,
-		success : r =>{ console.log('통신 성공')} ,
+		url : "/Ezen_teamB/BoardController" ,
+		method : "post" ,
+		data : { type : 2 , bno : bno  } ,
+		success : r =>{ console.log('통신 성공')
+			
+		
+		} ,
 		error : e => { console.log('통신 실패')}
 		
 	})

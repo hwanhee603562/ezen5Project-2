@@ -141,7 +141,17 @@ public class BoardDao extends Dao{
 		} catch (Exception e) {System.out.println(e);}
 		return false;
 	}
+	// 개별 게시물 답글 등록
+	public boolean bReply() {
+		try {
+			String sql = "";
+			ps = conn.prepareStatement(sql);
+			
+		} catch (Exception e) {System.out.println(e);}
+		return false;
+	}
 	
+	// 개별 게시물 답글 출력
 	
 	
 }

@@ -62,4 +62,19 @@
 .replyTextarea{
 	width: 100%;
 }
+.replyInfo{
+	display: flex;
+	justify-content: space-between;
+	
+}
+.boardReplyContent{
+	border: 1px solid red;
+	background-color: #e8e8e8;
+}
+.replyContent{
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid red;
+
+}
 

@@ -35,7 +35,7 @@
 			
 				<div class="boardReply">
 					<div class="replyTextarea">
-						<textarea cols="100%" rows="" class="rWrite"></textarea>
+						<textarea cols="100%" rows="" class="rWrite" name="rcontent"></textarea>
 					</div>
 					<div>
 						<button onclick="replyWrite()"type="button">답글등록</button>
@@ -50,12 +50,36 @@
 			
 		</div>
 		<div class="boardReplyContent">
-			<div><!-- 답글출력구역 -->
-				<div>답글</div>
+			<div class="replyInfo"><!-- 답글출력구역 -->
+				<div> id : admin </div>
+				<div> 날짜 : 2023-10-06 15:47:00 </div>
+			</div>	
+			<div class="replyContent"> 
+				<div>내용 : 안녕하세요</div>
+				<div> <button type="button">수정</button> <button type="button">삭제</button></div>
 			</div>
+			<div class="replyInfo"><!-- 답글출력구역 -->
+				<div> id : admin </div>
+				<div> 날짜 : 2023-10-06 15:47:00 </div>
+			</div>	
+			<div class="replyContent"> 
+				<div>내용 : 안녕하세요</div>
+				<div> <button type="button">수정</button> <button type="button">삭제</button></div>
+			</div>
+			<div class="replyInfo"><!-- 답글출력구역 -->
+				<div> id : admin </div>
+				<div> 날짜 : 2023-10-06 15:47:00 </div>
+			</div>	
+			<div class="replyContent"> 
+				<div>내용 : 안녕하세요</div>
+				<div> <button type="button">수정</button> <button type="button">삭제</button></div>
+			</div>
+				
+				
+			
 		</div>
 	</div>
-	
+	<%@include file = "../footer.jsp" %>
 	
 	<script  src="/Ezen_teamB/js/board/detailedboard.js" type="text/javascript"></script>
 </body>
