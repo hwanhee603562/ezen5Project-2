@@ -146,6 +146,7 @@ function faceToFace(){
 	document.querySelector('.emediationAdress').innerHTML = '';
 	
 	document.getElementById("outputMapField").style.display = "block";
+	document.getElementById("outputMapField").style.height = "450px";
 	//document.getElementsByClassName("outputMapField")[0].style.display = "block";
 	document.getElementById("outputMapField2").style.display = "none";
 	
@@ -315,7 +316,7 @@ let emediationInfo = { eno : '', ename : '', eadress : '' }
 
 
 function brokerage(){
-	console.log('brokerage실행')
+	
 	// 클러스터가 출력되는 것을 막기 위해 클러스터 배열을 clear함
 	clusterer2.clear()
 	
@@ -333,6 +334,7 @@ function brokerage(){
 
 	document.getElementById("outputMapField").style.display = "none";
 	document.getElementById("outputMapField2").style.display = "block";
+	document.getElementById("outputMapField2").style.height = "450px";
 
 	
 	itrade = 3;
@@ -667,7 +669,10 @@ function registerItems(){
 		processData: false,
 		success: result =>{
 			
-			if(result) console.log('등록성공')
+			if(result){
+				alert('등록이 완료되었습니다')
+				location.href = "/Ezen_teamB/jsp/item/checkitems.jsp"
+			}
 			
 		},
 		error: e =>{

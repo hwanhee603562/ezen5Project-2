@@ -284,7 +284,7 @@ function faceToFace(){
 	document.querySelector('.emediationAdress').innerHTML = '';
 	
 	document.getElementById("outputMapField").style.display = "block";
-	//document.getElementsByClassName("outputMapField")[0].style.display = "block";
+	document.getElementById("outputMapField").style.height = "450px";
 	document.getElementById("outputMapField2").style.display = "none";
 	
 	itrade = 2;
@@ -460,6 +460,7 @@ function brokerage(){
 
 	document.getElementById("outputMapField").style.display = "none";
 	document.getElementById("outputMapField2").style.display = "block";
+	document.getElementById("outputMapField2").style.height = "450px";
 	
 	
 	itrade = 3;
@@ -829,7 +830,10 @@ function updateItems(){
 		processData: false,
 		success: result =>{
 			
-			if(result) console.log('등록성공')
+			if(result){
+				alert('수정이 완료되었습니다')
+				location.href = "/Ezen_teamB/jsp/item/checkitems.jsp"
+			}
 
 		},
 		error: e =>{
