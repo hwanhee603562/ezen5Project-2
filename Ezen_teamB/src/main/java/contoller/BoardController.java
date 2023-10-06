@@ -30,6 +30,10 @@ public class BoardController extends HttpServlet {
     
 	// 1. 게시판 등록
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	String type = request.getParameter("type");
+    	ObjectMapper objectMapper = new ObjectMapper();
+    	String json = "";
+    	if(type.equals("1")) {
     	MultipartRequest multi = new MultipartRequest(
     			request, 
     			request.getServletContext().getRealPath("/jsp/board/upload"),
@@ -50,9 +54,16 @@ public class BoardController extends HttpServlet {
     	Board boardDto = new Board(cno, btitle, bcontent, bfile, mno); System.out.println(boardDto);
     	
     	boolean result = BoardDao.getInstance().bwrite(boardDto);
-    	
+    	}else if(type.equals("2")) {
+    		
+    		int bno = Integer.parseInt(request.getParameter("bno"));
+    		String rcontent = request.getParameter("rcontent");
+    		int mno = ((MemberList)request.getSession().getAttribute("loginSession")).getMno();
+    		
+    		
+    	}
     	response.setContentType("application/json; charset=UTF-8");
-    	response.getWriter().print(result);
+    	response.getWriter().print(json);
 	}
     
 	// 2. 게시판 조회
@@ -77,7 +88,7 @@ public class BoardController extends HttpServlet {
 			int totalsize = BoardDao.getInstance().getTotalSize(cno,key,keyword);
 			int totalpage = totalsize%listsize == 0  ? totalsize/listsize : totalsize/listsize+1;
 			int btnsize = 5;
-			int starbtn =((page-1)/btnsize)*btnsize+1; System.out.println(starbtn);
+			int starbtn =((page-1)/btnsize)*btnsize+1; 
 			int endbtn = starbtn+(btnsize-1); 
 			if( endbtn >= totalpage ) endbtn = totalpage;
 			

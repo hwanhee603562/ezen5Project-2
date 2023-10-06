@@ -68,11 +68,12 @@
 					<option value="m.mid">작성자</option>
 				</select>
 				<input class="keyword" type="text" placeholder="검색할내용"> <!-- 검색내용 -->
-				<button onclick="boardSearch()" type="button">검색</button>
+				<button onclick="boardSearch()" type="button" class="searchBtn">검색</button>
 			</div>
 			<!-- 검색구역 END -->
 		
 	</div> <!-- 게시물 전체구역 end -->
+	<%@include file = "../footer.jsp" %>
 	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 	<script  src="/Ezen_teamB/js/board/mainboard.js" type="text/javascript"></script>
 </body>

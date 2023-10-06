@@ -35,9 +35,9 @@
 		</form>	
 		</div>
 	</div>
-<<<<<<< HEAD
-		<%@include file = "../footer.jsp" %>
-=======
+
+	<%@include file = "../footer.jsp" %>
+
 	
 	
 	<!-- 부트스트랩에서 만든 JS 적용 -->
@@ -47,7 +47,7 @@
 	<!-- 썸머노트 한글적용  -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/lang/summernote-ko-KR.min.js"></script>
 	
->>>>>>> branch '한승우' of https://github.com/hwanhee603562/ezen5Project-2
+
 	<script  src="/Ezen_teamB/js/board/writeboard.js" type="text/javascript"></script>
 </body>
 </html>
