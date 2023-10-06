@@ -42,7 +42,9 @@ public class BoardController extends HttpServlet {
     	String btitle = multi.getParameter("btitle");
     	String bcontent = multi.getParameter("bcontent");
     	String bfile = multi.getFilesystemName("bfile");
-    	
+    	System.out.println(11111111);
+    	System.out.println(bfile);
+    	System.out.println(11111111);
     	int mno = ( (MemberList)request.getSession().getAttribute("loginSession") ).getMno(); System.out.println(mno);
     	int cno = Integer.parseInt(multi.getParameter("cno")); 
     	

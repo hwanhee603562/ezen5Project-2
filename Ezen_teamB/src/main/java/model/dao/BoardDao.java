@@ -98,7 +98,8 @@ public class BoardDao extends Dao{
 	// 개별 게시물 등록
 	public boolean bwrite( Board boardDto ) {
 		try {
-			String sql ="insert into board( btitle , bcontent , bfile , mno , cno )"+"values( ? , ? , ? , ? , ? )";
+			System.out.println(boardDto);
+			String sql ="insert into board( btitle , bcontent , bfile , mno , cno ) "+"values( ? , ? , ? , ? , ? )";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, boardDto.getBtitle());
 			ps.setString(2, boardDto.getBcontent());
@@ -114,12 +115,14 @@ public class BoardDao extends Dao{
 	// 개별 게시물 수정
 	public boolean bUpdate( Board dto ) {
 		try {
+		
+			
 			String sql = "update board set btitle = ? , bcontent = ? , cno = ? ,bfile = ? where bno = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getBtitle());
-			ps.setString(2, dto.getBtitle());
+			ps.setString(2, dto.getBcontent());
 			ps.setInt(3, dto.getCno());
-			ps.setString(4, dto.getBtitle());
+			ps.setString(4, dto.getBfile());
 			ps.setInt(5, dto.getBno());
 			int count = ps.executeUpdate();
 			if( count == 1) return true;

@@ -27,21 +27,31 @@ public class BoardFileDownload extends HttpServlet {
 
 	// 게시물 파일 다운로드
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			// 1. 파일명	
 		String filename = request.getParameter("filename");
-		
+			// 2. 첨부파일 경로
 		String uploadpath = request.getServletContext().getRealPath("/jsp/board/upload");
+			// 3. 다운로드 할 파일의 전체 경로
 		String filepath = uploadpath+"/"+filename;
 		
 		response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(filepath,"UTF-8"));
 		
-		File file = new File(filepath);
-		FileInputStream fin = new FileInputStream(file);
-		byte[] bytes = new byte[(int)file.length()];
-		fin.read(bytes);
+			File file = new File(filepath);
+			// 1. 
+			System.out.println(1111);
+			System.out.println(1111);
+			System.out.println(1111);
+			System.out.println(filepath);
+			FileInputStream fin = new FileInputStream(file);
+			// 2. 
+			System.out.println(22222);
+			byte[] bytes = new byte[(int)file.length()];
+			// 3. 
+			fin.read(bytes);
+			System.out.println(2222);
 		
-		BufferedOutputStream oin = new BufferedOutputStream(response.getOutputStream());
-		oin.write(bytes);
+			BufferedOutputStream oin = new BufferedOutputStream(response.getOutputStream());
+			oin.write(bytes);
 		fin.close(); oin.flush(); oin.close();
 		
 	}

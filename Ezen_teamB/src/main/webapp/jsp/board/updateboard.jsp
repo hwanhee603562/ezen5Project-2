@@ -27,8 +27,6 @@
 			<select name="cno" class="cno">
 			</select>
 			제목 : <input type="text" name="btitle" class="btitle">
-			<select name="cno" class="cno">
-			</select>
 			<textarea id="summernote" name="bcontent" class="bcontent"></textarea>
 			첨부파일 : <input type="file" name="bfile" class="bfile">
 			
