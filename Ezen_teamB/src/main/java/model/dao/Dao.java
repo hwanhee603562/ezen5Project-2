@@ -24,12 +24,6 @@ public class Dao {
 							, "admin", "12341234a"); 
 
 			
-			
-			
-			 
-
-						
-
 
 
 			/*
