@@ -1,4 +1,5 @@
 
+
 /* 게시물 조회 조건 객체 */
 let pageObject2 = { maxSize : 10, page: 1, category : 1, pDate : '', nDate : '' }
 	// * maxSize 	: 하나의 페이지에 최대표시할 멤버수
@@ -90,7 +91,54 @@ function printCateStatics(r){
 
 // 거래방식별 통계 출력함수
 function printTradeStatics(r){
-	console.log(r);
+	
+	let gnum1 = 2;
+	let gnum2 = 3;
+	let gnum3 = 5;
+	
+
+	let g_List = [{value : gnum1, name : '배송'},
+				{value : gnum2, name : '대면거래'},
+				{value : gnum3, name : '안전거래'}]
+	
+	
+
+	var chartDom = document.getElementById('printGraf');
+	var myChart = echarts.init(chartDom);
+	var option;
+	
+	option = {
+	  title: {
+	    text: 'Referer of a Website',
+	    subtext: 'Fake Data',
+	    left: 'center'
+	  },
+	  tooltip: {
+	    trigger: 'item'
+	  },
+	  legend: {
+	    orient: 'vertical',
+	    left: 'left'
+	  },
+	  series: [
+	    {
+	      name: 'Access From',
+	      type: 'pie',
+	      radius: '50%',
+	      data: g_List,
+	      emphasis: {
+	        itemStyle: {
+	          shadowBlur: 10,
+	          shadowOffsetX: 0,
+	          shadowColor: 'rgba(0, 0, 0, 0.5)'
+	        }
+	      }
+	    }
+	  ]
+	};
+	
+	option && myChart.setOption(option);
+	
 }
 
 
