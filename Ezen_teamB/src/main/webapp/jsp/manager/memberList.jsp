@@ -9,7 +9,7 @@
 	<link href="/Ezen_teamB/css/manager/memberList.css" rel="stylesheet">
 
 </head>
-<body>
+<body>	
 
 	<div class="memberListTopField">
 		<div class="searchMember">	<!-- 검색구역 -->
