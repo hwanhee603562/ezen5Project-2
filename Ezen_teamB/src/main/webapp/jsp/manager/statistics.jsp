@@ -10,9 +10,6 @@
 <!-- 통계페이지 -->
 </head>
 <body>
-
-
-
 	<!-- 날짜 검색 구역 -->
 	<div class="dateInput">
 		<div class="inputBox">
@@ -34,6 +31,8 @@
 		
 	
 	</div>
+	
+	
 
 </body>
 </html>
