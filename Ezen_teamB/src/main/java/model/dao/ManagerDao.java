@@ -1,9 +1,12 @@
 package model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import model.dto.CateStatistics;
 import model.dto.MemberList;
 import model.dto.MemberManageDto;
+import model.dto.TradeStatistic;
 
 // 관리자 클래스
 public class ManagerDao extends Dao{
@@ -102,8 +105,55 @@ public class ManagerDao extends Dao{
 	// 거래내역
 	
 	
-	// 통계
+	// 통계(카테고리별)
+	public List<CateStatistics> getCateStatistics(String pDate, String nDate){
+		List<CateStatistics> list =  new ArrayList<>();
+		
+		try {
+			String sql = "select u.uname as 대분류, d.dname as 소분류, count(case when i.iestate = 0 then 1 end) as 거래상태, count(case when i.isafepayment = 0 then 1 end) as 안전결제사용여부, count(uname) "
+					+ "from umaincategory u, dsubcategory d, itemsinfo i "
+					+ "where u.uno = d.uno and d.dno = i.dno and i.idate between ? and ? "
+					+ "group by u.uno";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pDate);
+			ps.setString(2, nDate);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				CateStatistics cDto = new CateStatistics(
+						rs.getString(1), rs.getString(2), 
+						rs.getInt(3), rs.getInt(4), rs.getInt(5));
+				list.add(cDto);
+			}
+			return list;
+			
+			
+		} catch (Exception e) {System.out.println(e);}
+		
+		return null;
+	}
 	
+	// 통계(거래방식별)
+	public List<TradeStatistic> getTradeStatistics(String pDate, String nDate){
+		List<TradeStatistic> list = new ArrayList<>();
+		
+		try {
+			String sql = "select i.itrade as 거래방식, count(i.itrade) "
+					+ "from itemsinfo i, tradelog t\r\n"
+					+ "where i.idate between ? and ? "
+					+ "group by i.itrade";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pDate);
+			ps.setString(2, nDate);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				TradeStatistic tDto = new TradeStatistic(rs.getInt(1), rs.getInt(2));
+				list.add(tDto);
+			}
+			return list;
+		} catch (Exception e) {System.out.println(e);}
+		
+		return null;
+	}
 	
 	// 전체 중개거래소 
 	
@@ -113,6 +163,24 @@ public class ManagerDao extends Dao{
 	
 	// 개별 중개거래소 삭제
 	
+	// 페이징 처리(카테고리)
+	public int getTotalSize1(String category, String pDate, String nDate) {
+		
+		try {
+			String sql = "select count(*) from umaincategory u, dsubcategory d, itemsinfo i "
+					+ "where u.uno = d.uno and d.dno = i.dno and i.idate between ? and ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pDate);
+			ps.setString(2, nDate);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		} catch (Exception e) {System.out.println(e);}
+		
+		return 0;
+	}
 	
 	
 	

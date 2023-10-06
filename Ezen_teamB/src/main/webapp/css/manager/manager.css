@@ -93,6 +93,38 @@
     margin-top: 20px;
 }
 
+/* 카테고리 통계 css */
+.printBox{
+	width: 100%;
+}
+
+/* 통계 테이블 */
+.printBox table{
+	border-collapse: collapse;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.cStatisticListTable th, .cStatisticListTable td{
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+.cStatisticListTable th{
+	background-color: #f2f2f2;
+    height: 44px;
+    box-sizing: border-box;
+}
+
+.cStatisticListTable td{
+	height: 30px;	
+	box-sizing: border-box;
+}
+
+.stResult{
+	background-color: #C2F3FF;
+}
+
 
 
 

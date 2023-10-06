@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,9 +116,9 @@ public class ChattingDao extends Dao{
 		
 		try {
 			String sql = "select m.mid, jcontent, jchatdate, ino from jchatting j, memberlist m  where j.caller = m.mno and rno = ?";
-			ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, rno);
-			rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				MsgDto mDto = new MsgDto(
 						rs.getString(1), rs.getString(2),
@@ -126,7 +128,7 @@ public class ChattingDao extends Dao{
 			return list;
 			
 			
-		} catch (Exception e) {}
+		} catch (Exception e) {System.out.println(e);}
 		
 		return null;
 	}

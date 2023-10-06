@@ -26,7 +26,8 @@ public class ChattingController extends HttpServlet {
     public ChattingController() {
         super();
     }
-
+    
+    // 채팅내용을 불러오는 함수
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String rno = request.getParameter("rno");
