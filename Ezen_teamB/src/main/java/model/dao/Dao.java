@@ -15,31 +15,38 @@ public class Dao {
 		try { 
 
 
-			/*
+			
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
 				
 
 			this.conn = DriverManager.getConnection("jdbc:mysql://database-1.ccmmlpcfyswe.us-east-1.rds.amazonaws.com:3306/usedtrade"
 							, "admin", "12341234a"); 
+<<<<<<< HEAD
 */
 			
+=======
+
+>>>>>>> branch '최의선' of https://github.com/hwanhee603562/ezen5Project-2
 			
+<<<<<<< HEAD
 				
 			 
 
 						
 
+=======
+>>>>>>> branch '최의선' of https://github.com/hwanhee603562/ezen5Project-2
 
 
-			
+			/*
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
 			
 			
 			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedtrade"
 					, "root", "1234");
-			
+			*/
 
 			
 			

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.dto.MsgDto;
+import model.dto.MsgRoom;
 
 // 채팅기능 클래스
 public class ChattingDao extends Dao{
@@ -106,7 +107,7 @@ public class ChattingDao extends Dao{
 		return null;
 	}
 	
-	// 채팅목록들을 가져오는 메소드
+	// 채팅한 텍스트들을 가져오는 메소드
 	public List<MsgDto> getMsgs(String rno){
 		
 		List<MsgDto> list = new ArrayList<MsgDto>();
@@ -126,6 +127,38 @@ public class ChattingDao extends Dao{
 			
 			
 		} catch (Exception e) {}
+		
+		return null;
+	}
+	
+	// 자신의 채팅방 목록을 가져오는 메소드
+	public List<MsgRoom> getMsgRoom(int mno){
+		
+		List<MsgRoom> list = new ArrayList<>();
+		
+		try {
+			String sql = "select*from ("
+					+ "   select*from jchatting "
+					+ "	where (rno, jchatdate) in( select rno, max(jchatdate) as date_time "
+					+ "		from jchatting group by rno "
+					+ "		) order by jchatdate desc "
+					+ "	) jchat_desc "
+					+ "where caller = ? or receiver = ? "
+					+ "group by rno";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.setInt(2, mno);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				MsgRoom mdto = new MsgRoom(
+						rs.getInt(2), rs.getInt(3), rs.getString(4),
+						rs.getString(5), rs.getBoolean(6),
+						rs.getInt(7), rs.getString(8));
+				list.add(mdto);
+			}
+			return list;
+			
+		} catch (Exception e) {System.out.println(e);}
 		
 		return null;
 	}

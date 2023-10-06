@@ -40,7 +40,7 @@ function onMsg(e){
 	msg.jcontent.content = msg.jcontent.content.replace(/\n/g,'<br>');
 	  
 	
-	
+	roadChat();
 }
 
 roadChat();
@@ -110,7 +110,6 @@ function typeHTML(msg){
 	
 	// 1. 메시지 타입 일때는 <div> 반환
 	if(msg.type == 'message'){
-		console.log('msg 함수 정상작동')
 		html += `<div class="content">${msg.content}</div>`;
 	}
 	
