@@ -1,3 +1,14 @@
+/* 썸머노트 실행 */
+$(document).ready(function() {
+	
+	let option ={
+		lang : 'ko-KR' , 
+		height : 500 ,
+		placeholder : '여기에 내용작성'
+	}
+	$('#summernote').summernote(option);
+  
+});
 if (loginMid == 'admin') {
 	document.querySelector('.cno').innerHTML = `<option value="1"> 공지사항 </option>
 	  	 											 <option value="2">건의사항</option> `

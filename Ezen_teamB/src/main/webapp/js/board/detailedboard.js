@@ -15,27 +15,46 @@ function getBoard(){
 		success : r =>{ console.log('통신 성공')
 			
 			let boardBox = document.querySelector('.boardBox')
+			let bottomBtn = document.querySelector('.bottomBtn')
 			
 			let html =`
-				카테고리 : <div> ${r.cname}</div>
-				아이디 : <div> ${r.mid} </div>
-				작성일 : <div> ${r.bdate} </div>
-				제목 : <div> ${r.btitle} </div>
-				내용 : <div> ${r.bcontent}</div>
-				첨부파일 : <div> <a href="/Ezen_teamB/BoardFileDownload="${r.bfile}>${r.bfile}</a> </div>
+				<div class="detailedTop">
+				<div> 
+					제목 : ${r.btitle} </br>
+				 	아이디 :  ${r.mid} 
+				 </div>
+				<div> 
+					${r.cname} </br>
+					${r.bdate}
+				</div>
+				</div>
+				
+				<div class="detailedMid">
+				<div> 내용 : ${r.bcontent} </div>
+				<div>첨부파일 :  <a href="/Ezen_teamB/BoardFileDownload="${r.bfile}>${r.bfile}</a></div>
+				
+				</div>
+		
 
 			`;
-			html +='<a href="mainboard.jsp"><button type="button">목록보기</button></a>';
+			boardBox.innerHTML = html
+			
 			if(r.ishost){
 			
-				html+=`
+				html =`
+					<div class="detailbtn">
 					<button onclick="bUpdate(${r.bno})" type="button">수정</button>
-					<button onclick="bDelete(${r.bno})" type="button">삭제</button>`;
+					<button onclick="bDelete(${r.bno})" type="button">삭제</button>
+					</div>
+					`;
+				
+				bottomBtn.innerHTML = html;
+				
 			}
-	
 			
-			boardBox.innerHTML = html
-		
+			
+			
+			
 		} ,
 		error : e => { console.log('통신 실패')}
 
@@ -61,6 +80,12 @@ function bDelete(bno) {
 		} ,
 		error : e => { console.log("통신실패") }
 	})
+}
+// 답글
+function replyWrite(){
+	console.log("답글")
+	
+	
 }
 
 

@@ -1,1 +1,20 @@
-@charset "UTF-8";
+.boardTop{
+	color:#A287D6;
+	text-align: center;
+}
+.boardBox{
+	border: 1px solid red;
+	height: 600px;
+}
+.detailedTop{
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #e8e8e8; 
+}
+.boardBottom{
+	display: flex;
+	justify-content: space-between;
+}
+.boardBottom{
+	border: 1px solid red;
+}
