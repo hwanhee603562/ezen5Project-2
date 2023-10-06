@@ -81,6 +81,8 @@ public class MemberList {
 		this.mphone = mphone;
 	}
 	
+	
+	
 
 	// 아이디 & 비밀번호 반환  생성자
 	

@@ -57,8 +57,7 @@
 
 
 
-
-
+	<%@include file = "footer.jsp" %>
 
 
 

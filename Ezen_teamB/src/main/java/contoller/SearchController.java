@@ -1,6 +1,8 @@
 package contoller;
 
 import java.io.IOException;
+import java.util.Random;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.MemberDao;
 import model.dto.MemberList;
+import model.dto.TempPwd;
 
 /**
  * Servlet implementation class SearchController
@@ -57,15 +60,34 @@ public class SearchController extends HttpServlet {
 			
 		}else if(type.equals("pwd")) {
 			
-			MemberList dto = new MemberList(mid, memail);
-			MemberList result = MemberDao.getInstance().pwdSearch(dto);
-
+			TempPwd dto = new TempPwd(mid , memail);
+			System.out.println("비밀번호찾기 mid : " + mid);
+			System.out.println("비밀번호찾기 memail : " + memail);
+			System.out.println("비밀번호찾기 dto : " + dto);
+			TempPwd result = MemberDao.getInstance().pwdSearch(dto);
+				
+			System.out.println("비밀번호 찾기 컨트롤러 가져온 비밀번호 : " + result);
+			
 			if (result == null) {
 				String mpwd = "null";
 				json = mapper.writeValueAsString(mpwd);
 			}else if(result != null) {
-				String mpwd = String.valueOf(result.getMid());
-				json = mapper.writeValueAsString(mpwd);
+				
+	
+				
+				int ranpwd = (int) (Math.random() * 10000) + 99999;
+				System.out.println("임시비밀번호 만들고 :" +ranpwd);
+				String temp = Integer.toString(ranpwd);
+				
+				Boolean temppwd = MemberDao.getInstance().tempPwd(temp , mid);
+				
+				if (temppwd == true) {					
+					int tpwd = ranpwd;
+					System.out.println("임시비밀번호 : " +temppwd);
+					json = mapper.writeValueAsString(tpwd);
+				}
+				
+				
 		
 			}
 		

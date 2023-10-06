@@ -3,6 +3,7 @@ package model.dao;
 import java.time.LocalDateTime;
 
 import model.dto.MemberList;
+import model.dto.TempPwd;
 
 // 회원기능 클래스
 public class MemberDao extends Dao{
@@ -166,6 +167,8 @@ public class MemberDao extends Dao{
 // 아이디 찾기 함수
 	
 	public MemberList idSearch(MemberList dto) {
+		
+		System.out.println("아이디찾기 다오 : mname : " +dto.getMname());
 		try {
 			
 			String sql = "select mid from memberlist where mname = ? and mphone = ?";
@@ -192,10 +195,53 @@ public class MemberDao extends Dao{
 	
 // 비밀번호 찾기 함수
 	
-	public MemberList pwdSearch(MemberList dto) {
+	public TempPwd pwdSearch(TempPwd dto) {
 		
+		System.out.println("다오 비밀번호찾기 아이디 :" + dto.getMid());
+		System.out.println("다오 비밀번호찾기 비밀번호 :" +dto.getMemail());
+		
+		try {
+			String sql = "select mpwd from memberlist where mid = ? and memail = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getMid());
+			ps.setString(2, dto.getMemail());
+			rs=ps.executeQuery();
+			
+			
+			if (rs.next()) {
+				TempPwd member = new TempPwd(rs.getString(1));
+				System.out.println("비밀번호찾기 다오 member : " + member);
+					return member;
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("비밀번호찾기 다오 오류 "+ e) ;
+		}
 		
 		return null;
+	}
+	
+	// 임시비밀번호 등록
+	public boolean tempPwd(String tempwd , String mid) {
+		try {
+			String sql = "update memberlist set mpwd =? where mid = ?";
+			
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, tempwd);
+			ps.setString(2, mid);
+			
+			int row = ps.executeUpdate();
+			
+			if (row == 1) {
+				return true;
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("임시비밀번호 등록 다오 오류 "+ e) ;
+		}return false;
 	}
 	
 	
