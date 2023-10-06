@@ -46,8 +46,8 @@
 						
 						
 						<div class="safepayBtnBox">
-							<button onclick="buyManagement()" class="buyLogBtn" type="button"> 구매관리 </button>
-							<button onclick="sellManagement()" class="sellLogBtn" type="button"> 판매관리 </button>
+							<button onclick="buyManagement(1)" class="buyLogBtn" type="button"> 구매관리 </button>
+							<button onclick="sellManagement(1)" class="sellLogBtn" type="button"> 판매관리 </button>
 						</div>
 						
 						<div class="safepaySearchField">
@@ -84,13 +84,7 @@
 								<td> 2023-05-27 06:23 </td>
 								<td> <button> 버튼1 </button> </td>
 							</tr>
-							<tr>
-								<td> 요청 </td>
-								<td> 수박팝니다 </td>
-								<td> abb258 </td>
-								<td> 2023-05-27 06:23 </td>
-								<td> <button> 버튼1 </button> </td>
-							</tr>
+							
 						</table>
 
 

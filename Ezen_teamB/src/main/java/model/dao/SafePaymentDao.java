@@ -1,5 +1,7 @@
 package model.dao;
 
+import java.util.ArrayList;
+
 import model.dto.SafePaymentDto;
 
 // 안전결제 클래스
@@ -38,12 +40,13 @@ public class SafePaymentDao extends Dao{
 		return -1;
 	}
 	
-	// 안전결제 진행 현황 조회
+	// 개별 결제내역 출력
 	public SafePaymentDto getSafepayLog( int vrequester, int ino ) {
 		
 		try {
 			
-			String sql = "select * from vsafepayment where vrequester = ? and ino = ?";
+			String sql = "select a.*, b.mno from vsafepayment a join itemsinfo b "
+					   + "on a.ino = b.ino where a.vrequester = ? and a.ino = ?";
 			
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, vrequester);
@@ -53,7 +56,7 @@ public class SafePaymentDao extends Dao{
 			if( rs.next() ) {
 				return new SafePaymentDto(
 					rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getInt(6), rs.getInt(7)
+					rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)
 				);
 			}
 			
@@ -64,6 +67,84 @@ public class SafePaymentDao extends Dao{
 		
 		return null; 
 	}
+	
+	// 전체 결제내역 출력
+	public ArrayList<SafePaymentDto> getPaymentList( int maxSize, int startRow, String startDate, String endDate, int vstateFilter ){
+		
+		String dateFilter = "";
+		switch (vstateFilter) {
+		
+			case 1 : dateFilter = "vrespdate";	 break;
+			case 2 : dateFilter = "vreqsdate";	 break;
+			case 3 : dateFilter = "vgivedate"; 	 break;
+			
+		}
+		
+		try {
+			
+			String sql = ""
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return null;
+	}
+	
+	
+	// 집계 함수
+	public int getTotalPaymentCount( String startDate, String endDate, int vstateFilter ) {
+		
+		String dateFilter = "";
+		switch (vstateFilter) {
+		
+			case 1 : dateFilter = "vrespdate";	 break;
+			case 2 : dateFilter = "vreqsdate";	 break;
+			case 3 : dateFilter = "vgivedate"; 	 break;
+			
+		}
+			
+		try {
+			
+			String sql = "select count(*) from vsafepayment v where date(v."+dateFilter+") between ? and ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString( 1, startDate );
+			ps.setString( 2, endDate );
+			
+			rs = ps.executeQuery();
+			if( rs.next() ) return rs.getInt(0);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

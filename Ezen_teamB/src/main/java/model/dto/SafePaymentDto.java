@@ -3,12 +3,13 @@ package model.dto;
 public class SafePaymentDto {
 
 	private int vno; 			// 안전결제 진행 상태 pk
-	private int vrequester;		// 구매자 안전결제방식 구매요청자
+	private int vrequester;		// 구매자 안전결제방식 구매요청자 ID
 	private String vrespdate;	// 안전결제 요청일시
 	private String vreqsdate;	// 판매자 안전결제 수락일시
 	private String vgivedate;	// 판매자 안전결제 물품전달일
 	private int vstate;			// 거래상태( 1 요청상태, 2 요청수락상태(가지가지에게 포인트 보내기), 3 물품전달상태, 4 거래완료 상태(판매자에게 포인트 입금) )
 	private int ino;			// 판매물품
+	private int seller;			// 판매자 ID
 	
 	// 생성자
 	public SafePaymentDto() {
@@ -16,7 +17,7 @@ public class SafePaymentDto {
 	}
 
 	public SafePaymentDto(int vno, int vrequester, String vrespdate, String vreqsdate, String vgivedate, int vstate,
-			int ino) {
+			int ino, int seller) {
 		super();
 		this.vno = vno;
 		this.vrequester = vrequester;
@@ -25,10 +26,10 @@ public class SafePaymentDto {
 		this.vgivedate = vgivedate;
 		this.vstate = vstate;
 		this.ino = ino;
+		this.seller = seller;
 	}
 
-	
-	
+
 	// getter setter
 	public int getVno() {
 		return vno;
@@ -86,13 +87,23 @@ public class SafePaymentDto {
 		this.ino = ino;
 	}
 
-	
+	public int getSeller() {
+		return seller;
+	}
+
+	public void setSeller(int seller) {
+		this.seller = seller;
+	}
+
 	
 	@Override
 	public String toString() {
 		return "SafePaymentDto [vno=" + vno + ", vrequester=" + vrequester + ", vrespdate=" + vrespdate + ", vreqsdate="
-				+ vreqsdate + ", vgivedate=" + vgivedate + ", vstate=" + vstate + ", ino=" + ino + "]";
+				+ vreqsdate + ", vgivedate=" + vgivedate + ", vstate=" + vstate + ", ino=" + ino + ", seller=" + seller
+				+ "]";
 	}
+
+	
 	
 	
 	
