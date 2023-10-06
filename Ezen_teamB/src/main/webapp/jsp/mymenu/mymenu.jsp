@@ -45,7 +45,7 @@
 					<div class="cardInfo">
 							<!-- 서브메뉴 콘텐츠 출력구역 -->
 					</div>
-				</div>
+				</div>	
 			</div> <!-- infoBottom end -->
 		</div>
 	</div>	<!-- 마이메뉴 전체구역 end -->
