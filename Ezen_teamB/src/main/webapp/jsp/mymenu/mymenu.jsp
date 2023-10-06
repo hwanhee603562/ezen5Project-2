@@ -68,7 +68,7 @@
 							</div>
 						</div>	
 						
-						
+							
 						<table class="safepayStateTable">
 							<tr>
 								<th> 진행상태 </th>
