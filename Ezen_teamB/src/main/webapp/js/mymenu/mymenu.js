@@ -13,6 +13,7 @@ document.querySelector('.smenu1').addEventListener("click",(e)=>{
 	document.getElementById('smenu2').classList.remove('active');
 	document.getElementById('smenu3').classList.remove('active');
 	document.getElementById('smenu4').classList.remove('active');
+	document.getElementById('smenu5').classList.remove('active');
 })
 
 document.querySelector('.smenu2').addEventListener("click",(e)=>{
@@ -22,6 +23,7 @@ document.querySelector('.smenu2').addEventListener("click",(e)=>{
 	document.getElementById('smenu2').classList.add('active');
 	document.getElementById('smenu3').classList.remove('active');
 	document.getElementById('smenu4').classList.remove('active');
+	document.getElementById('smenu5').classList.remove('active');
 })
 
 document.querySelector('.smenu3').addEventListener("click",(e)=>{
@@ -31,6 +33,7 @@ document.querySelector('.smenu3').addEventListener("click",(e)=>{
 	document.getElementById('smenu2').classList.remove('active');
 	document.getElementById('smenu3').classList.add('active');
 	document.getElementById('smenu4').classList.remove('active');
+	document.getElementById('smenu5').classList.remove('active');
 })
 
 document.querySelector('.smenu4').addEventListener("click",(e)=>{
@@ -40,6 +43,17 @@ document.querySelector('.smenu4').addEventListener("click",(e)=>{
 	document.getElementById('smenu2').classList.remove('active');
 	document.getElementById('smenu3').classList.remove('active');
 	document.getElementById('smenu4').classList.add('active');
+	document.getElementById('smenu5').classList.remove('active');
+})
+
+document.querySelector('.smenu5').addEventListener("click",(e)=>{
+	console.log('5번클릭');
+	
+	document.getElementById('smenu1').classList.remove('active');
+	document.getElementById('smenu2').classList.remove('active');
+	document.getElementById('smenu3').classList.remove('active');
+	document.getElementById('smenu4').classList.remove('active');
+	document.getElementById('smenu5').classList.add('active');
 })
 
 // 회원정보 출력 함수   ---> 기능 완성후 html 출력기능 함수로 합칠것
@@ -239,6 +253,16 @@ function transHistory(){console.log('거래내역 리스트')
 	});
 	
 }
+
+
+// 안전결제 관리 함수
+function safePayManagement(){
+	
+}
+
+
+
+
 
 // 찜목록 출력함수
 function PrintWishList(){console.log('찜목록 리스트')

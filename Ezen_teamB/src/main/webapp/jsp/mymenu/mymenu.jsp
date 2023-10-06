@@ -28,10 +28,13 @@
 					    <a onclick="transHistory()" id="smenu2" class="nav-link" href="#">거래내역</a>
 					  </li>
 					  <li class="nav-item smenu3">
-					    <a onclick="PrintWishList()" id="smenu3" class="nav-link" href="#">찜목록</a>
+					    <a onclick="safePayManagement()" id="smenu3" class="nav-link" href="#">안전결제관리</a>
 					  </li>
 					  <li class="nav-item smenu4">
-					    <a onclick="chattingList()" id="smenu4" class="nav-link" href="#">채팅목록</a>
+					    <a onclick="PrintWishList()" id="smenu4" class="nav-link" href="#">찜목록</a>
+					  </li>
+					  <li class="nav-item smenu5">
+					    <a onclick="chattingList()" id="smenu5" class="nav-link" href="#">채팅목록</a>
 					  </li>
 					</ul>
 				</div>

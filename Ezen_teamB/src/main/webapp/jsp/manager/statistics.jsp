@@ -10,7 +10,8 @@
 <body>
 
 	통계
-
+	<button onclick="sfsfd()" type="button"> 안녕 </button>
+	<script src="/Ezen_teamB/js/manager/statistics.js" type="text/javascript"></script>
 
 </body>
 </html>
