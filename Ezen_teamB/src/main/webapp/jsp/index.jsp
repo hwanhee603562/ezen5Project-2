@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	
+		
 	<link href="/Ezen_teamB/css/index.css" rel="stylesheet">
 	
 	<!-- 부트스트랩 css -->
