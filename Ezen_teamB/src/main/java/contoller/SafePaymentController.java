@@ -28,6 +28,8 @@ public class SafePaymentController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String json = "";
+		ObjectMapper mapper = new ObjectMapper();
 		String type = request.getParameter("type");
 		
 		if( type.equals("getBuyerManage") ) {
@@ -42,7 +44,7 @@ public class SafePaymentController extends HttpServlet {
 			// 페이지 레코드 시작번호 ( 0, 11, 22 ... )
 			int startRow = (page-1) * maxSize;
 			// 안전거래 총 진행현황 건수
-			int totalPaymentCount = SafePaymentDao.getInstance().getTotalPaymentCount(startDate, endDate, vstateFilter);
+			int totalPaymentCount = SafePaymentDao.getInstance().getTotalPaymentCount(vstateFilter);
 			
 			// 마지막 페이지 번호 == 총 페이지 수
 			int totalPageCount = 
@@ -59,11 +61,13 @@ public class SafePaymentController extends HttpServlet {
 			if( endBtn >= totalPageCount ) endBtn = totalPageCount;
 			
 			ArrayList<SafePaymentDto> result 
-			= SafePaymentDao.getInstance().getPaymentList(maxSize, startRow, startDate, endDate, vstateFilter);
+			= SafePaymentDao.getInstance().getPaymentList(maxSize, startRow, vstateFilter);
 			
-			
+			json = mapper.writeValueAsString(result);
 		}
 		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print( json );
 		
 		
 	}

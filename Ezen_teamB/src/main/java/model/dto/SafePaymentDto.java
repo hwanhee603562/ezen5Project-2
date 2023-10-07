@@ -10,6 +10,7 @@ public class SafePaymentDto {
 	private int vstate;			// 거래상태( 1 요청상태, 2 요청수락상태(가지가지에게 포인트 보내기), 3 물품전달상태, 4 거래완료 상태(판매자에게 포인트 입금) )
 	private int ino;			// 판매물품
 	private int seller;			// 판매자 ID
+	private String ititle;		// 판매제목
 	
 	// 생성자
 	public SafePaymentDto() {
@@ -17,7 +18,7 @@ public class SafePaymentDto {
 	}
 
 	public SafePaymentDto(int vno, int vrequester, String vrespdate, String vreqsdate, String vgivedate, int vstate,
-			int ino, int seller) {
+			int ino, int seller, String ititle) {
 		super();
 		this.vno = vno;
 		this.vrequester = vrequester;
@@ -27,6 +28,7 @@ public class SafePaymentDto {
 		this.vstate = vstate;
 		this.ino = ino;
 		this.seller = seller;
+		this.ititle = ititle;
 	}
 
 
@@ -95,13 +97,22 @@ public class SafePaymentDto {
 		this.seller = seller;
 	}
 
-	
+	public String getItitle() {
+		return ititle;
+	}
+
+	public void setItitle(String ititle) {
+		this.ititle = ititle;
+	}
+
 	@Override
 	public String toString() {
 		return "SafePaymentDto [vno=" + vno + ", vrequester=" + vrequester + ", vrespdate=" + vrespdate + ", vreqsdate="
 				+ vreqsdate + ", vgivedate=" + vgivedate + ", vstate=" + vstate + ", ino=" + ino + ", seller=" + seller
-				+ "]";
+				+ ", ititle=" + ititle + "]";
 	}
+	
+	
 
 	
 	

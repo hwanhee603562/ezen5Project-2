@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.awt.List;
 import java.util.ArrayList;
 
 import model.dto.SafePaymentDto;
@@ -45,7 +46,7 @@ public class SafePaymentDao extends Dao{
 		
 		try {
 			
-			String sql = "select a.*, b.mno from vsafepayment a join itemsinfo b "
+			String sql = "select a.*, b.mno, b.ititle from vsafepayment a join itemsinfo b "
 					   + "on a.ino = b.ino where a.vrequester = ? and a.ino = ?";
 			
 			ps = conn.prepareStatement(sql);
@@ -56,7 +57,7 @@ public class SafePaymentDao extends Dao{
 			if( rs.next() ) {
 				return new SafePaymentDto(
 					rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)
+					rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9)
 				);
 			}
 			
@@ -68,53 +69,69 @@ public class SafePaymentDao extends Dao{
 		return null; 
 	}
 	
+	
 	// 전체 결제내역 출력
-	public ArrayList<SafePaymentDto> getPaymentList( int maxSize, int startRow, String startDate, String endDate, int vstateFilter ){
+	public ArrayList<SafePaymentDto> getPaymentList( int maxSize, int startRow, int vstateFilter ){
 		
-		String dateFilter = "";
-		switch (vstateFilter) {
+		ArrayList<SafePaymentDto> list = new ArrayList<>();
 		
-			case 1 : dateFilter = "vrespdate";	 break;
-			case 2 : dateFilter = "vreqsdate";	 break;
-			case 3 : dateFilter = "vgivedate"; 	 break;
-			
-		}
+		System.out.println(maxSize);
+		System.out.println(startRow);
 		
 		try {
 			
-			String sql = ""
+			String sql = "select a.*, b.mno, b.ititle "
+					+ "from vsafepayment a join itemsinfo b on a.ino = b.ino ";
+			
+			// 필터가 존재하지 않으면 모두 출력
+			if( vstateFilter != 0 ) {
+				sql += "where vstate = "+vstateFilter;
+			}
+			sql += " ORDER BY a.vno DESC limit ?, ?";
+			
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, maxSize);
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				SafePaymentDto dto = new SafePaymentDto(
+						rs.getInt("vno"),
+						rs.getInt("vrequester"),
+						rs.getString("vrespdate"),
+						rs.getString("vreqsdate"),
+						rs.getString("vgivedate"),
+						rs.getInt("vstate"),
+						rs.getInt("ino"),
+						rs.getInt("mno"),
+						rs.getString("ititle")
+				);
+				list.add( dto );
+			}
+			
+			return list;
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
 		
 		return null;
 	}
 	
 	
 	// 집계 함수
-	public int getTotalPaymentCount( String startDate, String endDate, int vstateFilter ) {
-		
-		String dateFilter = "";
-		switch (vstateFilter) {
-		
-			case 1 : dateFilter = "vrespdate";	 break;
-			case 2 : dateFilter = "vreqsdate";	 break;
-			case 3 : dateFilter = "vgivedate"; 	 break;
-			
-		}
+	public int getTotalPaymentCount( int vstateFilter ) {
 			
 		try {
 			
-			String sql = "select count(*) from vsafepayment v where date(v."+dateFilter+") between ? and ?";
+			String sql = "select count(*) from vsafepayment v where vstate = ?";
 			
 			ps = conn.prepareStatement(sql);
-			ps.setString( 1, startDate );
-			ps.setString( 2, endDate );
+			ps.setInt( 1, vstateFilter );
 			
 			rs = ps.executeQuery();
-			if( rs.next() ) return rs.getInt(0);
+			if( rs.next() ) return rs.getInt(1);
 			
 		} catch (Exception e) {
 			System.out.println(e);

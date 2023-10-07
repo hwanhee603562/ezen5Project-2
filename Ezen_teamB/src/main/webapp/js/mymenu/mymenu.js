@@ -1,14 +1,14 @@
 console.log('마이메뉴 JS');
 
-if(loginState == false){
+if (loginState == false) {
 	alert('로그인이 필요한 서비스 입니다.')
 	location.href = "/Ezen_teamB/jsp/member/login.jsp";
 }
 
 /* 네비게이션 이벤트 함수 */
-document.querySelector('.smenu1').addEventListener("click",(e)=>{
+document.querySelector('.smenu1').addEventListener("click", (e) => {
 	console.log('1번클릭');
-	
+
 	document.getElementById('smenu1').classList.add('active');
 	document.getElementById('smenu2').classList.remove('active');
 	document.getElementById('smenu3').classList.remove('active');
@@ -16,9 +16,9 @@ document.querySelector('.smenu1').addEventListener("click",(e)=>{
 	document.getElementById('smenu5').classList.remove('active');
 })
 
-document.querySelector('.smenu2').addEventListener("click",(e)=>{
+document.querySelector('.smenu2').addEventListener("click", (e) => {
 	console.log('2번클릭');
-	
+
 	document.getElementById('smenu1').classList.remove('active');
 	document.getElementById('smenu2').classList.add('active');
 	document.getElementById('smenu3').classList.remove('active');
@@ -26,9 +26,9 @@ document.querySelector('.smenu2').addEventListener("click",(e)=>{
 	document.getElementById('smenu5').classList.remove('active');
 })
 
-document.querySelector('.smenu3').addEventListener("click",(e)=>{
+document.querySelector('.smenu3').addEventListener("click", (e) => {
 	console.log('3번클릭');
-	
+
 	document.getElementById('smenu1').classList.remove('active');
 	document.getElementById('smenu2').classList.remove('active');
 	document.getElementById('smenu3').classList.add('active');
@@ -36,9 +36,9 @@ document.querySelector('.smenu3').addEventListener("click",(e)=>{
 	document.getElementById('smenu5').classList.remove('active');
 })
 
-document.querySelector('.smenu4').addEventListener("click",(e)=>{
+document.querySelector('.smenu4').addEventListener("click", (e) => {
 	console.log('4번클릭');
-	
+
 	document.getElementById('smenu1').classList.remove('active');
 	document.getElementById('smenu2').classList.remove('active');
 	document.getElementById('smenu3').classList.remove('active');
@@ -46,9 +46,9 @@ document.querySelector('.smenu4').addEventListener("click",(e)=>{
 	document.getElementById('smenu5').classList.remove('active');
 })
 
-document.querySelector('.smenu5').addEventListener("click",(e)=>{
+document.querySelector('.smenu5').addEventListener("click", (e) => {
 	console.log('5번클릭');
-	
+
 	document.getElementById('smenu1').classList.remove('active');
 	document.getElementById('smenu2').classList.remove('active');
 	document.getElementById('smenu3').classList.remove('active');
@@ -56,24 +56,31 @@ document.querySelector('.smenu5').addEventListener("click",(e)=>{
 	document.getElementById('smenu5').classList.add('active');
 })
 
+
+
+
+
+
 // 회원정보 출력 함수   ---> 기능 완성후 html 출력기능 함수로 합칠것
 
 let mno = loginMno;
 
 infoPrint();
-function infoPrint(){console.log('회원정보 출력 함수')
+function infoPrint() {
+	console.log('회원정보 출력 함수')
 	console.log(loginMno)
-	$.ajax({ 
-	       url : "/Ezen_teamB/MyMenuController",
-	       data : {type: '2' , mno: loginMno},         // 보내는 데이터
-	       method : "get",
-	       async: false,
-	       success : r =>{console.log(r);
-	       
-				let infoContent = document.querySelector('.infoContent');
-				let html = ``;
-				
-				html +=
+	$.ajax({
+		url: "/Ezen_teamB/MyMenuController",
+		data: { type: '2', mno: loginMno },         // 보내는 데이터
+		method: "get",
+		async: false,
+		success: r => {
+			console.log(r);
+
+			let infoContent = document.querySelector('.infoContent');
+			let html = ``;
+
+			html +=
 				`
 					<h3 class="infoTitletxt"> 마이페이지 </h3>
 					<div class="contentHeader">${r.mid} <span>회원님</span></div>
@@ -93,70 +100,72 @@ function infoPrint(){console.log('회원정보 출력 함수')
 					<button onclick="deleteModal()" class="btn btn-outline-danger btn-sm deleteBtn"
 					data-bs-toggle="modal" data-bs-target="#exampleModal2">회원탈퇴</button>
 				`
-				
-				
-				
-				
-				infoContent.innerHTML = html;
-				
-	       },
-	       error : e =>{console.log('통신실패')}
-	 });
-	
-	
+
+
+
+
+			infoContent.innerHTML = html;
+
+		},
+		error: e => { console.log('통신실패') }
+	});
+
+
 }
 
 // 마이메뉴 페이지 출력시 함수 실행
 saleList();
 // 판매중인상품 리스트 출력 함수
-function saleList(){console.log('판매중인상품 리스트')
+function saleList() {
+	console.log('판매중인상품 리스트')
 
-	$.ajax( { 
-	       url : "/Ezen_teamB/MyMenuController",
-	       data : {type: '1' , mno: loginMno, estate : 1},         // 보내는 데이터
-	       method : "get",
-	       async: false,
-	       success : jsonArray =>{console.log(jsonArray);
-	       		let cardInfo = document.querySelector('.cardInfo');
-	       		let html = ``;
-	       		
-	       		// 판매중인 상품 숫자 출력
-	       		let saleProduct = jsonArray.length
-	       		let productCount = document.querySelector('.productCount');
-	       		html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;   		
-	       		productCount.innerHTML = html
-	       		
-	       		html = 
-	       		`
+	$.ajax({
+		url: "/Ezen_teamB/MyMenuController",
+		data: { type: '1', mno: loginMno, estate: 1 },         // 보내는 데이터
+		method: "get",
+		async: false,
+		success: jsonArray => {
+
+			let cardInfo = document.querySelector('.cardInfo');
+			let html = ``;
+
+			// 판매중인 상품 숫자 출력
+			let saleProduct = jsonArray.length
+			let productCount = document.querySelector('.productCount');
+			html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;
+			productCount.innerHTML = html
+
+			html =
+				`
 	       			<table class="table table-hover align-middle text-center">
 						  <tbody class="tableBody">
 	       		`;
-	       		
-	       		if(jsonArray.length < 1){
-					   tableBody.innerHTML = `판매중인 상품이 없습니다.`;
-					   return;
-				   }
-	       		
-	       		// 회원번호에 따른 판매중인 상품 출력
-	       		jsonArray.forEach((p,i)=>{
-					   let itrade;
-					   
-					   if(p.itrade == 1){
-						   itrade = 1;
-						   p.itrade = '배송'
-					   }else if(p.itrade == 2){
-						   itrade = 2
-						   p.itrade = '직거래'
-					   }else if(p.itrade == 3){
-						   itrade = 3
-						   p.itrade = '중개소거래'
-					   }
-					   
-					   p.idate = (p.idate).substr(0,10);
-					   html += 
-					   `
+
+			if (jsonArray.length < 1) {
+				tableBody.innerHTML = `판매중인 상품이 없습니다.`;
+				return;
+			}
+
+			// 회원번호에 따른 판매중인 상품 출력
+			jsonArray.forEach((p, i) => {
+				let itrade;
+
+				if (p.itrade == 1) {
+					itrade = 1;
+					p.itrade = '배송'
+				} else if (p.itrade == 2) {
+					itrade = 2
+					p.itrade = '직거래'
+				} else if (p.itrade == 3) {
+					itrade = 3
+					p.itrade = '중개소거래'
+				}
+
+				p.idate = (p.idate).substr(0, 10);
+				html +=
+					`
 							   		<tr class="tableContent">
-								      <th scope="row">${i+1}</th>
+								      <th scope="row">${i + 1}</th>
 								      <td width="10%"><img src="/Ezen_teamB/jsp/item/img/${Object.values(p.imgList)[0]}"></td>
 								      <td width="30%">${p.ititle}</td>
 								      <td width="10%">${p.itrade}</td>
@@ -166,64 +175,66 @@ function saleList(){console.log('판매중인상품 리스트')
 								      <td><button type="button" class="btn btn-danger">삭제</button></td>
 								    </tr>
 					   `
-					   
-				   })
-				   
-				   html += 
-				   `
+
+			})
+
+			html +=
+				`
 				   			</tbody>
 						</table>
 				   `
-	       		cardInfo.innerHTML = html;
-	       		
-			},
-	       	error : e=>{console.log(e)}
-	     });
-	
+			cardInfo.innerHTML = html;
+			
+		},
+		error: e => { console.log(e) }
+	});
+
 }		// function end
 
 // 판매물품 수정 버튼 함수
-function updateItem(ino, itrade){
-	
+function updateItem(ino, itrade) {
+
 	location.href = `/Ezen_teamB/jsp/item/updateitems.jsp?ino=${ino}&itrade=${itrade}`;
-	
+
 }
 
 
 
 // 거래내역 출력함수
-function transHistory(){console.log('거래내역 리스트')
-	
-	$.ajax( { 
-	       url : "/Ezen_teamB/MyMenuController",
-	       data : {type: '1' , mno: loginMno, estate : 2},         // 보내는 데이터
-	       method : "get",
-	       async: false,
-	       success : jsonArray =>{console.log(jsonArray);
-	       	
-	       		let cardInfo = document.querySelector('.cardInfo');
-	       		let html = 
+function transHistory() {
+	console.log('거래내역 리스트')
+
+	$.ajax({
+		url: "/Ezen_teamB/MyMenuController",
+		data: { type: '1', mno: loginMno, estate: 2 },         // 보내는 데이터
+		method: "get",
+		async: false,
+		success: jsonArray => {
+			console.log(jsonArray);
+
+			let cardInfo = document.querySelector('.cardInfo');
+			let html =
 				`
 	       			<table class="table table-hover align-middle text-center">
 						  <tbody class="tableBody">
 	       		`;
-				
-	       		
-	       		// 회원번호에 따른 거래내역 출력
-	       		jsonArray.forEach((p,i)=>{
-					   console.log(Object.values(p.imgList)[0]);
-					   if(p.itrade == 1){
-						   p.itrade = '배송'
-					   }else if(p.itrade == 2){
-						   p.itrade = '직거래'
-					   }else if(p.itrade == 3){
-						   p.itrade = '중개소거래'
-					   }
-					   p.idate = (p.idate).substr(0,10);
-					   html += 
-					   `
+
+
+			// 회원번호에 따른 거래내역 출력
+			jsonArray.forEach((p, i) => {
+				console.log(Object.values(p.imgList)[0]);
+				if (p.itrade == 1) {
+					p.itrade = '배송'
+				} else if (p.itrade == 2) {
+					p.itrade = '직거래'
+				} else if (p.itrade == 3) {
+					p.itrade = '중개소거래'
+				}
+				p.idate = (p.idate).substr(0, 10);
+				html +=
+					`
 					   		<tr class="tableContent">
-						      <th scope="row">${i+1}</th>
+						      <th scope="row">${i + 1}</th>
 						      <td width="5%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
 						      <td>${p.ititle}</td>
 						      <td>${p.itrade}</td>
@@ -232,95 +243,146 @@ function transHistory(){console.log('거래내역 리스트')
 						      <td><div class="saleComplete">거래완료<div></td>
 						    </tr>
 					   `
-					   
-				   })
-				 
-				 html += 
-				   `
+
+			})
+
+			html +=
+				`
 				   			</tbody>
 						</table>
-				   `   
-				 
-	       		cardInfo.innerHTML = html;
-	       		
-	       		let saleProduct = jsonArray.length
-	       		let productCount = document.querySelector('.productCount');
-	       		html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;   		
-	       		productCount.innerHTML = html
-	       },
-	       error : e => {}
-	
+				   `
+
+			cardInfo.innerHTML = html;
+
+			let saleProduct = jsonArray.length
+			let productCount = document.querySelector('.productCount');
+			html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;
+			productCount.innerHTML = html
+		},
+		error: e => { }
+
 	});
-	
+
 }
 
+
+/* 안전결제내역 조회 조건 객체 */
+let safepayPageObject = {
+	type: 'getBuyerManage',
+	maxSize: 11,		// * maxSize 	: 하나의 페이지에 최대표시할 안전결제건수
+	page: 1,			// * page		: 현재 출력되는 페이지의 하단 번호
+	vstateFilter: 0
+};
 
 
 
 // 안전결제 관리 함수
-	// 1-1 안전결제 구매관리 
+// 1-1 안전결제 관리 페이지 
 function safePayManagement() {
+	
+	let printContent = document.querySelector('.printContent');
+	
+	let html = ` 
+			<div class="safepayStateBox">
+
+
+				<div class="safepayBtnBox">
+					<button onclick="buyManagement(1)" class="buyLogBtn" type="button">구매관리</button>
+					<button onclick="sellManagement(1)" class="sellLogBtn" type="button">판매관리</button>
+				</div>
+
+				<div class="safepaySearchField">
+					<div class="selectDateBox">
+						<select id="selectFilterBox2" class="selectFilterBox">
+							<option class="stateInfo" value="0">진행상태</option>
+							<option value="1">요청</option>
+							<option value="2">수락</option>
+							<option value="3">전달</option>
+							<option value="4">완료</option>
+						</select>
+					</div>
+					<div>
+						<button onclick="onSearchSafepay()" class="searchBtn" type="button">검색</button>
+					</div>
+				</div>
+				
+				<table class="safepayStateTable">
+					<tr>
+						<th>진행상태</th>
+						<th>물품제목</th>
+						<th>판매자ID</th>
+						<th>일시</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td>요청</td>
+						<td>수박팝니다</td>
+						<td>abb258</td>
+						<td>2023-05-27 06:23</td>
+						<td>
+							<button>버튼1</button>
+						</td>
+					</tr>
+				</table>
+				
+		`
+	printContent.innerHTML = html
+	
 	
 	// 기본 구매관리 버튼 클릭
 	buyManagement(1)
 }
 
-/* 안전결제내역 조회 조건 객체 */
-let pageObject = { type : '', maxSize : 11, page: 1, startDate : '', endDate : '', vstateFilter : '' }
-	// * maxSize 	: 하나의 페이지에 최대표시할 안전결제건수
-	// * page		: 현재 출력되는 페이지의 하단 번호
-	// * key 		: select 내 옵션 목록
-	// * keyword 	: 검색할 데이터(키워드)
 
-	// 1-2 안전결제 구매관리
-function buyManagement( page ){
+
+// 1-2 안전결제 구매관리
+function buyManagement(page) {
+
+	safepayPageObject.type = 'getBuyerManage'
+	safepayPageObject.page = page
 	
-	pageObject.type = 'getBuyerManage'
-	pageObject.page = page
 	
 	document.getElementsByClassName("buyLogBtn")[0].style.backgroundColor = "#9767EB";
 	document.getElementsByClassName("sellLogBtn")[0].style.backgroundColor = "#A2A7E8";
-	
-	let cardInfo = document.querySelector('.cardInfo');
 
-	let html = ` 
-	       <div class="safepayStateBox">
-						
-				<div class="safepayBtnBox">
-					<button onclick="buyManagement(1)" class="buyLogBtn" type="button"> 구매관리 </button>
-					<button onclick="sellManagement(1)" class="sellLogBtn" type="button"> 판매관리 </button>
-				</div>
-						
-				<table class="safepayStateTable">
-		`			
+	let safepayStateTable = document.querySelector('.safepayStateTable')
+	
+	let html = `
+			<tr>
+				<th>진행상태</th>
+				<th>물품제목</th>
+				<th>판매자ID</th>
+				<th>일시</th>
+				<th></th>
+			</tr>
+		`
+	
 	$.ajax({
 		url: "/Ezen_teamB/SafePaymentController",
 		method: "get",
 		async: false,
-		data: pageObject,
+		data: safepayPageObject,
 		success: s => {
 			console.log('성공')
 			console.log(s)
 		},
-		error: e =>{
+		error: e => {
 			console.log('에러발생')
 		}
-		
+
 	})
-				
-	
-	html += `
-				</table >
-			</div >
-		`
-	
+
+
+
+
 }
-	// 1-3 안전결제 판매관리
-function sellManagement( page ){
-	
-	pageObject.type = 'getSellerManage'
-	pageObject.page = page
-	
+// 1-3 안전결제 판매관리
+function sellManagement(page) {
+
+	safepayPageObject.type = 'getSellerManage'
+	safepayPageObject.page = page
+
+
 	document.getElementsByClassName("buyLogBtn")[0].style.backgroundColor = "#A2A7E8";
 	document.getElementsByClassName("sellLogBtn")[0].style.backgroundColor = "#9767EB";
 
@@ -328,45 +390,63 @@ function sellManagement( page ){
 }
 
 
+// 검색
+function onSearchSafepay() {
 
+	let select = document.getElementById('selectFilterBox2');
+	safepayPageObject.vstateFilter = select.options[select.selectedIndex].value
+
+	if (safepayPageObject.type == 'getBuyerManage') {
+		buyManagement(1)
+	}
+	if (safepayPageObject.type == 'getSellerManage') {
+		sellManagement(1)
+	}
+
+	
+	
+
+}
 
 
 
 
 
 // 찜목록 출력함수
-function PrintWishList(){console.log('찜목록 리스트')
-	
+function PrintWishList() {
+	console.log('찜목록 리스트')
+
 	$.ajax({
-		url : "/Ezen_teamB/MyMenuController",
-		async : false,
-		data : {type : '3', mno : loginMno},
-		method : "get", 
-		success : jsonArray =>{console.log(jsonArray);
-		
-		let cardInfo = document.querySelector('.cardInfo');
-	       		let html = 
+		url: "/Ezen_teamB/MyMenuController",
+		async: false,
+		data: { type: '3', mno: loginMno },
+		method: "get",
+		success: jsonArray => {
+			console.log(jsonArray);
+
+			let cardInfo = document.querySelector('.cardInfo');
+			let html =
 				`
 	       			<table class="table table-hover align-middle text-center">
 						  <tbody class="tableBody">
 	       		`;
-				
-	       		
-	       		// 회원번호에 따른 거래내역 출력
-	       		jsonArray.forEach((p,i)=>{
-					   console.log(Object.values(p.imgList)[0]);
-					   if(p.itrade == 1){
-						   p.itrade = '배송'
-					   }else if(p.itrade == 2){
-						   p.itrade = '직거래'
-					   }else if(p.itrade == 3){
-						   p.itrade = '중개소거래'
-					   }
-					   p.idate = (p.idate).substr(0,10);
-					   html += 
-					   `
+
+
+			// 회원번호에 따른 거래내역 출력
+			jsonArray.forEach((p, i) => {
+				console.log(Object.values(p.imgList)[0]);
+				if (p.itrade == 1) {
+					p.itrade = '배송'
+				} else if (p.itrade == 2) {
+					p.itrade = '직거래'
+				} else if (p.itrade == 3) {
+					p.itrade = '중개소거래'
+				}
+				p.idate = (p.idate).substr(0, 10);
+				html +=
+					`
 					   		<tr class="tableContent">
-						      <th scope="row">${i+1}</th>
+						      <th scope="row">${i + 1}</th>
 						      <td width="5%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
 						      <td>${p.ititle}</td>
 						      <td>${p.itrade}</td>
@@ -375,180 +455,190 @@ function PrintWishList(){console.log('찜목록 리스트')
 						      <td><button onclick="deleteWishList(${p.ino})" class="btn btn-danger wdbtn" type="button">삭제</button></td>
 						    </tr>
 					   `
-					   
-				   })
-				 
-				 html += 
-				   `
+
+			})
+
+			html +=
+				`
 				   			</tbody>
 						</table>
-				   `   
-				 
-	       		cardInfo.innerHTML = html;
-	       		
-	       		let saleProduct = jsonArray.length
-	       		let productCount = document.querySelector('.productCount');
-	       		html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;   		
-	       		productCount.innerHTML = html
-		
+				   `
+
+			cardInfo.innerHTML = html;
+
+			let saleProduct = jsonArray.length
+			let productCount = document.querySelector('.productCount');
+			html = `<h4>상품 <span class="countText">${saleProduct}</span></h4>`;
+			productCount.innerHTML = html
+
 		},
-		error : e=>{console.log('통신실패')}
+		error: e => { console.log('통신실패') }
 	})
-	
+
 }	// f end
 
 
 // 회원정보 수정 모달창 함수
-function updateModal(){ console.log('회원정보 변경 함수')
-	
-	$.ajax({ 
-	       url : "/Ezen_teamB/MemberController",
-	       data : {type: '1' , mno: loginMno},         // 보내는 데이터
-	       method : "get",
-	       success : r =>{console.log(r);
-	       		
-	       		let emailInput = document.querySelector('.emailInput');
-	       		let pwd = document.querySelector('.pwd');
-	       		let pwdCk = document.querySelector('.pwdCk')
-	       		emailInput.value = `${r.memail}`
-	       		pwd.value = `	${r.mpwd}`
-	       		pwdCk.value = `${r.mpwd}`
-	       		
-	       }
+function updateModal() {
+	console.log('회원정보 변경 함수')
+
+	$.ajax({
+		url: "/Ezen_teamB/MemberController",
+		data: { type: '1', mno: loginMno },         // 보내는 데이터
+		method: "get",
+		success: r => {
+			console.log(r);
+
+			let emailInput = document.querySelector('.emailInput');
+			let pwd = document.querySelector('.pwd');
+			let pwdCk = document.querySelector('.pwdCk')
+			emailInput.value = `${r.memail}`
+			pwd.value = `	${r.mpwd}`
+			pwdCk.value = `${r.mpwd}`
+
+		}
 	});
-	
+
 }	// updateInfo function end
 
 // 회원정보 수정 함수
-function updateInfo(){
-	
+function updateInfo() {
+
 	let emailInput = document.querySelector('.emailInput').value;
 	let adrInput2 = document.querySelector('.adrInput2').value;
 	let adrInput3 = document.querySelector('.adrInput3').value;
 	let pwd = document.querySelector('.pwd').value;
-	
-	$.ajax({ 
-	       url : "/Ezen_teamB/MemberController",
-	       data : {mno: loginMno, memail : emailInput,
-	       adress1 : adrInput2, adress2 : adrInput3, mpwd : pwd},
-	       method : "put",
-	       success : r =>{console.log(r);
-				if(r){
-					alert('회원정보가 수정되었습니다.')
-					location.href = "/Ezen_teamB/jsp/member/login.jsp"
-				}else{alert('수정 실패')}
-	       		
-	       }
+
+	$.ajax({
+		url: "/Ezen_teamB/MemberController",
+		data: {
+			mno: loginMno, memail: emailInput,
+			adress1: adrInput2, adress2: adrInput3, mpwd: pwd
+		},
+		method: "put",
+		success: r => {
+			console.log(r);
+			if (r) {
+				alert('회원정보가 수정되었습니다.')
+				location.href = "/Ezen_teamB/jsp/member/login.jsp"
+			} else { alert('수정 실패') }
+
+		}
 	});
 }	// updateInfo f end
 
 
 // 찜목록 삭제함수
-function deleteWishList(ino){console.log('찜목록 삭제함수')
-	
-	$.ajax({ 
-	       url : "/Ezen_teamB//MyMenuController",
-	       data : {ino: ino, mno: loginMno},         // 보내는 데이터
-	       method : "delete",
-	       success : r =>{console.log(r);
-	       		if(r){
-					   console.log('찜목록 삭제')
-					   PrintWishList();
-				}else{console.log('찜목록 삭제 실패')}
-	       		
-	       },
-	       error: e => {console.log(e)}
+function deleteWishList(ino) {
+	console.log('찜목록 삭제함수')
+
+	$.ajax({
+		url: "/Ezen_teamB//MyMenuController",
+		data: { ino: ino, mno: loginMno },         // 보내는 데이터
+		method: "delete",
+		success: r => {
+			console.log(r);
+			if (r) {
+				console.log('찜목록 삭제')
+				PrintWishList();
+			} else { console.log('찜목록 삭제 실패') }
+
+		},
+		error: e => { console.log(e) }
 	});
 
 }
 
 
 // 회원탈퇴 함수
-function deleteInfo(){
-	
+function deleteInfo() {
+
 	let deletepwd = document.querySelector('.deletepwd').value;
 	console.log(deletepwd);
-	
-	$.ajax({ 
-	       url : "/Ezen_teamB//MemberController",
-	       data : {mno: loginMno, mpwd : deletepwd},         // 보내는 데이터
-	       method : "delete",
-	       success : r =>{console.log('통신성공');
-	       		if(r){
-					   alert('회원탈퇴가 완료되었습니다.')
-					   location.href = "/Ezen_teamB/jsp/index.jsp"
-				}else{
-					alert('비밀번호가 틀렸습니다.')
-				}
-	       		
-	       },
-	       error: e => {console.log(e)}
+
+	$.ajax({
+		url: "/Ezen_teamB//MemberController",
+		data: { mno: loginMno, mpwd: deletepwd },         // 보내는 데이터
+		method: "delete",
+		success: r => {
+			console.log('통신성공');
+			if (r) {
+				alert('회원탈퇴가 완료되었습니다.')
+				location.href = "/Ezen_teamB/jsp/index.jsp"
+			} else {
+				alert('비밀번호가 틀렸습니다.')
+			}
+
+		},
+		error: e => { console.log(e) }
 	});
-	
+
 }
 
 // 채팅목록 출력함수
-function chattingList(){console.log('채팅목록 출력함수 실행')
-	
+function chattingList() {
+	console.log('채팅목록 출력함수 실행')
+
 	$.ajax({
-		url : "/Ezen_teamB/MyMenuController",
-		async : false,
-		data : {type : '4', mno : loginMno},
-		method : "get", 
-		success : jsonArray =>{ console.log(jsonArray)
+		url: "/Ezen_teamB/MyMenuController",
+		async: false,
+		data: { type: '4', mno: loginMno },
+		method: "get",
+		success: jsonArray => {
+			console.log(jsonArray)
 			let cardInfo = document.querySelector('.cardInfo');
 			let productCount = document.querySelector('.productCount');
-	       	let html = ``;
-	       	productCount.innerHTML = html;
-	       	
-	       	html = 
+			let html = ``;
+			productCount.innerHTML = html;
+
+			html =
 				`
 	       			<table class="table table-hover align-middle text-center">
 						  <tbody class="tableBody">
 	       		`;
-			
-			
-			if(jsonArray.length < 1){
-					   tableBody.innerHTML = `텅...`;
-					   return;
+
+
+			if (jsonArray.length < 1) {
+				tableBody.innerHTML = `텅...`;
+				return;
 			}
-			
-			jsonArray.forEach((p,i)=>{
-				p.jchatdate = (p.jchatdate).substr(0,10);
+
+			jsonArray.forEach((p, i) => {
+				p.jchatdate = (p.jchatdate).substr(0, 10);
 				p.jcontent = JSON.parse(p.jcontent)
 				html +=
-				
-				`
+
+					`
 					<tr onclick="goChat(${p.ino}, '${p.rno}')" class="tableContent">
-				      <th scope="row">${i+1}</th>
+				      <th scope="row">${i + 1}</th>
 				      <td>${p.jcontent.content}</td>
 				      <td>${p.jchatdate}</td>
 				      <td><button type="button" class="btn btn-danger">나가기</button></td>
 				    </tr>
 				`
-				
+
 			})
-			
-			html += 
-				   `
+
+			html +=
+				`
 				   			</tbody>
 						</table>
 				   `
-			
-			
+
+
 			cardInfo.innerHTML = html;
-			
+
 		},
-		error : e => {console.log(e)}	
+		error: e => { console.log(e) }
 	})
-	
+
 }
 
 // 채팅방 이동함수
-function goChat(ino, rno){
+function goChat(ino, rno) {
 	console.log('채팅방 이동함수')
 	location.href = `/Ezen_teamB/jsp/chatting/chatting.jsp?ino=${ino}&rno=${rno}`
-	
+
 }
 
 
@@ -562,53 +652,53 @@ var height = 600; //팝업의 높이
 
 // 주소 입력 api
 function execPostCode() {
-         new daum.Postcode({
-		    width: width, //생성자에 크기 값을 명시적으로 지정해야 합니다.
-		    height: height,			 
-			 
-             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
- 
-                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
- 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                if(fullRoadAddr !== ''){
-                    fullRoadAddr += extraRoadAddr;
-                }
- 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                console.log(data.zonecode);
-                console.log(fullRoadAddr);
-                
-                
-                $("[name=addr1]").val(data.zonecode);
-                $("[name=addr2]").val(fullRoadAddr);
-                
-                
-                /* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
-                document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
-            }
-         }).open({
-		    left: (window.screen.width / 2) - (width / 2),
-		    top: (window.screen.height / 2) - (height / 2)
-		});
+	new daum.Postcode({
+		width: width, //생성자에 크기 값을 명시적으로 지정해야 합니다.
+		height: height,
+
+		oncomplete: function(data) {
+			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+			// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+			// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+			var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+			// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+				extraRoadAddr += data.bname;
+			}
+			// 건물명이 있고, 공동주택일 경우 추가한다.
+			if (data.buildingName !== '' && data.apartment === 'Y') {
+				extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			}
+			// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			if (extraRoadAddr !== '') {
+				extraRoadAddr = ' (' + extraRoadAddr + ')';
+			}
+			// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+			if (fullRoadAddr !== '') {
+				fullRoadAddr += extraRoadAddr;
+			}
+
+			// 우편번호와 주소 정보를 해당 필드에 넣는다.
+			console.log(data.zonecode);
+			console.log(fullRoadAddr);
+
+
+			$("[name=addr1]").val(data.zonecode);
+			$("[name=addr2]").val(fullRoadAddr);
+
+
+			/* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
+			document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
+			document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
+		}
+	}).open({
+		left: (window.screen.width / 2) - (width / 2),
+		top: (window.screen.height / 2) - (height / 2)
+	});
 }
 
 
