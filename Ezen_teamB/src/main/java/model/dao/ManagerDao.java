@@ -3,6 +3,8 @@ package model.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.dto.AgeStatistic;
+import model.dto.AreaStatistic;
 import model.dto.CateStatistics;
 import model.dto.MemberList;
 import model.dto.MemberManageDto;
@@ -138,7 +140,7 @@ public class ManagerDao extends Dao{
 		
 		try {
 			String sql = "select i.itrade as 거래방식, count(i.itrade) "
-					+ "from itemsinfo i, tradelog t\r\n"
+					+ "from itemsinfo i, tradelog t "
 					+ "where i.idate between ? and ? "
 					+ "group by i.itrade";
 			ps = conn.prepareStatement(sql);
@@ -151,6 +153,60 @@ public class ManagerDao extends Dao{
 			}
 			return list;
 		} catch (Exception e) {System.out.println(e);}
+		
+		return null;
+	}
+	
+	// 통계(연령대별)
+	public List<AgeStatistic> getAgeStatistics(String pDate, String nDate){
+		List<AgeStatistic> list = new ArrayList<AgeStatistic>();
+		
+		try {
+			String sql = "select "
+					+ "(substring(substring(now(),1,4)-concat(ceiling(substring(m.msno2,1,1)/2)+18,substring(m.msno1,1,2)),1,1)*10) as age, "
+					+ "count((substring(substring(now(),1,4)-concat(ceiling(substring(m.msno2,1,1)/2)+18,substring(m.msno1,1,2)),1,1)*10)) as 거래량, "
+					+ "count(case when i.isafepayment = 1 then 1 end) as 안전결제사용 from memberlist m, itemsinfo i where m.mno = i.mno and i.idate between ? and ? "
+					+ "group by age";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pDate);
+			ps.setString(2, nDate);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				AgeStatistic aDto = new AgeStatistic(
+						rs.getInt(1), rs.getInt(2), rs.getInt(3));
+				list.add(aDto);
+			}
+			return list;
+			
+		} catch (Exception e) {System.out.println(e);}
+		
+		return null;
+	}
+	
+	// 통계(지역별)
+	public List<AreaStatistic> getAreaStatistics(String pDate, String nDate){
+		List<AreaStatistic> list = new ArrayList<AreaStatistic>();
+		
+		try {
+			String sql = "select LEFT(itradeplace,3) as 지역,  \r\n"
+					+ "count(d.dno), count(case when i.itrade = 1 then 1 end) as 배송여부, count(case when i.iestate = 1 then 1 end) as 거래상태\r\n"
+					+ "from itemsinfo i, dpoint d, memberlist m\r\n"
+					+ "where i.ino = d.ino and i.mno = m.mno and i.idate between ? and ?\r\n"
+					+ "group by 지역";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pDate);
+			ps.setString(2, nDate);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				AreaStatistic aDto = new AreaStatistic(
+						rs.getString(1), rs.getInt(2),
+						rs.getInt(3), rs.getInt(4));
+				list.add(aDto);
+			}
+			return list;
+			
+		} catch (Exception e) {System.out.println("지역별 통계 오류 : " + e);}
+		
 		
 		return null;
 	}
