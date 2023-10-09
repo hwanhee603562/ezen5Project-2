@@ -46,8 +46,8 @@ public class SafePaymentDao extends Dao{
 		
 		try {
 			
-			String sql = "select a.*, b.mno, b.ititle from vsafepayment a join itemsinfo b "
-					   + "on a.ino = b.ino where a.vrequester = ? and a.ino = ?";
+			String sql = "select a.*, c.mid, b.ititle from vsafepayment a join itemsinfo b "
+					   + "on a.ino = b.ino join memberlist c on b.mno = c.mno where a.vrequester = ? and a.ino = ?";
 			
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, vrequester);
@@ -57,7 +57,7 @@ public class SafePaymentDao extends Dao{
 			if( rs.next() ) {
 				return new SafePaymentDto(
 					rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9)
+					rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getString(8), rs.getString(9)
 				);
 			}
 			
@@ -71,24 +71,22 @@ public class SafePaymentDao extends Dao{
 	
 	
 	// 전체 결제내역 출력
-	public ArrayList<SafePaymentDto> getPaymentList( int maxSize, int startRow, int vstateFilter ){
+	public ArrayList<SafePaymentDto> getBuyerPaymentList( int maxSize, int startRow, int vstateFilter, int vrequester ){
 		
 		ArrayList<SafePaymentDto> list = new ArrayList<>();
 		
-		System.out.println(maxSize);
-		System.out.println(startRow);
-		
 		try {
 			
-			String sql = "select a.*, b.mno, b.ititle "
-					+ "from vsafepayment a join itemsinfo b on a.ino = b.ino ";
+			String sql = "select a.*, c.mid, b.ititle from vsafepayment a "
+					+ "join itemsinfo b on a.ino = b.ino join memberlist c on b.mno = c.mno";
 			
 			// 필터가 존재하지 않으면 모두 출력
 			if( vstateFilter != 0 ) {
-				sql += "where vstate = "+vstateFilter;
+				sql += " where a.vstate = "+vstateFilter+" and a.vrequester = "+vrequester;
+			} else {
+				sql += " where a.vrequester = "+vrequester;
 			}
 			sql += " ORDER BY a.vno DESC limit ?, ?";
-			
 			
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, startRow);
@@ -104,7 +102,7 @@ public class SafePaymentDao extends Dao{
 						rs.getString("vgivedate"),
 						rs.getInt("vstate"),
 						rs.getInt("ino"),
-						rs.getInt("mno"),
+						rs.getString("mid"),
 						rs.getString("ititle")
 				);
 				list.add( dto );
@@ -118,17 +116,57 @@ public class SafePaymentDao extends Dao{
 		
 		return null;
 	}
+
+	// 전체 결제내역 출력
+	public ArrayList<SafePaymentDto> getSellerPaymentList(int maxSize, int startRow, int vstateFilter, int vrequester) {
+
+		ArrayList<SafePaymentDto> list = new ArrayList<>();
+
+		try {
+
+			String sql = "select a.*, c.mid, b.ititle from vsafepayment a "
+					+ "join itemsinfo b on a.ino = b.ino join memberlist c on a.vrequester = c.mno "
+					+ "where b.mno = "+vrequester;
+
+			// 필터가 존재하지 않으면 모두 출력
+			if (vstateFilter != 0) {
+				sql += " and a.vstate = "+vstateFilter;
+			}
+			sql += " ORDER BY a.vno DESC limit ?, ?";
+
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, maxSize);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				SafePaymentDto dto = new SafePaymentDto(rs.getInt("vno"), rs.getInt("vrequester"),
+						rs.getString("vrespdate"), rs.getString("vreqsdate"), rs.getString("vgivedate"),
+						rs.getInt("vstate"), rs.getInt("ino"), rs.getString("mid"), rs.getString("ititle"));
+				list.add(dto);
+			}
+
+			return list;
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return null;
+	}
 	
 	
-	// 집계 함수
-	public int getTotalPaymentCount( int vstateFilter ) {
+	// 구매관리 집계 함수
+	public int getBuyerTotalCount( int vstateFilter, int vrequester ) {
 			
 		try {
 			
-			String sql = "select count(*) from vsafepayment v where vstate = ?";
+			String sql = "select count(*) from vsafepayment v where vrequester ="+vrequester;
+			if( vstateFilter != 0 ) {
+				sql = "select count(*) from vsafepayment v where vstate = "+ vstateFilter +" and vrequester ="+vrequester;
+			}
 			
 			ps = conn.prepareStatement(sql);
-			ps.setInt( 1, vstateFilter );
 			
 			rs = ps.executeQuery();
 			if( rs.next() ) return rs.getInt(1);
@@ -140,10 +178,46 @@ public class SafePaymentDao extends Dao{
 		return 0;
 	}
 	
+	// 판매관리 집계 함수
+	public int getSellerTotalCount( int vstateFilter, int seller ) {
+		try {
+
+			String sql = "select count(*) from vsafepayment a join itemsinfo b on a.ino = b.ino where b.mno = " + seller;
+			if (vstateFilter != 0) {
+				sql = "select count(*) from vsafepayment a join itemsinfo b on a.ino = b.ino where a.vstate = "+vstateFilter+" and b.mno = "+seller;
+			}
+
+			ps = conn.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+			if (rs.next())
+				return rs.getInt(1);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return 0;
+	}
 	
-	
-	
-	
+	// 안전결제 취소 기능
+	public boolean deleteSafepay( int vno ) {
+		
+		try {
+			
+			String sql = "delete from vsafepayment where vno = "+vno;
+			
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
 	
 	
 	

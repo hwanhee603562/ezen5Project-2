@@ -238,7 +238,7 @@
 /* -------------- 안전결제 --------------- */
 /* 안전결제 전체구역 */
 .safepayStateBox {
-    width: 1200px;
+    width: 1180px;
     margin: 0 auto;
     border: 1px solid #e8e8e8;
     padding: 10px; /* 상자 주위에 간격을 추가합니다. */
@@ -251,7 +251,7 @@
 }
 
 .buyLogBtn, .sellLogBtn {
-	width: 584px;
+	width: 575px;
     background-color: #A2A7E8;
     color: #fff;
     border: none;
@@ -343,7 +343,31 @@
 }
 
 
-
+/* ============= 페이징 버튼 구역 */
+.pagingBtnField{
+	
+	width: 350px;
+	text-align: center;
+	margin: 0 auto;
+		
+}
+.pagingBtnField button{
+	width: 28px;
+	height: 28px;
+	font-weight: bold;
+	background-color: #FAFAFA;
+	border: 1px solid #E1E1E1;
+}
+.beforePageBtn{
+	margin-right: 10px;
+}
+.afterPageBtn{
+	margin-left: 10px;
+}
+.centerPageBtn{
+	width: 35px !important;
+	height: 31px !important;
+}
 
 
 

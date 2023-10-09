@@ -70,6 +70,7 @@
 
 
 							<table class="safepayStateTable">
+							<!-- 
 								<tr>
 									<th>진행상태</th>
 									<th>물품제목</th>
@@ -86,6 +87,7 @@
 										<button>버튼1</button>
 									</td>
 								</tr>
+								 -->
 
 							</table>
 
