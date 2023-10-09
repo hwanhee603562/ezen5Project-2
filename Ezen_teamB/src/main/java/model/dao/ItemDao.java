@@ -22,7 +22,7 @@ public class ItemDao extends Dao {
 	private ItemDao() {}
 	
 	
-	// 1 판매물품등록
+	// 1-1 판매물품등록
 	public boolean uploadItem( ItemsInfo itemsInfo, DpointDto dpointDto ) {
 		
 		try {
@@ -120,8 +120,27 @@ public class ItemDao extends Dao {
 		return false;
 	}
 
-	
-	
+	// 1-2 거래완료 물품 등록 [거래내역 등록]
+	public boolean setTradeLog( int ino, int mno ) {
+		
+		try {
+			
+			String sql = "insert into tradelog(buyer, ino) values(?, ?)";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, mno);
+			ps.setInt(2, ino);
+			
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
 	
 	
 	
@@ -500,9 +519,29 @@ public class ItemDao extends Dao {
 		
 		return -1;
 	}
+		// 2-11 판매자 조회
+	public int getItemSeller( int ino ) {
+		
+		try {
+
+			String sql = "select mno from itemsinfo where ino = " + ino;
+
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next())
+				return rs.getInt(1);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return -1;
+	}
 	
 	
-	// 3 판매물품수정
+	
+	// 3-1 판매물품수정
 	public boolean updateItem(ItemsInfo itemsInfo, DpointDto dpointDto) {
 
 		try {
@@ -640,6 +679,24 @@ public class ItemDao extends Dao {
 		return false;
 	}
 	
+	// 3-2 판매물품 상태 변경 [판매물품 거래완료]
+	public boolean changeItemState( int ino ) {
+		
+		try {
+			
+			String sql = "update itemsinfo set iestate = 1 where ino = "+ino;
+			
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
 	
 	// 4 판매물품삭제
 	public boolean deleteExistingImg( int ino, String pimg ) {

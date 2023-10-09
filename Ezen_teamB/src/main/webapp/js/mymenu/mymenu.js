@@ -386,19 +386,19 @@ function buyManagement(page) {
 					case 1: outputState = '요청'; 
 							outputDate = p.vrespdate;
 							outputBtn = `
-								<button onclick="deleteSafepay(${p.vno})">취소</button>
+								<button onclick="deleteSafepay(${p.vno}, ${p.ino}, ${p.vrequester}, ${p.vstate})">취소</button>
 							`
 							break;
 					case 2: outputState = '수락';
 							outputDate = p.vreqsdate;
 							outputBtn = `
-								<button onclick="deleteSafepay(${p.vno})">취소</button>
+								<button onclick="deleteSafepay(${p.vno}, ${p.ino}, ${p.vrequester}, ${p.vstate})">취소</button>
 							`
 							break;
 					case 3: outputState = '전달'; 
 							outputDate = p.vgivedate;
 							outputBtn = `
-								<button onclick="checkItem(${p.vno})" style="background-color:#9767EB;">수령확정</button>
+								<button onclick="checkItem(${p.vno}, ${p.ino}, ${[p.vrequester]})" style="background-color:#9767EB;">수령확정</button>
 							`
 							break;
 					case 4: outputTr = `<tr style="color:#8F918E !important;">`;
@@ -505,14 +505,14 @@ function sellManagement(page) {
 					case 1: outputState = '요청'; 
 							outputDate = p.vrespdate;
 							outputBtn = `
-								<button onclick="deleteSafepay(${p.vno})">거절</button>
-								<button onclick="acceptSafepay(${p.vno}, ${p.ino}, ${p.vrequester})">수락</button>
+								<button onclick="deleteSafepay(${p.vno}, ${p.ino}, ${p.vrequester}, ${p.vstate})">거절</button>
+								<button onclick="acceptSafepay(${p.vno}, ${p.ino}, ${p.vrequester}, ${p.vstate})">수락</button>
 							`
 							break;
 					case 2: outputState = '수락';
 							outputDate = p.vreqsdate;
 							outputBtn = `
-								<button onclick="deleteSafepay(${p.vno})">거절</button>
+								<button onclick="deleteSafepay(${p.vno}, ${p.ino}, ${p.vrequester}, ${p.vstate})">거절</button>
 								<button onclick="deliverySafepay(${p.vno})">전달</button>
 							`
 							break;
@@ -638,17 +638,23 @@ let deleteSafepayComment = `해당 안전결제 진행 건을 취소하시겠습
 
 
 // 안전결제 취소 (필드 삭제) 기능
-function deleteSafepay( vno ){
+function deleteSafepay( vno, ino, vrequester, vstate ){
 	
 	let promptObj = confirm(`${deleteSafepayComment}`)
+	console.log(promptObj)
 	
 	if( !promptObj ) return;
-
+	
 	$.ajax({
 		url: "/Ezen_teamB/SafePaymentController",
 		method: 'delete',
 		async: false,
-		data: {vno : vno},
+		data: {
+			vno : vno,
+			ino : ino,
+			vrequester : vrequester,
+			vstate : vstate
+		},
 		success: s => {
 			
 			if(s)	alert('안전결제를 취소하였습니다')
@@ -670,7 +676,7 @@ function deleteSafepay( vno ){
 }
 
 // 판매자 요청 수락 기능
-function acceptSafepay( vno, ino, vrequester ){
+function acceptSafepay( vno, ino, vrequester, vstate ){
 	
 	let promptObj = confirm(`안전결제를 수락할 시 동일한 물품에 대한 안전요청 건은 자동삭제됩니다 수락하시겠습니까?`)
 	
@@ -678,6 +684,7 @@ function acceptSafepay( vno, ino, vrequester ){
 		return
 	}
 	
+	let checkBuyerPoint = false
 	// 포인트 조회
 	$.ajax({
 		url: "/Ezen_teamB/pointPayment",
@@ -685,19 +692,20 @@ function acceptSafepay( vno, ino, vrequester ){
 		async: false,
 		data: { ino : ino, vrequester : vrequester },
 		success: s =>{
-			
-			console.log(s)
-			if( !s ){
-				deleteSafepayComment = `구매자의 포인트가 부족합니다 해당 건을 취소하시겠습니까?`;
-				deleteSafepay( vno )
-				return;
-			}
+			checkBuyerPoint = s;
 		},
 		error: e =>{
 			console.log('에러발생')
 		}
 		
 	})
+	
+	if (!checkBuyerPoint) {
+		deleteSafepayComment = `구매자의 포인트가 부족합니다 해당 건을 취소하시겠습니까?`;
+		deleteSafepay(vno, ino, vrequester, vstate)
+		return;
+	}
+	
 	
 	// 포인트 차감
 	$.ajax({
@@ -753,12 +761,17 @@ function deliverySafepay( vno ){
 }				
 
 // 구매자 수령확정 기능
-function checkItem(vno){
+function checkItem(vno, ino, vrequester){
 	$.ajax({
 		url: "/Ezen_teamB/SafePaymentController",
 		method: "put",
 		async: false,
-		data: { type : 'checkItem' , vno : vno },
+		data: { 
+			type : 'checkItem',
+			vno : vno,
+			ino : ino,
+			vrequester : vrequester
+		},
 		success: s =>{
 			
 		},

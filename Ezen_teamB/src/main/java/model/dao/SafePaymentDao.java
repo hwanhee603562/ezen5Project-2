@@ -201,9 +201,19 @@ public class SafePaymentDao extends Dao{
 	}
 	
 	// 개별 안전결제 취소(삭제) 기능
-	public boolean deleteSafepay( int vno ) {
+	public boolean deleteSafepay( int vno, int ino, int vrequester, int vstate ) {
 		
 		try {
+			
+			// 현재 안전결제 진행상태 확인
+				// 안전결제가 '수락' 단계인 경우
+				// 즉, 포인트가 지급된 경우 포인트를 환급해주어야함
+			if( vstate == 2 ) {
+				// 제품 가격 조회
+				int iprice = ItemDao.getInstance().getItemPrice( ino );
+				// 구매자의 포인트 환급
+				PointPaymentDao.getInstance().givePoint(vrequester, iprice);
+			}
 			
 			String sql = "delete from vsafepayment where vno = "+vno;
 			
@@ -282,9 +292,20 @@ public class SafePaymentDao extends Dao{
 	}
 
 	// 구매자 수령 확정
-	public boolean checkItem(int vno) {
+	public boolean checkItem(int vno, int ino, int vrequester) {
 		
 		try {
+			
+			// ino 물품 테이블에 물품 상태 변경 [거래완료]
+			ItemDao.getInstance().changeItemState( ino );
+			
+			// 거래내역 등록
+			ItemDao.getInstance().setTradeLog( ino, vrequester );
+			
+			// 제품 가격 조회 후 포인트 지급 
+			int iprice = ItemDao.getInstance().getItemPrice( ino );
+			int seller = ItemDao.getInstance().getItemSeller( ino );
+			PointPaymentDao.getInstance().givePoint(seller, iprice);
 			
 			String sql = "update vsafepayment set vstate = 4 where vno = "+vno;
 			

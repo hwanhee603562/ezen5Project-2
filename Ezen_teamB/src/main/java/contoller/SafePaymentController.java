@@ -146,7 +146,10 @@ public class SafePaymentController extends HttpServlet {
 		}
 		// 구매자 수령확정
 		if (type.equals("checkItem")) {
-			result = SafePaymentDao.getInstance().checkItem( vno );
+			int ino = Integer.parseInt( request.getParameter("ino") );
+			int vrequester = Integer.parseInt( request.getParameter("vrequester") );
+			
+			result = SafePaymentDao.getInstance().checkItem( vno, ino, vrequester );
 		}
 		
 		response.setContentType("application/json;charset=UTF-8");
@@ -159,7 +162,11 @@ public class SafePaymentController extends HttpServlet {
 		
 		// 안전결제 취소
 		int vno = Integer.parseInt( request.getParameter("vno") );
-		boolean result = SafePaymentDao.getInstance().deleteSafepay( vno );
+		int ino = Integer.parseInt( request.getParameter("ino") );
+		int vrequester = Integer.parseInt( request.getParameter("vrequester") );
+		int vstate = Integer.parseInt( request.getParameter("vstate") );
+		
+		boolean result = SafePaymentDao.getInstance().deleteSafepay( vno, ino, vrequester, vstate );
 		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print( result );
