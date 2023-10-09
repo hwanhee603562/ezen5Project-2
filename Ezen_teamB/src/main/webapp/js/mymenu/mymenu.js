@@ -150,43 +150,40 @@ function infoPrint() {
 IMP.init('imp74472512') // 아임포트 콘솔에서 확인
 
 // 포인트 충전
-function chargePoint(){
+function requestPay(){
 	let now = new Date();
 	let time = now.getTime();
 	let merchant_uid = time+"-p-"+loginMid;	// 가급적 회원번호 조합 권장 / 로그인세션에서 아이디 가져옴
-	console.log(merchant_uid)
 	
 	IMP.request_pay({
 		pg: "html5_inicis.INIBillTst",		// 아임포트 콘솔에서 확인
 		pay_method: pay_method,				// 결제방식
-		merchant_uid: merchant_uid,   		// 주문번호
-		name: "포인트결제",
 		amount: amount,                     // 숫자 타입
-		buyer_email: "gildong@gmail.com",
-		buyer_name: "이환희",
-		buyer_tel: "010-4242-4242",
-		buyer_addr: "서울특별시 강남구 신사동",
-		buyer_postcode: "12345",
 		vbank_due : 1						// 가상계좌 입금마감일시 : 미기입시 default값 30일
 	}, function(rsp) { // callback
 		//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
 
 		if (rsp.success) {	// 결제 성공
 
-			
-
 		} else {	// 결제실패 : 사업자번호가 없기 때문에 실패가 성공이라는 가정으로 진행
-		
-			alert('포인트가 지급되었습니다')
 			
-			// 1. 포인트 적립 기능처리
-			setPoint( amount, '포인트결제' )
-			
-			// 2. 결제내역 테이블 기능처리 [ 구현x ]
-			
-			
+			$.ajax({
+				url: "/Ezen_teamB/pointPayment",
+				method: "post",
+				async: false,
+				data: { amount : amount },
+				success: s =>{
+					alert('포인트가 지급되었습니다')
+					console.log(s)
+				},
+				error: e =>{
+					console.log('에러 발생')
+				}
+			})
 		}
-
+		popup.style.display = "none";
+		location.href = `/Ezen_teamB/jsp/mymenu/mymenu.jsp`;
+		
 	});
 }
 

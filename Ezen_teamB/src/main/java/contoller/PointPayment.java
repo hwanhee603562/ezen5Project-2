@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.dao.ItemDao;
 import model.dao.PointPaymentDao;
+import model.dto.MemberList;
 
 // 포인트 Controller
 @WebServlet("/pointPayment")
@@ -21,7 +22,7 @@ public class PointPayment extends HttpServlet {
         super();
     }
 
-
+    // 포인트 조회
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
     	int vrequester = Integer.parseInt( request.getParameter("vrequester") );
@@ -34,11 +35,7 @@ public class PointPayment extends HttpServlet {
     	
     	boolean result = false;
     	if( mpoint >= iprice ) result = true;
-    	
-    	/*
-    	ObjectMapper mapper = new ObjectMapper();
-    	String json = mapper.writeValueAsString( safepayPageDto );
-    	*/
+   
     	
     	response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print( result );
@@ -47,6 +44,14 @@ public class PointPayment extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int amount = Integer.parseInt( request.getParameter("amount") );
+		int mno = ((MemberList)request.getSession().getAttribute("loginSession")).getMno();
+		
+		boolean result = PointPaymentDao.getInstance().givePoint( mno, amount );
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print( result );
 		
 	}
 
