@@ -482,6 +482,25 @@ public class ItemDao extends Dao {
 		
 		return null;
 	}
+		// 2-10 물품 가격조회
+	public int getItemPrice( int ino ) {
+		
+		try {
+			
+			String sql = "select iprice from itemsinfo where ino = "+ino;
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			if( rs.next() ) return rs.getInt(1);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return -1;
+	}
+	
 	
 	// 3 판매물품수정
 	public boolean updateItem(ItemsInfo itemsInfo, DpointDto dpointDto) {

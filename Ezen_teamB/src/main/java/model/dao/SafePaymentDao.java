@@ -200,7 +200,7 @@ public class SafePaymentDao extends Dao{
 		return 0;
 	}
 	
-	// 안전결제 취소 기능
+	// 개별 안전결제 취소(삭제) 기능
 	public boolean deleteSafepay( int vno ) {
 		
 		try {
@@ -219,10 +219,86 @@ public class SafePaymentDao extends Dao{
 		return false;
 	}
 	
+	// 다수 안전결제 취소(삭제) 기능
+		// 수락되지 않은 물품에 대한 안전결제 모두 삭제
+	public void allDeleteSafepay( int vno, int ino ) {
+		
+		try {
+
+			String sql = "delete from vsafepayment where ino = "+ino+" and vno != "+vno;
+
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 	
 	
-	
-	
+	// 판매자 요청 수락
+	public boolean acceptSafepay(int vno, int ino, int vrequester) {
+		
+		try {
+			
+			//수락되지 않은 물품에 대한 안전결제 모두 삭제
+			allDeleteSafepay( vno, ino );
+			// 제품 가격 조회
+			int iprice = ItemDao.getInstance().getItemPrice( ino );
+			// 포인트 차감
+			PointPaymentDao.getInstance().deductPoint( vrequester, iprice );
+			
+			String sql = "update vsafepayment set vreqsdate = now(), vstate = 2 where vno = "+vno;
+			
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
+
+	// 판매자 물품 전달
+	public boolean deliverySafepay(int vno) {
+		
+		try {
+			
+			String sql = "update vsafepayment set vgivedate = now(), vstate = 3 where vno = "+vno;
+			
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
+
+	// 구매자 수령 확정
+	public boolean checkItem(int vno) {
+		
+		try {
+			
+			String sql = "update vsafepayment set vstate = 4 where vno = "+vno;
+			
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return false;
+	}
 	
 	
 	

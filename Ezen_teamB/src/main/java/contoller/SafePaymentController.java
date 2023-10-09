@@ -126,7 +126,32 @@ public class SafePaymentController extends HttpServlet {
 
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		String type = request.getParameter("type");
+		int vno = Integer.parseInt( request.getParameter("vno") );
+		
+		boolean result = false;
+		
+		// 판매자 요청 수락
+		if( type.equals("acceptSafepay") ) {
+			
+			int ino = Integer.parseInt( request.getParameter("ino") );
+			int vrequester = Integer.parseInt( request.getParameter("vrequester") );
+			result = SafePaymentDao.getInstance().acceptSafepay( vno, ino, vrequester );
+			
+		}
+		// 판매자 물품 전달
+		if (type.equals("deliverySafepay")) {
+			result = SafePaymentDao.getInstance().deliverySafepay( vno );
+		}
+		// 구매자 수령확정
+		if (type.equals("checkItem")) {
+			result = SafePaymentDao.getInstance().checkItem( vno );
+		}
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print( result );
+		
 	}
 
 	
@@ -134,7 +159,6 @@ public class SafePaymentController extends HttpServlet {
 		
 		// 안전결제 취소
 		int vno = Integer.parseInt( request.getParameter("vno") );
-		System.out.println(vno);
 		boolean result = SafePaymentDao.getInstance().deleteSafepay( vno );
 		
 		response.setContentType("application/json;charset=UTF-8");
