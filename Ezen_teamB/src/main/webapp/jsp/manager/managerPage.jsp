@@ -42,6 +42,10 @@
 			<div class="rightMainOutput">	<!-- 우측 본문 출력 구역 -->
 			
 				<%@ include file = "./memberList.jsp" %>
+				
+				<div class="emediationPrint">
+					<!-- 중개거래소 관리 -->
+				</div>
 			
 			</div>
 		
@@ -49,7 +53,17 @@
 	</div>
 	
 	
-	 <script src="/Ezen_teamB/js/manager/statistics.js" type="text/javascript"></script>
+	<!-- 카카오지도 api -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c51f4ebd6d93bf1f15d0f4ba2809fea5&libraries=services,clusterer"></script>
+	
+	<!-- 카카오 우편번호 서비스 api -->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
+	
+	
+	<script src="/Ezen_teamB/js/manager/tradelog.js" type="text/javascript"></script>
+	<script src="/Ezen_teamB/js/manager/statistics.js" type="text/javascript"></script>
+	<script src="/Ezen_teamB/js/manager/emediation.js" type="text/javascript"></script>
 	 
 	 
 		<!-- 부트스트랩에서 만든 JS 적용 -->
