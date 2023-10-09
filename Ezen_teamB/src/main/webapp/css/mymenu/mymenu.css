@@ -219,8 +219,129 @@
 	font-size: 12px !important;
 }
 
+/* --------------- 포인트 팝업 --------------- */
+
+/* 팝업 창 스타일링 */
+.custom-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000; /* 팝업의 z-index 값을 높게 설정 */
+}
+
+.custom-popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 555px;
+    height: 558px;
+}
+
+.customPopInfo{
+	margin-left: 9px;
+	width: 200px;
+	text-align: center;
+	margin-top: 30px;
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.close-custom-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 팝업 열기 버튼 스타일링 */
+#openCustomPopup {
+    border: none;
+    background-color: #9767EB;
+    color: white;
+    width: 50px;
+    height: 30px;
+}
 
 
+/* 상단 금액 */
+.outputAmountField {
+    display: flex;
+    flex-wrap: wrap; /* 버튼이 넘칠 경우 자동으로 줄 바꿈 */
+    gap: 10px; /* 버튼 간격 설정 */
+    max-width: 500px; /* 버튼 컨테이너의 최대 너비 설정 */
+    margin: 0 auto;
+    justify-content: space-around;
+    border-top: 1px solid #e8e8e8;
+    padding-top: 20px;
+}
+.outputAmountField button {
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    height: 49px;
+    
+}
+
+/* 하단 결제방식 */
+.outputPayMethod{
+	display: flex;
+    flex-wrap: wrap; /* 버튼이 넘칠 경우 자동으로 줄 바꿈 */
+    gap: 10px; /* 버튼 간격 설정 */
+    max-width: 500px; /* 버튼 컨테이너의 최대 너비 설정 */
+    margin: 0 auto;
+    justify-content: space-around;
+    border-top: 1px solid #e8e8e8;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+.outputPayMethod button {
+    padding: 5px 10px;
+    background-color: #e8e8e8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 87px;
+    height: 70px;
+    
+}
+/* 선택 출력구역 */
+.pointBox, .methodBox{
+	font-weight: bold;
+}
+.selectedPoint, .selectedMethod{
+	color: red;
+}
+/* 결제 버튼 구역 */
+.liquidateBtn{
+	width: 80px;
+	height: 38px;
+	border: 1px solid #0dcaf0;
+	color: #0dcaf0;
+	background-color: white;
+	border-radius: 5px;
+}
+.bottomOutputField{
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid #e8e8e8;
+	margin-top: 20px;
+	padding-top: 33px;
+}
 /* ----------------- 모달창 ---------------------- */
 
 .adressBox{

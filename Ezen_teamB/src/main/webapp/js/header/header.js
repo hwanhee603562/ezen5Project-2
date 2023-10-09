@@ -38,7 +38,7 @@ function getMemberInfo() {
 				loginState = true; loginMid = r.mid; loginMno = r.mno;
 
 				html += `
-						<li><a href="/Ezen_teamB/jsp/mymenu/mymenu.jsp">마이페이지</a></li>
+						<li> ${loginMid}님 </li>
 						<li> <a onclick="logout()" href="/Ezen_teamB/jsp/index.jsp">로그아웃</a> </li>			
 					`
 			}

@@ -186,6 +186,8 @@
 		</div>
 	</div>
 
+	<!-- 포트원 결제 라이브러리 -->
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
 	<!-- 주소검색 api -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

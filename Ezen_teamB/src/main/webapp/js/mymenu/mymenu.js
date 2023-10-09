@@ -82,6 +82,38 @@ function infoPrint() {
 
 			html +=
 				`
+					 <div id="customPopup" class="custom-popup">
+				        <div class="custom-popup-content">
+				            <span id="closeCustomPopup" class="close-custom-popup">×</span>
+				            <div class="customPopInfo"> 포인트 결제 </div>
+				            <div> 
+								<div class="outputAmountField">
+									<button onclick="onAmount(1000)" type="button"> 1000포인트 </button>
+									<button onclick="onAmount(5000)" type="button"> 5000포인트 </button>
+									<button onclick="onAmount(10000)" type="button"> 10000포인트 </button>
+									<button onclick="onAmount(50000)" type="button"> 50000포인트 </button>
+									<button onclick="onAmount(100000)" type="button"> 100000포인트 </button>
+									<button onclick="onAmount(500000)" type="button"> 500000포인트 </button>
+								</div>
+								
+								<div class="outputPayMethod">
+									<button onclick="onPayMethod('card', '카드결제')" type="button"> 카드결제 </button>
+									<button onclick="onPayMethod('trans', '실시간 계좌이체')" type="button"> 실시간 계좌이체 </button>
+									<button onclick="onPayMethod('vbank', '가상계좌')" type="button"> 가상계좌 </button>
+									<button onclick="onPayMethod('phone', '휴대폰 소액결제')" type="button"> 휴대폰 소액결제 </button>
+										<!-- HTML에서 매개변수 전달시 문자타입일 경우 '' 문자처리 -->
+								</div>
+							</div>
+							<div class="bottomOutputField">
+								<div>
+						            <div class="pointBox"> 충전할 포인트 : <span class="selectedPoint">  </span>원 </div>
+						            <div class="methodBox"> 결제방식 : <span class="selectedMethod">  </span> </div>
+					            </div>
+					            <div> <button class="liquidateBtn" onclick="requestPay()"> 결제하기 </button> </div>
+					        </div>    
+				        </div>
+				    </div>
+				
 					<h3 class="infoTitletxt"> 마이페이지 </h3>
 					<div class="contentHeader">${r.mid} <span>회원님</span></div>
 					<div class="contentMain">
@@ -89,6 +121,7 @@ function infoPrint() {
 						<div class="tradeTop">거래활동 <span>${r.tradelog}</span></div>
 						<div class="saleTop">판매물품 <span>${r.saleProduct}</span></div>
 						<div class="pointTop">포인트 <span>${r.mpoint}</span></div>
+						<div class="chargePoint"> <button id="openCustomPopup" class="openCustomPopup"> 충전 </button> </div>
 					</div>
 					<div class="infoDetail">
 						<div class="name">이름 ${r.mname}</div>
@@ -112,6 +145,91 @@ function infoPrint() {
 
 
 }
+
+// 아임포트 관리자 식별키
+IMP.init('imp74472512') // 아임포트 콘솔에서 확인
+
+// 포인트 충전
+function chargePoint(){
+	let now = new Date();
+	let time = now.getTime();
+	let merchant_uid = time+"-p-"+loginMid;	// 가급적 회원번호 조합 권장 / 로그인세션에서 아이디 가져옴
+	console.log(merchant_uid)
+	
+	IMP.request_pay({
+		pg: "html5_inicis.INIBillTst",		// 아임포트 콘솔에서 확인
+		pay_method: pay_method,				// 결제방식
+		merchant_uid: merchant_uid,   		// 주문번호
+		name: "포인트결제",
+		amount: amount,                     // 숫자 타입
+		buyer_email: "gildong@gmail.com",
+		buyer_name: "이환희",
+		buyer_tel: "010-4242-4242",
+		buyer_addr: "서울특별시 강남구 신사동",
+		buyer_postcode: "12345",
+		vbank_due : 1						// 가상계좌 입금마감일시 : 미기입시 default값 30일
+	}, function(rsp) { // callback
+		//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+
+		if (rsp.success) {	// 결제 성공
+
+			
+
+		} else {	// 결제실패 : 사업자번호가 없기 때문에 실패가 성공이라는 가정으로 진행
+		
+			alert('포인트가 지급되었습니다')
+			
+			// 1. 포인트 적립 기능처리
+			setPoint( amount, '포인트결제' )
+			
+			// 2. 결제내역 테이블 기능처리 [ 구현x ]
+			
+			
+		}
+
+	});
+}
+
+// 팝업 열기 버튼
+const openButton = document.getElementById("openCustomPopup");
+
+// 팝업 창
+const popup = document.getElementById("customPopup");
+
+// 팝업 닫기 버튼
+const closeButton = document.getElementById("closeCustomPopup");
+
+// 팝업 열기 이벤트 처리
+openButton.addEventListener("click", () => {
+    popup.style.display = "block"; // 팝업 창 보이기
+});
+
+// 팝업 닫기 이벤트 처리
+closeButton.addEventListener("click", () => {
+    popup.style.display = "none"; // 팝업 창 숨기기
+});
+
+
+
+
+// 3. 결제 방식 선택 함수
+let pay_method = ''		// 결제방식
+function onPayMethod( method, methodName ){
+	
+	document.querySelector('.selectedMethod').innerHTML = `${methodName}`
+	pay_method = method;
+	
+}
+
+// 4. 결제 금액 선택 함수
+let amount = 0;
+function onAmount( value ){
+	
+	document.querySelector('.selectedPoint').innerHTML = `${value}`;
+	amount = value;
+	
+} 
+
 
 // 마이메뉴 페이지 출력시 함수 실행
 saleList();
@@ -824,6 +942,8 @@ function PrintWishList() {
 					p.itrade = '중개소거래'
 				}
 				p.idate = (p.idate).substr(0, 10);
+				
+				
 				html +=
 					`
 					   		<tr class="tableContent">
