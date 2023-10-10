@@ -14,12 +14,15 @@ public class Dao {
 	public Dao() {
 		try { 
 
+			/*  
+=======
 
+>>>>>>> branch 'master' of https://github.com/hwanhee603562/ezen5Project-2
 			
 
 
 			/*  
-			
+				
 			  Class.forName("com.mysql.cj.jdbc.Driver");
 			  
 			  
@@ -28,14 +31,11 @@ public class Dao {
 			 "jdbc:mysql://database-1.ccmmlpcfyswe.us-east-1.rds.amazonaws.com:3306/usedtrade"
 			  , "admin", "12341234a");
 			
-			  */
-
+			  
+*/
 
 						
 
-
-		
-		
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
 			

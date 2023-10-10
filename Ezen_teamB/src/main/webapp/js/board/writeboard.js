@@ -25,7 +25,7 @@ function writeBtn() {
 	$.ajax({
 		url : "/Ezen_teamB/BoardController" , 
 		method : "post" ,
-		data :{ type : 1 , formData }  ,
+		data : formData  ,
 		contentType : false,
 		processData : false,
 		success : r => { console.log(r) 

@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
 import model.dao.ManagerDao;
+import model.dto.AgeStatistic;
+import model.dto.AreaStatistic;
 import model.dto.CateStatistics;
 import model.dto.TradeStatistic;
 
@@ -46,6 +48,20 @@ public class StatisticsController extends HttpServlet {
 			List<TradeStatistic> result =  ManagerDao.getInstance().getTradeStatistics(pDate, nDate);
 			jsonArray = objectMapper.writeValueAsString(result);
 		}
+		// 연령대별 통계
+		else if(category.equals("3")) {
+			
+			List<AgeStatistic> result = ManagerDao.getInstance().getAgeStatistics(pDate, nDate);
+			jsonArray = objectMapper.writeValueAsString(result);
+		}
+		// 지역별 통계
+		else if(category.equals("4")) {
+			
+			List<AreaStatistic> result = ManagerDao.getInstance().getAreaStatistics(pDate, nDate);
+			System.out.println(result);
+			jsonArray = objectMapper.writeValueAsString(result);
+		}
+		
 		
 		
 		response.setContentType("application/json;charset=UTF-8");

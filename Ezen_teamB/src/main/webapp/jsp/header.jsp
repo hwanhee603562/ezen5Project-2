@@ -24,6 +24,7 @@
 			<li><a class="registerText" href="/Ezen_teamB/jsp/item/checkitems.jsp">중고거래</a></li>
 			<li><a href="/Ezen_teamB/jsp/board/mainboard.jsp">게시판</a></li>
 			<li><a href="/Ezen_teamB/jsp/item/registeritems.jsp">물품등록</a></li>
+			<li><a href="/Ezen_teamB/jsp/mymenu/mymenu.jsp">마이페이지</a></li>
 		</ul>
 		
 		<!-- 서브메뉴 -->

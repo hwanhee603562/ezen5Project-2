@@ -27,11 +27,10 @@
 		<div onclick="onCategory(4)">지역별</div>
 	</div>
 	<!-- 통계 출력 구역 -->
-	<div class="printBox">
+	<div class="printBox" id ="printBox">
 		
 	
 	</div>
-	
 	
 
 </body>

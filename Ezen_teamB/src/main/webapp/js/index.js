@@ -142,7 +142,7 @@ function getMainCategory(){
 			let html = `<tr>`
 			for( let i=0; i<s.length; i++ ){
 				
-				if( i==5 || ( i>4 && i%5==0 ) ){
+				if( i==3 || ( i>2 && i%3==0 ) ){
 					html += `</tr><tr>`
 				}
 
@@ -165,7 +165,7 @@ function outputSubCategory( uno, uname ){
 	// 상세 카테고리 필터기능 수행
 	filterNum = uno
 	filterCategory = 'uno';
-	document.querySelector('.selCategory1').innerHTML = ` ${uname}`
+	document.querySelector('.selCategory1').innerHTML = ` 선택된 카테고리 : ${uname}`
 	document.querySelector('.selCategory2').innerHTML = ``
 	getItemList();
 	
@@ -177,12 +177,12 @@ function outputSubCategory( uno, uname ){
 			
 			// 소분류 카테고리 출력
 			let html = `
-				<div class="guideLabel"> 소분류 </div>
+				<div class="guideLabel">  </div>
 					<table class="outputDsubcategory">
 						<tr>`
 			for( let i=0; i<s.length; i++ ){
 				
-				if( i==5 || ( i>4 && i%5==0 ) ){
+				if( i==3 || ( i>2 && i%3==0 ) ){
 					html += `</tr><tr>`
 				}
 				html += `<td onclick="subCategoryFilter(${s[i].dno}, '${s[i].dname}' )"> ${s[i].dname} </td>`

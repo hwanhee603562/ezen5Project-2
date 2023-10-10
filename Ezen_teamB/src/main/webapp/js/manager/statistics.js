@@ -1,4 +1,5 @@
 
+
 /* 게시물 조회 조건 객체 */
 let pageObject2 = { maxSize : 10, page: 1, category : 1, pDate : '', nDate : '' }
 	// * maxSize 	: 하나의 페이지에 최대표시할 멤버수
@@ -32,6 +33,13 @@ function statisSearch(){console.log('검색버튼 클릭')
 			else if(pageObject2.category == 2){
 				printTradeStatics(r)
 			}
+			else if(pageObject2.category == 3){
+				printAgeStatics(r)
+			}
+			else if(pageObject2.category == 4){
+				printAreaStatics(r)
+			}
+		
 			
 			
 		},
@@ -90,7 +98,119 @@ function printCateStatics(r){
 
 // 거래방식별 통계 출력함수
 function printTradeStatics(r){
-	console.log(r);
+	
+	let printBox = document.querySelector('.printBox');
+	
+	let html = ``;
+			html +=
+			`
+				<table class="cStatisticListTable">
+				<tr class="tableText">
+					<th> 거래방식 </th>
+					<th class="stResult"> 거래량 </th>
+				</tr>
+			`
+			r.forEach( p => {
+				if(p.itrade == 1){
+					p.itrade = '배송'
+				}
+				else if(p.itrade == 2){p.itrade = '대면거래'}
+				else{p.itrade = '안전거래'}
+				
+				html +=
+				`
+					<tr class="tableText">
+						<td>${p.itrade}</td>
+						<td class="stResult">${p.itcount}</td>
+					</tr>	
+				`
+				
+			});
+			
+			html += 
+			`
+				</table>
+			`
+			
+			printBox.innerHTML = html;
+	
+	
+}
+
+// 연령대별 통계 출력함수
+function printAgeStatics(r){
+	console.log(r)
+	
+	let printBox = document.querySelector('.printBox');
+			let html = ``;
+			html +=
+			`
+				<table class="cStatisticListTable">
+				<tr class="tableText">
+					<th> 연령 </th>
+					<th> 안전거래사용 </th>
+					<th class="stResult"> 거래량 </th>
+				</tr>
+			`
+			r.forEach( p => {
+				
+				html +=
+				`
+					<tr class="tableText">
+						<td>${p.age}대</td>
+						<td>${p.strade}</td>
+						<td class="stResult">${p.trade}</td>
+					</tr>	
+				`
+				
+			});
+			
+			html += 
+			`
+				</table>
+			`
+			
+			printBox.innerHTML = html;	
+	
+}	// f end
+
+// 지역별 통계 출력함수
+function printAreaStatics(r){
+	
+	let printBox = document.querySelector('.printBox');
+			let html = ``;
+			html +=
+			`
+				<table class="cStatisticListTable">
+				<tr class="tableText">
+					<th> 지역 </th>
+					<th> 배송거래 </th>
+					<th> 완료된거래 </th>
+					<th class="stResult"> 거래량 </th>
+				</tr>
+			`
+			r.forEach( p => {
+				
+				html +=
+				`
+					<tr class="tableText">
+						<td>${p.area}</td>
+						<td>${p.deliver}</td>
+						<td>${p.tstate}</td>
+						<td class="stResult">${p.trade}</td>
+					</tr>	
+				`
+				
+			});
+			
+			html += 
+			`
+				</table>
+			`
+			
+			printBox.innerHTML = html;
+	
+	
 }
 
 

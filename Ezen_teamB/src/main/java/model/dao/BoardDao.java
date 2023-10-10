@@ -3,6 +3,7 @@ package model.dao;
 import java.util.ArrayList;
 
 import model.dto.Board;
+import model.dto.ReplyDto;
 
 // 게시판 클래스
 public class BoardDao extends Dao{
@@ -141,17 +142,60 @@ public class BoardDao extends Dao{
 		} catch (Exception e) {System.out.println(e);}
 		return false;
 	}
+	
 	// 개별 게시물 답글 등록
-	public boolean bReply() {
+	public boolean bReply( ReplyDto dto ) {
 		try {
-			String sql = "";
+			String sql = "insert into reply(bno,mno,rno,rcontent) values(?,?,?,?)";
 			ps = conn.prepareStatement(sql);
-			
+			ps.setInt(1, dto.getBno());
+			ps.setInt(2, dto.getMno());
+			ps.setInt(3,dto.getRno());
+			ps.setString(4,dto.getRcontent());
+			int count = ps.executeUpdate(); if( count == 1 ) return true;
 		} catch (Exception e) {System.out.println(e);}
 		return false;
 	}
 	
 	// 개별 게시물 답글 출력
-	
-	
+	public ArrayList<ReplyDto> getReply( int bno ){
+		ArrayList<ReplyDto> list = new ArrayList<>();
+		try {
+			String sql = "select m.mid, r.* from reply r join memberlist m on r.mno = m.mno where bno = "+bno+" order by rdate desc";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ReplyDto replyDto = new ReplyDto(
+						rs.getInt("rno"),rs.getInt("mno"),
+						rs.getInt("bno"),rs.getString("rdate"),
+						rs.getString("rcontent"),rs.getString("mid"));
+				list.add(replyDto);
+			}
+		} catch (Exception e) {System.out.println(e);}
+		return list;
+	}
+	// 개별 게시물 답글 수정
+	public boolean rUpdate( ReplyDto dto) {
+		try {
+			String sql = "update reply set rcontent =? where rno =?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,dto.getRcontent());
+			ps.setInt(2,dto.getRno());
+			int count = ps.executeUpdate();
+			if(count == 1 ) return true;
+		} catch (Exception e) {System.out.println(e);}
+		return false;
+	}
+	// 개별 게시물 답글 삭제
+	public boolean rDelete( int rno ) {
+		try {
+			String sql = "delete from reply where rno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rno);
+			int count = ps.executeUpdate();
+			if(count == 1) return true;
+		} catch (Exception e) {System.out.println(e);}
+		return false;
+		
+	}
 }
