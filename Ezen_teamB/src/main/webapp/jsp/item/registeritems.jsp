@@ -121,7 +121,7 @@
 				<div class="inputDeskBox prtPrice">
 					<div class="deskInfo">판매가격</div>
 					<div class="rightInputBox">
-						<input name="iprice" class="iprice" type="number"><br>
+						<input name="iprice" min="0" class="iprice" type="number"><br>
 					</div>
 					
 				</div>
