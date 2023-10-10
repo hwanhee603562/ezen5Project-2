@@ -14,16 +14,21 @@
 	 <!-- 대면거래 지도 출력 구역 -->
 		<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->
 	<div id="outputMapField" style="height: 0px;"><!-- 지도 출력되는 구역 -->
-		<div class="insertBox">
-			<input type="text" id="sample5_address" placeholder="주소">
-			<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
-			<select class="eType">
-				<option value="CU">CU</option>
-				<option value="GS25">GS25</option>
-				<option value="7-ELEVEN">7-ELEVEN</option>
-				<option value="미니스톱">미니스톱</option>
-			</select>
-			<button onclick="insertEmediaion()" type="button"> 안전거래소등록</button>
+		<div class="edTop">
+			<div class="insertBox">
+				<input type="text" id="sample5_address" placeholder="주소">
+				<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+				<select class="eType">
+					<option value="CU">CU</option>
+					<option value="GS25">GS25</option>
+					<option value="7-ELEVEN">7-ELEVEN</option>
+					<option value="미니스톱">미니스톱</option>
+				</select>
+				<button onclick="insertEmediaion()" type="button"> 안전거래소등록</button>
+			</div>
+			<div>
+				<button onclick="goManager()" type="button">관리자화면</button>
+			</div>
 		</div>
 		
 		

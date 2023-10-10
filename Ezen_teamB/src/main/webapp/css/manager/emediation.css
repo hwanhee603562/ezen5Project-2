@@ -2,7 +2,11 @@
 
 .insertBox{
 	display: flex;
+}
 
+.edTop{
+	display: flex;
+	justify-content: space-between;
 }
 
 .eTableBox{
