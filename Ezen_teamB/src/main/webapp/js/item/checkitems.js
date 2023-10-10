@@ -40,7 +40,7 @@ function getItemList(  ){
 									<div class="itemCardPrice"> ${p.iprice}원 </div>
 									<div class="itemCardAdress"> ${p.itrade == 1 ? '' : p.itrade == 2 ? '대면거래' : '중개거래' } </div>
 									<div class="itemCardAdress"> ${ p.itrade == 1 ? '배송' : p.itradeplace } </div>
-									<div class="itemCardAdress"> ${ p.isafepayment == 0 ? '안전결제사용' : '' } </div>
+									<div class="itemCardAdress"> ${ p.isafepayment == 1 ? '안전결제사용' : '' } </div>
 									<div class="itemCardAdress"> ${ p.idate } </div>
 								</div>
 								

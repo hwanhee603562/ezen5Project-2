@@ -57,6 +57,11 @@ function getDetailedItems(){
 			document.querySelector('.itemPriceWord').innerHTML = s.iprice;
 			// 7. 안전결제사용여부 출력
 			document.querySelector('.itemSafePaymentWord').innerHTML = s.isafepayment==0 ? '미사용' : '사용';
+				// 안전결제 버튼 출력
+			if( s.isafepayment == 1 ){
+				document.querySelector('.buttonField').innerHTML +=
+				`<button onclick="responseSafepay()" class="safepayResponseBtn" type="button"> 안전결제요청 </button>`;
+			}
 			// 8. 판매 내용 출력
 			document.querySelector('.outputContent').innerHTML = s.icontent;
 			
@@ -102,6 +107,51 @@ function getDetailedItems(){
 	})
 	
 }	// getDetailedItems function end
+
+
+// 안전결제요청 버튼을 클릭하였을 때
+function responseSafepay(){
+	
+	if( !loginState ){
+		alert('로그인 후 이용하시기 바랍니다')
+		return
+	}
+	
+	let result;
+	$.ajax({
+		url: "/Ezen_teamB/SafePaymentController",
+		method: "post",
+		async: false,
+		data: {
+			type : "responseSafepay",
+			ino : ino
+		},
+		success: r => {
+			result = r
+		},
+		error: e => {
+			console.log('에러발생')
+			console.log(e)
+		}
+	})
+	
+	if (result == 1) {
+		alert('이미 해당 판매자에게 안전결제를 요청하였습니다');
+		return;
+	}
+	if (result >= 2) {
+		alert('이미 해당 판매자와 안전결제를 진행 중입니다')
+		return
+	}
+	if (result == -1) {
+		alert('안전결제 요청에 실패하였습니다 [ 관리자 문의 ]')
+		return
+	}
+	if (result == 0) {
+		alert('해당 판매자에게 안전결제를 요청하였습니다')
+		location.href = `/Ezen_teamB/jsp/mymenu/mymenu.jsp#`;
+	}
+}
 
 
 // 채팅버튼을 눌렀을때 실행되는 함수
