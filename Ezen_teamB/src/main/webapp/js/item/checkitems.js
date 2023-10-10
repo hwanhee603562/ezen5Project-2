@@ -41,7 +41,7 @@ function getItemList(  ){
 									<div class="itemCardAdress"><span class="tfont4"> ${p.itrade == 1 ? '' : p.itrade == 2 ? '대면거래' : '중개거래' }</span> </div>
 									<div class="itemCardAdress"><span class="tfont3"> ${ p.isafepayment == 1 ? '안전결제사용' : '' }</span> </div>
 									<div class="itemCardAdress"> ${ p.itrade == 1 ? '배송' : p.itradeplace } </div>
-									<div class="itemCardPrice"><span class="tfont2">${p.iprice}원</span> </div>
+									<div class="itemCardPrice"><span class="tfont2">${p.iprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</span> </div>
 								</div>
 								
 							</div>
