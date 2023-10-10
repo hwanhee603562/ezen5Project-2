@@ -68,13 +68,22 @@
 	
 }
 .boardReplyContent{
-	border: 1px solid red;
 	background-color: #e8e8e8;
 }
 .replyContent{
 	display: flex;
 	justify-content: space-between;
-	border: 1px solid red;
+	border-bottom: 1px solid black;
+	margin: 10px 10px;
+	
 
+}
+.replyBtn{
+	border: none;
+	background-color: #A287D6;
+	border-radius: 10px;
+}
+.rcontent{
+	resize: none; 
 }
 

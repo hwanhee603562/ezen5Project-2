@@ -1,16 +1,17 @@
-
-/* 개별 조회 */
-getBoard()
-function getBoard(){
 	
 	let urlParams = new URL(location.href).searchParams
 		console.log(urlParams)
 	let bno = urlParams.get("bno")
 		console.log(bno)
+/* 개별 조회 */
+getBoard()
+function getBoard(){
+
 		
 	$.ajax({
 		url : "/Ezen_teamB/BoardController" ,
 		method : "get" ,
+		async: false,
 		data : { type : 2 , bno : bno } ,
 		success : r =>{ console.log('통신 성공')
 			let outputFileName = document.querySelector('.outputFileName')
@@ -76,6 +77,7 @@ function bDelete(bno) {
 	$.ajax({
 		url : "/Ezen_teamB/BoardController",
 		method : "delete" ,
+		async: false,
 		data : { bno : bno } ,
 		success : r => { console.log("통신성공")
 			if(r) {
@@ -86,17 +88,21 @@ function bDelete(bno) {
 		error : e => { console.log("통신실패") }
 	})
 }
-// 답글
-function replyWrite(bno){
+// 개별 답글 등록
+function replyWrite(){
 	console.log("답글")
-	let rWrite = document.querySelector('.rWrite').value
-	console.log(rWrite);
+	let rcontent = document.querySelector('.rcontent').value
+	console.log(rcontent);
+	
 	$.ajax({
-		url : "/Ezen_teamB/BoardController" ,
+		url : "/Ezen_teamB/BoardReplyController" ,
 		method : "post" ,
-		data : { type : 2 , bno : bno  } ,
+		async: false,
+		data : { bno : bno , rcontent : rcontent } ,
 		success : r =>{ console.log('통신 성공')
-			
+			if(r) {
+				alert('등록 성공')
+			}else{ alert('등록 실패')}
 		
 		} ,
 		error : e => { console.log('통신 실패')}
@@ -104,6 +110,87 @@ function replyWrite(bno){
 	})
 	
 }
+
+// 개별 답글 출력
+getReply();
+
+function getReply(){
+	
+	if( loginMid == 'admin' ){
+		document.querySelector('.boardReply').innerHTML =`<div class="replyTextarea">
+						<textarea cols="100%" rows="" class="rcontent" name="rcontent"></textarea>
+						<button class="replyBtn" onclick="replyWrite()"type="button">답글등록</button>
+					</div>`
+	
+		$.ajax({
+			url : "/Ezen_teamB/BoardReplyController",
+			method : "get" ,
+			async: false,
+			data : { bno : bno },
+			success : r => {console.log('통신성공')
+			
+				let boardReplyContent = document.querySelector('.boardReplyContent')
+				let html = ``
+				
+				r.forEach( p => {
+					
+					html += `<div class="replyContent"> 
+						<div>
+							ID : ${p.mid}
+							내용 : ${p.rcontent}
+							날짜 : ${p.rdate}
+						</div>
+						<div> <button onclick="replyUpdate(${p.rno})"type="button">수정</button> <button onclick="replyDelete(${p.rno})" type="button">삭제</button></div>
+					</div>`	
+				})
+				
+			
+			boardReplyContent.innerHTML = html
+			},
+			error : e => { console.log('통신실패')} 
+			
+		}) // ajax end
+	} // if end
+	
+}// f end
+
+// 개별 답글 수정
+function replyUpdate(rno){
+	console.log(rno)
+	console.log('답글 수정')
+	let rcontent = prompt('수정할 내용을 작성해주세요.','');
+	$.ajax({
+		url : "/Ezen_teamB/BoardReplyController" ,
+		method : "put" ,
+		data : {rno : rno , rcontent : rcontent} ,
+		success : r => { console.log('통신성공') 
+			if(r){
+				alert('답글 수정.')
+			}else{ alert('수정 실패')}
+		},
+		error : e => {console.log('통신실패')}
+	})	
+	
+}
+
+// 개별 답글 삭제
+function replyDelete(rno){
+	console.log('답글 삭제')
+	$.ajax({
+		url : "/Ezen_teamB/BoardReplyController" ,
+		method : "delete" ,
+		data : { rno } ,
+		success : r => {console.log('통신 성공')
+			if(r) {
+				alert('답글이 삭제되었습니다.')
+			}else{ alert('삭제 실패')}
+		},
+		error : e => { console.log('통신 실패')}
+		
+	})
+	
+}
+
 
 
 

@@ -30,10 +30,7 @@ public class BoardController extends HttpServlet {
     
 	// 1. 게시판 등록
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String type = request.getParameter("type");
-    	ObjectMapper objectMapper = new ObjectMapper();
-    	String json = "";
-    	if(type.equals("1")) {
+    	
     	MultipartRequest multi = new MultipartRequest(
     			request, 
     			request.getServletContext().getRealPath("/jsp/board/upload"),
@@ -54,16 +51,10 @@ public class BoardController extends HttpServlet {
     	Board boardDto = new Board(cno, btitle, bcontent, bfile, mno); System.out.println(boardDto);
     	
     	boolean result = BoardDao.getInstance().bwrite(boardDto);
-    	}else if(type.equals("2")) {
-    		
-    		int bno = Integer.parseInt(request.getParameter("bno"));
-    		String rcontent = request.getParameter("rcontent");
-    		int mno = ((MemberList)request.getSession().getAttribute("loginSession")).getMno();
-    		
-    		
-    	}
+    	
     	response.setContentType("application/json; charset=UTF-8");
-    	response.getWriter().print(json);
+    	response.getWriter().print(result);
+    	
 	}
     
 	// 2. 게시판 조회
@@ -72,12 +63,12 @@ public class BoardController extends HttpServlet {
 		String type = request.getParameter("type");
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json="";
+		
 		// 전체 조회
 		if(type.equals("1")) {
 			
 			String key = request.getParameter("key");
 			String keyword = request.getParameter("keyword");
-			
 			int cno = Integer.parseInt(request.getParameter("cno")); // 카테고리
 			int listsize = Integer.parseInt(request.getParameter("listsize")); // 출력할 게시물 최대 게시물수 
 			int page = Integer.parseInt(request.getParameter("page")); // 페이지
@@ -102,7 +93,7 @@ public class BoardController extends HttpServlet {
 		}else if( type.equals("2")) { // 개별 조회 로직
 			
 			int bno = Integer.parseInt(request.getParameter("bno"));
-			
+		
 			Board result = BoardDao.getInstance().getBoard(bno);
 			
 			Object object = request.getSession().getAttribute("loginSession");

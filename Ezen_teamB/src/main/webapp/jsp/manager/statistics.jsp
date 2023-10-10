@@ -8,7 +8,7 @@
 
 	<link href="/Ezen_teamB/css/manager/statistics.css" rel = "stylesheet">
 <!-- 통계페이지 -->
-</head>
+</head>	
 <body>
 	<!-- 날짜 검색 구역 -->
 	<div class="dateInput">
