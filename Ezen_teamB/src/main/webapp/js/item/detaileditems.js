@@ -186,7 +186,7 @@ function chatStart(){
 function insertFav(){
 	
 	if(loginState == false){
-		alert('로그인이후 가능한 기능입니다.');
+		alert('로그인 후 사용가능 합니다.');
 		return;
 	}
 	

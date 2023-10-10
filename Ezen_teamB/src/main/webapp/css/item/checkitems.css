@@ -23,7 +23,7 @@
 	padding: 20px;
 }
 .topField span{
-	color: red;
+	color: red; font-weight: bold;
 }
 /* 카테고리 선택구역 */
 	/* 대분류 */
@@ -31,6 +31,7 @@
 	border-bottom: 1px solid #e8e8e8;
 	padding-bottom: 20px;
 	margin-bottom: 20px;
+	font-size: 14px;
 	
 }
 .searchAllBtn{
@@ -49,6 +50,7 @@
 	width: 203px;
 	padding-left: 12px;
 	height: 34px;
+	
 }
 	/* 소분류 */
 .bottomCategory{
@@ -65,6 +67,7 @@
 	width: 203px;
 	padding-left: 12px;
 	height: 34px;
+	font-size: 14px;
 }
 
 .guideLabel{
@@ -74,11 +77,11 @@
 
 /* 마우스 오버(마우스 올렸을때) */
 .topCategory td:hover {
-	background-color: silver;
+	background-color:#A287D6;
 	cursor: pointer;
 }
 .bottomCategory td:hover {
-	background-color: silver;
+	background-color:#A287D6;
 	cursor: pointer;
 }
 
@@ -87,7 +90,7 @@
 /* ==================== 카드구역 */
 .card{
 	height: 359px !important;
-
+	border: none !important;
 }
 .card-img-top{
 	width: 180px;
@@ -103,6 +106,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	font-size: 12px;
 }
 
 
@@ -114,7 +118,7 @@
 /* 가격 */
 .tfont2{font-size: 20px; color:#A287D6; font-weight: bold;}
 /* 안전결제 */
-.tfont3{font-size: 15px; color:blue;font-weight: bold;}
+.tfont3{font-size: 15px; color:blue;font-weight: bold; margin: 3px 0px;}
 /* 대면거래 */
 .tfont4{font-size: 15px; }
 /* 날짜 */

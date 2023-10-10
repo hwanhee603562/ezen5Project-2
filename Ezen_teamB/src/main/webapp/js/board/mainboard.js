@@ -45,7 +45,7 @@ function getList(page){
 			let boardTable = document.querySelector('.boardTable');
 			
 			let html = `
-				<tr>
+				<tr class="boardpoint">
 					<th> 번호 </th>
 					<th> 카테고리 </th>
 					<th> 제목 </th>
@@ -56,7 +56,7 @@ function getList(page){
 			pageDto.boardList.forEach( b=>{
 				html +=`
 					
-					<tr>
+					<tr class="boardpoint">
 						<td>${b.bno}</td>
 						<td>${b.cname}</td>
 						<td><a href="/Ezen_teamB/jsp/board/detailedboard.jsp?bno=${b.bno}">${b.btitle} </a> </td>
