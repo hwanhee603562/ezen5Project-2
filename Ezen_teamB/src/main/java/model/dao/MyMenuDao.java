@@ -16,7 +16,7 @@ public class MyMenuDao extends Dao{
 	public static MyMenuDao getInstance() {
 		return myMenuDao;
 	}
-	private MyMenuDao() {}
+	private MyMenuDao() {}	
 	
 	
 	// 내 정보 출력
