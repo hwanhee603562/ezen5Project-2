@@ -221,7 +221,7 @@ public class ManagerDao extends Dao{
 		List<AreaStatistic> list = new ArrayList<AreaStatistic>();
 		
 		try {
-			String sql = "select LEFT(itradeplace,3) as 지역,  \r\n"
+			String sql = "select LEFT(itradeplace,2) as 지역,  \r\n"
 					+ "count(d.dno), count(case when i.itrade = 1 then 1 end) as 배송여부, count(case when i.iestate = 1 then 1 end) as 거래상태\r\n"
 					+ "from itemsinfo i, dpoint d, memberlist m\r\n"
 					+ "where i.ino = d.ino and i.mno = m.mno and i.idate between ? and ?\r\n"
