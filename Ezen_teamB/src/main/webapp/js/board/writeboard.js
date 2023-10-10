@@ -13,7 +13,7 @@ if (loginMid == 'admin') {
 	document.querySelector('.cno').innerHTML = `<option value="1"> 공지사항 </option>
 	  	 											 <option value="2">건의사항</option> `
 } else { document.querySelector('.cno').innerHTML = `<option value="2">건의사항</option>` }
-
+// 글등록
 function writeBtn() {
 	
 	

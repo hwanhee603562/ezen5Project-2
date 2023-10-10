@@ -102,6 +102,7 @@ function replyWrite(){
 		success : r =>{ console.log('통신 성공')
 			if(r) {
 				alert('등록 성공')
+				getReply();
 			}else{ alert('등록 실패')}
 		
 		} ,
@@ -110,18 +111,19 @@ function replyWrite(){
 	})
 	
 }
-
+let mid = urlParams.get("mid")
 // 개별 답글 출력
+
 getReply();
 
 function getReply(){
 	
-	if( loginMid == 'admin' ){
+	if( loginMid == 'admin' || loginMid == mid ){
 		document.querySelector('.boardReply').innerHTML =`<div class="replyTextarea">
 						<textarea cols="100%" rows="" class="rcontent" name="rcontent"></textarea>
 						<button class="replyBtn" onclick="replyWrite()"type="button">답글등록</button>
 					</div>`
-	
+			
 		$.ajax({
 			url : "/Ezen_teamB/BoardReplyController",
 			method : "get" ,
@@ -140,7 +142,7 @@ function getReply(){
 							내용 : ${p.rcontent}
 							날짜 : ${p.rdate}
 						</div>
-						<div> <button onclick="replyUpdate(${p.rno})"type="button">수정</button> <button onclick="replyDelete(${p.rno})" type="button">삭제</button></div>
+						<div class="replyBottom"> <button onclick="replyUpdate(${p.rno})"type="button">수정</button> <button onclick="replyDelete(${p.rno})" type="button">삭제</button></div>
 					</div>`	
 				})
 				
@@ -151,7 +153,7 @@ function getReply(){
 			
 		}) // ajax end
 	} // if end
-	
+
 }// f end
 
 // 개별 답글 수정
@@ -166,11 +168,12 @@ function replyUpdate(rno){
 		success : r => { console.log('통신성공') 
 			if(r){
 				alert('답글 수정.')
+				getReply();
 			}else{ alert('수정 실패')}
 		},
 		error : e => {console.log('통신실패')}
 	})	
-	
+
 }
 
 // 개별 답글 삭제
@@ -183,13 +186,15 @@ function replyDelete(rno){
 		success : r => {console.log('통신 성공')
 			if(r) {
 				alert('답글이 삭제되었습니다.')
+				getReply();
 			}else{ alert('삭제 실패')}
 		},
 		error : e => { console.log('통신 실패')}
 		
 	})
-	
+
 }
+
 
 
 

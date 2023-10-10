@@ -59,7 +59,7 @@ function getList(page){
 					<tr>
 						<td>${b.bno}</td>
 						<td>${b.cname}</td>
-						<td><a href="/Ezen_teamB/jsp/board/detailedboard.jsp?bno=${b.bno}">${b.btitle} </a> </td>
+						<td><a href="/Ezen_teamB/jsp/board/detailedboard.jsp?bno=${b.bno}&mid=${b.mid}">${b.btitle} </a> </td>
 						<td>${b.mid}</td>
 						<td>${b.bdate}</td>
 					</tr>
