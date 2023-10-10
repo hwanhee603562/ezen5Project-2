@@ -290,7 +290,7 @@ public class SafePaymentDao extends Dao{
 		
 		return false;
 	}
-
+	
 	// 구매자 수령 확정
 	public boolean checkItem(int vno, int ino, int vrequester) {
 		
