@@ -33,7 +33,7 @@
 		</div>
 		
 		<div class="itemCardBox">	<!-- 카드가 출력되는 박스구역 -->
-			<div class="row row-cols-1 row-cols-md-5 g-4">
+			<div class="row row-cols-1 row-cols-md-4 g-4">
 
 			</div>
 		</div> 	<!-- 카드가 출력되는 박스구역 end -->

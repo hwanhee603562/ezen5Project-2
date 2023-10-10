@@ -76,7 +76,6 @@ function infoPrint() {
 		async: false,
 		success: r => {
 			console.log(r);
-
 			let infoContent = document.querySelector('.infoContent');
 			let html = ``;
 
@@ -112,14 +111,13 @@ function infoPrint() {
 					            <div> <button class="liquidateBtn" onclick="requestPay()"> 결제하기 </button> </div>
 					        </div>    
 				        </div>
-				    </div>
+				    </div>	
 				
 					<h3 class="infoTitletxt"> 마이페이지 </h3>
 					<div class="contentHeader">${r.mid} <span>회원님</span></div>
 					<div class="contentMain">
 						<div class="titleTop">처음온손님</div>
-						<div class="tradeTop">거래활동 <span>${r.tradelog}</span></div>
-						<div class="saleTop">판매물품 <span>${r.saleProduct}</span></div>
+						<div class="saleTop">거래활동 <span>${r.saleProduct}</span></div>
 						<div class="pointTop">포인트 <span>${r.mpoint}</span></div>
 						<div class="chargePoint"> <button id="openCustomPopup" class="openCustomPopup"> 충전 </button> </div>
 					</div>
@@ -232,6 +230,9 @@ function onAmount( value ){
 saleList();
 // 판매중인상품 리스트 출력 함수
 function saleList() {
+	
+	let cardInfo = document.querySelector('.cardInfo');
+	cardInfo.innerHTML = ``;
 	console.log('판매중인상품 리스트')
 
 	$.ajax({
@@ -241,7 +242,7 @@ function saleList() {
 		async: false,
 		success: jsonArray => {
 
-			let cardInfo = document.querySelector('.cardInfo');
+			cardInfo = document.querySelector('.cardInfo');
 			let html = ``;
 
 			// 판매중인 상품 숫자 출력
@@ -264,7 +265,7 @@ function saleList() {
 			// 회원번호에 따른 판매중인 상품 출력
 			jsonArray.forEach((p, i) => {
 				let itrade;
-
+				console.log(p)
 				if (p.itrade == 1) {
 					itrade = 1;
 					p.itrade = '배송'
@@ -275,19 +276,29 @@ function saleList() {
 					itrade = 3
 					p.itrade = '중개소거래'
 				}
-
+				
+				let outputBtn = `<td width="108px;"></td>`
+				// 안전결제거래로 등록한 물품은 따로 안전결제가 진행 중일 경우 완료 처리가 불가함
+					// 즉, vstate(1~4단계 중 )가 1을 초과할 경우 불가
+				if( p.isafepayment == 0 ){
+					outputBtn = `<td><button onclick="completeItem(${p.ino})" type="button" class="btn btn-primary">판매완료</button></td>`
+				}
+				
+				
 				p.idate = (p.idate).substr(0, 10);
 				html +=
 					`
 							   		<tr class="tableContent">
 								      <th scope="row">${i + 1}</th>
-								      <td width="10%"><img src="/Ezen_teamB/jsp/item/img/${Object.values(p.imgList)[0]}"></td>
+
+								      <td width="10%"><img src="/Ezen_teamB/jsp/item/img/${Object.values(p.imgList)[0] == null ? 'defaultImg.png' : Object.values(p.imgList)[0]}"></td>
 								      <td class="goItemBtn" onclick="goItem(${p.ino}, ${itrade})" width="30%">${p.ititle}</td>
 								      <td width="10%">${p.itrade}</td>
-								      <td width="20%">${p.uname}/${p.dname}</td>
+								      <td width="16%">${p.uname}/${p.dname}</td>
 								      <td>${p.idate}</td>
+								      ${outputBtn}
 								      <td><button onclick="updateItem(${p.ino}, ${itrade})" type="button" class="btn btn-success">수정</button></td>
-								      <td><button type="button" class="btn btn-danger">삭제</button></td>
+								      <td><button onclick="deleteItem(${p.ino})" type="button" class="btn btn-danger">삭제</button></td>
 								    </tr>
 					   `
 
@@ -306,11 +317,70 @@ function saleList() {
 
 }		// function end
 
+// 판매물품 판매완료 버튼 함수
+	// 안전결제거래로 등록한 물품은 따로 안전결제가 진행 중일 경우 완료 처리가 불가함
+	// 즉, vstate(1~4단계 중 )가 1을 초과할 경우 불가
+function completeItem( ino ){
+	
+	$.ajax({
+		url: "/Ezen_teamB/SafePaymentController",
+		method: 'put',
+		async: false,
+		data: {
+			type : 'completeItem',
+			ino : ino
+		},
+		success: s =>{
+			
+			if(s){
+				alert('물품 판매가 완료되었습니다')
+			}
+			
+		},
+		error: e =>{
+			console.log('에러발생')
+		}
+	})
+	location.href = `/Ezen_teamB/jsp/mymenu/mymenu.jsp`
+	
+}
+
 // 판매물품 수정 버튼 함수
 function updateItem(ino, itrade) {
 
 	location.href = `/Ezen_teamB/jsp/item/updateitems.jsp?ino=${ino}&itrade=${itrade}`;
 
+}
+
+
+// 판매물품 삭제 버튼 함수
+function deleteItem( ino ){
+	
+	let promptObj = confirm('해당 물품을 삭제하시겠습니까?')
+	
+	if( !promptObj ) return;
+	
+	$.ajax({
+		url: "/Ezen_teamB/ItemController",
+		method : 'delete',
+		async: false,
+		data : {
+			type : 'deleteItem',
+			ino : ino
+		},
+		success: s =>{
+			console.log(s)
+			if(s){
+				alert('해당 물품이 삭제되었습니다')
+				location.href = `/Ezen_teamB/jsp/mymenu/mymenu.jsp`
+				
+			}
+		},
+		error: e =>{
+			console.log('에러발생')
+		}
+	})
+	
 }
 
 // 물품상세보기페이지 이동함수
@@ -319,6 +389,7 @@ function goItem(ino, itrade){
 	location.href = `/Ezen_teamB/jsp/item/detaileditems.jsp?ino=${ino}&itrade=${itrade}`;
 	
 }
+
 
 
 
@@ -353,11 +424,12 @@ function transHistory() {
 					p.itrade = '중개소거래'
 				}
 				p.idate = (p.idate).substr(0, 10);
+				console.log(Object.values(p.imgList)[0])
 				html +=
 					`
 					   		<tr class="tableContent">
 						      <th scope="row">${i + 1}</th>
-						      <td width="5%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
+						      <td width="5%"><img src="/Ezen_teamB/jsp/item/img/${Object.values(p.imgList)[0] == null ? 'defaultImg.png' : Object.values(p.imgList)[0] }"></td>
 						      <td>${p.ititle}</td>
 						      <td>${p.itrade}</td>
 						      <td>${p.uname}/${p.dname}</td>
@@ -384,7 +456,6 @@ function transHistory() {
 		error: e => { }
 
 	});
-
 }
 
 /* ==================== 안전결제 관리 */

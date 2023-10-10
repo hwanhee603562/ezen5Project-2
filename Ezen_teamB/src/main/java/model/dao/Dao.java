@@ -18,8 +18,10 @@ public class Dao {
 			
 
 
+
+
 			
-				
+
 			  Class.forName("com.mysql.cj.jdbc.Driver");
 			  
 			  
@@ -33,8 +35,6 @@ public class Dao {
 
 						
 
-
-		
 			/*
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
@@ -44,7 +44,7 @@ public class Dao {
 					, "root", "1234");
 			*/
 
-			
+	
 			
 			System.out.println("안내] DB연동성공");
 		}catch (Exception e) {System.out.println("경고] DB연동성공실패 : "+e);}

@@ -57,6 +57,18 @@ color: #9767EB ; font-weight: bold;}
 
 }
 
+/* 인증번호 버튼 */
+.authBtn{
+	width: 70px; 
+	border: 1px solid #9767EB !important; 
+	background-color: #9767EB !important; 
+	font-weight: bold !important; 
+	color: white !important;
+	height : 40px;
+
+}
+
+
 /* 전체 인풋박스 css */
 .signupform input{ border: 1px solid #DBDBDB; border-radius: 5px; height: 40px; width: 350px;}
 
@@ -64,7 +76,8 @@ color: #9767EB ; font-weight: bold;}
 #signResidentNumF{ width: 165px;}
 #signResidentNumS{ width: 165px;}
 
-
+#signEmail{width: 270px;}
+#ecode{width: 270px;}
 
 /* ----------------------로그인 화면 css ------------- */
 /* 상단 로그인 글자 */

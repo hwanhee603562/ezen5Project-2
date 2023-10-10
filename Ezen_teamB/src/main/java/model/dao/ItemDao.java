@@ -322,7 +322,7 @@ public class ItemDao extends Dao {
 				sql += " where (ititle like '%"+searchWord+"%' or itradeplace like '%"+searchWord+"%')";
 			}
 			
-			sql += " order by idate desc";
+			sql += " and a.iestate = 0 order by idate desc";
 			
 			
 			ps = conn.prepareStatement(sql);
@@ -698,7 +698,26 @@ public class ItemDao extends Dao {
 		return false;
 	}
 	
-	// 4 판매물품삭제
+	// 4-1 판매물품삭제
+	public boolean deleteItem( int ino ) {
+		
+		try {
+			
+			String sql = "delete from itemsinfo where ino = "+ino;
+			
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+		
+	}
+	
+	// 4-2 판매이미지삭제
 	public boolean deleteExistingImg( int ino, String pimg ) {
 		
 		try {

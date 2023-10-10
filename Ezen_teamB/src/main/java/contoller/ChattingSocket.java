@@ -15,7 +15,7 @@ public class ChattingSocket {
 	// import websocket
 	
 		public static ArrayList<Session> joinList = new ArrayList<>();
-		
+			
 		// 1.
 		@OnOpen		// 클라이언트가 서버소켓에 접속했을대 매핑/연결
 		public void onOpen(Session session) {

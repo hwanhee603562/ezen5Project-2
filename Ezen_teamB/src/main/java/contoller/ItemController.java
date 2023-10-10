@@ -379,7 +379,15 @@ public class ItemController extends HttpServlet {
 		String type = request.getParameter("type");
 		boolean result = false;
 		
-		// 물품 수정시 기존 이미지 DB에서 삭제하기
+		// 판매 물품 삭제
+		if( type.equals("deleteItem") ) {
+		
+			int ino = Integer.parseInt(request.getParameter("ino"));
+			
+			result = ItemDao.getInstance().deleteItem( ino );
+			
+		}
+		// 물품 수정시 기존 이미지 DB에서 삭제하기		
 		if( type.equals("deleteExistingImg") ) {
 			
 			int ino = Integer.parseInt(request.getParameter("ino"));

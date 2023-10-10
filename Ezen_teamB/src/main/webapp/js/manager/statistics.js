@@ -58,6 +58,7 @@ function onCategory(category){
 
 // 카테고리별 통계 출력함수
 function printCateStatics(r){
+	console.log(1)
 	console.log(r)
 	
 	let printBox = document.querySelector('.printBox');
@@ -212,25 +213,3 @@ function printAreaStatics(r){
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

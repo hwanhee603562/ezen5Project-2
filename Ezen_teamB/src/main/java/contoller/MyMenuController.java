@@ -47,6 +47,7 @@ public class MyMenuController extends HttpServlet {
 		}
 		// 회원 정보 출력
 		else if(type.equals("2")) {
+			
 			int mno = Integer.parseInt(request.getParameter("mno"));
 			int tradeCount = MyMenuDao.getInstance().tradeCount(mno);
 			

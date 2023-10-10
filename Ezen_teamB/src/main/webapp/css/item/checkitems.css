@@ -87,6 +87,7 @@
 /* ==================== 카드구역 */
 .card{
 	height: 359px !important;
+
 }
 .card-img-top{
 	width: 180px;
@@ -103,17 +104,23 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-.card-body div{
-	border-top: 1px solid #e8e8e8;
-}
 
 
 
+/* 물품포인트 */
 
+/* 제목 */
+.tfont1{font-weight: bold; font-size: 25px;}
+/* 가격 */
+.tfont2{font-size: 20px; color:#A287D6; font-weight: bold;}
+/* 안전결제 */
+.tfont3{font-size: 15px; color:blue;font-weight: bold;}
+/* 대면거래 */
+.tfont4{font-size: 15px; }
+/* 날짜 */
+.tfont5{font-size: 12px; }
 
-
-
-
+/* 물품 포인트 종료 */
 
 
 

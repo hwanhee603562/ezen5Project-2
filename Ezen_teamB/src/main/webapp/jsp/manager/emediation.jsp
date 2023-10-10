@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8">	
 <title>Insert title here</title>
 
 	<link href="/Ezen_teamB/css/manager/emediation.css" rel = "stylesheet">
 <!-- 거래중개업체 관리 페이지 -->
-</head>
-<body>
+</head>	
+<body>	
 
 	 <!-- 대면거래 지도 출력 구역 -->
 		<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->

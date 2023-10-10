@@ -39,60 +39,7 @@
 					<div class="productCount"></div>
 					<div class="cardInfo">
 
-
-
-
-						<div class="safepayStateBox">
-
-
-							<div class="safepayBtnBox">
-								<button onclick="buyManagement(1)" class="buyLogBtn"
-									type="button">구매관리</button>
-								<button onclick="sellManagement(1)" class="sellLogBtn"
-									type="button">판매관리</button>
-							</div>
-
-							<div class="safepaySearchField">
-								<div class="selectDateBox">
-									<select id="selectFilterBox2" class="selectFilterBox">
-										<option class="stateInfo" value="0">진행상태</option>
-										<option value="1">요청</option>
-										<option value="2">수락</option>
-										<option value="3">전달</option>
-										<option value="4">완료</option>
-									</select>
-								</div>
-								<div>
-									<button onclick="onSearchSafepay()" class="searchBtn"
-										type="button">검색</button>
-								</div>
-							</div>
-
-
-							<table class="safepayStateTable">
-							<!-- 
-								<tr>
-									<th>진행상태</th>
-									<th>물품제목</th>
-									<th>판매자ID</th>
-									<th>일시</th>
-									<th></th>
-								</tr>
-								<tr>
-									<td>요청</td>
-									<td>수박팝니다</td>
-									<td>abb258</td>
-									<td>2023-05-27 06:23</td>
-									<td>
-										<button>버튼1</button>
-									</td>
-								</tr>
-								 -->
-
-							</table>
-
-
-						</div>
+						
 
 
 					</div>
