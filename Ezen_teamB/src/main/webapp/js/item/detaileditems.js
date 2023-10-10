@@ -107,6 +107,11 @@ function getDetailedItems(){
 // 채팅버튼을 눌렀을때 실행되는 함수
 function chatStart(){
 	
+	if(loginState == false){
+		alert('로그인이후 가능한 기능입니다.');
+		return;
+	}
+	
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
@@ -124,6 +129,33 @@ function chatStart(){
 	})	
 	
 	location.href = `/Ezen_teamB/jsp/chatting/chatting.jsp?ino=${ino}&rno=${rno}`;
+	
+}	// f end
+
+// 찜목록 추가 함수
+function insertFav(){
+	
+	if(loginState == false){
+		alert('로그인이후 가능한 기능입니다.');
+		return;
+	}
+	
+	$.ajax({
+		url: "/Ezen_teamB/MyMenuController",
+		method: "post",
+		async:false,
+		data: { 
+			type : "getChatRno", 
+			mno : loginMno,
+			ino : ino
+		},
+		success: r => {console.log(r)
+				if(r){
+					alert('찜하기 성공')
+				}
+		},
+		error : e =>{console.log(e)}
+	})	
 	
 }
 
