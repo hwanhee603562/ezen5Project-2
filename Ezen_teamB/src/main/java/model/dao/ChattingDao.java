@@ -163,6 +163,26 @@ public class ChattingDao extends Dao{
 		} catch (Exception e) {System.out.println(e);}
 		
 		return null;
+	}	// m end
+	
+	// 채팅방 나가기 함수
+	public boolean outMsgRoom(String rno) {
+		
+		System.out.println(rno);
+		
+		try {
+			String sql = "delete from jchatting where rno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, rno);
+			System.out.println(sql);
+			int count = ps.executeUpdate();
+			if(count == 1) {
+				return true;
+			}
+			
+		} catch (Exception e) {System.out.println("채팅방 나가기 오류 : " + e);}
+		
+		return false;
 	}
 	
 	
