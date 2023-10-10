@@ -111,7 +111,7 @@ function infoPrint() {
 					            <div> <button class="liquidateBtn" onclick="requestPay()"> 결제하기 </button> </div>
 					        </div>    
 				        </div>
-				    </div>
+				    </div>	
 				
 					<h3 class="infoTitletxt"> 마이페이지 </h3>
 					<div class="contentHeader">${r.mid} <span>회원님</span></div>
