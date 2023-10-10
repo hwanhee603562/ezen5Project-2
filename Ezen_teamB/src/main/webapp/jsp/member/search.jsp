@@ -29,10 +29,11 @@
 		
 				<div><span class="signfont">전화번호</span></div>
 				<input class="form-floating mb-3 px-3" id="searcPhone" name="signPhone" maxlength="11" oninput="maxlength(this)"  type="number" placeholder="'-' 제외 숫자만 입력 해주세요." ><br/>
-					<span class="signfont">인증번호 입력</span>	
-				<div class="idCertified"><!-- 인증번호 입력 -->
+					<!-- 미구현 -->
+<!-- 					<span class="signfont">인증번호 입력</span>	
+				<div class="idCertified">인증번호 입력
 					<input class="form-floating mb-3 px-3" id="findId" name="signPhone" maxlength="6" oninput="maxlength(this)"  type="number" placeholder="인증번호" >			
-				</div>
+				</div> -->
 		
 				<div>
 					<button class="loginbtn btn btn-outline-dark" type="button"
@@ -59,10 +60,13 @@
 				<input class="form-floating mb-3 px-3" id="searchEmail" name="signPwd"
 					maxlength="20" oninput="maxlength(this)" type="email"
 					placeholder="이메일"><br/>
-					<span class="signfont">인증번호 입력</span>					
-				<div class="pwdCertified"><!-- 인증번호 입력 -->
+					
+					<!-- 미구현 -->
+<!-- 					<span class="signfont">인증번호 입력</span>					
+				<div class="pwdCertified">인증번호 입력
 					<input class="form-floating mb-3 px-3" id="findPwd" name="signPhone" maxlength="11" oninput="maxlength(this)"  type="number" placeholder="인증번호" >				
-				</div>
+				</div> -->
+				
 				<div>
 					<button class="loginbtn btn btn-outline-dark" type="button"
 						onclick="pwdSearch()">확인</button>

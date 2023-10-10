@@ -26,7 +26,10 @@ function idSearch(){ console.log('아이디 찾기 함수 실행')
 			if(result=='null'){
 				alert('정보가 일치하지 않습니다')
 			}else if(result !='null'){
-				alert('고객님의 아이디는 '+result+' 입니다' )
+				alert('고객님의 아이디는 '+result+' 입니다')
+				document.getElementById('searchName').value = "";
+				document.getElementById('searcPhone').value = "";
+
 			}
 
 			
@@ -58,7 +61,8 @@ function pwdSearch(){ console.log('비밀번호 찾기 함수 실행')
 				alert('정보가 일치하지 않습니다')
 			}else if(result !='null'){
 				
-				alert('고객님의 임시 비밀번호는 '+result+' 입니다' )
+				alert('고객님의 임시 비밀번호는 '+result+' 입니다\n비밀번호를 변경 하세요' )
+				location.href='/Ezen_teamB/jsp/member/login.jsp'
 			}
 			
 			
