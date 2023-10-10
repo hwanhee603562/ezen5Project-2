@@ -72,6 +72,16 @@ public class MyMenuController extends HttpServlet {
 			json = mapper.writeValueAsString(result);
 		}
 		
+		// 찜목록 상태 출력
+		else if(type.equals("5")) {
+			int ino = Integer.parseInt(request.getParameter("ino"));
+			int mno = Integer.parseInt(request.getParameter("mno"));
+			
+			boolean result = MyMenuDao.getInstance().getWish(mno, ino);
+			
+			json = mapper.writeValueAsString(result);
+		}
+		
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(json);
 		
@@ -79,6 +89,16 @@ public class MyMenuController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 1. 찜하기로 등록할 제품번호 요청
+				int ino = Integer.parseInt(request.getParameter("ino"));
+				// 2. 찜하기를 등록한 회원번호 요청 x [서블릿은 로그인한 정보를 알고 있음]
+				int mno = Integer.parseInt(request.getParameter("mno"));
+				// 3. Dao 에게 
+				boolean result = MyMenuDao.getInstance().setWish(mno, ino);
+				System.out.println(result);
+				// 4.
+				response.setContentType("application/json;charset=utf-8");
+				response.getWriter().print(result);
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -152,7 +152,7 @@ public class MyMenuDao extends Dao{
 		try {		
 			sql += getWish(mno, ino) ? 
 				"delete from watchitem where mno = ? and ino = ?" : 
-				"insert into watchitem values(?, ?)";
+				"insert into watchitem(mno, ino) values(?, ?)";
 			
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, mno);
