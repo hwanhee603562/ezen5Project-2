@@ -176,6 +176,8 @@ function insertEmediaion(){
 		success: r => {console.log(r)
 			if(r){
 				alert('등록성공')
+				// 동록성공후 리랜더링
+				printEmediation();
 			}
 			
 		},

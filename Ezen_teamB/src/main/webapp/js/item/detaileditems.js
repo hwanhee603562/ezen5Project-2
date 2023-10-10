@@ -157,6 +157,11 @@ function responseSafepay(){
 // 채팅버튼을 눌렀을때 실행되는 함수
 function chatStart(){
 	
+	if(loginState == false){
+		alert('로그인이후 가능한 기능입니다.');
+		return;
+	}
+	
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "get",
@@ -175,6 +180,52 @@ function chatStart(){
 	
 	location.href = `/Ezen_teamB/jsp/chatting/chatting.jsp?ino=${ino}&rno=${rno}`;
 	
+}	// f end
+
+// 찜목록 추가 함수
+function insertFav(){
+	
+	if(loginState == false){
+		alert('로그인이후 가능한 기능입니다.');
+		return;
+	}
+	
+	$.ajax({
+		url: "/Ezen_teamB/MyMenuController",
+		method: "post",
+		async:false,
+		data: { 
+			mno : loginMno,
+			ino : ino
+		},
+		success: r => {console.log(r)
+				if(r){getWish();}
+				else{}
+		},
+		error : e =>{console.log(e)}
+	})	
+	
+}
+
+// 3. 찜하기 상태 호출
+getWish();
+function getWish(){
+	let wish = document.querySelector('.wish');
+	
+	// 1. 비회원이면
+	if(loginState == false){
+		wish.innerHTML = '♡';
+	}
+	
+	$.ajax({
+		url : "/Ezen_teamB/MyMenuController",
+		method : "get",
+		data : {type: "5", ino : ino, mno : loginMno},
+		success : result =>{console.log(result);
+			if(result){wish.innerHTML = '♥';}
+			else{wish.innerHTML = '♡';}
+		}
+	});
 }
 
 

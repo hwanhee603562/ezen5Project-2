@@ -219,6 +219,16 @@
 	font-size: 12px !important;
 }
 
+/* 채팅방 커서 */
+.chatJoinBtn{
+	cursor: pointer;
+}
+
+/* 목록 커서 */
+.goItemBtn{
+	cursor: pointer;
+}
+
 /* --------------- 포인트 팝업 --------------- */
 
 /* 팝업 창 스타일링 */

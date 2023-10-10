@@ -114,7 +114,7 @@
 
 
 		<div class="buttonField">	<!-- 버튼 구역 -->
-			<button class="watchItemBtn" type="button"> 찜 </button>
+			<button onclick="insertFav()" class="watchItemBtn" type="button"> 찜 <span class="wish"></span></button>
 			<button onclick="chatStart()" class="chatBtn" type="button"> 가지톡 </button>
 		</div>
 

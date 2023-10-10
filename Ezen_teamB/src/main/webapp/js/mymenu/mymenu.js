@@ -290,8 +290,9 @@ function saleList() {
 					`
 							   		<tr class="tableContent">
 								      <th scope="row">${i + 1}</th>
+
 								      <td width="10%"><img src="/Ezen_teamB/jsp/item/img/${Object.values(p.imgList)[0] == null ? 'defaultImg.png' : Object.values(p.imgList)[0]}"></td>
-								      <td width="30%">${p.ititle}</td>
+								      <td class="goItemBtn" onclick="goItem(${p.ino}, ${itrade})" width="30%">${p.ititle}</td>
 								      <td width="10%">${p.itrade}</td>
 								      <td width="16%">${p.uname}/${p.dname}</td>
 								      <td>${p.idate}</td>
@@ -351,6 +352,7 @@ function updateItem(ino, itrade) {
 
 }
 
+
 // 판매물품 삭제 버튼 함수
 function deleteItem( ino ){
 	
@@ -380,6 +382,16 @@ function deleteItem( ino ){
 	})
 	
 }
+
+// 물품상세보기페이지 이동함수
+function goItem(ino, itrade){
+	
+	location.href = `/Ezen_teamB/jsp/item/detaileditems.jsp?ino=${ino}&itrade=${itrade}`;
+	
+}
+
+
+
 
 // 거래내역 출력함수
 function transHistory() {
@@ -996,12 +1008,16 @@ function PrintWishList() {
 
 			// 회원번호에 따른 거래내역 출력
 			jsonArray.forEach((p, i) => {
+				let itrade;
 				console.log(Object.values(p.imgList)[0]);
 				if (p.itrade == 1) {
+					itrade = 1;
 					p.itrade = '배송'
 				} else if (p.itrade == 2) {
+					itrade = 2;
 					p.itrade = '직거래'
 				} else if (p.itrade == 3) {
+					itrade = 3;
 					p.itrade = '중개소거래'
 				}
 				p.idate = (p.idate).substr(0, 10);
@@ -1012,7 +1028,7 @@ function PrintWishList() {
 					   		<tr class="tableContent">
 						      <th scope="row">${i + 1}</th>
 						      <td width="5%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
-						      <td>${p.ititle}</td>
+						      <td class="goItemBtn" onclick="goItem(${p.ino}, ${itrade})">${p.ititle}</td>
 						      <td>${p.itrade}</td>
 						      <td>${p.uname}/${p.dname}</td>
 						      <td><div class="saleContinue">판매중<div></td>
@@ -1142,6 +1158,12 @@ function deleteInfo() {
 // 채팅목록 출력함수
 function chattingList() {
 	console.log('채팅목록 출력함수 실행')
+	
+	let cardInfo = document.querySelector('.cardInfo');
+	let productCount = document.querySelector('.productCount');
+	let html = ``;
+	productCount.innerHTML = html;
+	cardInfo.innerHTML = html;
 
 	$.ajax({
 		url: "/Ezen_teamB/MyMenuController",
@@ -1150,10 +1172,6 @@ function chattingList() {
 		method: "get",
 		success: jsonArray => {
 			console.log(jsonArray)
-			let cardInfo = document.querySelector('.cardInfo');
-			let productCount = document.querySelector('.productCount');
-			let html = ``;
-			productCount.innerHTML = html;
 
 			html =
 				`
@@ -1173,11 +1191,11 @@ function chattingList() {
 				html +=
 
 					`
-					<tr onclick="goChat(${p.ino}, '${p.rno}')" class="tableContent">
+					<tr class="tableContent">
 				      <th scope="row">${i + 1}</th>
-				      <td>${p.jcontent.content}</td>
+				      <td class="chatJoinBtn" onclick="goChat(${p.ino}, '${p.rno}')">${p.jcontent.content}</td>
 				      <td>${p.jchatdate}</td>
-				      <td><button type="button" class="btn btn-danger">나가기</button></td>
+				      <td><button onclick="deleteChat('${p.rno}')" type="button" class="btn btn-danger">나가기</button></td>
 				    </tr>
 				`
 
@@ -1188,14 +1206,31 @@ function chattingList() {
 				   			</tbody>
 						</table>
 				   `
-
-
-			cardInfo.innerHTML = html;
-
 		},
 		error: e => { console.log(e) }
 	})
 
+	cardInfo.innerHTML = html;
+}
+
+// 채팅방 나가기 함수
+function deleteChat(rno){
+	
+	let conf = confirm('채팅방을 나가시겠습니까?');
+	if(conf){}
+	else{return;}
+	
+	$.ajax({
+		url: "/Ezen_teamB/ChattingController",
+		async: false,
+		data: { rno : rno },
+		method: "delete",
+		success: r => {console.log(r)
+				chattingList();
+		},
+		error : e => {console.log(e)}
+	})	
+	
 }
 
 // 채팅방 이동함수

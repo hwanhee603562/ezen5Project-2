@@ -9,7 +9,7 @@
 	<link href="/Ezen_teamB/css/manager/emediation.css" rel = "stylesheet">
 <!-- 거래중개업체 관리 페이지 -->
 </head>
-<body>
+<body>	
 
 	 <!-- 대면거래 지도 출력 구역 -->
 		<!-- 거래방식 - 대면거래일 시 지도출력하여 대면거래 위치 지정 -->

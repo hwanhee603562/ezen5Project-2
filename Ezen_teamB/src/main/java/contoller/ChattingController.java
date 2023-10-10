@@ -53,7 +53,14 @@ public class ChattingController extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		String rno = request.getParameter("rno");
+		
+		boolean result = ChattingDao.getInstance().outMsgRoom(rno);
+		System.out.println(result);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
 	}
 
 }
