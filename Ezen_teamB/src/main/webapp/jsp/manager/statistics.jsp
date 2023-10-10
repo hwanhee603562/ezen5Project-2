@@ -26,12 +26,11 @@
 		<div onclick="onCategory(3)">연령대별</div>
 		<div onclick="onCategory(4)">지역별</div>
 	</div>
-	<!-- 통계 출력 구역 -->		
-	<div class="printBox">
+	<!-- 통계 출력 구역 -->
+	<div class="printBox" id ="printBox">
 		
 	
 	</div>
-	
 	
 
 </body>
