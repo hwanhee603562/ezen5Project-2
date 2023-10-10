@@ -1022,12 +1022,12 @@ function PrintWishList() {
 				}
 				p.idate = (p.idate).substr(0, 10);
 				
-				
+					
 				html +=
 					`
 					   		<tr class="tableContent">
 						      <th scope="row">${i + 1}</th>
-						      <td width="5%"><img src="/Ezen_teamB/item/img/${Object.values(p.imgList)[0]}"></td>
+						      <td width="5%"><img src="/Ezen_teamB/jsp/item/img/${Object.values(p.imgList)[0] == null ? 'defaultImg.png' : Object.values(p.imgList)[0]}"></td>
 						      <td class="goItemBtn" onclick="goItem(${p.ino}, ${itrade})">${p.ititle}</td>
 						      <td>${p.itrade}</td>
 						      <td>${p.uname}/${p.dname}</td>
