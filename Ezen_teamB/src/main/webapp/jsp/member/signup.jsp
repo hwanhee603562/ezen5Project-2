@@ -33,6 +33,18 @@
 
 				<div><span class="signfont">이메일</span></div>
 				<input class="form-floating mb-1 px-3" onkeyup="emailCheck()" id="signEmail" name="signEmail" maxlength="30" oninput="maxlength(this)"  type="text" placeholder="이메일" >
+				<button onclick="authReq()" class="btn btn-outline-dark mb-1 authBtn" disabled type="button">인증</button>
+				
+				<!-- 이메일 인증 통과 -->
+				<div class="emailchechbox"></div>			
+				
+				<!-- 이메일 인증 확인 구역 -->
+				<div class="authbox"></div>
+				
+		
+				
+				
+
 				<div class="emailCheck px-2"></div><br/>		<!-- 이메일 양식 맞춰서 -->
 								
 				<div><span class="signfont">주소</span></div>

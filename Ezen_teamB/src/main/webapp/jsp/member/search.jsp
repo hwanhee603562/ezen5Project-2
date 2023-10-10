@@ -39,7 +39,7 @@
 					<button class="loginbtn btn btn-outline-dark" type="button"
 						onclick="idSearch()">확인</button>
 				</div>
-				
+				                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 				</div>	
 				
 				<!---------------------- 비밀번호 찾기 ------------------------->
@@ -57,15 +57,16 @@
 				<div>
 					<span class="signfont">이메일</span>
 				</div>
-				<input class="form-floating mb-3 px-3" id="searchEmail" name="signPwd"
+				<input class="form-floating mb-3 px-3" onkeyup="emailCheck()" id="searchEmail" name="signPwd"
 					maxlength="20" oninput="maxlength(this)" type="email"
-					placeholder="이메일"><br/>
-					
-					<!-- 미구현 -->
-<!-- 					<span class="signfont">인증번호 입력</span>					
-				<div class="pwdCertified">인증번호 입력
-					<input class="form-floating mb-3 px-3" id="findPwd" name="signPhone" maxlength="11" oninput="maxlength(this)"  type="number" placeholder="인증번호" >				
-				</div> -->
+					placeholder="이메일">
+				<button onclick="authReq()" class="btn btn-outline-dark mb-1 authBtn" disabled type="button">인증</button>
+							
+				<!-- 이메일 인증 통과 -->
+				<div class="emailchechbox"></div>			
+				
+				<!-- 이메일 인증 확인 구역 -->
+				<div class="authbox"></div>
 				
 				<div>
 					<button class="loginbtn btn btn-outline-dark" type="button"

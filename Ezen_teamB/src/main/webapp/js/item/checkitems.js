@@ -36,12 +36,12 @@ function getItemList(  ){
 								<img src="/Ezen_teamB/jsp/item/img/${ Object.values(p.imgList)[0] == null ? 'defaultImg.png' : Object.values(p.imgList)[0] }" class="card-img-top" alt="...">
 								
 								<div  class="card-body">
-									<div class="itemCardTitle"> ${p.ititle} </div>
-									<div class="itemCardPrice"> ${p.iprice}원 </div>
-									<div class="itemCardAdress"> ${p.itrade == 1 ? '' : p.itrade == 2 ? '대면거래' : '중개거래' } </div>
+									<div class="itemCardTitle"><span class="tfont1">${p.ititle}</span> </div>
+									
+									<div class="itemCardAdress"><span class="tfont4"> ${p.itrade == 1 ? '' : p.itrade == 2 ? '대면거래' : '중개거래' }</span> </div>
+									<div class="itemCardAdress"><span class="tfont3"> ${ p.isafepayment == 1 ? '안전결제사용' : '' }</span> </div>
 									<div class="itemCardAdress"> ${ p.itrade == 1 ? '배송' : p.itradeplace } </div>
-									<div class="itemCardAdress"> ${ p.isafepayment == 1 ? '안전결제사용' : '' } </div>
-									<div class="itemCardAdress"> ${ p.idate } </div>
+									<div class="itemCardPrice"><span class="tfont2">${p.iprice}원</span> </div>
 								</div>
 								
 							</div>

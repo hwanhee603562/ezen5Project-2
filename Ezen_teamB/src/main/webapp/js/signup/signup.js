@@ -28,8 +28,10 @@ function idcheck(){
 			async:false,
 			data : {type : "mid" , data : signId},
 			success : result => {
-				if(result){idcheck.innerHTML = `<span style="color:red; font-size:12px;">사용중인 아이디 입니다</span>`}
-				else{idcheck.innerHTML = `<span style="color:blue; font-size:12px;">사용 가능한 아이이디 입니다</span>`}
+				if(result){idcheck.innerHTML = `<span style="color:red; font-size:12px;">사용중인 아이디 입니다</span>`
+					 	checkList [0] = false; }
+				else{idcheck.innerHTML = `<span style="color:blue; font-size:12px;">사용 가능한 아이이디 입니다</span>`
+					 	checkList [0] = true; }
 			},
 			error : error=>{ console.log(error)}
 		})
@@ -51,6 +53,7 @@ function signPwdTest(){
 	
 	if(pwregular.test(signPwd)){//정규식 표현이 정상 이라면
 		document.querySelector('.signPwdCheck1').innerHTML=`<span style="color:blue; font-size:12px;">사용 가능한 비밀번호</span>`;
+
 	}else if(signPwd == ""){//비밀번호가 공란이라면 알림 메세지 지우기
 		document.querySelector('.signPwdCheck1').innerHTML=``;
 		document.querySelector('.signPwdCheck2').innerHTML=``;				
@@ -59,12 +62,15 @@ function signPwdTest(){
 	
 	if(signPwdCheck == ""){//비밀번호 확인이 공란이라면 알림 메세지 지우기
 		document.querySelector('.signPwdCheck2').innerHTML=``;
+
 		
 	}else if(signPwd != signPwdCheck){//비밀번호와 비밀번호 확인이 불일치시
 		document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:red; font-size:12px;">비밀번호 불일치</span>`;
+		checkList [1] = false;
 	}
 	else if(signPwd == signPwdCheck && signPwdCheck != ""){// 비밀번호, 비밀번호 확인 일치, 공란 아니면
 		document.querySelector('.signPwdCheck2').innerHTML=`<span style="color:blue; font-size:12px;">비밀번호 일치</span>`;
+	 	checkList [1] = true; 
 	}
 
 }
@@ -82,15 +88,111 @@ function emailCheck(){
 	if(signEmail==""){//이메일 공란이면 알림창 비우기
 		emailCheck.innerHTML=``;
 	}else if(emailregular.test(signEmail)){//정규표현식 정상일때
+
 		emailCheck.innerHTML=`<span style="color:blue; font-size:12px;">이메일 사용가능</span>`
+		document.querySelector('.authBtn').disabled=false;
 	}else{//정규표현식 비정상일때
 		emailCheck.innerHTML=`<span style="color:red; font-size:12px;">이메일 사용불가</span>`
+		document.querySelector('.authBtn').disabled=true;
 	}
 	
 	
 	
 }
 
+
+let authcode = '';
+let timer = 0;
+let timerInter;
+
+
+// 이메일 인증 발송
+function authReq(){
+	console.log('인증요청 발송 정상')
+	
+	let authbox = document.querySelector('.authbox');
+	let html = `
+			<input class="form-floating mb-1 px-3" id="ecode" type="text">
+			<button class="btn btn-outline-dark mb-1 authBtn" type="button" onclick="auth()">확인</button><br/>
+			<span class="timebox"> 남은시간 05:00</span>
+	`
+	authbox.innerHTML=html;
+	// 인증 정상 메세지 초기화
+	document.querySelector('.emailCheck').innerHTML=``;
+	
+	let email = document.getElementById('signEmail').value;
+	
+	
+	$.ajax({
+		
+		url:"/Ezen_teamB/SendEmailController",
+		method:"get",
+		data : {email : email},
+		success : r =>{console.log(r)
+		authcode = r;},
+		error : e=>{console.log(e)}		
+	})
+	
+	
+
+	timer = 300;
+	setTimer();
+	
+	
+	
+}
+
+
+// 타이머
+function setTimer(){
+	timerInter = setInterval(()=> {
+		
+
+			let m = parseInt(timer/60)
+			let s = parseInt(timer%60);
+
+			m = m < 10 ? "0" + m : m; // 만약 m이 10보다 작으면(1~9) 앞에 0 붙이고 아니면(10이상) 그대로
+			s = s < 10 ? "0" + s : s;
+		document.querySelector('.timebox').innerHTML = `남은시간 ${m}:${s}`; // 현재 인증 시간 html 대입
+		timer--;
+		
+		//만약에 타이머가 0 이면 종료
+		if(timer < 0) {
+			// 1. setInterval 종료 [누구를 종료할건지 변수 선언 = timerInter]
+			clearInterval(timerInter);
+			// 2. 인증 실패
+			document.querySelector('.emailchechbox').innerHTML=`<span style="color:red; font-size:12px;">인증실패</span>`;
+			// 3. authbox 숨기기
+			document.querySelector('.authbox').innerHTML=``;
+		}		
+	}, 1000)	
+	
+}
+
+
+// 이메일 인증 완료
+function auth(){
+	
+	let ecode = document.getElementById('ecode').value;
+	
+	if(authcode == ecode){
+		// interval 종료 시키기
+		clearInterval(timerInter);
+		// 인증 성공		
+		document.querySelector('.emailchechbox').innerHTML=`<span style="color:blue; font-size:12px;">인증 성공</span>`;		
+		// 박스 초기화
+		document.querySelector('.authbox').innerHTML=``;
+		// 인증 버튼 비활성화
+		document.querySelector('.authBtn').disabled=true;
+	 	checkList [2] = true; 
+	}
+	else{// 인증 실패
+		document.querySelector('.emailchechbox').innerHTML=`<span style="color:red; font-size:12px;">인증 실패</span>`
+	 	checkList [2] = false; 		
+	}
+	
+	
+}
 
 
 
@@ -149,31 +251,36 @@ function execPostCode() {
 		});
      }
 
+let checkList = [false, false, false]
+
 
 function signup(){
 	// 회원 가입 폼 호출
-	let signupform = document.querySelectorAll('.signupform')[0];
-	// 폼 데이터화
-	let signupData = new FormData(signupform);
-
+	if(checkList[0] && checkList[1] && checkList[2]){
+		let signupform = document.querySelectorAll('.signupform')[0];
+		// 폼 데이터화
+		let signupData = new FormData(signupform);
+		
 	
-	$.ajax({
 		
-		url : "/Ezen_teamB/MemberController",
-		method : "post",
-		data : signupData,
-	    contentType : false,
-	    processData : false,		
-		success : result => { 
-			console.log(result)
-			if(result==true){
-				alert('회원가입에 성공 하였습니다')
-				location.href="/Ezen_teamB/jsp/member/login.jsp"}
-			else{alert('회원가입 실패')}			
-		},
-		error : error =>{console.log(error)}
-		
-	})// ajax
+		$.ajax({
+			
+			url : "/Ezen_teamB/MemberController",
+			method : "post",
+			data : signupData,
+		    contentType : false,
+		    processData : false,		
+			success : result => { 
+				console.log(result)
+				if(result==true){
+					alert('회원가입에 성공 하였습니다')
+					location.href="/Ezen_teamB/jsp/member/login.jsp"}
+				else{alert('회원가입 실패')}			
+			},
+			error : error =>{console.log(error)}
+			
+		})// ajax
+	}else{alert('회원가입 불가')}
 	
 }// signup end
 
