@@ -19,11 +19,11 @@
 			<div class="fleft">
 			
 				<ul>
-					<li>가지가지 커뮤니티</li>
-					<li>안전물품거래로~~~~~하세요</li>
-					<li>ㅁㄴㅇㄻㄴㅇㄻ</li>
-					<li>235234534ㅁㄴㅇㄻㄴㄹ</li>
-					<li>12345132452341414</li>
+					<li><span class="fpoint1">고객센터 ></span></li>
+					<li><span class="fpoint2">1600-1010</span> 09:00 ~ 18:00</li>
+					<li>평일 : 전체 문의 상담 가능</li>
+					<li>주말, 공휴일 : 미운영</li>
+
 
 				</ul>			
 			
@@ -47,7 +47,7 @@
 					<li>사업자번호 112-49-89490 l 통신판매업신고번호 제2023-안산상록-0504호 </li>
 					<li>연락처 : 031-777-4989 : 팩스 : 301-777-4982 l 이메일 :  gaji4989@gaji.com </li>
 					<li>주소 : 안산시 상록구 한대앞역 Ezen 504호 </li><br/>
-					<li><a href="https://ohou.se/usepolicy"><span class="fpoint">이용약관</span></a>  l  <a href="https://ohou.se/privacy"><span class="fpoint">개인정보처리방침</span> </a> </li>
+					<li><a href="/Ezen_teamB/jsp/board/terms.jsp"><span class="fpoint">이용약관</span></a>  l  <a href="/Ezen_teamB/jsp/board/terms2.jsp"><span class="fpoint">개인정보처리방침</span> </a> </li>
 					<li>Copyrigthⓒ가지가지스타일 </li>
 				</ul>			
 			</div>
