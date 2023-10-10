@@ -8,7 +8,7 @@
 
 	<link href="/Ezen_teamB/css/manager/emediation.css" rel = "stylesheet">
 <!-- 거래중개업체 관리 페이지 -->
-</head>
+</head>	
 <body>	
 
 	 <!-- 대면거래 지도 출력 구역 -->
