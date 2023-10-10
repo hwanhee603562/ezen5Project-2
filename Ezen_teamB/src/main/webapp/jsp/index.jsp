@@ -21,20 +21,25 @@
 	<%@include file = "header.jsp" %>
 	
 	<!-- index 전체구역 -->
-	<div class="indexWrap">
+	<div class="indexWrap mapfull">
 		
 		<div class="mainField"> <!-- 본문 지도출력 구역 -->
 			
-			<div id="map" style="width:800px;height:600px;"></div>
+			<div id="map" ></div>
 		
 		</div>
 			
 		<div class="topField">	<!-- 상단 제품추천 구역 -->
-			
 			<div>	<!-- 카테고리 출력구역 -->	
-				
 				<div class="topCategory">	<!-- 대분류 카테고리 설정구역 -->
-				<div class="guideLabel"> 대분류 <button class="searchAllBtn" onclick="searchAll()" type="button"> 전체보기 </button> </div>
+				
+				<div class="categorybox">
+					<span></span> <span class="selCategory1">  </span> <span class="selCategory2">  </span>
+				</div>
+				<div class="guideLabel"><button class="searchAllBtn" onclick="searchAll()" type="button"> 전체보기 </button> </div>
+				
+				
+				
 				<table class="outputUmaincategory">
 					<!-- 대분류 카테고리 출력구역 -->
 				</table>
@@ -44,25 +49,12 @@
 			<div class="bottomCategory">	
 				<!-- 소분류 카테고리 출력구역 -->
 			</div>
-			<span> 선택된 카테고리 : </span> <span class="selCategory1">  </span> <span class="selCategory2">  </span>
+			
 			
 			</div>
-		
 		</div>
 	
-
 	</div>
-
-
-
-
-
-	<%@include file = "footer.jsp" %>
-
-
-
-
-
 	
 	<!-- 카카오지도 api -->
 	<script type="text/javascript"
