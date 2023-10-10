@@ -25,15 +25,15 @@ public class MyMenuDao extends Dao{
 		Mymenu mDto = new Mymenu();
 		
 		try {
-			String sql = "select m.mid, m.mlevel, count(i.ino) as 판매물품, m.mpoint, m.mname, m.madress, m.memail\r\n"
-					+ "from memberlist m left join itemsinfo i\r\n"
-					+ "on m.mno = i.mno\r\n"
-					+ "where if(i.ino is null , m.mno = ?, i.iestate = 0)\r\n"
-					+ "group by m.mno \r\n"
-					+ "having m.mno = ?";
+			String sql = "SELECT m.mid, m.mlevel, COUNT(i.ino) AS 판매물품, m.mpoint, m.mname, m.madress, m.memail\r\n"
+					+ "FROM memberlist m\r\n"
+					+ "INNER JOIN itemsinfo i ON m.mno = i.mno\r\n"
+					+ "WHERE m.mno = "+mno+" AND (i.iestate = 0 OR i.iestate = 1)\r\n"
+					+ "GROUP BY m.mno;";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, mno);
-			ps.setInt(2, mno);
+			
+			/* ps.setInt(1, mno); ps.setInt(2, mno); */
+			 
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				mDto = new Mymenu(
@@ -41,6 +41,7 @@ public class MyMenuDao extends Dao{
 						rs.getInt(3), rs.getInt(4), rs.getString(5),
 						rs.getString(6), rs.getString(7));
 			}
+			System.out.println(mDto);
 			return mDto;
 			
 		} catch (Exception e) {System.out.println("내 정보 출력함수 오류 " + e);}

@@ -7,7 +7,7 @@ console.log(rno)
 
 
 // 서버소켓 접속
-let clientSocket = new WebSocket(`ws://localhost:80/Ezen_teamB/serversocket/${loginMid}/${ino}/${rno}`);
+let clientSocket = new WebSocket(`ws://192.168.17.17:80/Ezen_teamB/serversocket/${loginMid}/${ino}/${rno}`);
 
 clientSocket.onerror = e=>{console.log('서버와 오류발생 ' + e)};
 clientSocket.onclose = e=>{console.log('서버와 연결끊김 ' + e)};

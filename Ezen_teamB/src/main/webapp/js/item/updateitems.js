@@ -805,7 +805,7 @@ function updateItems(){
 	formData.set('itrade', itrade )				// 거래방식 : 1 배송, 2 대면거래, 3 중개거래
 
 	// 서블릿에서 doPost에서 기능 구분을 위해 타입 생성 후 폼데이터에 별도로 추가
-	let type = "registerItems"
+	let type = "updateItems"
 	formData.set('type', type )
 	
 	// 거래방식이 '대면거래'일 시 대면거래에 대한 위경도, 주소값 저장
@@ -825,7 +825,7 @@ function updateItems(){
 	$.ajax({
 		url: "/Ezen_teamB/ItemController",
 		method: "put",
-		data: formData,
+		data: formData ,
 		contentType: false,
 		processData: false,
 		success: result =>{
