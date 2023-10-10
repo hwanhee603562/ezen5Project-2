@@ -38,7 +38,7 @@ public class ManagerDao extends Dao{
 			}
 			
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("총회원수 출력 오류 : " + e);
 		}
 		
 		return 0;
@@ -74,7 +74,7 @@ public class ManagerDao extends Dao{
 			return list;
 			
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("회원통계출력오류 : " + e);
 		}
 		
 		return null;
@@ -110,7 +110,7 @@ public class ManagerDao extends Dao{
 		List<CateStatistics> list =  new ArrayList<>();
 		
 		try {
-			String sql = "select u.uname as 대분류, d.dname as 소분류, count(case when i.iestate = 0 then 1 end) as 거래상태, count(case when i.isafepayment = 0 then 1 end) as 안전결제사용여부, count(uname) "
+			String sql = "select u.uname as 대분류, d.dname as 소분류, count(case when i.iestate = 1 then 1 end) as 거래상태, count(case when i.isafepayment = 0 then 1 end) as 안전결제사용여부, count(uname) "
 					+ "from umaincategory u, dsubcategory d, itemsinfo i "
 					+ "where u.uno = d.uno and d.dno = i.dno and i.idate between ? and ? "
 					+ "group by u.uno";
@@ -127,7 +127,7 @@ public class ManagerDao extends Dao{
 			return list;
 			
 			
-		} catch (Exception e) {System.out.println(e);}
+		} catch (Exception e) {System.out.println("카테고리별 통계오류 : " + e);}
 		
 		return null;
 	}

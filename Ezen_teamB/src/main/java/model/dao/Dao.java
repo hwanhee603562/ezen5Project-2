@@ -15,10 +15,10 @@ public class Dao {
 		try { 
 
 
-			/*
-
-
 			
+
+
+			/*  
 			
 			  Class.forName("com.mysql.cj.jdbc.Driver");
 			  
@@ -35,7 +35,7 @@ public class Dao {
 
 
 		
-
+		
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
 			
