@@ -146,10 +146,9 @@ public class ManagerDao extends Dao{
 		List<CateStatistics> list =  new ArrayList<>();
 		
 		try {
-			String sql = "select u.uname as 대분류, d.dname as 소분류, count(case when i.iestate = 1 then 1 end) as 거래상태, count(case when i.isafepayment = 0 then 1 end) as 안전결제사용여부, count(uname) "
-					+ "from umaincategory u, dsubcategory d, itemsinfo i "
-					+ "where u.uno = d.uno and d.dno = i.dno and i.idate between ? and ? "
-					+ "group by u.uno";
+			String sql = "select u.uname as 대분류, d.dname as 소분류, count(case when i.iestate = 1 then 1 end) as 거래상태, count(case when i.isafepayment = 0 then 1 end) as 안전결제사용여부, count(*) as total_count\r\n"
+					+ "from umaincategory u, dsubcategory d, itemsinfo i where u.uno = d.uno and d.dno = i.dno and i.idate between ? and ? \r\n"
+					+ "group by u.uno, d.dname";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, pDate);
 			ps.setString(2, nDate);
