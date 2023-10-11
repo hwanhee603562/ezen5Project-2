@@ -21,7 +21,7 @@ public class Dao {
 
 
 			
-
+				/*
 			  Class.forName("com.mysql.cj.jdbc.Driver");
 			  
 			  
@@ -29,20 +29,21 @@ public class Dao {
 			  this.conn = DriverManager.getConnection(
 			 "jdbc:mysql://database-1.ccmmlpcfyswe.us-east-1.rds.amazonaws.com:3306/usedtrade"
 			  , "admin", "12341234a");
+			  */
 			
 			  
 
 
 						
 
-			/*
+			
 			Class.forName("com.mysql.cj.jdbc.Driver");	
 			
 			
 			
 			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedtrade"
 					, "root", "1234");
-			*/
+			
 
 	
 			

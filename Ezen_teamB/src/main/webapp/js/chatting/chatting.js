@@ -8,7 +8,7 @@ console.log(rno)
 
 // 서버소켓 접속
 let clientSocket = new WebSocket(
-	`ws://192.168.17.17:80/Ezen_teamB/serversocket/${loginMid}/${ino}/${rno}`);
+	`ws://localhost:80/Ezen_teamB/serversocket/${loginMid}/${ino}/${rno}`);
 
 clientSocket.onerror = e=>{console.log('서버와 오류발생 ' + e)};
 clientSocket.onclose = e=>{console.log('서버와 연결끊김 ' + e)};
@@ -36,11 +36,11 @@ function onMsg(e){
 	let chatcont = document.querySelector('.chatcont')
 	let html = ``;
 	// 만약 알림 메시지 이면
-	console.log(msg.msg.type)
-	if(msg.msg.type == 'alram'){
+	console.log(msg.jcontent.type)
+	if(msg.jcontent.type == 'alram'){
 		html = `${typeHTML(msg.msg)}`;
 	}
-		else if(msg.frommid == loginMId){
+		else if(msg.caller == loginMid){
 			html += `
 								<div class="rcont">
 									<div class="subcont">

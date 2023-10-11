@@ -35,6 +35,7 @@ public class ServerSocket {
 			if(rmid.equals(cmid)) {
 				rmid = ChattingDao.getInstance().findRMid("2", ino);
 			}
+			System.out.println(rmid);
 			// 1-1 : 접속된 클라이언트소켓을 리스트에 저장
 			ClientDto clientDto = new ClientDto(session, cmid, rmid, ino,rno);
 			clientList.add(clientDto);
