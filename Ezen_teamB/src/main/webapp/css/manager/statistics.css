@@ -6,6 +6,8 @@
 	background-color: #4474A2;
 }
 
+
+
 /* 날짜 선택 구역 */
 .inputBox{
 	display: flex;
@@ -42,6 +44,8 @@
 
 .printBox{
 	width: 100%;
+	height: 489px;
+	overflow-y: scroll;
 }
 
 /* 통계 테이블 */

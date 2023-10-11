@@ -32,17 +32,9 @@
 		</div>
 	</div>
 	
-	<div class="memberTableBox">	<!-- 멤버 테이블 출력구역 -->
+	<div class="memberTableBox" style="overflow-y: scroll;">	<!-- 멤버 테이블 출력구역 -->
 		<table class="memberListTable">
-			<tr>
-				<th> 거래번호 </th>
-				<th> 아이디 </th>
-				<th> 이름 </th>
-				<th> 거래위치 </th>
-				<th> 게시물제목 </th>
-				<th> 거래방법 </th>
-				<th> 거래일시 </th>
-			</tr>
+			
 
 			
 			
