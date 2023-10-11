@@ -69,7 +69,9 @@ public class BoardReplyController extends HttpServlet {
 
 	// 개별 답글 수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int rno = Integer.parseInt(request.getParameter("rno"));
+		
 		String rcontent = request.getParameter("rcontent"); 
 		
 		ReplyDto replyDto = new ReplyDto(rno, rcontent);
@@ -83,6 +85,7 @@ public class BoardReplyController extends HttpServlet {
 
 	// 개별 답글 삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int rno = Integer.parseInt(request.getParameter("rno"));
 		
 		boolean result = BoardDao.getInstance().rDelete(rno);

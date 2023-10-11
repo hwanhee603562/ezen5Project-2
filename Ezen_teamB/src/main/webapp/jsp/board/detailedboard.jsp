@@ -34,7 +34,6 @@
 
 		<div class="boardBottom"> <!-- 개별 게시물 하단 구역 -->
 			
-
 				<div class="boardReply">
 				
 				</div>
