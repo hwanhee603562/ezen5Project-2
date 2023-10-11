@@ -146,7 +146,7 @@ public class ChattingDao extends Dao{
 					+ "		) order by jchatdate desc "
 					+ "	) jchat_desc "
 					+ "where caller = ? or receiver = ? "
-					+ "group by rno";
+					+ "group by rno,jno";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, mno);
 			ps.setInt(2, mno);
