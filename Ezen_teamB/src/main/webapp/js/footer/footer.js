@@ -1,1 +1,0 @@
-console.log('footer js 정상 실행')

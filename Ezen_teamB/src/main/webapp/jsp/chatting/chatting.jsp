@@ -26,7 +26,7 @@
 			    	<i class="far fa-smile"></i>
 			  	</button>
 			  	<ul class="dropdown-menu emolistbox"></ul>
-				<textarea onkeydown="onEnterKey()" class="msg" name="msg"></textarea>
+				<textarea class="msg" name="msg"></textarea>
 				<button onclick="onSend()" class="sendbtn" type="button">전송</button>
 			</div>
 			

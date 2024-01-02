@@ -7,7 +7,8 @@ console.log(rno)
 
 
 // 서버소켓 접속
-let clientSocket = new WebSocket(`ws://192.168.17.17:80/Ezen_teamB/serversocket/${loginMid}/${ino}/${rno}`);
+let clientSocket = new WebSocket(
+	`ws://localhost:80/Ezen_teamB/serversocket/${loginMid}/${ino}/${rno}`);
 
 clientSocket.onerror = e=>{console.log('서버와 오류발생 ' + e)};
 clientSocket.onclose = e=>{console.log('서버와 연결끊김 ' + e)};
@@ -28,23 +29,44 @@ function onSend(){ console.log('전송함수');
 
 // 메세지 받았을때 함수
 function onMsg(e){
-	console.log(e.data);
 	
 	let msg = JSON.parse(e.data);
-
-	console.log(msg);
-	
 	msg.jcontent = JSON.parse(msg.jcontent)
-	console.log(msg.jcontent)
 	
-	msg.jcontent.content = msg.jcontent.content.replace(/\n/g,'<br>');
-	  
-	
-	roadChat();
+	let chatcont = document.querySelector('.chatcont')
+	let html = ``;
+	// 만약 알림 메시지 이면
+	console.log(msg.jcontent.type)
+	if(msg.jcontent.type == 'alram'){
+		html = `${typeHTML(msg.msg)}`;
+	}
+		else if(msg.caller == loginMid){
+			html += `
+								<div class="rcont">
+									<div class="subcont">
+										<div class="date">${msg.jchatdate}</div>
+										${typeHTML(msg.jcontent)}
+									</div>
+								</div>`;
+		}else{
+			html += `
+							<div class="lcont">
+								<div class="tocont">
+									<div class="name">${msg.caller}</div>
+									<div class="subcont">
+										${typeHTML(msg.jcontent)}
+										<div class="date">${msg.jchatdate}</div>
+									</div>
+								</div>
+							</div>
+			`
+		}
+	chatcont.innerHTML += html;
+	chatcont.scrollTop = chatcont.scrollHeight;
 }
 
+// js 실행시 roadChat함수 실행
 roadChat();
-// 채팅방입장시 예전 채팅 불러오는 함수
 function roadChat(){
 	
 	$.ajax({
@@ -69,13 +91,10 @@ function roadChat(){
 							${typeHTML(r[i].jcontent)}
 						</div>
 					</div>
-					`;
-				  
+					`;  
 			  }
-			  
 			  else{
 				  html += 
-				  
 				  `
 				  	<div class="lcont">
 						<div class="tocont">
@@ -87,32 +106,22 @@ function roadChat(){
 						</div>
 					</div>
 				  `
-				  
 			  }
 		  }
 		  chatcont.innerHTML = html;
-		  
 		  chatcont.scrollTop = chatcont.scrollHeight;
 	  },
 	  error : e => {console.log('오류내용' + e)}
 	})
-	
 }
-
-
-
 
 // 메시지 타입 구분 함수
 function typeHTML(msg){
-	
 	let html = ``;
-	console.log(msg);
-	
 	// 1. 메시지 타입 일때는 <div> 반환
 	if(msg.type == 'message'){
 		html += `<div class="content">${msg.content}</div>`;
 	}
-	
 	// 2. 이모티콘 타입 일때는 <img> 반환
 	else if(msg.type == 'emo'){
 		html += `<img src="/jspweb/img/emo${msg.content}.gif"/>`;
@@ -121,9 +130,7 @@ function typeHTML(msg){
 	else if(msg.type == 'alram'){
 		html += `<div class="alram">${msg.content}</div>`
 	}
-	
 	return html;
-	
 }
 
 

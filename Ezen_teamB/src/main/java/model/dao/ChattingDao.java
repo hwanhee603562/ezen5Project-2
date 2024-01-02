@@ -146,7 +146,11 @@ public class ChattingDao extends Dao{
 					+ "		) order by jchatdate desc "
 					+ "	) jchat_desc "
 					+ "where caller = ? or receiver = ? "
+<<<<<<< HEAD
 					+ "group by rno,jno";
+=======
+					+ "group by rno, jno";
+>>>>>>> branch '최의선' of https://github.com/hwanhee603562/ezen5Project-2
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, mno);
 			ps.setInt(2, mno);

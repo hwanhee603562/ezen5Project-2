@@ -279,6 +279,11 @@ function eDelete(eno){console.log('삭제함수 ' + eno)
 		error : e => {console.log(e)}
 	})
 	
+}	// f end
+
+// 관리자화면으로 돌아가는 함수
+function goManager(){
+	location.href = "/Ezen_teamB/jsp/manager/managerPage.jsp";
 }
 
 
